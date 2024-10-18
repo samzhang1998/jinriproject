@@ -1,0 +1,424 @@
+.search_result2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.25rem;
+    padding-top: 0;
+    box-sizing: border-box;
+}
+
+.page_header2 {
+    width: 100%;
+    aspect-ratio: 1440 / 462;
+    height: auto;
+    border-radius: 0 0 1.875rem 1.875rem;
+    background: linear-gradient(180deg, #333 0%, #767676 100%);
+    box-shadow: 0px 0.25rem 3.375rem 0px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    display: flex;
+    justify-content: end;
+    top: 0;
+    z-index: 1;
+}
+
+.mobile_page_header2 {
+    display: none;
+}
+
+.page_header2 img {
+    width: 50%;
+}
+
+.purchase2 {
+    width: 85%;
+    aspect-ratio: 1200 / 589;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    border: 1px solid #E8E8E8;
+    background: #FFF;
+    border-radius: 1.25rem;
+    position: relative;
+    box-sizing: border-box;
+    margin-top: 8%;
+    z-index: 1;
+}
+
+.sell_price2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sell_price2 h1 {
+    color: #003637;
+    font-family: Montserrat;
+    font-size: 4.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    margin-top: 18%;
+    margin-bottom: 0;
+}
+
+.sell_price2 p {
+    color: #008286;
+    font-family: Montserrat;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    margin-top: 0;
+}
+
+.details2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.title2 {
+    width: 18.2rem;
+    height: 2.8rem;
+    border-radius: 0.625rem;
+    background: #E5F3F4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8%;
+}
+
+.mobile_title2 {
+    display: none;
+}
+
+.title2 h2 {
+    color: #0C0C0C;
+    font-family: Montserrat;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.details2 h3 {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    margin: 1%;
+    margin-top: 3%;
+}
+
+.details2 p {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    margin: 0;
+}
+
+.available2 {
+    display: flex;
+    align-items: center;
+}
+
+.available2 img {
+    margin-right: 1%;
+    width: 1.5rem;
+    height: auto;
+}
+
+.available2 p {
+    color: #008286;
+    font-family: Montserrat;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.details2 h4 {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    margin-top: 3%;
+    margin-bottom: 1%;
+}
+
+.details2 h5 {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    margin-bottom: 1%;
+}
+
+.details2 span {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+}
+
+.purchase_button2 {
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+
+.purchase_button2 button {
+    width: 13.3rem;
+    height: 3.125rem;
+    background: #008286;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.purchase_button2 a {
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    text-decoration: none;
+}
+
+.purchase_button2 a:hover {
+    color: #007BFF;
+}
+
+.mobile_purchase_button2 {
+    display: none;
+}
+
+.check2 {
+    display: grid;
+    width: 85%;
+    grid-template-columns: 548fr 588fr;
+    margin-top: 8%;
+}
+
+.check_text2 {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0;
+}
+
+.check_text2 h6 {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 132.883%;
+    margin-top: 0;
+    margin-bottom: 6%;
+}
+
+.check_text2 p {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 132.883%;
+    margin: 0;
+}
+
+.dummy_text2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    margin-top: 7%;
+    margin-bottom: 1%;
+}
+
+.dummy_text2 img {
+    margin-right: 2%;
+    width: 1.5rem;
+    height: auto;
+}
+
+.dummy_text2 p {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.check_img2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.inner2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.inner2 img {
+    width: 100%;
+    height: auto;
+}
+
+.outer2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    margin-left: 2%;
+}
+
+.outer2 img {
+    width: 100%;
+    height: auto;
+}
+
+.mobile_search_result2 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .page_header2 {
+        display: none;
+    }
+
+    .mobile_page_header2 {
+        background-image: url('homebox1.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        display: flex;
+        top: 0;
+        z-index: 1;
+    }
+
+    .purchase2 {
+        display: flex;
+        flex-direction: column;
+        margin-top: 3%;
+        padding: 5%;
+    }
+
+    .title2 {
+        display: none;
+    }
+
+    .mobile_title2 {
+        width: 18.2rem;
+        height: 2.8rem;
+        border-radius: 0.625rem;
+        background: #E5F3F4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mobile_title2 h2 {
+        color: #0C0C0C;
+        font-family: Montserrat;
+        font-size: 1.3rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%;
+    }
+
+    .sell_price2 h1 {
+        margin-top: 5%;
+    }
+
+    .details2 h4 {
+        font-size: 1.5rem;
+    }
+
+    .details2 h5 {
+        font-size: 1.5rem;
+        margin-top: 3%;
+    }
+
+    .details2 p {
+        font-size: 1.2rem;
+    }
+
+    .details2 span {
+        font-size: 1.2rem;
+    }
+    
+    .purchase_button2 {
+        display: none;
+    }
+
+    .mobile_purchase_button2 {
+        display: flex;
+        z-index: 2;
+        width: 85%;
+        margin-top: 5%;
+    }
+
+    .mobile_purchase_button2 button {
+        width: 100%;
+        height: 4rem;
+        background: #008286;
+        border: none;
+        border-radius: 0.75rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mobile_purchase_button2 a {
+        color: #FFF;
+        font-family: Montserrat;
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .check2 {
+        display: flex;
+        flex-direction: column-reverse;
+        margin-top: 18%;
+        gap: 1.5rem;
+    }
+
+    .check_text2 h6 {
+        font-size: 2.2rem;
+    }
+
+    .check_text2 p {
+        font-size: 1.3rem;
+    }
+
+    .dummy_text2 {
+        margin-top: 2%;
+    }
+
+    .mobile_search_result2 {
+        display: none;
+    }
+}

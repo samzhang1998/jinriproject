@@ -1,0 +1,252 @@
+.order_page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #F5F5F5;
+}
+
+.view_order {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+    margin-left: 3%;
+}
+
+.portal_selection {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    padding: 3%;
+    padding-top: 1.5%;
+    height: 36.625rem;
+    background: #FFF;
+    border-radius: 1.25rem;
+}
+
+.portal_selection h1 {
+    color: #828282;
+    font-family: Montserrat;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.to_details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-top: 2%;
+    height: 2.875rem;
+}
+
+.to_details img {
+    margin-left: 5%;
+    margin-right: 3%;
+    width: 1.5rem;
+    height: auto;
+}
+
+.to_details p {
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    margin: 0;
+}
+
+.download_order {
+    width: 60%;
+    margin-left: 3%;
+    padding-top: 0;
+    padding: 3%;
+    border-radius: 1.25rem;
+    margin-bottom: 5%;
+    background: #FFF;
+}
+
+.download_order h1 {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.download {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+}
+
+.processing {
+    display: flex;
+    flex-direction: column;
+}
+
+.processing p {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.processing h1 {
+    color: #110229;
+    font-family: Montserrat;
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+}
+
+.processing h2 {
+    color: #110229;
+    font-family: Montserrat;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    margin: 0;
+}
+
+.processing h3 {
+    color: #656565;
+    font-family: Montserrat;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    margin: 0;
+}
+
+.tracking {
+    display: flex;
+    flex-direction: column;
+}
+
+.track_history {
+    display: grid;
+    grid-template-columns: 5fr 2fr 5fr;
+    width: 70%;
+    justify-content: start;
+    align-items: center;
+}
+
+.download_report {
+    width: 15.25rem;
+    height: 3rem;
+    border-radius: 2.875rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #EAEAEA;
+    border: none;
+    color: #A4A4A4;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.download_report img {
+    margin-right: 3%;
+    width: 1.5rem;
+    height: auto;
+}
+
+.download_report1 {
+    width: 15.25rem;
+    height: 3rem;
+    border-radius: 2.875rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: #008286;
+    border: none;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.download_report1 img {
+    margin-right: 3%;
+    width: 1.5rem;
+    height: auto;
+}
+
+.question p {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.question h2 {
+    color: #008286;
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    margin: 0;
+}
+
+.tracking p {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.track_circle {
+    width: 0.875rem;
+    height: 0.875rem;
+    border-radius: 50%;
+    border: 2px solid#A4A4A4;
+    background-color: #FFF;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.track_inside {
+    width: 0.4375rem;
+    height: 0.4375rem;
+    border-radius: 50%;
+    border: 2px solid#A4A4A4;
+    background-color: #A4A4A4;
+    position: relative;
+}
+
+.track_circle.completed {
+    border: 2px solid#008286;
+    background-color: #FFF;
+}
+
+.track_inside.completed {
+    border: 2px solid#008286;
+    background-color: #008286;
+}
+
+@media (max-width: 768px) {
+    .download {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

@@ -1,0 +1,59 @@
+.change_settings {
+    display: flex;
+    flex-direction: column;
+    width: 97%;
+    border-radius: 1.25rem;
+    background: #FFF;
+    padding: 5%;
+    margin-right: 3%;
+}
+
+.change_settings h1 {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.change {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.change h1 {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.change p {
+    color: #656565;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    margin-bottom: 0;
+}
+
+.change1 {
+    color: #008286;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    text-decoration-line: underline;
+    border: none;
+    background: #FFF;
+    cursor: pointer;
+}

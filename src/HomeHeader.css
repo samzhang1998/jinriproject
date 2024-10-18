@@ -1,0 +1,143 @@
+.home_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2.5%;
+    padding: 0.625rem 1.25rem;
+    position: relative;
+    width: 100%;
+    z-index: 2    
+}
+
+.home_header nav {
+    display: flex;
+    align-items: center;
+}
+
+.logo1 {
+    position: relative;
+    margin-left: 35%;
+    margin-top: 0.4rem;
+}
+ 
+.menu1 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.875rem;
+}
+  
+.menu1 li {
+    display: inline;
+}
+  
+.menu1 li a {
+    text-decoration: none;
+    color: #343434;
+    font-size: 0.875rem;
+    font-family: Montserrat;
+}
+  
+.menu1 li a:hover {
+    color: #007BFF;
+}
+  
+.login1 {
+    position: relative;
+    margin-right: 5%;
+    margin-top: 0.1875rem;
+}
+  
+.login1 button {
+    width: 9rem;
+    height: 2.375rem;
+    padding: 0.5rem 1rem;
+    background-color: #008286;
+    border: none;
+    border-radius: 3.125rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_text1 {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login1 img {
+    position: relative;
+    margin-right: 5%;
+}
+
+.login1 a {
+    text-decoration: none;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.login1 a:hover {
+    color: #007BFF;
+}
+
+.burger-menu1 {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.625rem;
+}
+  
+@media (max-width: 768px) {
+    .logo1 {
+        margin-left: 15%;
+    }
+    
+    .logo1 img {
+        width: 15rem;
+        height: auto;
+    }
+
+    .login1 img {
+        position: relative;
+        height: 1.5rem;
+    }
+
+    .menu1 {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        background-color: #FFF;
+        top: 1.5rem;
+        right: 2.5rem;
+        width: 10rem;
+        padding: 3rem;
+        z-index: 1000;
+        border-radius: 1rem;
+    }
+    
+    .menu1 li {
+        margin: 1rem 0;
+    }
+    
+    .menu1 li a {
+        color: black;
+        font-size: 1.5rem;
+    }
+
+    .burger-menu1 {
+        display: block;
+        font-size: 2rem;
+    }
+
+    .menu1.show {
+        display: flex;
+        z-index: 1000;
+    }
+
+}
