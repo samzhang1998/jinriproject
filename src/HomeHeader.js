@@ -11,7 +11,7 @@ const HomeHeader = () => {
     return (
         <header className="home_header">
             <Link to="/" className='logo_link1'>
-                <div className="logo1"><img src='/Group 8693 1.png' alt='logo' /></div>
+                <div className="logo1"><img src='${process.env.PUBLIC_URL}/Group 8693 1.png' alt='logo' /></div>
             </Link>
             <nav>
                 <div className="burger-menu1" onClick={toggleMenu}>
