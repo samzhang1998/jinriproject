@@ -81,8 +81,8 @@ const AgentPortal = () => {
                             background: currentPage === 2 ? "#F4F4F4" : "#FFF",
                         }}
                     >
-                        {currentPage === 2 && <img src="File_dock_fill (1).png" alt="fill"></img>}
-                        {currentPage !== 2 && <img src="File_dock_fill.png" alt="fill1"></img>}
+                        {currentPage === 2 && <img src="/File_dock_fill (1).png" alt="fill" />}
+                        {currentPage !== 2 && <img src="/File_dock_fill.png" alt="fill1" />}
                         <p
                             style={{
                                 color: currentPage === 2 ? "#008286" : "#A4A4A4",
