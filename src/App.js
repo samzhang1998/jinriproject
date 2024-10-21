@@ -18,7 +18,7 @@ import OrderDetail from './Agent Portal/OrderDetail';
 
 function App () {
   return(
-    <Router>
+    <Router basename='/jinriproject'>
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
