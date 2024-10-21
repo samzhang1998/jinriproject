@@ -3,13 +3,17 @@ import './Searchresult2.css';
 import Header from '../Header';
 import { Link } from "react-router-dom";
 import Findreport from './Findreport';
+import building from '../asset/图层 2 1.png';
+import ok from '../asset/Check_fill.png';
+import inner from '../asset/pexels-emrecan-2079246.png';
+import outer from '../asset/pexels-tobiasbjorkli-2119713.png';
 
 const Searchresult2 = () => {
     return (
         <div className='search_result2'>
             <Header />
             <div className='page_header2'>
-                <img src='/图层 2 1.png' alt='building' />
+                <img src={building} alt='building' />
             </div>
             <div className='mobile_page_header2'></div>
             <div className='purchase2'>
@@ -26,7 +30,7 @@ const Searchresult2 = () => {
                     </div>
                     <h3>52 Waterloo Street, Rhodes NSW 2138</h3>
                     <div className='available2'>
-                        <img src='/Check_fill.png' alt='ok' />
+                        <img src={ok} alt='ok' />
                         <p>Report available now!</p>
                     </div>
                     <h4>Details</h4>
@@ -57,28 +61,28 @@ const Searchresult2 = () => {
                         back model to ensure that you don't waste money when looking 
                         at properties that you don't end up buying.</p>
                     <div className='dummy_text2'>
-                        <img src='/Check_fill.png' alt='ok' />
+                        <img src={ok} alt='ok' />
                         <p>Lorem Ipsum is simply dummy text of the</p>
                     </div>
                     <div className='dummy_text2'>
-                        <img src='/Check_fill.png' alt='ok' />
+                        <img src={ok} alt='ok' />
                         <p>Lorem Ipsum is simply dummy text of the</p>
                     </div>
                     <div className='dummy_text2'>
-                        <img src='/Check_fill.png' alt='ok' />
+                        <img src={ok} alt='ok' />
                         <p>Lorem Ipsum is simply dummy text of the</p>
                     </div>
                     <div className='dummy_text2'>
-                        <img src='/Check_fill.png' alt='ok' />
+                        <img src={ok} alt='ok' />
                         <p>Lorem Ipsum is simply dummy text of the</p>
                     </div>
                 </div>
                 <div className='check_img2'>
                     <div className='inner2'>
-                        <img src='/pexels-emrecan-2079246.png' alt='inner' />
+                        <img src={inner} alt='inner' />
                     </div>
                     <div className='outer2'>
-                        <img src='/pexels-tobiasbjorkli-2119713.png' alt='outer' />
+                        <img src={outer} alt='outer' />
                     </div>
                 </div>
             </div>

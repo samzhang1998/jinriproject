@@ -3,6 +3,11 @@ import { useParams } from 'react-router-dom';
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import "./OrderDetail.css";
+import add1 from '../asset/File_dock_add_fill (1).png';
+import fill1 from '../asset/File_dock_fill (1).png';
+import set from '../asset/Setting_fill.png';
+import logout from '../asset/Sign_in_squre_fill.png';
+import download from '../asset/Import_duotone_line.png';
 
 const OrderDetail = () => {
     const { orderId } = useParams();
@@ -39,12 +44,12 @@ const OrderDetail = () => {
                     <h1>Agent Portal</h1>
                     <Link to={"/agentportal"} style={{textDecoration: 'none'}}>
                         <div className="to_details">
-                            <img src="/File_dock_add_fill (1).png" alt="add1" />
+                            <img src={add1} alt="add1" />
                             <p style={{color: '#A4A4A4'}}>Order Report</p>
                         </div>
                     </Link>
                     <div className="to_details" style={{background: '#F4F4F4'}}>
-                        <img src="/File_dock_fill (1).png" alt="fill" />
+                        <img src={fill1} alt="fill1" />
                         <p style={{color: '#008286'}}>Orders</p>
                     </div>
                     <Link to={"/agentportal"} 
@@ -52,13 +57,13 @@ const OrderDetail = () => {
                         style={{textDecoration: 'none'}}
                     >
                         <div className="to_details">
-                            <img src="/Setting_fill.png" alt="set1" />
+                            <img src={set} alt="set" />
                             <p style={{color: '#A4A4A4'}}>Account Settings</p>
                         </div>
                     </Link>
                     <Link to={"/"} style={{textDecoration: 'none'}}>
                         <div className="to_details">
-                            <img src="/Sign_in_squre_fill.png" alt="logout" />
+                            <img src={logout} alt="logout" />
                             <p style={{color: '#A4A4A4'}}>Logout</p>                        
                         </div>
                     </Link>
@@ -75,12 +80,12 @@ const OrderDetail = () => {
                         </div>
                         {order.status === 'Processing' ? (
                             <button className="download_report">
-                                <img src="/Import_duotone_line.png" alt="download" />
+                                <img src={download} alt="download" />
                                 Download Report
                             </button>
                         ) : (
                             <button className="download_report1">
-                                <img src="/Import_duotone_line.png" alt="download" />
+                                <img src={download} alt="download" />
                                 Download Report
                             </button>
 

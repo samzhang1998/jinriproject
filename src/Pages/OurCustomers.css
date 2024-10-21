@@ -54,7 +54,7 @@
 .customer_card_up {
     display: flex;
     flex-direction: row;
-    align-items: end;
+    align-items: start;
     justify-content: start;
 }
 
@@ -69,10 +69,8 @@
 }
 
 .customer_card_up img {
-    position: absolute;
-    margin-bottom: 5%;
-    margin-left: 32%;
-    width: 6%;
+    position: relative;
+    width: 15%;
 }
 
 .customer_info {

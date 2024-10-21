@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Header from '../Header';
 import { useNavigate } from 'react-router-dom';
 import './ContactUs.css';
+import email from '../asset/Message_alt_fill.png';
+import phone from '../asset/Phone_fill.png';
+import address from '../asset/Pin_alt_fill1.png';
 
 const ContactUs = () => {
   const [formData,setFormData] = useState ({
@@ -56,7 +59,7 @@ const ContactUs = () => {
         <div className='contact_method'>
           <div className='contact_choice'>
             <div className='fill'>
-              <img src='/Message_alt_fill.png' alt='email' />
+              <img src={email} alt='email' />
             </div>
             <div>
               <h2>Email</h2>
@@ -65,7 +68,7 @@ const ContactUs = () => {
           </div>
           <div className='contact_choice'>
             <div className='fill'>
-              <img src='/Phone_fill.png' alt='phone' />
+              <img src={phone} alt='phone' />
             </div>
             <div>
               <h2>Phone</h2>
@@ -74,7 +77,7 @@ const ContactUs = () => {
           </div>
           <div className='contact_choice'>
             <div className='fill'>
-              <img src='/Pin_alt_fill1.png' alt='address' />
+              <img src={address} alt='address' />
             </div>
             <div>
               <h2>Address</h2>

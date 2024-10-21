@@ -108,28 +108,28 @@ const Footer = () => {
                         target="_blank" 
                         rel="noopener noreferrer"
                     >
-                        <img src="/Facebook - Original.png" alt="facebook" />
+                        <img src={facebook} alt="facebook" />
                     </a>
                     <a
                         href="https://www.twitter.com/" 
                         target="_blank" 
                         rel="noopener noreferrer"
                     >
-                        <img src="/Twitter - Original.png" alt="twitter" />
+                        <img src={twitter} alt="twitter" />
                     </a>
                     <a
                         href="https://www.instagram.com/" 
                         target="_blank" 
                         rel="noopener noreferrer"
                     >
-                        <img src="/Group.png" alt="instagram" />
+                        <img src={instagram} alt="instagram" />
                     </a>
                     <a
                         href="https://www.linkedin.com/" 
                         target="_blank" 
                         rel="noopener noreferrer"
                     >
-                    <img src="/LinkedIn - Original.png" alt="linkedin" />
+                    <img src={linkedin} alt="linkedin" />
                     </a>
                 </div>
                 <div className="rights">© 2024. All rights reserved.</div>

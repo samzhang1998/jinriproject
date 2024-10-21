@@ -4,6 +4,8 @@ import Paymentdetail from './Paymentdetail';
 import Header from '../Header';
 import './Purchasereport.css';
 import { Link } from 'react-router-dom';
+import check from '../asset/Check_fill.png';
+import back from '../asset/Expand_left.png';
 
 const StepOne = ({ showStepTwo, updatePaymentSummary }) => {
     const [hasGrannyFlat, setHasGrannyFlat] = useState(false);
@@ -271,7 +273,7 @@ const PaymentSummary = ({ summary }) => {
             <div>
                 <div className="calculation"><p>Building & Pest Report</p><span>$199</span></div>
                 <div className="report_available">
-                    <img src="/Check_fill.png" alt="check" />
+                    <img src={check} alt="check" />
                     <h4>Report available now!</h4>
                 </div>
                 {summary.hasGrannyFlat && (
@@ -331,7 +333,7 @@ const PurchasePage = () => {
                 <button className='back'>
                     <Link to="/search1">
                         <div className='back_text'>
-                            <img src='Expand_left.png' alt='back' />
+                            <img src={back} alt='back' />
                             <p>Back</p>
                         </div>
                     </Link>
@@ -340,7 +342,7 @@ const PurchasePage = () => {
             {currentStep === 2 && (                
                 <button onClick={showStepOne} className='back'>
                     <div className='back_text'>
-                        <img src='Expand_left.png' alt='back'></img>
+                        <img src={back} alt='back' />
                         <p>Back</p>
                     </div>
                 </button>                
@@ -348,7 +350,7 @@ const PurchasePage = () => {
             {currentStep === 3 && (                
                 <button onClick={showStepTwo} className='back'>
                     <div className='back_text'>
-                        <img src='Expand_left.png' alt='back'></img>
+                        <img src={back} alt='back' />
                         <p>Back</p>
                     </div>
                 </button>

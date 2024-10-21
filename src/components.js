@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./components.css";
+import fill from './asset/Pin_alt_fill.png';
 
 // search button selection
 const Colorbutton1 = () => {
@@ -128,7 +129,7 @@ const MobileSearchBox = () => {
         <div>
             <div className='mobile_search_box'>
                 <div className='mobile_type_area'>
-                    <img src='Pin_alt_fill.png' alt='fill' />
+                    <img src={fill} alt='fill' />
                     <input className="mobile_search"
                         type="text"
                         value={query}
