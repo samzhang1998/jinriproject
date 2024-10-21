@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/jinriproject/static/css/main.fbff5184.css",
-    "main.js": "/jinriproject/static/js/main.4a7658b8.js",
+    "main.js": "/jinriproject/static/js/main.ab456926.js",
     "static/js/453.f69bbbff.chunk.js": "/jinriproject/static/js/453.f69bbbff.chunk.js",
     "static/media/image_home.png": "/jinriproject/static/media/image_home.6e1b29804aaf65923871.png",
     "static/media/pexels-binyaminmellish-1396122 (1).png": "/jinriproject/static/media/pexels-binyaminmellish-1396122 (1).1a9e302727d265039d46.png",
@@ -55,11 +55,11 @@
     "static/media/montserrat-latin-100.woff2": "/jinriproject/static/media/montserrat-latin-100.8d7d79679b70dbe27172.woff2",
     "index.html": "/jinriproject/index.html",
     "main.fbff5184.css.map": "/jinriproject/static/css/main.fbff5184.css.map",
-    "main.4a7658b8.js.map": "/jinriproject/static/js/main.4a7658b8.js.map",
+    "main.ab456926.js.map": "/jinriproject/static/js/main.ab456926.js.map",
     "453.f69bbbff.chunk.js.map": "/jinriproject/static/js/453.f69bbbff.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fbff5184.css",
-    "static/js/main.4a7658b8.js"
+    "static/js/main.ab456926.js"
   ]
 }
