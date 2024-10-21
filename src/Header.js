@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
+import userfill from './asset/User_fill.png';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +32,7 @@ const Header = () => {
                 <button>
                     <Link to="/agentportal">
                         <div className='login_text'>
-                            <img src='/User_fill.png' alt='user' />
+                            <img src={userfill} alt='user' />
                             LOGIN
                         </div>
                     </Link>

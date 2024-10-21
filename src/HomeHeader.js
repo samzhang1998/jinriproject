@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './HomeHeader.css';
 import { Link } from 'react-router-dom';
+import logo from './asset/Group 8693 1.png';
+import userfill from './asset/User_fill.png';
 
 const HomeHeader = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +13,7 @@ const HomeHeader = () => {
     return (
         <header className="home_header">
             <Link to="/" className='logo_link1'>
-                <div className="logo1"><img src='${process.env.PUBLIC_URL}/Group 8693 1.png' alt='logo' /></div>
+                <div className="logo1"><img src={logo} alt='logo' /></div>
             </Link>
             <nav>
                 <div className="burger-menu1" onClick={toggleMenu}>
@@ -30,7 +32,7 @@ const HomeHeader = () => {
                 <button>
                     <Link to="/agentportal">
                         <div className='login_text1'>
-                            <img src='/User_fill.png' alt='user' />
+                            <img src={userfill} alt='user' />
                             LOGIN
                         </div>
                     </Link>

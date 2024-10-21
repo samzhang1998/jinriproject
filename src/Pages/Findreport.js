@@ -1,6 +1,7 @@
 import React from "react";
 import "./Findreport.css"
 import { Link } from "react-router-dom";
+import building2 from '../asset/vecteezy_ai-generated-modern-cozy-house-with-pool-and-parking-for_35706666.png';
 
 const Findreport = () => {
     return (
@@ -14,7 +15,7 @@ const Findreport = () => {
                 </div>
             </div>
             <div className="building2">
-                <img src="vecteezy_ai-generated-modern-cozy-house-with-pool-and-parking-for_35706666.png" alt="building2"></img>
+                <img src={building2} alt="building2" />
             </div>
         </div>
     );

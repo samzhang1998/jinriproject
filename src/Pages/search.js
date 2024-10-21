@@ -1,6 +1,7 @@
 import React from 'react';
 import Colorbutton1, { SearchBox, MobileSearchBox } from '../components';
 import './search.css';
+import fill from '../asset/Pin_alt_fill.png';
 
 const Search = () => {
     return (
@@ -10,7 +11,7 @@ const Search = () => {
             </div>
             <div className='search_content'>
                 <div className='type_area'>
-                    <img src='/Pin_alt_fill.png' alt='fill' />
+                    <img src={fill} alt='fill' />
                     <SearchBox />
                 </div>
                 <p>Can't find property? Click here</p>

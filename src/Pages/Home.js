@@ -6,6 +6,10 @@ import Search from './search.js';
 import { Link } from 'react-router-dom';
 import OurCustomers from './OurCustomers.js';
 import MobileHome from '../Mobile/MobileHome.js';
+import house from '../asset/image1.png';
+import search from '../asset/File_dock_search.png';
+import house1 from '../asset/image3.png';
+import check from '../asset/Check_fill.png';
 
 const Home = () => {
   return (
@@ -24,20 +28,20 @@ const Home = () => {
         </div>
         <div className='box2'>
           <div className='img_container'>
-            <img src='/image1.png' alt='house' />
+            <img src={house} alt='house' />
             <div className='home_rectangle1'>
-              <img src='/File_dock_search.png' alt='search' />
+              <img src={search} alt='search' />
               <div className='rectangle1_1'>
                 <h2>Building & <br /> Pest Inspection</h2>
               </div>
             </div>
             <div className='home_rectangle2'>
-              <img src='/File_dock_search.png' alt='search' />
+              <img src={search} alt='search' />
               <div className='rectangle2_1'>
                 <h2>Building & <br /> Pest Inspection</h2>
               </div>
             </div>
-            <img src='/image3.png' alt='house' />
+            <img src={house1} alt='house' />
           </div>
           <div className='text_container'>
             <h3>GET YOUR REPORT IN <br /> 10 MINUTES!</h3>
@@ -45,21 +49,21 @@ const Home = () => {
               you need at the best possible priceGet informed Before You Buy. Have our 
               qualified inspectors provide the reports you need at the best possible price</p>
             <div className='get_report1'>
-              <img src='/Check_fill.png' alt='check' />
+              <img src={check} alt='check' />
               <div className='steps'>
                 <h4>Instant Report</h4>
                 <p>Get informed Before You Buy. Have our qualified <br /> inspectors</p>
               </div>
             </div>
             <div className='get_report'>
-              <img src='/Check_fill.png' alt='check' />
+              <img src={check} alt='check' />
               <div className='steps'>
                 <h4>Insurance Covered</h4>
                 <p>Get informed Before You Buy. Have our qualified <br /> inspectors pro</p>
               </div>
             </div>
             <div className='get_report'>
-              <img src='/Check_fill.png' alt='check' />
+              <img src={check} alt='check' />
               <div className='steps'>
                 <h4>Get informed Before You Buy.</h4>
                 <p>Get informed Before You Buy. Have our 
@@ -67,7 +71,7 @@ const Home = () => {
               </div>
             </div>
             <div className='get_report'>
-              <img src='/Check_fill.png' alt='check' />
+              <img src={check} alt='check' />
               <div className='steps'>
                 <h4>Get informed Before You Buy.</h4>
                 <p>Get informed Before You Buy. Have our 

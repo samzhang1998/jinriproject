@@ -1,24 +1,29 @@
 import React, { useState } from "react";
 import "./OurCustomers.css";
+import nsw from '../asset/nsw.png';
+import vic from '../asset/vic.png';
+import left from '../asset/ArrowSquareLeft.png';
+import right from '../asset/ArrowSquareRight.png';
+import info from '../asset/ico-quote.png';
 
 const OurCustomers = () => {
     const customerText = "“Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took”";
     const customers = [
         [
-            { name: 'Gladina Samantha', location: 'NSW 2000', imgSrc: 'nsw.png' },
-            { name: 'John Doe', location: 'VIC 3200', imgSrc: 'vic.png' }
+            { name: 'Gladina Samantha', location: 'NSW 2000', imgSrc: nsw },
+            { name: 'John Doe', location: 'VIC 3200', imgSrc: vic }
         ],
         [
-            { name: 'Jane Smith', location: 'NSW 2000', imgSrc: 'nsw.png' },
-            { name: 'Emily Johnson', location: 'VIC 3200', imgSrc: 'vic.png' }
+            { name: 'Jane Smith', location: 'NSW 2000', imgSrc: nsw },
+            { name: 'Emily Johnson', location: 'VIC 3200', imgSrc: vic }
         ],
         [
-            { name: 'Gladina Samantha', location: 'NSW 2000', imgSrc: 'nsw.png' },
-            { name: 'John Doe', location: 'VIC 3200', imgSrc: 'vic.png' }
+            { name: 'Gladina Samantha', location: 'NSW 2000', imgSrc: nsw },
+            { name: 'John Doe', location: 'VIC 3200', imgSrc: vic }
         ],
         [
-            { name: 'Jane Smith', location: 'NSW 2000', imgSrc: 'nsw.png' },
-            { name: 'Emily Johnson', location: 'VIC 3200', imgSrc: 'vic.png' }
+            { name: 'Jane Smith', location: 'NSW 2000', imgSrc: nsw },
+            { name: 'Emily Johnson', location: 'VIC 3200', imgSrc: vic }
         ]
     ];
 
@@ -35,7 +40,7 @@ const OurCustomers = () => {
         <div className="our_customer">
             <h1>What our customers are saying</h1>
             <div className="carousel">
-                <button className="prev_button" onClick={prevPage}><img src="/ArrowSquareLeft.png" alt="left" /></button>
+                <button className="prev_button" onClick={prevPage}><img src={left} alt="left" /></button>
                 <div className="carousel_content">
                     {customers[currentPage].map((customer, index) => (
                         <div key={index} className="carousel_item">
@@ -49,13 +54,13 @@ const OurCustomers = () => {
                                         <h4>{customer.name}</h4>
                                         <p>{customer.location}</p>
                                     </div>
-                                    <img src="/ico-quote.png" alt="info" />
+                                    <img src={info} alt="info" />
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
-                <button className="next_button" onClick={nextPage}><img src="/ArrowSquareRight.png" alt="right" /></button>
+                <button className="next_button" onClick={nextPage}><img src={right} alt="right" /></button>
             </div>
             <div className='points'>
                 <div className='point' style={{
