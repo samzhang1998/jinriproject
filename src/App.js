@@ -20,8 +20,8 @@ import ScrollToTop from './ScrollTop';
 function App () {
   return(
     <Router basename='/jinriproject'>
+      <ScrollToTop />
       <div>
-        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
