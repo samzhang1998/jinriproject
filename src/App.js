@@ -15,11 +15,13 @@ import PurchasePage from './Purchase/Purchasereport';
 import 'typeface-montserrat';
 import AgentPortal from './Agent Portal/AgentPortal';
 import OrderDetail from './Agent Portal/OrderDetail';
+import ScrollToTop from './ScrollTop';
 
 function App () {
   return(
     <Router basename='/jinriproject'>
       <div>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
@@ -42,4 +44,3 @@ function App () {
 };
 
 export default App;
-
