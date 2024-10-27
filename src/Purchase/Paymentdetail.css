@@ -130,3 +130,7 @@
 .pay_now:hover {
     color: #007BFF;
 }
+
+.paynow[disabled] {
+    color: #343434;
+}

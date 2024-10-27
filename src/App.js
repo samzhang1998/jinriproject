@@ -34,7 +34,8 @@ function App () {
           <Route path="/search1" element={<Searchresult1 />} />
           <Route path="/search2" element={<Searchresult2 />} />                                
           <Route path="/purchasereport" element={<PurchasePage />} />
-          <Route path="/agentportal" element={<AgentPortal />} />
+          <Route path="/agent/:id" element={<AgentPortal />} />
+          <Route path="/customer/:id" element={<AgentPortal />} />
           <Route path="/orders/:orderId" element={<OrderDetail />} />                      
         </Routes>
         <Footer />

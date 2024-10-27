@@ -1,0 +1,174 @@
+.usertype {    
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    position: relative;
+}
+
+.usertype_box {
+    width: 80%;
+    height: auto;
+    aspect-ratio: 1300 / 670;
+    background-image: url('image_home.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15rem;
+    margin-bottom: 5%;
+}
+
+.usertype_box h1 {
+    color: #fff;
+    font-family: Montserrat;
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.usertype_select {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+.usertype_select button {
+    width: 13.3rem;
+    height: 3.125rem;
+    background: #008286;
+    border: none;
+    border-radius: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.usertype_select button:hover {
+    color: #007BFF;
+}
+
+.usertype_select a {
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.usertype_select a:hover {
+    color: #007BFF;
+}
+
+.login_page {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    position: relative;
+}
+
+.login_box {
+    width: 80%;
+    height: auto;
+    aspect-ratio: 1300 / 670;
+    background-image: url('image_home.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 5%;
+}
+
+.login_detail {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.login_box h1 {
+    color: #fff;
+    font-family: Montserrat;
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.login_box label {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    align-items: center;
+    color: #fff;
+    font-family: Montserrat;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    margin-bottom: 5%;
+}
+
+.login_box input {
+    height: 2.8rem;
+    border-radius: 0.625rem;
+    border: 1px solid #DDD;
+    padding-left: 3%;
+    color: #656565;
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    outline: none;
+}
+
+.login_page_button {
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+}
+
+.login_page_button button {
+    width: 13.3rem;
+    height: 3.125rem;
+    background: #008286;
+    border: none;
+    border-radius: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login_page_button button:hover {
+    color: #007BFF;
+}
+
+.login_box p {
+    color: red;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+}

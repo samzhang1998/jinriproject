@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import './Paymentdetail.css';
+import Policy from "./Policy";
 
 const Paymentdetail = () => {
     const [paymentMethod, setPaymentMethod] = useState('creditCard');
@@ -13,6 +14,22 @@ const Paymentdetail = () => {
     };
     const handleCardSelected = () => {
         setIsPaypalSelected(false)
+    };
+
+    const [showModal, setShowModal] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
+    const handleCheckboxChange = () => {
+        const newCheckedState = !isChecked;
+        setIsChecked(newCheckedState);
+        if (newCheckedState) {
+            setShowModal(true); 
+        } else {
+            setShowModal(false);
+        }
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
     };
 
     return (
@@ -101,7 +118,9 @@ const Paymentdetail = () => {
                 <h2>Check for Sure Terms & Conditions</h2>
                 <p>*Please agree to the following to proceed with your order.</p>
                 <label>
-                    <input 
+                    <input
+                        checked={isChecked}
+                        onChange={handleCheckboxChange} 
                         type="checkbox"
                         style={{
                             width: '1.2rem',
@@ -114,7 +133,7 @@ const Paymentdetail = () => {
                     exceed your initial payment, up to a maximum of 50% of the retail 
                     cost of a report.</span>
                 </label>
-                <label>
+                {/* <label>
                     <input 
                         type="checkbox"
                         style={{
@@ -124,9 +143,10 @@ const Paymentdetail = () => {
                     />
                     <span>I acknowledge that I am engaging a Third Party Service Provider(s). I agree 
                     to the Terms & Conditions of this Third Party Service Provider.</span>
-                </label>
+                </label> */}
             </div>
-            <button type="submit" className="pay_now">Pay Now</button>
+            <Policy showModal={showModal} onClose={handleCloseModal} />
+            <button disabled={!isChecked} type="submit" className="pay_now">Pay Now</button>
         </div>
     );
 };
