@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Orders.css";
 
-const Orders = () => {
+const Orders = ({ id }) => {
     const [orders, setOrders] = useState([]);
     const [filter, setFilter] = useState('all');
+    
     useEffect(() => {
         const mockOrders = [
             {
@@ -65,7 +66,7 @@ const Orders = () => {
                             <h1>Order #{order.id}</h1>
                             <h2>{order.address}</h2>
                         </div>
-                        <Link to={`/orders/${order.id}`} className="view_order">View order</Link>
+                        <Link to={{ pathname: `/orders/${order.id}`, state: { id } }} className="view_order">View order</Link>
                     </div>
                 ))}
             </div>

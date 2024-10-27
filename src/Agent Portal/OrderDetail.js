@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams,useLocation } from 'react-router-dom';
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import "./OrderDetail.css";
@@ -12,6 +12,8 @@ import download from '../asset/Import_duotone_line.png';
 const OrderDetail = () => {
     const { orderId } = useParams();
     const [order, setOrder] = useState(null);
+    const location = useLocation();
+    const { id } = location.state || {};
 
     useEffect(() => {
         const mockOrderDetails = {
@@ -41,8 +43,8 @@ const OrderDetail = () => {
             <div className='header_bg'></div>
             <div className="view_order">
                 <div className="portal_selection">
-                    <h1>Agent Portal</h1>
-                    <Link to={"/agentportal"} style={{textDecoration: 'none'}}>
+                    <h1>Agent Portal {id}</h1>
+                    <Link to={{ pathname: `/customer/${id}` }} style={{textDecoration: 'none'}}>
                         <div className="to_details">
                             <img src={add1} alt="add1" />
                             <p style={{color: '#A4A4A4'}}>Order Report</p>
@@ -52,7 +54,7 @@ const OrderDetail = () => {
                         <img src={fill1} alt="fill1" />
                         <p style={{color: '#008286'}}>Orders</p>
                     </div>
-                    <Link to={"/agentportal"} 
+                    <Link to={{ pathname: `/customer/${id}` }} 
                         state={{ showContent: 3 }} 
                         style={{textDecoration: 'none'}}
                     >

@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import OrderOverview from "./OrderOverview";
 import Orders from "./Orders";
 import Header from '../Header';
-import { Link,useLocation } from "react-router-dom";
+import { Link,useLocation,useParams } from "react-router-dom";
 import UserSettings from "./UserSettings";
 import "./AgentPortal.css";
 import add from '../asset/File_dock_add_fill.png';
@@ -26,9 +26,10 @@ const OrderRequirement = ({ showOrders }) => {
 };
 
 const OrderProcess = () => {
+    const { id } = useParams();
     return (
         <div>
-            <Orders />
+            <Orders id={id} />
         </div>
     );
 };
@@ -43,6 +44,9 @@ const Settings = () => {
 
 const AgentPortal = () => {
     const [currentPage, setCurrentPage] = useState(1);
+    const { id } = useParams();
+    const location = useLocation();
+    const isAgent = location.pathname.includes('/agent');
     const showOrderOverview = () => {
         setCurrentPage(1);
     };
@@ -52,7 +56,15 @@ const AgentPortal = () => {
     const showSettings = () => {
         setCurrentPage(3);
     };
-    const location = useLocation();
+
+    useEffect(() => {
+        if (isAgent) {
+          setCurrentPage(1);
+        } else {
+          setCurrentPage(2);
+        }
+    }, [isAgent]);
+
     useEffect(() => {
         if (location.state && location.state.showContent) {
           setCurrentPage(location.state.showContent);
@@ -65,22 +77,24 @@ const AgentPortal = () => {
             <div className='header_bg'></div>
             <div className="portal">
                 <div className="portal_selection">
-                    <h1>Agent Portal</h1>
-                    <div 
-                        onClick={showOrderOverview} 
-                        className="to_details"
-                        style={{
-                            background: currentPage === 1 ? "#F4F4F4" : "#FFF",
-                        }}
-                    >
-                        {currentPage === 1 && <img src={add} alt="add" />}
-                        {currentPage !== 1 && <img src={add1} alt="add1" />}
-                        <p
+                    <h1>Agent Portal {id}</h1>
+                    {isAgent && (
+                        <div 
+                            onClick={showOrderOverview} 
+                            className="to_details"
                             style={{
-                                color: currentPage === 1 ? "#008286" : "#A4A4A4",
+                                background: currentPage === 1 ? "#F4F4F4" : "#FFF",
                             }}
-                        >Order Report</p>
-                    </div>
+                        >
+                            {currentPage === 1 && <img src={add} alt="add" />}
+                            {currentPage !== 1 && <img src={add1} alt="add1" />}
+                            <p
+                                style={{
+                                    color: currentPage === 1 ? "#008286" : "#A4A4A4",
+                                }}
+                            >Order Report</p>
+                        </div>
+                    )}
                     <div 
                         onClick={showOrders} 
                         className="to_details"
