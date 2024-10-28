@@ -26,10 +26,10 @@ const OrderRequirement = ({ showOrders }) => {
 };
 
 const OrderProcess = () => {
-    const { id } = useParams();
+    const { type,id } = useParams();
     return (
         <div>
-            <Orders id={id} />
+            <Orders id={id} type={type}/>
         </div>
     );
 };
@@ -77,7 +77,7 @@ const AgentPortal = () => {
             <div className='header_bg'></div>
             <div className="portal">
                 <div className="portal_selection">
-                    <h1>Agent Portal {id}</h1>
+                    <h1>Welcome, {id}</h1>
                     {isAgent && (
                         <div 
                             onClick={showOrderOverview} 

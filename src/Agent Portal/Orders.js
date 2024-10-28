@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Orders.css";
 
-const Orders = ({ id }) => {
+const Orders = ({ type,id }) => {
     const [orders, setOrders] = useState([]);
     const [filter, setFilter] = useState('all');
     
@@ -66,7 +66,7 @@ const Orders = ({ id }) => {
                             <h1>Order #{order.id}</h1>
                             <h2>{order.address}</h2>
                         </div>
-                        <Link to={{ pathname: `/orders/${order.id}`, state: { id } }} className="view_order">View order</Link>
+                        <Link to={{ pathname: `/${type}/${id}/orders/${order.id}` }} className="view_order">View order</Link>
                     </div>
                 ))}
             </div>

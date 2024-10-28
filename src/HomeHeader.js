@@ -20,10 +20,8 @@ const HomeHeader = () => {
                     &#9776;
                 </div>
                 <ul className={`menu1 ${isOpen ? 'show' : ''}`}>
-                    <li><Link to="/buyers">For Buyers</Link></li>
-                    <li><Link to="/sellers">For Sellers</Link></li>
-                    <li><Link to="/inspectors">For Inspectors</Link></li>
-                    <li><Link to="/agents">For Sales Agents</Link></li>
+                    <li><Link to="/individual">For Individual</Link></li>
+                    <li><Link to="/partner">For Partner</Link></li>
                     <li><Link to="/about">About Us</Link></li>
                     <li><Link to="/contact">Contact Us</Link></li>
                 </ul>

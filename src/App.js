@@ -4,10 +4,8 @@ import Home from './Pages/Home';
 import AboutUs from './Pages/AboutUs';
 import Footer from './Footer';
 import ContactUs from './Pages/ContactUs';
-import ForBuyers from './Pages/ForBuyers';
-import ForSellers from './Pages/ForSellers';
-import ForInspectors from './Pages/ForInspectors';
-import ForSalesAgents from './Pages/ForSalesAgents';
+import ForIndividual from './Pages/ForIndividual';
+import ForPartner from './Pages/ForPartner';
 import Login from './Pages/Login';
 import Searchresult1 from './Pages/Searchresult1';
 import Searchresult2 from './Pages/Searchresult2';
@@ -26,17 +24,15 @@ function App () {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
-          <Route path="/buyers" element={<ForBuyers />} />
-          <Route path="/sellers" element={<ForSellers />} />
-          <Route path="/inspectors" element={<ForInspectors />} />
-          <Route path="/agents" element={<ForSalesAgents />} />
+          <Route path="/individual" element={<ForIndividual />} />
+          <Route path="/partner" element={<ForPartner />} />
           <Route path="/login" element={<Login />} />
           <Route path="/search1" element={<Searchresult1 />} />
           <Route path="/search2" element={<Searchresult2 />} />                                
           <Route path="/purchasereport" element={<PurchasePage />} />
-          <Route path="/agent/:id" element={<AgentPortal />} />
-          <Route path="/customer/:id" element={<AgentPortal />} />
-          <Route path="/orders/:orderId" element={<OrderDetail />} />                      
+          <Route path="/:type/:id" element={<AgentPortal />} />
+          {/* <Route path="/customer/:id" element={<AgentPortal />} /> */}
+          <Route path="/:type/:id/orders/:orderId" element={<OrderDetail />} />                      
         </Routes>
         <Footer />
       </div>      

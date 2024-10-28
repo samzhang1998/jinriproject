@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams,useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import "./OrderDetail.css";
@@ -12,8 +12,7 @@ import download from '../asset/Import_duotone_line.png';
 const OrderDetail = () => {
     const { orderId } = useParams();
     const [order, setOrder] = useState(null);
-    const location = useLocation();
-    const { id } = location.state || {};
+    const { id,type } = useParams();
 
     useEffect(() => {
         const mockOrderDetails = {
@@ -43,18 +42,18 @@ const OrderDetail = () => {
             <div className='header_bg'></div>
             <div className="view_order">
                 <div className="portal_selection">
-                    <h1>Agent Portal {id}</h1>
-                    <Link to={{ pathname: `/customer/${id}` }} style={{textDecoration: 'none'}}>
+                    <h1>Welcome, {id}</h1>
+                    {type === "agent" && <Link to={{ pathname: `/${type}/${id}` }} style={{textDecoration: 'none'}}>
                         <div className="to_details">
                             <img src={add1} alt="add1" />
                             <p style={{color: '#A4A4A4'}}>Order Report</p>
                         </div>
-                    </Link>
+                    </Link>}
                     <div className="to_details" style={{background: '#F4F4F4'}}>
                         <img src={fill1} alt="fill1" />
                         <p style={{color: '#008286'}}>Orders</p>
                     </div>
-                    <Link to={{ pathname: `/customer/${id}` }} 
+                    <Link to={{ pathname: `/${type}/${id}` }} 
                         state={{ showContent: 3 }} 
                         style={{textDecoration: 'none'}}
                     >
@@ -73,7 +72,7 @@ const OrderDetail = () => {
                 <div className="download_order">
                     <h1>Order #{order.id}</h1>
                     <hr />
-                    <div className="download">
+                    {type === "customer" && <div className="download">
                         <div className="processing">
                             <p>Your order is</p>
                             <h1>{order.status}</h1>
@@ -90,15 +89,14 @@ const OrderDetail = () => {
                                 <img src={download} alt="download" />
                                 Download Report
                             </button>
-
                         )}
                         <div className="question">
                             <p>If you have any questions about your order, please feel free to contact us.</p>
                             <hr style={{background: "#DDD", height: '1px'}}/>
                             <h2>info@checkforsure.com.au</h2>
                         </div>
-                    </div>
-                    <hr />
+                    </div>}
+                    {type === "customer" && <hr />}
                     <div className="tracking">
                         <p>Tracking History</p>
                         {order.trackings.map((tracking, index) => (

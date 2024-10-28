@@ -1,14 +1,14 @@
 import React from 'react';
 import HomeHeader from '../HomeHeader';
 
-const ForSalesAgents = () => {
+const ForIndividual = () => {
   return (
     <div>
       <HomeHeader />
-      <h1>For Sales Agents</h1>
+      <h1>For Individual</h1>
       <p>Welcome to our website!</p>
     </div>
   );
 };
 
-export default ForSalesAgents;
+export default ForIndividual;

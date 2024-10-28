@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import YourDetailsForm from './Yourdetails';
 import Paymentdetail from './Paymentdetail';
 import Header from '../Header';
 import './Purchasereport.css';
-import { Link } from 'react-router-dom';
 import check from '../asset/Check_fill.png';
 import back from '../asset/Expand_left.png';
 
@@ -300,6 +300,7 @@ const PaymentSummary = ({ summary }) => {
 
 const PurchasePage = () => {
     const [currentStep, setCurrentStep] = useState(1);
+    const navigate = useNavigate();
     const [paymentSummary, setPaymentSummary] = useState({
         hasGrannyFlat: false,
         grannyFlatPrice: 0,
@@ -325,18 +326,20 @@ const PurchasePage = () => {
         setPaymentSummary((prevSummary) => ({ ...prevSummary, ...newSummary }));
     };
 
+    const handleBack = () => {
+        navigate(-1);
+    };
+
     return (
         <div className='purchase1'>
             <Header />
             <div className='header_bg'></div>
             {currentStep === 1 && (                
-                <button className='back'>
-                    <Link to="/search1">
+                <button className='back' onClick={handleBack}>
                         <div className='back_text'>
                             <img src={back} alt='back' />
                             <p>Back</p>
                         </div>
-                    </Link>
                 </button>
             )}
             {currentStep === 2 && (                

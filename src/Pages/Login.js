@@ -7,18 +7,14 @@ import HomeHeader from '../HomeHeader';
 const Login = () => {
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
-    const [userType, setUserType] = useState('customer');
+    const [userType, setUserType] = useState('');
     const [loginStatus, setLoginStatus] = useState('');
     const navigate = useNavigate();
 
     const handleLogin = () => {
         const isAuthenticated = authenticateUser(userId, password, userType);
         if (isAuthenticated) {
-            if (userType === 'customer') {
-                navigate(`/customer/${userId}`);
-            } else if (userType === 'agent') {
-                navigate(`/agent/${userId}`);
-            }
+                navigate(`/${userType}/${userId}`);
         } else {
             setLoginStatus('Invalid user ID or password.');
         }
