@@ -53,7 +53,7 @@ const Policy = ({ showModal, onClose }) => {
                 </div>
                 <button
                     className='understand'
-                    disabled={isScrolledToBottom}
+                    disabled={!isScrolledToBottom}
                     onClick={handleConfirm}
                 >I Understand</button>
             </div>
