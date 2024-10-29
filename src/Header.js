@@ -23,7 +23,7 @@ const Header = () => {
                     <li><Link to="/partner">For Partner</Link></li>
                     <li><Link to="/about">About Us</Link></li>
                     <li><Link to="/contact">Contact Us</Link></li>
-                    <div className='mobile_login'><Link to="/agentportal">Login</Link></div>
+                    <div className='mobile_login'><Link to="/login">Login</Link></div>
                 </ul>
             </nav>
             <div className="login">

@@ -176,6 +176,7 @@
     font-size: 1rem;
     font-style: normal;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .download_report1 img {

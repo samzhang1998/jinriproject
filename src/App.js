@@ -14,6 +14,8 @@ import 'typeface-montserrat';
 import AgentPortal from './Agent Portal/AgentPortal';
 import OrderDetail from './Agent Portal/OrderDetail';
 import ScrollToTop from './ScrollTop';
+import SignUp from './Pages/SignUp';
+import ThankYou from './Purchase/ThankYou';
 
 function App () {
   return(
@@ -30,8 +32,9 @@ function App () {
           <Route path="/search1" element={<Searchresult1 />} />
           <Route path="/search2" element={<Searchresult2 />} />                                
           <Route path="/purchasereport" element={<PurchasePage />} />
+          <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/:type/:id" element={<AgentPortal />} />
-          {/* <Route path="/customer/:id" element={<AgentPortal />} /> */}
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/:type/:id/orders/:orderId" element={<OrderDetail />} />                      
         </Routes>
         <Footer />

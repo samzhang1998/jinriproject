@@ -1,11 +1,14 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './Paymentdetail.css';
 import Policy from "./Policy";
 
 const Paymentdetail = () => {
     const [paymentMethod, setPaymentMethod] = useState('creditCard');
     const [isPaypalSelected, setIsPaypalSelected] = useState(false);
+    const navigate = useNavigate();
+
     const handlePaymentMethodChange = (e) => {
         setPaymentMethod(e.target.value);
     };
@@ -15,6 +18,9 @@ const Paymentdetail = () => {
     const handleCardSelected = () => {
         setIsPaypalSelected(false)
     };
+    const handleSubmit = () => {
+        navigate (`/thankyou`)
+    }
 
     const [showModal, setShowModal] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
@@ -133,20 +139,14 @@ const Paymentdetail = () => {
                     exceed your initial payment, up to a maximum of 50% of the retail 
                     cost of a report.</span>
                 </label>
-                {/* <label>
-                    <input 
-                        type="checkbox"
-                        style={{
-                            width: '1.2rem',
-                        }}
-                        required
-                    />
-                    <span>I acknowledge that I am engaging a Third Party Service Provider(s). I agree 
-                    to the Terms & Conditions of this Third Party Service Provider.</span>
-                </label> */}
             </div>
             <Policy showModal={showModal} onClose={handleCloseModal} />
-            <button disabled={!isChecked} type="submit" className="pay_now">Pay Now</button>
+            <button 
+                disabled={isChecked} 
+                type="submit" 
+                className="pay_now"
+                onClick={handleSubmit}
+            >Pay Now</button>
         </div>
     );
 };
