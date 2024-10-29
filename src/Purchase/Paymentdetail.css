@@ -131,6 +131,6 @@
     color: #007BFF;
 }
 
-.paynow[disabled] {
-    color: #343434;
+.pay_now[disabled] {
+    background: #343434;
 }

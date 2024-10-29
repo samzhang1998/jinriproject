@@ -118,7 +118,7 @@ const PasswordModal = ({ closeModal }) => {
                     value={newPassword}
                     onChange={handleNewPasswordChange}
                 />
-                {errorMessage && <p>{errorMessage}</p>}
+                {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
                 <button
                     onClick={handleSave}
                     className="save_change"
