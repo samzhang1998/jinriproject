@@ -142,7 +142,7 @@ const Paymentdetail = () => {
             </div>
             <Policy showModal={showModal} onClose={handleCloseModal} />
             <button 
-                disabled={isChecked} 
+                disabled={!isChecked} 
                 type="submit" 
                 className="pay_now"
                 onClick={handleSubmit}
