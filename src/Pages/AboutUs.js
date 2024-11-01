@@ -52,7 +52,7 @@ const AboutUs = () => {
         </div>
         <div className='container2'>
           <h2>Here is the <br /> Feature one</h2>
-          <div className='text1'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+          <div className='container2_text1'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took“Lorem Ipsum 
             is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industr</div>
           <img src={office} alt='office' />

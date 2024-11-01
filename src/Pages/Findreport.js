@@ -1,7 +1,7 @@
 import React from "react";
 import "./Findreport.css"
 import { Link } from "react-router-dom";
-import building2 from '../asset/vecteezy_ai-generated-modern-cozy-house-with-pool-and-parking-for_35706666.png';
+import building2 from '../asset/pngwing.com.png';
 
 const Findreport = () => {
     return (

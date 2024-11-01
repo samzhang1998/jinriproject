@@ -18,8 +18,8 @@ const Home = () => {
         <MobileHome />
       </div>
       <div className="home">
-        <HomeHeader />
-        <div className="box1">        
+        <div className="box1">  
+          <HomeHeader />      
           <div className='text1'>
             <h1>The home of porperty <br /> compliance and due diligence</h1>
             <p>Independent, Professional Reports</p>

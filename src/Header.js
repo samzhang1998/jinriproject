@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import userfill from './asset/User_fill.png';
+import logo1 from './asset/logo.png';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,7 @@ const Header = () => {
     return (
         <header className="header">
             <Link to="/" className='logo_link'>
-                <div className="logo">CHECK FOR SURE</div>
+                <img src={logo1} alt='logo' />
             </Link>
             <nav>
                 <div className="burger-menu" onClick={toggleMenu}>

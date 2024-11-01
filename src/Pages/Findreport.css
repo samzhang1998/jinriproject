@@ -64,6 +64,12 @@
     color: #007BFF;
 }
 
+.building2 {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
 .building2 img {
     position: relative;
     margin-bottom: 0;

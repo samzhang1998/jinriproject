@@ -12,20 +12,24 @@
 .header nav {
     display: flex;
     align-items: center;
-}
-
-.logo {
-    position: relative;
-    margin-left: 1.875rem;
-    margin-top: 0.3125rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ffffff;
+    padding-right: 15%;
 }
 
 .logo_link {
     color: inherit;
     text-decoration: none;
+    position: relative;
+    margin-left: 1.875rem;
+    margin-top: 0.3125rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    color: #ffffff;
+}
+
+.logo_link img {
+    width: 120%;
 }
  
 .menu {
@@ -33,7 +37,7 @@
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 1.875rem;
+    gap: 3rem;
 }
   
 .menu li {
