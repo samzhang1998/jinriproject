@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/jinriproject/static/css/main.938e1c2f.css",
+    "main.css": "/jinriproject/static/css/main.ae4e5515.css",
     "main.js": "/jinriproject/static/js/main.25f8f909.js",
     "static/js/453.f69bbbff.chunk.js": "/jinriproject/static/js/453.f69bbbff.chunk.js",
     "static/media/image_partner.jpg": "/jinriproject/static/media/image_partner.4a0fc474f352a7e33fb5.jpg",
-    "static/media/image_individual.png": "/jinriproject/static/media/image_individual.7c0e166635cf30f60ef0.png",
-    "static/media/image_home.png": "/jinriproject/static/media/image_home.44317a6a8220a8134e0e.png",
+    "static/media/image_individual.png": "/jinriproject/static/media/image_individual.fde05ec089c7688c9068.png",
+    "static/media/image_home.png": "/jinriproject/static/media/image_home.13691e13a09262931bcb.png",
     "static/media/pexels-binyaminmellish-1396122 (1).png": "/jinriproject/static/media/pexels-binyaminmellish-1396122 (1).1a9e302727d265039d46.png",
     "static/media/pexels-frans-van-heerden-201846-1438832.png": "/jinriproject/static/media/pexels-frans-van-heerden-201846-1438832.42d2cb3ce83651fdb13b.png",
     "static/media/图层 2 1.png": "/jinriproject/static/media/图层 2 1.5b6b54b71133d7a20e3a.png",
@@ -57,12 +57,12 @@
     "static/media/montserrat-latin-100.woff2": "/jinriproject/static/media/montserrat-latin-100.8d7d79679b70dbe27172.woff2",
     "static/media/logo.png": "/jinriproject/static/media/logo.f9b9c002f680970373cb.png",
     "index.html": "/jinriproject/index.html",
-    "main.938e1c2f.css.map": "/jinriproject/static/css/main.938e1c2f.css.map",
+    "main.ae4e5515.css.map": "/jinriproject/static/css/main.ae4e5515.css.map",
     "main.25f8f909.js.map": "/jinriproject/static/js/main.25f8f909.js.map",
     "453.f69bbbff.chunk.js.map": "/jinriproject/static/js/453.f69bbbff.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.938e1c2f.css",
+    "static/css/main.ae4e5515.css",
     "static/js/main.25f8f909.js"
   ]
 }
