@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/jinriproject/static/css/main.e80b2672.css",
-    "main.js": "/jinriproject/static/js/main.f1f3106a.js",
+    "main.css": "/jinriproject/static/css/main.8c7ba77f.css",
+    "main.js": "/jinriproject/static/js/main.25f8f909.js",
     "static/js/453.f69bbbff.chunk.js": "/jinriproject/static/js/453.f69bbbff.chunk.js",
-    "static/media/image_home.png": "/jinriproject/static/media/image_home.6e1b29804aaf65923871.png",
+    "static/media/image_partner.jpg": "/jinriproject/static/media/image_partner.4a0fc474f352a7e33fb5.jpg",
+    "static/media/image_individual.png": "/jinriproject/static/media/image_individual.7c0e166635cf30f60ef0.png",
+    "static/media/image_home.png": "/jinriproject/static/media/image_home.44317a6a8220a8134e0e.png",
     "static/media/pexels-binyaminmellish-1396122 (1).png": "/jinriproject/static/media/pexels-binyaminmellish-1396122 (1).1a9e302727d265039d46.png",
     "static/media/pexels-frans-van-heerden-201846-1438832.png": "/jinriproject/static/media/pexels-frans-van-heerden-201846-1438832.42d2cb3ce83651fdb13b.png",
     "static/media/图层 2 1.png": "/jinriproject/static/media/图层 2 1.5b6b54b71133d7a20e3a.png",
-    "static/media/vecteezy_ai-generated-modern-cozy-house-with-pool-and-parking-for_35706666.png": "/jinriproject/static/media/vecteezy_ai-generated-modern-cozy-house-with-pool-and-parking-for_35706666.4ca4c9896f4913dbb172.png",
     "static/media/pexels-fauxels-3184360.png": "/jinriproject/static/media/pexels-fauxels-3184360.2285cbdb3f6da3c47f36.png",
     "static/media/pexels-chevanon-323503.png": "/jinriproject/static/media/pexels-chevanon-323503.a1cc8605f123ff36c6f5.png",
+    "static/media/pngwing.com.png": "/jinriproject/static/media/pngwing.com.80a3a6f4edd4e95b9535.png",
     "static/media/pexels-tobiasbjorkli-2119713.png": "/jinriproject/static/media/pexels-tobiasbjorkli-2119713.a13879f32b3e27f5bace.png",
     "static/media/homebox1.png": "/jinriproject/static/media/homebox1.b4bfc5d5c3152a1d2c09.png",
     "static/media/aboutbox1.png": "/jinriproject/static/media/aboutbox1.55895e2866b6de0bdbde.png",
@@ -53,13 +55,14 @@
     "static/media/montserrat-latin-200.woff2": "/jinriproject/static/media/montserrat-latin-200.9d266fbbfa6cab7009bd.woff2",
     "static/media/montserrat-latin-100italic.woff2": "/jinriproject/static/media/montserrat-latin-100italic.e279051046ba1286706a.woff2",
     "static/media/montserrat-latin-100.woff2": "/jinriproject/static/media/montserrat-latin-100.8d7d79679b70dbe27172.woff2",
+    "static/media/logo.png": "/jinriproject/static/media/logo.f9b9c002f680970373cb.png",
     "index.html": "/jinriproject/index.html",
-    "main.e80b2672.css.map": "/jinriproject/static/css/main.e80b2672.css.map",
-    "main.f1f3106a.js.map": "/jinriproject/static/js/main.f1f3106a.js.map",
+    "main.8c7ba77f.css.map": "/jinriproject/static/css/main.8c7ba77f.css.map",
+    "main.25f8f909.js.map": "/jinriproject/static/js/main.25f8f909.js.map",
     "453.f69bbbff.chunk.js.map": "/jinriproject/static/js/453.f69bbbff.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e80b2672.css",
-    "static/js/main.f1f3106a.js"
+    "static/css/main.8c7ba77f.css",
+    "static/js/main.25f8f909.js"
   ]
 }
