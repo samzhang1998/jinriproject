@@ -10,6 +10,10 @@
     box-shadow: 0px 4px 54px 0px rgba(0, 0, 0, 0.25);
 }
 
+.mobile_partner {
+    display: none;
+}
+
 .partner_text1 {
     margin-bottom: 5%;
 }
@@ -37,4 +41,39 @@
     line-height: 150%;
     position: relative;
     margin-left: 10%;
+}
+
+@media (max-width: 768px) {
+    .screen_partner {
+        display: none;
+    }
+
+    .mobile_partner {
+        display: block;
+        width: 100%;
+    }
+
+    .partner_box1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .partner_text1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .partner_text1 h1 {
+        margin-left: 0;
+        font-size: 3rem;
+    }
+
+    .partner_text1 p {
+        margin-left: 0;
+        width: 80%;
+        text-align: center;
+        font-size: 1.3rem;
+    }
 }

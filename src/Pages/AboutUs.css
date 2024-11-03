@@ -89,21 +89,36 @@
     line-height: 142.857%;
 }
 
+.feature_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    gap: 1rem;
+    margin-top: 5%;
+    padding-left: 5%;
+    max-height: 50%;
+}
+
 .feature {
     display: flex;
-    margin-top: 8%;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: start;
+}
+
+.feature_left {
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-.feature img {
-    position: relative;
-    height: auto;
-    margin-right: 6%;
-    margin-left: 5%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    width: 3.625rem;
-    height: 3.625rem;
+.line {
+    width: 1px;
+    height: 3.5rem;
+    margin-top: 1rem;
+    border-left: 1px dashed #CACACA;
+    flex-shrink: 0;
 }
 
 .feature_text h2 {

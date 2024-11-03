@@ -120,13 +120,18 @@
         font-size: 2.2rem;
     }
     
-    .logo img {
+    .logo_link img {
         width: 15rem;
         height: auto;
+        margin-left: 250%;
     }
 
     .login {
         display: none;
+    }
+
+    .header nav {
+        padding-right: 10%;
     }
 
     .menu {
@@ -155,7 +160,6 @@
         color: #FFF;
         display: block;
         font-size: 2rem;
-        margin-right: 3rem;
     }
 
     .menu.show {

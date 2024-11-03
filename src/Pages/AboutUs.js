@@ -28,25 +28,35 @@ const AboutUs = () => {
             <p>Get informed Before You Buy. Have our qualified inspectors 
               provide the reports you need at the best possible price</p>
           </div>
-          <div className='feature'>
-            <img src={circle} alt='circle' />
-            <div className='feature_text'>
-              <h2>Here is the Feature one</h2>
-              <p>Get informed Before You Buy. Have our <br /> qualified inspectors</p>
+          <div className='feature_box'>
+            <div className='feature'>
+              <div className='feature_left'>
+                <img src={circle} alt='circle' />
+                <div className='line'></div>
+              </div>
+              <div className='feature_text'>
+                <h2>Here is the Feature one</h2>
+                <p>Get informed Before You Buy. Have our <br /> qualified inspectors</p>
+              </div>
             </div>
-          </div>
-          <div className='feature'>
-            <img src={circle} alt='circle' />
-            <div className='feature_text'>
-              <h2>Here is the Feature two</h2>
-              <p>Get informed Before You Buy. Have our <br /> qualified inspectors</p>
+            <div className='feature'>
+              <div className='feature_left'>
+                <img src={circle} alt='circle' />
+                <div className='line'></div>
+              </div>
+              <div className='feature_text'>
+                <h2>Here is the Feature two</h2>
+                <p>Get informed Before You Buy. Have our <br /> qualified inspectors</p>
+              </div>
             </div>
-          </div>
-          <div className='feature'>
-            <img src={circle} alt='circle' />
-            <div className='feature_text'>
-              <h2>Here is the Feature three</h2>
-              <p>Get informed Before You Buy. Have our <br /> qualified inspectors</p>
+            <div className='feature'>
+              <div className='feature_left'>
+                <img src={circle} alt='circle' />
+              </div>
+              <div className='feature_text'>
+                <h2>Here is the Feature three</h2>
+                <p>Get informed Before You Buy. Have our <br /> qualified inspectors</p>
+              </div>
             </div>
           </div>
         </div>
