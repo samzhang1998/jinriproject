@@ -6,7 +6,7 @@
     flex-direction: column;
     padding: 0;
     box-sizing: border-box;
-    background: linear-gradient(0deg, rgba(33, 62, 63, 0.77) 0%);
+    background: #F1F1F1;
 }
 
 .mobile_home {
@@ -28,6 +28,7 @@
 .text1 h1 {
     color: #FFF;
     font-size: 2.7rem;
+    font-family: Montserrat;
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
@@ -42,6 +43,7 @@
 .text1 p {
     color: #FFF;
     font-size: 1.2rem;
+    font-family: Montserrat;
     font-style: normal;
     font-weight: 500;
     line-height: 150%;
@@ -55,8 +57,7 @@
     margin-top: 5%;
     background: #F8F8F8;
     grid-template-columns: 6fr 5fr;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding: 5%;
     margin-bottom: 5%;
 }
 
@@ -197,10 +198,12 @@
 }
 
 .get_report img {
+    width: 5%;
     margin-right: 4%;
 }
 
 .get_report1 img {
+    width: 5%;
     margin-right: 4%;
 }
 

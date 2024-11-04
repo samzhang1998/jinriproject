@@ -26,6 +26,7 @@ const Colorbutton1 = () => {
                     border: 'none',
                     cursor: 'pointer',
                     fontSize: '0.875rem',
+                    fontFamily: 'Montserrat',
                 }}
             >
                 Building & Pest inspection
@@ -42,6 +43,7 @@ const Colorbutton1 = () => {
                     border: 'none',
                     cursor: 'pointer',
                     fontSize: '0.875rem',
+                    fontFamily: 'Montserrat',
                 }}
             >
                 Strata Report        

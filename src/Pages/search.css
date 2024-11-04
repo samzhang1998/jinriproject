@@ -9,6 +9,7 @@
 .searchbox span {
     color: #FFF;
     font-size: 0.8rem;
+    font-family: Montserrat;
     font-style: normal;
     font-weight: 500;
     line-height: 150%;
@@ -28,6 +29,15 @@
     border: 1px solid #F4F4F4;
     background: rgba(255, 255, 255, 0.20);
     backdrop-filter: blur(0.625rem);
+}
+
+.search_content p {
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
 }
 
 .mobile_search_content {
