@@ -3,7 +3,6 @@ import './AboutUs.css';
 import Header from '../Header';
 import Findreport from './Findreport';
 import { Link } from 'react-router-dom';
-import circle from '../asset/Ellipse 181.png';
 import office from '../asset/pexels-fauxels-3184360.png';
 import mobile from '../asset/pexels-christa-grover-977018-2121120.png';
 import logo from '../asset/Group 8693 1.png';
@@ -31,7 +30,7 @@ const AboutUs = () => {
           <div className='feature_box'>
             <div className='feature'>
               <div className='feature_left'>
-                <img src={circle} alt='circle' />
+                <div className='about_cricle'>1</div>
                 <div className='line'></div>
               </div>
               <div className='feature_text'>
@@ -41,7 +40,7 @@ const AboutUs = () => {
             </div>
             <div className='feature'>
               <div className='feature_left'>
-                <img src={circle} alt='circle' />
+                <div className='about_cricle'>1</div>
                 <div className='line'></div>
               </div>
               <div className='feature_text'>
@@ -51,7 +50,7 @@ const AboutUs = () => {
             </div>
             <div className='feature'>
               <div className='feature_left'>
-                <img src={circle} alt='circle' />
+                <div className='about_cricle'>1</div>
               </div>
               <div className='feature_text'>
                 <h2>Here is the Feature three</h2>

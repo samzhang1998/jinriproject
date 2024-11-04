@@ -108,6 +108,14 @@
     align-items: start;
 }
 
+.about_cricle{
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: #E5F3F4;
+    color: #E5F3F4;
+}
+
 .feature_left {
     display: flex;
     flex-direction: column;
