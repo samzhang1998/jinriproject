@@ -1,5 +1,4 @@
 import React from 'react';
-import HomeHeader from '../HomeHeader';
 import Search from './search';
 import './ForIndividual.css';
 import house from '../asset/image1.png';
@@ -14,7 +13,7 @@ const ForIndividual = () => {
     <div>
       <div className="individual_box1">
         <div className='screen_individual'>  
-          <HomeHeader />
+          <Header />
         </div>
         <div className='mobile_individual'>
           <Header />

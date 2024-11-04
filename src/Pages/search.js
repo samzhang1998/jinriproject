@@ -2,6 +2,7 @@ import React from 'react';
 import Colorbutton1, { SearchBox, MobileSearchBox } from '../components';
 import './search.css';
 import fill from '../asset/Pin_alt_fill.png';
+import { Link } from 'react-router-dom';
 
 const Search = () => {
     return (
@@ -14,7 +15,7 @@ const Search = () => {
                     <img src={fill} alt='fill' />
                     <SearchBox />
                 </div>
-                <p>Can't find property? Click here</p>
+                <p>Can't find property? <Link to='/address' className='find_address'>Click here</Link></p>
             </div>
             <div className='mobile_search_content'>
                 <MobileSearchBox />

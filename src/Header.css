@@ -29,7 +29,8 @@
 }
 
 .logo_link img {
-    width: 120%;
+    width: 150%;
+    margin-left: 35%;
 }
  
 .menu {
@@ -51,7 +52,7 @@
 .menu li a {
     text-decoration: none;
     color: #ffffff;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-family: Montserrat;
 }
   

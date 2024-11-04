@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css';
-import HomeHeader from '../HomeHeader.js';
+import Header from '../Header.js';
 import Findreport from './Findreport.js';
 import Search from './search.js';
 import { Link } from 'react-router-dom';
@@ -19,7 +19,7 @@ const Home = () => {
       </div>
       <div className="home">
         <div className="box1">  
-          <HomeHeader />      
+          <Header />      
           <div className='text1'>
             <h1>The home of porperty <br /> compliance and due diligence</h1>
             <p>Independent, Professional Reports</p>

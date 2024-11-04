@@ -16,6 +16,7 @@ import OrderDetail from './Agent Portal/OrderDetail';
 import ScrollToTop from './ScrollTop';
 import SignUp from './Pages/SignUp';
 import ThankYou from './Purchase/ThankYou';
+import CheckAddress from './Pages/CheckAddress';
 
 function App () {
   return(
@@ -29,6 +30,7 @@ function App () {
           <Route path="/individual" element={<ForIndividual />} />
           <Route path="/partner" element={<ForPartner />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/address" element={<CheckAddress />} />
           <Route path="/search1" element={<Searchresult1 />} />
           <Route path="/search2" element={<Searchresult2 />} />                                
           <Route path="/purchasereport" element={<PurchasePage />} />

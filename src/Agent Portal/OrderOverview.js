@@ -1,7 +1,7 @@
 import React from "react";
 import "./OrderOverview.css";
 
-const OrderOverview = () => {
+const OrderOverview = ({ showOrders }) => {
     return (
         <div>
             <div className="agent_property_form">                
@@ -116,7 +116,11 @@ const OrderOverview = () => {
                     <h2>Address: Unit654/311 high Street, Kingsford NSW 2037</h2>
                     <h2>Inspector: Max</h2>
                     <h2>ETA: 2-4 Business Days</h2>
-                </div>                
+                    <button 
+                        className="order_now"
+                        onClick={showOrders}
+                    >Order Now</button> 
+                </div>               
             </div>
         </div>
     );

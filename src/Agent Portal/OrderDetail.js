@@ -72,31 +72,33 @@ const OrderDetail = () => {
                 <div className="download_order">
                     <h1>Order #{order.id}</h1>
                     <hr />
-                    {type === "customer" && <div className="download">
+                    <div className="download">
                         <div className="processing">
                             <p>Your order is</p>
                             <h1>{order.status}</h1>
                             <h2>as on {order.date}</h2>
                             <h3>Last update on {order.lastdate}</h3>
                         </div>
-                        {order.status === 'Processing' ? (
-                            <button className="download_report">
-                                <img src={download} alt="download" />
-                                Download Report
-                            </button>
-                        ) : (
-                            <button className="download_report1">
-                                <img src={download} alt="download" />
-                                Download Report
-                            </button>
-                        )}
+                        {type === 'customer' && <div>
+                            {order.status === 'Processing' ? (
+                                <button className="download_report">
+                                    <img src={download} alt="download" />
+                                    Download Report
+                                </button>
+                            ) : (
+                                <button className="download_report1">
+                                    <img src={download} alt="download" />
+                                    Download Report
+                                </button>
+                            )}
+                        </div>}
                         <div className="question">
                             <p>If you have any questions about your order, please feel free to contact us.</p>
                             <hr style={{background: "#DDD", height: '1px'}}/>
                             <h2>info@checkforsure.com.au</h2>
                         </div>
-                    </div>}
-                    {type === "customer" && <hr />}
+                    </div>
+                    <hr />
                     <div className="tracking">
                         <p>Tracking History</p>
                         {order.trackings.map((tracking, index) => (

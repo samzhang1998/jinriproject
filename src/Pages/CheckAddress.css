@@ -1,0 +1,174 @@
+.check_address {
+    display: flex;
+    flex-direction: column;
+    background: #F5F5F5;
+}
+
+.address_info {
+    width: 76%;
+    margin-left: 9%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    padding: 3%;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    background: #FFF;
+    box-shadow: 0px 4px 15px 0px rgba(198, 198, 198, 0.25);
+}
+
+.address_info form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.address_info img {
+    width: 3rem;
+}
+
+.address_info ::placeholder {
+    color: #656565;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.address_info h1 {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+}
+
+.address_info input {
+    width: 98%;
+    height: 3rem;
+    border-radius: 0.6rem;
+    border: 1px solid #DDD;
+    padding-left: 2%;
+    outline: none;
+    margin-bottom: 3%;
+}
+
+.street_type {
+    width: 100%;
+    height: 3rem;
+    border-radius: 0.6rem;
+    border: 1px solid #DDD;
+    padding-left: 1%;
+    outline: none;
+    margin-bottom: 3%;
+    color: #656565;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.select_input {
+    width: 48%;
+    height: 3rem;
+    border-radius: 0.6rem;
+    border: 1px solid #DDD;
+    padding-left: 1%;
+    outline: none;
+    color: #656565;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.numbers {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5%;
+}
+
+.numbers input {
+    width: 50%;
+    height: 3rem;
+    border-radius: 0.6rem;
+    border: 1px solid #DDD;
+    padding-left: 2%;
+    outline: none;
+    margin-top: 3%;
+}
+
+.state_postcode {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5%;
+}
+
+.state_postcode select {
+    width: 50%;
+    height: 3rem;
+    border-radius: 0.6rem;
+    border: 1px solid #DDD;
+    padding-left: 2%;
+    outline: none;
+    color: #656565;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.state_postcode input {
+    width: 50%;
+    height: 3rem;
+    border-radius: 0.6rem;
+    border: 1px solid #DDD;
+    padding-left: 2%;
+    outline: none;
+}
+
+.check_ad_button {
+    width: 15rem;
+    height: 2.9375rem;
+    border-radius: 0.75rem;
+    background: #008286;
+    border: none;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    margin-top: 2%;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.check_ad_button:hover {
+    color: #007BFF;
+}
+
+.back_button1 {
+    background: none;
+    border: none;
+    width: 10%;
+    display: flex;
+    justify-content: start;
+    margin-top: 3%;
+    cursor: pointer;
+    color: #008286;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}

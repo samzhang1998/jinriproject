@@ -16,11 +16,7 @@ import logout from '../asset/Sign_in_squre_fill.png';
 const OrderRequirement = ({ showOrders }) => {
     return (
         <div>
-            <OrderOverview />
-            <button 
-                className="order_now"
-                onClick={showOrders}
-            >Order Now</button>
+            <OrderOverview  showOrders={showOrders}/>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeHeader from '../HomeHeader';
+import Header from '../Header';
 import Search from './search';
 import './ForPartner.css';
 import house from '../asset/image1.png';
@@ -7,7 +7,6 @@ import search from '../asset/File_dock_search.png';
 import house1 from '../asset/image3.png';
 import check from '../asset/Check_fill.png';
 import { Link } from 'react-router-dom';
-import Header from '../Header';
 
 
 const ForPartner = () => {
@@ -15,7 +14,7 @@ const ForPartner = () => {
     <div>
       <div className="partner_box1">
         <div className='screen_partner'>  
-          <HomeHeader />
+          <Header />
         </div>
         <div className='mobile_partner'>
           <Header />
