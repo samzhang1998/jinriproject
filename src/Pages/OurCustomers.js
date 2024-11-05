@@ -33,7 +33,7 @@ const OurCustomers = () => {
     };
     
     const prevPage = () => {
-        setCurrentPage((prevPage) => (prevPage - 1 + customers.length) % customers.length);
+        setCurrentPage((prevPage) => prevPage === 0 ? customers.length - 1 : prevPage - 1);
     };
 
     return (
@@ -41,7 +41,7 @@ const OurCustomers = () => {
             <h1>What our customers are saying</h1>
             <div className="carousel">
                 <button className="prev_button" onClick={prevPage}><img src={left} alt="left" /></button>
-                <div className="carousel_content">
+                <div className="carousel_content" style={{ transform: `translateX(-${currentPage * 100}%)` }}>
                     {customers[currentPage].map((customer, index) => (
                         <div key={index} className="carousel_item">
                             <div className="customer_card">
