@@ -38,13 +38,13 @@ const Home = () => {
             <div className='home_rectangle1'>
               <img src={search} alt='search' />
               <div className='rectangle1_1'>
-                <h2>Building & <br /> Pest Inspection</h2>
+                <h2><span>B</span>uilding & <br /> Pest Inspection</h2>
               </div>
             </div>
             <div className='home_rectangle2'>
               <img src={search} alt='search' />
               <div className='rectangle2_1'>
-                <h2>Building & <br /> Pest Inspection</h2>
+                <h2><span>B</span>uilding & <br /> Pest Inspection</h2>
               </div>
             </div>
             <img src={house1} alt='house' />

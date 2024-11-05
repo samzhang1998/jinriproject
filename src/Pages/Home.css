@@ -115,6 +115,16 @@
     line-height: normal;
 }
 
+.rectangle1_1 span {
+    color: #FFF;
+    text-align: right;
+    font-family: Poppins;
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
 .home_rectangle2 {
     border-radius: 1rem;
     background: #008286;
@@ -151,6 +161,16 @@
     text-align: right;
     font-family: Poppins;
     font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.rectangle2_1 span {
+    color: #FFF;
+    text-align: right;
+    font-family: Poppins;
+    font-size: 3rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
