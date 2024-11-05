@@ -26,6 +26,10 @@
     font-size: 0.875rem;
 }
 
+.screen_search_button:hover {
+    color: #007BFF;
+}
+
 .mobile_search_box {
     display: flex;
     width: 100%;
@@ -88,5 +92,9 @@
     font-size: 1.3rem;
     font-family: Montserrat;
     margin-top: 8%;
+}
+
+.mobile_search_button:hover {
+    color: #007BFF;
 }
 
