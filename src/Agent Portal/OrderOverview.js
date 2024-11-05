@@ -1,5 +1,6 @@
 import React from "react";
 import "./OrderOverview.css";
+import { Link } from "react-router-dom";
 
 const OrderOverview = ({ showOrders }) => {
     return (
@@ -22,7 +23,7 @@ const OrderOverview = ({ showOrders }) => {
                             borderRadius: '0.625rem',
                         }}
                     />
-                    <p>Can't find property?<span>Click here</span></p>
+                    <p>Can't find property?<Link to="/address"><span>Click here</span></Link></p>
                     <div>
                         <label>Do you have an offer accepted and a cooling off period?</label>
                         <div className="agent_selection">

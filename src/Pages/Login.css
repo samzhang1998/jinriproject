@@ -75,7 +75,6 @@
     height: 2.8rem;
     border-radius: 0 0.3rem 0.3rem 0;
     border: none;
-    padding-left: 1%;
     color: #008286;
     font-family: Montserrat;
     font-size: 1rem;
@@ -99,7 +98,10 @@
     align-items: center;
     background: #FFF;
     border-radius: 0.3rem 0 0 0.3rem;
-    padding-left: 1%;
+}
+
+.icon img {
+    width: 30%;
 }
 
 .login_page_button {

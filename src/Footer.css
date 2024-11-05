@@ -95,10 +95,14 @@
     color: palevioletred;
 }
 
-.service {
+/* .service {
     display: flex;
     flex-direction: column;
     align-items: start;
+} */
+
+.service {
+    display: none;
 }
 
 .our_service {

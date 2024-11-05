@@ -6,10 +6,15 @@ import house from '../asset/image1.png';
 import search from '../asset/File_dock_search.png';
 import house1 from '../asset/image3.png';
 import check from '../asset/Check_fill.png';
-import { Link } from 'react-router-dom';
-
 
 const ForPartner = () => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div>
       <div className="partner_box1">
@@ -80,7 +85,7 @@ const ForPartner = () => {
             </div>
           </div>
           <div className='order_button'>
-            <button><Link to='/purchasereport'>ORDER REPORT</Link></button>
+            <button onClick={scrollToTop}>ORDER REPORT</button>
           </div>
         </div>
       </div>
