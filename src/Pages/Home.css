@@ -54,7 +54,7 @@
 .box2 {
     display: grid;
     width: 90%;
-    margin-top: 5%;
+    margin-bottom: 5%;
     background: #F8F8F8;
     grid-template-columns: 6fr 5fr;
     padding: 5%;
