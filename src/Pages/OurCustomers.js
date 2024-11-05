@@ -41,7 +41,7 @@ const OurCustomers = () => {
             <h1>What our customers are saying</h1>
             <div className="carousel">
                 <button className="prev_button" onClick={prevPage}><img src={left} alt="left" /></button>
-                <div className="carousel_content" style={{ transform: `translateX(-${currentPage * 100}%)` }}>
+                <div className="carousel_content">
                     {customers[currentPage].map((customer, index) => (
                         <div key={index} className="carousel_item">
                             <div className="customer_card">

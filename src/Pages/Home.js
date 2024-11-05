@@ -3,7 +3,6 @@ import './Home.css';
 import Header from '../Header.js';
 import Findreport from './Findreport.js';
 import Search from './search.js';
-import { Link } from 'react-router-dom';
 import OurCustomers from './OurCustomers.js';
 import MobileHome from '../Mobile/MobileHome.js';
 import house from '../asset/image1.png';
@@ -12,6 +11,13 @@ import house1 from '../asset/image3.png';
 import check from '../asset/Check_fill.png';
 
 const Home = () => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div>
       <div className='mobile_home'>
@@ -79,7 +85,7 @@ const Home = () => {
               </div>
             </div>
             <div className='order_button'>
-              <button><Link to='/purchasereport'>ORDER REPORT</Link></button>
+              <button onClick={scrollToTop}>ORDER REPORT</button>
             </div>
           </div>
         </div>
