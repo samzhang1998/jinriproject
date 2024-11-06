@@ -27,7 +27,7 @@ const Home = () => {
         <div className="box1">  
           <Header />      
           <div className='text1'>
-            <h1>The home of porperty <br /> compliance and due diligence</h1>
+            <h1>The home of property <br /> compliance and due diligence</h1>
             <p>Independent, Professional Reports</p>
           </div>
           <Search />          
