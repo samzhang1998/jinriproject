@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/jinriproject/static/css/main.0cce05ca.css",
-    "main.js": "/jinriproject/static/js/main.39fac205.js",
+    "main.css": "/jinriproject/static/css/main.f26ce310.css",
+    "main.js": "/jinriproject/static/js/main.488da893.js",
     "static/js/453.f69bbbff.chunk.js": "/jinriproject/static/js/453.f69bbbff.chunk.js",
-    "static/media/image_partner.jpg": "/jinriproject/static/media/image_partner.4a0fc474f352a7e33fb5.jpg",
     "static/media/image_individual.png": "/jinriproject/static/media/image_individual.fde05ec089c7688c9068.png",
-    "static/media/image_home.png": "/jinriproject/static/media/image_home.13691e13a09262931bcb.png",
+    "static/media/image_home.png": "/jinriproject/static/media/image_home.601cf0875eb54ed223b1.png",
+    "static/media/image_partner.png": "/jinriproject/static/media/image_partner.9c5b20adc0c06fe6898d.png",
     "static/media/pexels-binyaminmellish-1396122 (1).png": "/jinriproject/static/media/pexels-binyaminmellish-1396122 (1).1a9e302727d265039d46.png",
     "static/media/pexels-frans-van-heerden-201846-1438832.png": "/jinriproject/static/media/pexels-frans-van-heerden-201846-1438832.42d2cb3ce83651fdb13b.png",
     "static/media/图层 2 1.png": "/jinriproject/static/media/图层 2 1.5b6b54b71133d7a20e3a.png",
@@ -57,12 +57,12 @@
     "static/media/montserrat-latin-100.woff2": "/jinriproject/static/media/montserrat-latin-100.8d7d79679b70dbe27172.woff2",
     "static/media/logo.png": "/jinriproject/static/media/logo.f9b9c002f680970373cb.png",
     "index.html": "/jinriproject/index.html",
-    "main.0cce05ca.css.map": "/jinriproject/static/css/main.0cce05ca.css.map",
-    "main.39fac205.js.map": "/jinriproject/static/js/main.39fac205.js.map",
+    "main.f26ce310.css.map": "/jinriproject/static/css/main.f26ce310.css.map",
+    "main.488da893.js.map": "/jinriproject/static/js/main.488da893.js.map",
     "453.f69bbbff.chunk.js.map": "/jinriproject/static/js/453.f69bbbff.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0cce05ca.css",
-    "static/js/main.39fac205.js"
+    "static/css/main.f26ce310.css",
+    "static/js/main.488da893.js"
   ]
 }
