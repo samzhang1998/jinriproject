@@ -9,6 +9,16 @@ import back from '../asset/Expand_left.png';
 
 const StepOne = ({ showStepTwo, updatePaymentSummary }) => {
     const [hasGrannyFlat, setHasGrannyFlat] = useState(false);
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+    };
+    const handleClick = () => {
+        showStepTwo();
+        scrollToTop();
+    }
     
     const handleGrannyFlatChange = (e) => {
         const isSelected = e.target.value === 'yes';
@@ -122,7 +132,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary }) => {
             </div>
             <YourDetailsForm />
             <button 
-                onClick={showStepTwo}
+                onClick={handleClick}
                 style={{
                     background: '#008286',
                     width: '8.9rem',
@@ -148,6 +158,16 @@ const StepTwo = ({ showStepThree, showStepOne, updatePaymentSummary }) => {
     const [getMortgageAdvice,setGetMortgageAdvice] = useState(false);
     const [consultExpert,setConsultExpert] = useState(false);
     const [getValueReport,setGetValueReport] = useState(false);
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+    };
+    const handleClick = () => {
+        showStepThree();
+        scrollToTop();
+    }
 
     const handleMortgageAdviceChange = () => {
         const selected = !getMortgageAdvice;
@@ -232,7 +252,7 @@ const StepTwo = ({ showStepThree, showStepOne, updatePaymentSummary }) => {
                 </div>
             </div>
             <button 
-                onClick={showStepThree}
+                onClick={handleClick}
                 style={{
                     background: '#008286',
                     width: '8.9rem',

@@ -3,6 +3,17 @@ import "./OrderOverview.css";
 import { Link } from "react-router-dom";
 
 const OrderOverview = ({ showOrders }) => {
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+    };
+    const handleClick = () => {
+        scrollToTop();
+        showOrders();
+    };
+
     return (
         <div>
             <div className="agent_property_form">                
@@ -119,7 +130,7 @@ const OrderOverview = ({ showOrders }) => {
                     <h2>ETA: 2-4 Business Days</h2>
                     <button 
                         className="order_now"
-                        onClick={showOrders}
+                        onClick={handleClick}
                     >Order Now</button> 
                 </div>               
             </div>
