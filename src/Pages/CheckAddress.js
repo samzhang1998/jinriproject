@@ -18,6 +18,7 @@ const CheckAddress = () => {
         state: '',
         postcode: ''
     });
+    const query = `${formData.unitNumber}-${formData.streetNumber} ${formData.streetName}, ${formData.suburb} ${formData.state}${formData.postcode}`;
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,7 +32,7 @@ const CheckAddress = () => {
         e.preventDefault();
         try {
             await PostData('/submit-address', formData);
-            navigate('/search2', { state: { 
+            navigate(`/bookinspect/${query}`, { state: { 
                 streetName: formData.streetName, 
                 streetNumber: formData.streetNumber, 
                 unitNumber: formData.unitNumber 
@@ -137,7 +138,10 @@ const CheckAddress = () => {
                         />
                     </div>
                     {/* <button type="submit">Check your address</button> */}
-                    <button className="check_ad_button" onClick={() => navigate('/search2')}>Check your address</button>
+                    <button 
+                        className="check_ad_button" 
+                        onClick={() => navigate(`/bookinspector/${query}`)}
+                    >Check your address</button>
                 </form>
                 <button className="back_button1" onClick={handleBack}>← Back</button>
             </div>
