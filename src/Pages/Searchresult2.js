@@ -1,7 +1,7 @@
 import React from 'react';
 import './Searchresult2.css';
 import Header from '../Header';
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import Findreport from './Findreport';
 import building from '../asset/图层 2 1.png';
 import ok from '../asset/Check_fill.png';
@@ -9,6 +9,7 @@ import inner from '../asset/pexels-emrecan-2079246.png';
 import outer from '../asset/pexels-tobiasbjorkli-2119713.png';
 
 const Searchresult2 = () => {
+    const { query } = useParams();
     return (
         <div className='search_result2'>
             <Header />
@@ -28,7 +29,7 @@ const Searchresult2 = () => {
                     <div className='title2'>
                         <h2>Building & Pest Report</h2>
                     </div>
-                    <h3>52 Waterloo Street, Rhodes NSW 2138</h3>
+                    <h3>{query}</h3>
                     <div className='available2'>
                         <img src={ok} alt='ok' />
                         <p>Report available now!</p>

@@ -31,9 +31,9 @@ function App () {
           <Route path="/partner" element={<ForPartner />} />
           <Route path="/login" element={<Login />} />
           <Route path="/address" element={<CheckAddress />} />
-          <Route path="/search1" element={<Searchresult1 />} />
-          <Route path="/search2" element={<Searchresult2 />} />                                
-          <Route path="/purchasereport" element={<PurchasePage />} />
+          <Route path="/report/:query" element={<Searchresult1 />} />
+          <Route path="/bookinspector/:query" element={<Searchresult2 />} />                                
+          <Route path="/purchasereport/:query" element={<PurchasePage />} />
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/:type/:id" element={<AgentPortal />} />
           <Route path="/signup" element={<SignUp />} />

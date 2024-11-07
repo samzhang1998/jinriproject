@@ -188,9 +188,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.purchase_button a {
     color: #FFF;
     font-family: Montserrat;
     font-size: 1.125rem;
@@ -199,7 +196,7 @@
     text-decoration: none;
 }
 
-.purchase_button a:hover {
+.purchase_button button:hover {
     color: #007BFF;
 }
 
@@ -389,9 +386,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .mobile_purchase_button a {
         color: #FFF;
         font-family: Montserrat;
         font-size: 1.6rem;

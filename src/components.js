@@ -76,9 +76,9 @@ const SearchBox = () => {
         );
         
         if (results.length > 0) {
-            navigate('/search1');
+            navigate(`/report/${query}`);
         } else {
-            navigate('/search2');
+            navigate(`/bookinspector/${query}`);
         }
     };
 

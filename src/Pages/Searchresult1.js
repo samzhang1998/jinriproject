@@ -1,7 +1,7 @@
 import React from 'react';
 import './Searchresult1.css';
 import Header from '../Header';
-import { Link } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import Findreport from './Findreport';
 import building from '../asset/图层 2 1.png';
 import ok from '../asset/Check_fill.png';
@@ -9,6 +9,9 @@ import inner from '../asset/pexels-emrecan-2079246.png';
 import outer from '../asset/pexels-tobiasbjorkli-2119713.png';
 
 const Searchresult1 = () => {
+    const { query } = useParams();
+    const navigate = useNavigate();
+
     return (
         <div className='search_result1'>
             <Header />
@@ -28,7 +31,7 @@ const Searchresult1 = () => {
                     <div className='title'>
                         <h2>Building & Pest Report</h2>
                     </div>
-                    <h3>36-38 Walker Street, Rhodes NSW 2138</h3>
+                    <h3>{query}</h3>
                     <div className='available'>
                         <img src={ok} alt='ok' />
                         <p>Report available now!</p>
@@ -42,12 +45,16 @@ const Searchresult1 = () => {
                     <h5>Inspectors</h5>
                     <span>Max</span>
                     <div className="purchase_button">
-                        <button><Link to="/purchasereport">Purchase Report</Link></button>
+                        <button onClick={() => navigate(`/purchasereport/${query}`)}>
+                            Purchase Report
+                        </button>
                     </div>
                 </div>
             </div>
             <div className="mobile_purchase_button">
-                <button><Link to="/purchasereport">Purchase Report</Link></button>
+                <button onClick={() => navigate(`/purchasereport/${query}`)}>
+                    Purchase Report
+                </button>
             </div>
             <div className='check'>
                 <div className='check_text'>

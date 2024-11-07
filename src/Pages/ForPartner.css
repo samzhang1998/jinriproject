@@ -1,12 +1,12 @@
 .partner_box1 {
-    background-image: url('image_partner.jpg');
+    background-image: url('image_partner.png');
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(270deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.65) 99%), url("image_partner.jpg") lightgray 50% / cover no-repeat;
+    background: linear-gradient(270deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.65) 99%), url("image_partner.png") lightgray 50% / cover no-repeat;
     box-shadow: 0px 4px 54px 0px rgba(0, 0, 0, 0.25);
 }
 

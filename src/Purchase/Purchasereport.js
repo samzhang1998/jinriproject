@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import YourDetailsForm from './Yourdetails';
 import Paymentdetail from './Paymentdetail';
 import Header from '../Header';
@@ -283,11 +283,12 @@ const StepThree = ({ showStepTwo, showStepOne }) => {
 };
 
 const PaymentSummary = ({ summary }) => {
+    const { query } = useParams();
     return (
         <div className="order_summary">
             <h3>Order Summary</h3>
             <div className="address">
-                <p>Unit 23/36-38 Walker Street, Rhodes NSW 2138</p>
+                <p>{query}</p>
             </div>
             <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
             <div>
