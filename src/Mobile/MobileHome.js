@@ -12,8 +12,7 @@ const MobileHome = () => {
         <div className="mobile">
             <div className="mobile_box1">
                 <Header />
-                <h1>The home of property</h1>
-                <h2>compliance and due diligence</h2>
+                <h1>The home of property <br /> compliance and due diligence</h1>
                 <p>Independent, Professional Reports</p>
                 <Search />
             </div>

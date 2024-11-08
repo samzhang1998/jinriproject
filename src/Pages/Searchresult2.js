@@ -47,7 +47,7 @@ const Searchresult2 = () => {
                     </div>
                 </div>
             </div>
-            <div className="mobile_purchase_button">
+            <div className="mobile_purchase_button2">
                 <button><Link to="/contact">Book Inspector</Link></button>
             </div>
             <div className='check2'>

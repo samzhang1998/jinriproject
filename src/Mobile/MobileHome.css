@@ -21,13 +21,7 @@
     margin-top: 25%;
     font-size: 2.3rem;
     font-family: Montserrat;
-}
-
-.mobile_box1 h2 {
-    margin: 0;
-    color: #fff;
-    font-size: 2.3rem;
-    font-family: Montserrat;
+    text-align: center;
 }
 
 .mobile_box1 p {
