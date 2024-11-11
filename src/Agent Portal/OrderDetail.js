@@ -10,9 +10,8 @@ import logout from '../asset/Sign_in_squre_fill.png';
 import download from '../asset/Import_duotone_line.png';
 
 const OrderDetail = () => {
-    const { orderId } = useParams();
+    const { orderId,orderStatus,id,type } = useParams();
     const [order, setOrder] = useState(null);
-    const { id,type } = useParams();
 
     useEffect(() => {
         const mockOrderDetails = {
@@ -20,7 +19,7 @@ const OrderDetail = () => {
             date: '09 Sep 2024, Friday',
             lastdate: '12 Sep, Tuesday',
             address: '45 Hills street, Marricville NSW 2301',
-            status: 'Complete',
+            status: orderStatus,
             trackings: [
                 { datehistory: '09 Sep, Monday', trackhistory: 'Order Received', completed: true },
                 { datehistory: '10 Sep, Tuesday', trackhistory: 'Inspector Assigned', completed: false },
@@ -30,7 +29,7 @@ const OrderDetail = () => {
             ]
         };
         setOrder(mockOrderDetails);
-    }, [orderId]);
+    }, [orderId,orderStatus]);
 
     if (!order) {
         return <p>Loading...</p>;

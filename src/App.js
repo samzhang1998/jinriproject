@@ -37,7 +37,7 @@ function App () {
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/:type/:id" element={<AgentPortal />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/:type/:id/orders/:orderId" element={<OrderDetail />} />                      
+          <Route path="/:type/:id/orders/:orderId/:orderStatus" element={<OrderDetail />} />                      
         </Routes>
         <Footer />
       </div>      

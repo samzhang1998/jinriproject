@@ -66,7 +66,9 @@ const Orders = ({ type,id }) => {
                             <h1>Order #{order.id}</h1>
                             <h2>{order.address}</h2>
                         </div>
-                        <Link to={{ pathname: `/${type}/${id}/orders/${order.id}` }} className="view_order">View order</Link>
+                        <Link to={{ pathname: `/${type}/${id}/orders/${order.id}/${order.status}` }} className="view_order">
+                            View order
+                        </Link>
                     </div>
                 ))}
             </div>
