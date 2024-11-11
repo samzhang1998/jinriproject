@@ -1,4 +1,4 @@
-const Backend_url = 'https://your-backend-url.com/api';
+const Backend_url = 'http://localhost:5000';
 
 export const GetData = async () => {
   try {

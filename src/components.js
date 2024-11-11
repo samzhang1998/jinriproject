@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import "./components.css";
 import fill from './asset/Pin_alt_fill.png';
+import { Autocomplete, useLoadScript } from "@react-google-maps/api";
 
 // search button selection
 const Colorbutton1 = () => {
@@ -61,11 +62,36 @@ const SearchBox = () => {
     ];
 
     const [query, setQuery] = useState('');
+    const [autocomplete, setAutocomplete] = useState(null);
     const navigate = useNavigate();
+
+    const onLoad = (autocompleteInstance) => {
+        setAutocomplete(autocompleteInstance);
+    };
+
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: 'AIzaSyB5dIbLMMqePwB7XX-btMBvkzf__oVK67I',
+        libraries: ['places'],
+    });
+    
+    if (!isLoaded) {
+        return <div>Loading...</div>;
+    }
+
+    const onPlaceChanged = () => {
+        if (autocomplete !== null) {
+            const place = autocomplete.getPlace();
+            setQuery(place.formatted_address);
+            console.log('Selected Place:', place);
+        } else {
+            console.log('Autocomplete is not loaded yet!');
+        }
+    };
 
     const handleInputChange = (e) => {
         setQuery(e.target.value);
     };
+
     const handleSearch = () => {
         if (query.trim() === '') {
             alert('Please enter a search term.');
@@ -84,16 +110,22 @@ const SearchBox = () => {
 
     return (
         <div className="search_box">
-            <input className="screen_search"
-                type="text"
-                value={query}
-                onChange={handleInputChange}
-            />
+            <Autocomplete 
+                onLoad={onLoad} 
+                onPlaceChanged={onPlaceChanged}
+            >
+                <input className="screen_search"
+                    type="text"
+                    value={query}
+                    placeholder=''
+                    onChange={handleInputChange}
+                />
+            </Autocomplete>            
             <button className="screen_search_button"
                 onClick={handleSearch}
             >
                 SEARCH         
-            </button>
+            </button>            
         </div>
     );
 };
@@ -106,7 +138,31 @@ const MobileSearchBox = () => {
     ];
 
     const [query, setQuery] = useState('');
+    const [autocomplete, setAutocomplete] = useState(null);
     const navigate = useNavigate();
+
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: 'AIzaSyB5dIbLMMqePwB7XX-btMBvkzf__oVK67I',
+        libraries: ['places'],
+    });
+
+    const onLoad = (autocompleteInstance) => {
+        setAutocomplete(autocompleteInstance);
+    };
+
+    const onPlaceChanged = () => {
+        if (autocomplete !== null) {
+            const place = autocomplete.getPlace();
+            setQuery(place.formatted_address);
+            console.log('Selected Place:', place);
+        } else {
+            console.log('Autocomplete is not loaded yet!');
+        }
+    };
+
+    if (!isLoaded) {
+        return <div>Loading...</div>;
+    }
 
     const handleInputChange = (e) => {
         setQuery(e.target.value);
@@ -132,13 +188,16 @@ const MobileSearchBox = () => {
             <div className='mobile_search_box'>
                 <div className='mobile_type_area'>
                     <img src={fill} alt='fill' />
-                    <input className="mobile_search"
-                        type="text"
-                        value={query}
-                        onChange={handleInputChange}
-                    />
+                    <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+                        <input className="mobile_search"
+                            type="text"
+                            value={query}
+                            onChange={handleInputChange}
+                            placeholder=''
+                        />
+                    </Autocomplete>
                 </div>
-                <p>Can't find property? Click here</p>
+                <p>Can't find property? <Link to='/address' className='find_address'>Click here</Link></p>
             </div>
             <button className="mobile_search_button"
                 onClick={handleSearch}

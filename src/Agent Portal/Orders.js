@@ -7,47 +7,47 @@ const Orders = ({ type,id }) => {
     const [orders, setOrders] = useState([]);
     const [filter, setFilter] = useState('all');
 
-    // useEffect(() => {
-    //     const fetchOrders = async () => {
-    //         try {
-    //             const data = await GetData();
-    //             setOrders(data);
-    //         } catch (error) {
-    //             console.error('Error fetching orders:', error);
-    //         }
-    //     };
-    //     fetchOrders();
-    // }, []);
-    
     useEffect(() => {
-        const mockOrders = [
-            {
-                id: '1598723',
-                date: '09-04-2023',
-                address: 'Unit654/311 high Street, Kingsford NSW 2037',
-                status: 'Processing'
-            },
-            {
-                id: '1598724',
-                date: '09-04-2023',
-                address: 'Unit654/311 high Street, Kingsford NSW 2037',
-                status: 'Completed'
-            },
-            {
-                id: '16124256',
-                date: '09-04-2023',
-                address: '45 Hills street, Marricville NSW 2301',
-                status: 'Completed'
-            },
-            {
-                id: '16124257',
-                date: '09-04-2023',
-                address: '45 Hills street, Marricville NSW 2301',
-                status: 'Processing'
-            },
-        ];
-        setOrders(mockOrders);
+        const fetchOrders = async () => {
+            try {
+                const data = await GetData();
+                setOrders(data);
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+            }
+        };
+        fetchOrders();
     }, []);
+    
+    // useEffect(() => {
+    //     const mockOrders = [
+    //         {
+    //             id: '1598723',
+    //             date: '09-04-2023',
+    //             address: 'Unit654/311 high Street, Kingsford NSW 2037',
+    //             status: 'Processing'
+    //         },
+    //         {
+    //             id: '1598724',
+    //             date: '09-04-2023',
+    //             address: 'Unit654/311 high Street, Kingsford NSW 2037',
+    //             status: 'Completed'
+    //         },
+    //         {
+    //             id: '16124256',
+    //             date: '09-04-2023',
+    //             address: '45 Hills street, Marricville NSW 2301',
+    //             status: 'Completed'
+    //         },
+    //         {
+    //             id: '16124257',
+    //             date: '09-04-2023',
+    //             address: '45 Hills street, Marricville NSW 2301',
+    //             status: 'Processing'
+    //         },
+    //     ];
+    //     setOrders(mockOrders);
+    // }, []);
     const filteredOrders = orders.filter(order => {
         if (filter === 'all') return true;
         return order.status.toLowerCase() === filter;
