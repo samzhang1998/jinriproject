@@ -138,8 +138,13 @@
     align-items: center;
 }
 
+.download_area {
+    display: flex;
+    justify-content: center;
+}
+
 .download_report {
-    width: 15.25rem;
+    width: 85%;
     height: 3rem;
     border-radius: 2.875rem;
     display: flex;
@@ -162,7 +167,7 @@
 }
 
 .download_report1 {
-    width: 15.25rem;
+    width: 85%;
     height: 3rem;
     border-radius: 2.875rem;
     display: flex;

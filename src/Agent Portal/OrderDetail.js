@@ -78,7 +78,7 @@ const OrderDetail = () => {
                             <h2>as on {order.date}</h2>
                             <h3>Last update on {order.lastdate}</h3>
                         </div>
-                        {type === 'customer' && <div>
+                        {type === 'customer' && <div className="download_area">
                             {order.status === 'Processing' ? (
                                 <button className="download_report">
                                     <img src={download} alt="download" />
