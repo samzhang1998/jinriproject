@@ -1,10 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Orders.css";
+import { GetData } from "../API";
 
 const Orders = ({ type,id }) => {
     const [orders, setOrders] = useState([]);
     const [filter, setFilter] = useState('all');
+
+    // useEffect(() => {
+    //     const fetchOrders = async () => {
+    //         try {
+    //             const data = await GetData();
+    //             setOrders(data);
+    //         } catch (error) {
+    //             console.error('Error fetching orders:', error);
+    //         }
+    //     };
+    //     fetchOrders();
+    // }, []);
     
     useEffect(() => {
         const mockOrders = [
