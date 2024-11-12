@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate,Link } from 'react-router-dom';
 import "./components.css";
 import fill from './asset/Pin_alt_fill.png';
-import { Autocomplete, useLoadScript } from "@react-google-maps/api";
+import { Autocomplete, useJsApiLoader } from "@react-google-maps/api";
 
 // search button selection
 const Colorbutton1 = () => {
@@ -64,14 +64,15 @@ const SearchBox = () => {
     const [query, setQuery] = useState('');
     const [autocomplete, setAutocomplete] = useState(null);
     const navigate = useNavigate();
+    const libraries = ['places'];
 
     const onLoad = (autocompleteInstance) => {
         setAutocomplete(autocompleteInstance);
     };
 
-    const { isLoaded } = useLoadScript({
+    const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: 'AIzaSyB5dIbLMMqePwB7XX-btMBvkzf__oVK67I',
-        libraries: ['places'],
+        libraries: libraries,
     });
     
     if (!isLoaded) {
@@ -140,10 +141,11 @@ const MobileSearchBox = () => {
     const [query, setQuery] = useState('');
     const [autocomplete, setAutocomplete] = useState(null);
     const navigate = useNavigate();
+    const libraries = ['places'];
 
-    const { isLoaded } = useLoadScript({
+    const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: 'AIzaSyB5dIbLMMqePwB7XX-btMBvkzf__oVK67I',
-        libraries: ['places'],
+        libraries: libraries,
     });
 
     const onLoad = (autocompleteInstance) => {
