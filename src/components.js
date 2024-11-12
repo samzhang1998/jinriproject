@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate,Link } from 'react-router-dom';
 import "./components.css";
 import fill from './asset/Pin_alt_fill.png';
@@ -65,6 +65,25 @@ const SearchBox = () => {
     const [autocomplete, setAutocomplete] = useState(null);
     const navigate = useNavigate();
     const libraries = ['places'];
+    const [bounds, setBounds] = useState(null);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                const userLocation = new window.google.maps.LatLng(latitude, longitude);
+                const radius = 1000000;
+                const circle = new window.google.maps.Circle({
+                    center: userLocation,
+                    radius: radius,
+                });
+                setBounds(circle.getBounds());
+            },
+            () => {
+                console.error("Fail to get user location")
+            }
+        );
+    }, []);
 
     const onLoad = (autocompleteInstance) => {
         setAutocomplete(autocompleteInstance);
@@ -114,6 +133,11 @@ const SearchBox = () => {
             <Autocomplete 
                 onLoad={onLoad} 
                 onPlaceChanged={onPlaceChanged}
+                bounds={bounds}
+                options={{
+                    strictBounds: true,
+                    types: ['address']
+                }}
             >
                 <input className="screen_search"
                     type="text"
@@ -142,6 +166,25 @@ const MobileSearchBox = () => {
     const [autocomplete, setAutocomplete] = useState(null);
     const navigate = useNavigate();
     const libraries = ['places'];
+    const [bounds, setBounds] = useState(null);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                const userLocation = new window.google.maps.LatLng(latitude, longitude);
+                const radius = 1000000;
+                const circle = new window.google.maps.Circle({
+                    center: userLocation,
+                    radius: radius,
+                });
+                setBounds(circle.getBounds());
+            },
+            () => {
+                console.error("Fail to get user location")
+            }
+        );
+    }, []);
 
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: 'AIzaSyB5dIbLMMqePwB7XX-btMBvkzf__oVK67I',
@@ -190,7 +233,15 @@ const MobileSearchBox = () => {
             <div className='mobile_search_box'>
                 <div className='mobile_type_area'>
                     <img src={fill} alt='fill' />
-                    <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+                    <Autocomplete 
+                        onLoad={onLoad} 
+                        onPlaceChanged={onPlaceChanged}
+                        bounds={bounds}
+                        options={{
+                            strictBounds: true,
+                            types: ['address']
+                        }}
+                    >
                         <input className="mobile_search"
                             type="text"
                             value={query}
