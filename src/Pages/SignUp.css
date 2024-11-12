@@ -43,10 +43,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 40%;
 }
 
 .sign_up_step input {
-    width: 100%;
+    width: 98%;
     height: 2.8rem;
     border-radius: 0.3rem;
     border: none;
