@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/jinriproject/static/css/main.e02b85ad.css",
-    "main.js": "/jinriproject/static/js/main.c91d09d7.js",
+    "main.css": "/jinriproject/static/css/main.91bbe564.css",
+    "main.js": "/jinriproject/static/js/main.7250a881.js",
     "static/js/453.f69bbbff.chunk.js": "/jinriproject/static/js/453.f69bbbff.chunk.js",
     "static/media/image_individual.png": "/jinriproject/static/media/image_individual.fde05ec089c7688c9068.png",
     "static/media/image_home.png": "/jinriproject/static/media/image_home.601cf0875eb54ed223b1.png",
@@ -57,12 +57,12 @@
     "static/media/montserrat-latin-100.woff2": "/jinriproject/static/media/montserrat-latin-100.8d7d79679b70dbe27172.woff2",
     "static/media/logo.png": "/jinriproject/static/media/logo.f9b9c002f680970373cb.png",
     "index.html": "/jinriproject/index.html",
-    "main.e02b85ad.css.map": "/jinriproject/static/css/main.e02b85ad.css.map",
-    "main.c91d09d7.js.map": "/jinriproject/static/js/main.c91d09d7.js.map",
+    "main.91bbe564.css.map": "/jinriproject/static/css/main.91bbe564.css.map",
+    "main.7250a881.js.map": "/jinriproject/static/js/main.7250a881.js.map",
     "453.f69bbbff.chunk.js.map": "/jinriproject/static/js/453.f69bbbff.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e02b85ad.css",
-    "static/js/main.c91d09d7.js"
+    "static/css/main.91bbe564.css",
+    "static/js/main.7250a881.js"
   ]
 }
