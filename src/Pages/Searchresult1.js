@@ -1,7 +1,7 @@
 import React from 'react';
 import './Searchresult1.css';
 import Header from '../Header';
-import { useParams,useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import Findreport from './Findreport';
 import building from '../asset/图层 2 1.png';
 import ok from '../asset/Check_fill.png';
@@ -9,8 +9,9 @@ import inner from '../asset/pexels-emrecan-2079246.png';
 import outer from '../asset/pexels-tobiasbjorkli-2119713.png';
 
 const Searchresult1 = () => {
-    const { query } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
+    const { query } = location.state || {};
 
     return (
         <div className='search_result1'>
@@ -45,14 +46,14 @@ const Searchresult1 = () => {
                     <h5>Inspectors</h5>
                     <span>Max</span>
                     <div className="purchase_button">
-                        <button onClick={() => navigate(`/purchasereport/${query}`)}>
+                        <button onClick={() => navigate('/purchasereport')}>
                             Purchase Report
                         </button>
                     </div>
                 </div>
             </div>
             <div className="mobile_purchase_button">
-                <button onClick={() => navigate(`/purchasereport/${query}`)}>
+                <button onClick={() => navigate('/purchasereport')}>
                     Purchase Report
                 </button>
             </div>

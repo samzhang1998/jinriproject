@@ -122,9 +122,9 @@ const SearchBox = () => {
         );
         
         if (results.length > 0) {
-            navigate(`/report/${query}`);
+            navigate('/report', { state: { query } });
         } else {
-            navigate(`/bookinspector/${query}`);
+            navigate('/bookinspector', { state: { query } });
         }
     };
 
@@ -222,9 +222,9 @@ const MobileSearchBox = () => {
         );
         
         if (results.length > 0) {
-            navigate(`/report/${query}`);
+            navigate('/report', { state: { query } });
         } else {
-            navigate(`/bookinspector/${query}`);
+            navigate('/bookinspector', { state: { query } });
         }
     };
 

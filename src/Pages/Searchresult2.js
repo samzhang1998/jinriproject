@@ -1,7 +1,7 @@
 import React from 'react';
 import './Searchresult2.css';
 import Header from '../Header';
-import { Link,useParams } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import Findreport from './Findreport';
 import building from '../asset/图层 2 1.png';
 import ok from '../asset/Check_fill.png';
@@ -9,7 +9,8 @@ import inner from '../asset/pexels-emrecan-2079246.png';
 import outer from '../asset/pexels-tobiasbjorkli-2119713.png';
 
 const Searchresult2 = () => {
-    const { query } = useParams();
+    const location = useLocation();
+    const { query } = location.state || {};
     return (
         <div className='search_result2'>
             <Header />
