@@ -1,6 +1,5 @@
 .home {
     display: flex;
-    width: 100%;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -36,7 +35,7 @@
     text-align: left;
     position: relative;
     padding: 0px;
-    margin-top: 10%;
+    margin-top: 10vh;
     margin-left: 5%;
     margin-bottom: 2%;
 }

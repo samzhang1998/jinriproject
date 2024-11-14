@@ -3,6 +3,7 @@ const cors = require('cors');
 const app = express();
 const PORT = 5000;
 app.use(cors());
+app.use(express.json());
 
 const mockOrders = [
   {
@@ -34,6 +35,12 @@ const mockOrders = [
 app.get('/data', (req,res) => {
   res.json(mockOrders);
 });
+
+app.post('/data', (req,res) => {
+  const formData = req.body;
+  console.log('Received form data:', formData);
+  res.status(200).json({ message: 'Message received successfully!' });
+})
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

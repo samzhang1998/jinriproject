@@ -28,10 +28,10 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('https://example.org/products.json', {
+      const res = await fetch('http://localhost:5000/data', {
         method: 'post',
         headers: {
-          'Contant-Type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
