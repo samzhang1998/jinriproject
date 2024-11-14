@@ -35,9 +35,9 @@
     text-align: left;
     position: relative;
     padding: 0px;
-    margin-top: 10vh;
+    margin-top: 5vh;
     margin-left: 5%;
-    margin-bottom: 2%;
+    margin-bottom: 0;
 }
 
 .text1 p {
@@ -49,6 +49,7 @@
     line-height: 150%;
     position: relative;
     margin-left: 5%;
+    margin-top: 0;
 }
 
 .box2 {

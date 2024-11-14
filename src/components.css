@@ -43,6 +43,14 @@
     backdrop-filter: blur(0.625rem);
 }
 
+.mobile_select_button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 5%;
+}
+
 .mobile_type_area {
     display: flex;
     flex-direction: row;
