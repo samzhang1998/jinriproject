@@ -125,7 +125,7 @@
     .logo_link img {
         width: 15rem;
         height: auto;
-        margin-left: 250%;
+        margin-left: 400%;
     }
 
     .login {
@@ -142,7 +142,7 @@
         position: absolute;
         background-color: #FFF;
         top: 1.5rem;
-        right: 10rem;
+        right: 8rem;
         width: 10rem;
         padding: 3rem;
         z-index: 1000;
