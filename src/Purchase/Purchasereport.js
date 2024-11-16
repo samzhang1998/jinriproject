@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate,useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import YourDetailsForm from './Yourdetails';
 import Paymentdetail from './Paymentdetail';
 import Header from '../Header';
@@ -154,7 +154,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary }) => {
     );
 };
 
-const StepTwo = ({ showStepThree, showStepOne, updatePaymentSummary }) => {
+const StepTwo = ({ showStepThree, updatePaymentSummary }) => {
     const [getMortgageAdvice,setGetMortgageAdvice] = useState(false);
     const [consultExpert,setConsultExpert] = useState(false);
     const [getValueReport,setGetValueReport] = useState(false);
@@ -274,7 +274,7 @@ const StepTwo = ({ showStepThree, showStepOne, updatePaymentSummary }) => {
     );
 };
 
-const StepThree = ({ showStepTwo, showStepOne }) => {
+const StepThree = () => {
     return (
         <div>
             <Paymentdetail />
@@ -283,7 +283,10 @@ const StepThree = ({ showStepTwo, showStepOne }) => {
 };
 
 const PaymentSummary = ({ summary }) => {
-    const { query } = useParams();
+    const location = useLocation();
+    const { query } = location.state || {};
+    const totalAmount = 199 + (summary.hasGrannyFlat ? 99 : 0);
+
     return (
         <div className="order_summary">
             <h3>Order Summary</h3>
@@ -314,7 +317,7 @@ const PaymentSummary = ({ summary }) => {
                 )}
             </div>
             <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
-            <div className="total"><h4>Total <p>(GST Inc)</p>:</h4><h5>${199 + (summary.hasGrannyFlat ? 99 : 0)}</h5></div>
+            <div className="total"><h4>Total <p>(GST Inc)</p>:</h4><h5>${totalAmount}</h5></div>
         </div>
     );
 };

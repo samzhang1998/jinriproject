@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Header from '../Header';
-import { useNavigate } from 'react-router-dom';
 import './ContactUs.css';
 import email from '../asset/Message_alt_fill.png';
 import phone from '../asset/Phone_fill.png';
 import address from '../asset/Pin_alt_fill1.png';
+import { PostData } from '../API';
 
 const ContactUs = () => {
   const [formData,setFormData] = useState ({
@@ -15,7 +15,7 @@ const ContactUs = () => {
     yourMessage: '',
   });
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const [success, setSuccess] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,19 +28,10 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/data', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      if (!res.ok) {
-        throw new Error('Failed to send message');
-      }
-      navigate('/');
+      await PostData('/data', formData);
+      setSuccess(true);
     } catch (err) {
-      setError(err.message);
+      setError('Failed to send data');
     }
   };
 
@@ -135,6 +126,9 @@ const ContactUs = () => {
               rows="4"
             />
             {error && <p style={{ color: 'red' }}>{error}</p>}
+            {success && <p style={{ color: 'green' }}>
+              Thank you for choosing us, our team will contact you soon!
+            </p>}
             <button type='submit'>Send</button>
           </form>
         </div>

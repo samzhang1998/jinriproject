@@ -47,10 +47,6 @@
     margin-top: 0;
 }
 
-.mobile_individual1 {
-    display: none;
-}
-
 @media (max-width: 768px) {
     .screen_individual {
         display: none;
@@ -83,28 +79,5 @@
         width: 80%;
         text-align: center;
         font-size: 1.3rem;
-    }
-
-    .box2 {
-        display: none;
-    }
-
-    .mobile_individual1 {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 10%;
-    }
-
-    .mobile_box2_img {
-        display: flex;
-        width: 90%;
-        flex-direction: row;
-        gap: 2rem;
-    }
-    
-    .mobile_box2_text {
-        display: block;
     }
 }

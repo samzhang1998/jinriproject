@@ -13,6 +13,10 @@ const Searchresult1 = () => {
     const location = useLocation();
     const { query } = location.state || {};
 
+    const handleSearch = () => {
+        navigate('/purchasereport', { state: { query } });
+    };
+
     return (
         <div className='search_result1'>
             <Header />
@@ -46,14 +50,14 @@ const Searchresult1 = () => {
                     <h5>Inspectors</h5>
                     <span>Max</span>
                     <div className="purchase_button">
-                        <button onClick={() => navigate('/purchasereport')}>
+                        <button onClick={handleSearch}>
                             Purchase Report
                         </button>
                     </div>
                 </div>
             </div>
             <div className="mobile_purchase_button">
-                <button onClick={() => navigate('/purchasereport')}>
+                <button onClick={handleSearch}>
                     Purchase Report
                 </button>
             </div>
