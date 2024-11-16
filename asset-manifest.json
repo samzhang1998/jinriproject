@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/jinriproject/static/css/main.cdec12e7.css",
-    "main.js": "/jinriproject/static/js/main.374bd2e5.js",
+    "main.js": "/jinriproject/static/js/main.6d71ddd0.js",
     "static/js/453.f69bbbff.chunk.js": "/jinriproject/static/js/453.f69bbbff.chunk.js",
     "static/media/image_individual.png": "/jinriproject/static/media/image_individual.fde05ec089c7688c9068.png",
     "static/media/image_home.png": "/jinriproject/static/media/image_home.601cf0875eb54ed223b1.png",
@@ -18,8 +18,6 @@
     "static/media/aboutbox1.png": "/jinriproject/static/media/aboutbox1.55895e2866b6de0bdbde.png",
     "static/media/pexels-rdne-8293635.png": "/jinriproject/static/media/pexels-rdne-8293635.3a223ceda00073cac6ab.png",
     "static/media/pexels-emrecan-2079246.png": "/jinriproject/static/media/pexels-emrecan-2079246.6c43d7171eaa291db541.png",
-    "static/media/image3.png": "/jinriproject/static/media/image3.55ec37a0380634ff1d27.png",
-    "static/media/image1.png": "/jinriproject/static/media/image1.a32e232a09dc9f990ce8.png",
     "static/media/pexels-christa-grover-977018-2121120.png": "/jinriproject/static/media/pexels-christa-grover-977018-2121120.8a3f877751a5818e9c44.png",
     "static/media/pexels-rdne-8293746.png": "/jinriproject/static/media/pexels-rdne-8293746.c46d36e2a67aec61ab66.png",
     "static/media/Mask group3.png": "/jinriproject/static/media/Mask group3.1057f74c4c2abca97927.png",
@@ -64,11 +62,11 @@
     "static/media/Mask group4.png": "/jinriproject/static/media/Mask group4.dbdabd2db546271907d0.png",
     "index.html": "/jinriproject/index.html",
     "main.cdec12e7.css.map": "/jinriproject/static/css/main.cdec12e7.css.map",
-    "main.374bd2e5.js.map": "/jinriproject/static/js/main.374bd2e5.js.map",
+    "main.6d71ddd0.js.map": "/jinriproject/static/js/main.6d71ddd0.js.map",
     "453.f69bbbff.chunk.js.map": "/jinriproject/static/js/453.f69bbbff.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.cdec12e7.css",
-    "static/js/main.374bd2e5.js"
+    "static/js/main.6d71ddd0.js"
   ]
 }
