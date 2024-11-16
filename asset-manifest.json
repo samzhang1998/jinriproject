@@ -1,11 +1,12 @@
 {
   "files": {
-    "main.css": "/jinriproject/static/css/main.701d57d9.css",
-    "main.js": "/jinriproject/static/js/main.5ebf7082.js",
+    "main.css": "/jinriproject/static/css/main.cdec12e7.css",
+    "main.js": "/jinriproject/static/js/main.374bd2e5.js",
     "static/js/453.f69bbbff.chunk.js": "/jinriproject/static/js/453.f69bbbff.chunk.js",
     "static/media/image_individual.png": "/jinriproject/static/media/image_individual.fde05ec089c7688c9068.png",
     "static/media/image_home.png": "/jinriproject/static/media/image_home.601cf0875eb54ed223b1.png",
     "static/media/image_partner.png": "/jinriproject/static/media/image_partner.9c5b20adc0c06fe6898d.png",
+    "static/media/pexels-binyaminmellish-1396122.png": "/jinriproject/static/media/pexels-binyaminmellish-1396122.8b70c5ddc3b98c1f46f3.png",
     "static/media/pexels-binyaminmellish-1396122 (1).png": "/jinriproject/static/media/pexels-binyaminmellish-1396122 (1).1a9e302727d265039d46.png",
     "static/media/pexels-frans-van-heerden-201846-1438832.png": "/jinriproject/static/media/pexels-frans-van-heerden-201846-1438832.42d2cb3ce83651fdb13b.png",
     "static/media/homebox1.png": "/jinriproject/static/media/homebox1.b4bfc5d5c3152a1d2c09.png",
@@ -15,10 +16,13 @@
     "static/media/pngwing.com.png": "/jinriproject/static/media/pngwing.com.80a3a6f4edd4e95b9535.png",
     "static/media/pexels-tobiasbjorkli-2119713.png": "/jinriproject/static/media/pexels-tobiasbjorkli-2119713.a13879f32b3e27f5bace.png",
     "static/media/aboutbox1.png": "/jinriproject/static/media/aboutbox1.55895e2866b6de0bdbde.png",
+    "static/media/pexels-rdne-8293635.png": "/jinriproject/static/media/pexels-rdne-8293635.3a223ceda00073cac6ab.png",
     "static/media/pexels-emrecan-2079246.png": "/jinriproject/static/media/pexels-emrecan-2079246.6c43d7171eaa291db541.png",
     "static/media/image3.png": "/jinriproject/static/media/image3.55ec37a0380634ff1d27.png",
     "static/media/image1.png": "/jinriproject/static/media/image1.a32e232a09dc9f990ce8.png",
     "static/media/pexels-christa-grover-977018-2121120.png": "/jinriproject/static/media/pexels-christa-grover-977018-2121120.8a3f877751a5818e9c44.png",
+    "static/media/pexels-rdne-8293746.png": "/jinriproject/static/media/pexels-rdne-8293746.c46d36e2a67aec61ab66.png",
+    "static/media/Mask group3.png": "/jinriproject/static/media/Mask group3.1057f74c4c2abca97927.png",
     "static/media/montserrat-latin-700italic.woff": "/jinriproject/static/media/montserrat-latin-700italic.6779372f04095051c62e.woff",
     "static/media/montserrat-latin-800italic.woff": "/jinriproject/static/media/montserrat-latin-800italic.fe82abb0bcede51bf724.woff",
     "static/media/montserrat-latin-600italic.woff": "/jinriproject/static/media/montserrat-latin-600italic.c4fcfeeb057724724097.woff",
@@ -55,14 +59,16 @@
     "static/media/montserrat-latin-200.woff2": "/jinriproject/static/media/montserrat-latin-200.9d266fbbfa6cab7009bd.woff2",
     "static/media/montserrat-latin-100italic.woff2": "/jinriproject/static/media/montserrat-latin-100italic.e279051046ba1286706a.woff2",
     "static/media/montserrat-latin-100.woff2": "/jinriproject/static/media/montserrat-latin-100.8d7d79679b70dbe27172.woff2",
+    "static/media/Mask group.png": "/jinriproject/static/media/Mask group.b87efb7d4313138a05a0.png",
     "static/media/logo.png": "/jinriproject/static/media/logo.f9b9c002f680970373cb.png",
+    "static/media/Mask group4.png": "/jinriproject/static/media/Mask group4.dbdabd2db546271907d0.png",
     "index.html": "/jinriproject/index.html",
-    "main.701d57d9.css.map": "/jinriproject/static/css/main.701d57d9.css.map",
-    "main.5ebf7082.js.map": "/jinriproject/static/js/main.5ebf7082.js.map",
+    "main.cdec12e7.css.map": "/jinriproject/static/css/main.cdec12e7.css.map",
+    "main.374bd2e5.js.map": "/jinriproject/static/js/main.374bd2e5.js.map",
     "453.f69bbbff.chunk.js.map": "/jinriproject/static/js/453.f69bbbff.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.701d57d9.css",
-    "static/js/main.5ebf7082.js"
+    "static/css/main.cdec12e7.css",
+    "static/js/main.374bd2e5.js"
   ]
 }
