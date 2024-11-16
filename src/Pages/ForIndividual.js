@@ -1,22 +1,11 @@
 import React from 'react';
 import Search from './search';
 import './ForIndividual.css';
-import house from '../asset/image1.png';
-import search from '../asset/File_dock_search.png';
-import house1 from '../asset/image3.png';
-import check from '../asset/Check_fill.png';
 import Header from '../Header';
 import Introduction from './Introduction';
 import Strength from './Strength';
 
 const ForIndividual = () => {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
   return (
     <div>
       <div className="individual_box1">

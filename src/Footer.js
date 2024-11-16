@@ -61,7 +61,7 @@ const Footer = () => {
                         <li><Link to="/individual">For Individual</Link></li>
                         <li><Link to="/partner">For Partner</Link></li>
                         <li><Link to="/contact">Location</Link></li>
-                        <li><Link to="/contact">Media</Link></li>
+                        <li><Link to="/admin">Media</Link></li>
                     </ul>
                 </nav>
             </div>

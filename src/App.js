@@ -17,6 +17,7 @@ import ScrollToTop from './ScrollTop';
 import SignUp from './Pages/SignUp';
 import ThankYou from './Purchase/ThankYou';
 import CheckAddress from './Pages/CheckAddress';
+import Admin from './Agent Portal/Admin';
 
 function App () {
   return(
@@ -37,7 +38,8 @@ function App () {
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/:type/:id" element={<AgentPortal />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/:type/:id/orders/:orderId/:orderStatus" element={<OrderDetail />} />                      
+          <Route path="/:type/:id/orders/:orderId/:orderStatus" element={<OrderDetail />} />
+          <Route path="/admin" element={<Admin />} />                    
         </Routes>
         <Footer />
       </div>      

@@ -2,21 +2,10 @@ import React from 'react';
 import Header from '../Header';
 import Search from './search';
 import './ForPartner.css';
-import house from '../asset/image1.png';
-import search from '../asset/File_dock_search.png';
-import house1 from '../asset/image3.png';
-import check from '../asset/Check_fill.png';
 import Introduction from './Introduction';
 import Strength from './Strength';
 
 const ForPartner = () => {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
   return (
     <div>
       <div className="partner_box1">
