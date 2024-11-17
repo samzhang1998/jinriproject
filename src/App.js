@@ -18,6 +18,7 @@ import SignUp from './Pages/SignUp';
 import ThankYou from './Purchase/ThankYou';
 import CheckAddress from './Pages/CheckAddress';
 import Admin from './Agent Portal/Admin';
+import Adminlogin from './Pages/Adminlogin';
 
 function App () {
   return(
@@ -39,7 +40,8 @@ function App () {
           <Route path="/:type/:id" element={<AgentPortal />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/:type/:id/orders/:orderId/:orderStatus" element={<OrderDetail />} />
-          <Route path="/admin" element={<Admin />} />                    
+          <Route path="/adminlogin" element={<Adminlogin />} />
+          <Route path="/admin/:id" element={<Admin />} />                    
         </Routes>
         <Footer />
       </div>      

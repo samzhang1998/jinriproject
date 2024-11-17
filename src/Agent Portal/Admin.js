@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import UserSettings from "./UserSettings";
 import add from '../asset/File_dock_add_fill.png';
 import add1 from '../asset/File_dock_add_fill (1).png';
@@ -36,6 +36,7 @@ const Settings = () => {
 
 const Admin = () => {
     const [currentPage, setCurrentPage] = useState(1);
+    const { id } = useParams();
     const showOrderStatus = () => {
         setCurrentPage(1);
     };
@@ -52,7 +53,7 @@ const Admin = () => {
             <div className='header_bg'></div>
             <div className="portal">
                 <div className="portal_selection">
-                    <h1>Welcome Admin</h1>
+                    <h1>Welcome {id}</h1>
                     <div 
                         onClick={showOrderStatus} 
                         className="to_details"
@@ -66,7 +67,7 @@ const Admin = () => {
                             style={{
                                 color: currentPage === 1 ? "#008286" : "#A4A4A4",
                             }}
-                        >Order Report</p>
+                        >Order Status</p>
                     </div>
                     <div 
                         onClick={showCustomer} 
@@ -81,7 +82,7 @@ const Admin = () => {
                             style={{
                                 color: currentPage === 2 ? "#008286" : "#A4A4A4",
                             }}
-                        >Orders</p>
+                        >Customers</p>
                     </div>
                     <div 
                         onClick={showSettings} 

@@ -49,6 +49,10 @@ const agents = [
   { id: 'agent2', password: 'password2' },
 ];
 
+const admin = [
+  { id: 'admin', password: '123456'},
+];
+
 export const authenticateUser = (userId, password, userType) => {
   let users;
 
@@ -56,6 +60,8 @@ export const authenticateUser = (userId, password, userType) => {
     users = customers;
   } else if (userType === 'agent') {
     users = agents;
+  } else if (userType === 'admin') {
+    users = admin;
   } else {
     return false;
   }
