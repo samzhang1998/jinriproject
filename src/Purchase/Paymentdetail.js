@@ -116,75 +116,75 @@ const Paymentdetail = () => {
                 </label>
             </div>
             <form>
-            {paymentMethod === 'creditCard' && (
-                <div className="card_detail">
-                    <input 
-                        type="text"
-                        id="cardHolderName"
-                        name="cardHolderName"
-                        placeholder="Card Holder Name*"
-                        value={formData.cardHolderName}
-                        onChange={handleChange}
-                        required
-                    />
-                    <input 
-                        type="text"
-                        id="cardNumber"
-                        name="cardNumber"
-                        placeholder="Card Number*"
-                        value={formData.cardNumber}
-                        onChange={handleChange}
-                        required
-                    />
-                    <div className="cvv">
+                {paymentMethod === 'creditCard' && (
+                    <div className="card_detail">
                         <input 
                             type="text"
-                            id="expireDate"
-                            name="expireDate"
-                            placeholder="Expired Date*"
-                            value={formData.expireDate}
+                            id="cardHolderName"
+                            name="cardHolderName"
+                            placeholder="Card Holder Name*"
+                            value={formData.cardHolderName}
                             onChange={handleChange}
                             required
                         />
                         <input 
                             type="text"
-                            id="cvv"
-                            name="cvv"
-                            placeholder="CVV*"
-                            value={formData.cvv}
+                            id="cardNumber"
+                            name="cardNumber"
+                            placeholder="Card Number*"
+                            value={formData.cardNumber}
                             onChange={handleChange}
                             required
                         />
+                        <div className="cvv">
+                            <input 
+                                type="text"
+                                id="expireDate"
+                                name="expireDate"
+                                placeholder="Expired Date*"
+                                value={formData.expireDate}
+                                onChange={handleChange}
+                                required
+                            />
+                            <input 
+                                type="text"
+                                id="cvv"
+                                name="cvv"
+                                placeholder="CVV*"
+                                value={formData.cvv}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
                     </div>
+                )}
+                <div className="check_for_sure">
+                    <h2>Check for Sure Terms & Conditions</h2>
+                    <p>*Please agree to the following to proceed with your order.</p>
+                    <label>
+                        <input
+                            checked={isChecked}
+                            onChange={handleCheckboxChange} 
+                            type="checkbox"
+                            style={{
+                                width: '1.2rem',
+                            }}
+                            required
+                        />
+                        <span>I have read and agree to Check for sure's Terms & Conditions (which 
+                            includes our Collection Notice and Cancellation charges policy). 
+                            A 'Late Cancellation' could lead to cancellation charges that can 
+                            exceed your initial payment, up to a maximum of 50% of the retail 
+                            cost of a report.</span>
+                    </label>
                 </div>
-            )}
-            <div className="check_for_sure">
-                <h2>Check for Sure Terms & Conditions</h2>
-                <p>*Please agree to the following to proceed with your order.</p>
-                <label>
-                    <input
-                        checked={isChecked}
-                        onChange={handleCheckboxChange} 
-                        type="checkbox"
-                        style={{
-                            width: '1.2rem',
-                        }}
-                        required
-                    />
-                    <span>I have read and agree to Check for sure's Terms & Conditions (which 
-                    includes our Collection Notice and Cancellation charges policy). 
-                    A 'Late Cancellation' could lead to cancellation charges that can 
-                    exceed your initial payment, up to a maximum of 50% of the retail 
-                    cost of a report.</span>
-                </label>
-            </div>
-            <Policy showModal={showModal} onClose={handleCloseModal} />
-            <button 
-                disabled={!isChecked} 
-                type="submit" 
-                className="pay_now"
-                onClick={handleSubmit}
-            >Pay Now</button>
+                <Policy showModal={showModal} onClose={handleCloseModal} />
+                <button 
+                    disabled={!isChecked} 
+                    type="submit" 
+                    className="pay_now"
+                    onClick={handleSubmit}
+                >Pay Now</button>
             </form>
         </div>
     );

@@ -158,7 +158,7 @@ const SearchBox = () => {
 export { SearchBox };
 
 const MobileSearchBox = () => {
-    const data = [
+    const address = [
         '36-38 Walker Street, Rhodes NSW 2138',
     ];
 
@@ -224,7 +224,7 @@ const MobileSearchBox = () => {
             alert('Please enter a search term.');
             return;
         }
-        const results = data.filter((item) =>
+        const results = address.filter((item) =>
             item.toLowerCase().includes(query.toLowerCase())
         );
         

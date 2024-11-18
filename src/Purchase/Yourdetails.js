@@ -123,7 +123,6 @@ const YourDetailsForm = () => {
                         placeholder="Email*"
                         required
                     />
-                    {/* {formErrors.email && <p style={{ color: 'red' }}>{formErrors.email}</p>} */}
                     <input 
                         type="email"
                         name="confirmEmail"
@@ -132,7 +131,6 @@ const YourDetailsForm = () => {
                         placeholder="Confirm Email*"
                         required
                     />
-                    {/* {formErrors.confirmEmail && <p style={{ color: 'red' }}>{formErrors.confirmEmail}</p>} */}
                     {formErrors.confirmEmailMatch && <p style={{ color: 'red' }}>{formErrors.confirmEmailMatch}</p>}
                     <input 
                         type="text"
@@ -142,7 +140,6 @@ const YourDetailsForm = () => {
                         placeholder="Contact Number*"
                         required
                     />
-                    {/* {formErrors.contactNumber && <p style={{ color: 'red' }}>{formErrors.contactNumber}</p>} */}
                     <input 
                         type="text"
                         name="homeAddress"
