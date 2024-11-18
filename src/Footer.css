@@ -92,7 +92,7 @@
 }
 
 .menu_footer ul li a:hover {
-    color: palevioletred;
+    text-decoration: underline;
 }
 
 /* .service {
@@ -136,7 +136,7 @@
 }
 
 .service_footer ul li a:hover {
-    color: palevioletred;
+    text-decoration: underline;
 }
 
 .other {
