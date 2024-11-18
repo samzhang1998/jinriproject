@@ -133,22 +133,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary }) => {
             <YourDetailsForm />
             <button 
                 onClick={handleClick}
-                style={{
-                    background: '#008286',
-                    width: '8.9rem',
-                    height: '2.9rem',
-                    color: '#FFF',
-                    fontFamily: 'Montserrat',
-                    fontSize: '1.125rem',
-                    fontStyle: 'normal',
-                    fontWeight: '600',
-                    lineHeight: '150%',                    
-                    marginBottom: '8%',
-                    cursor: 'pointer',
-                    borderRadius: '1rem',
-                    border: 'none',
-                    marginTop: '5%',
-                }}
+                className="tostep2"
             >NEXT</button>
         </div>
     );
@@ -253,22 +238,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary }) => {
             </div>
             <button 
                 onClick={handleClick}
-                style={{
-                    background: '#008286',
-                    width: '8.9rem',
-                    height: '2.9rem',
-                    color: '#FFF',
-                    fontFamily: 'Montserrat',
-                    fontSize: '1.125rem',
-                    fontStyle: 'normal',
-                    fontWeight: '600',
-                    lineHeight: '150%',                    
-                    marginBottom: '8%',
-                    marginTop: '5%',
-                    cursor: 'pointer',
-                    borderRadius: '1rem',
-                    border: 'none',
-                }}
+                className='tostep3'
             >NEXT</button>
         </div>
     );

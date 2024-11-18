@@ -57,7 +57,7 @@ export default Colorbutton1;
 
 // search box
 const SearchBox = () => {
-    const data = [
+    const address = [
         '36-38 Walker Street, Rhodes NSW 2138',
     ];
 
@@ -117,7 +117,7 @@ const SearchBox = () => {
             alert('Please enter a search term.');
             return;
         }
-        const results = data.filter((item) =>
+        const results = address.filter((item) =>
             item.toLowerCase().includes(query.toLowerCase())
         );
         

@@ -220,7 +220,7 @@
 }
 
 .send_message button:hover {
-    color: palevioletred;
+    background-color: #004d40;
 }
 
 @media (max-width: 768px) {

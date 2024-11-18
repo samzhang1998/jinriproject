@@ -197,7 +197,7 @@
 }
 
 .purchase_button button:hover {
-    color: #007BFF;
+    background-color: #004d40;
 }
 
 .mobile_purchase_button {

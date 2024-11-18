@@ -3,11 +3,35 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Paymentdetail.css';
 import Policy from "./Policy";
+import { PostData } from "../API";
 
 const Paymentdetail = () => {
     const [paymentMethod, setPaymentMethod] = useState('creditCard');
     const [isPaypalSelected, setIsPaypalSelected] = useState(false);
     const navigate = useNavigate();
+    const [formData,setFormData] = useState ({
+        cardHolderName: '',
+        cardNumber: '',
+        expireDate: '',
+        cvv: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await PostData('/card', formData);
+            console.log('Payment Response:', response);
+            navigate('/thankyou');
+        } catch (error) {
+            console.error('Error submitting payment:', error);
+            alert('Error processing payment. Please try again.');
+        }
+    };
 
     const handlePaymentMethodChange = (e) => {
         setPaymentMethod(e.target.value);
@@ -18,9 +42,6 @@ const Paymentdetail = () => {
     const handleCardSelected = () => {
         setIsPaypalSelected(false)
     };
-    const handleSubmit = () => {
-        navigate (`/thankyou`)
-    }
 
     const [showModal, setShowModal] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
@@ -94,27 +115,44 @@ const Paymentdetail = () => {
                     Paypal
                 </label>
             </div>
+            <form>
             {paymentMethod === 'creditCard' && (
                 <div className="card_detail">
                     <input 
                         type="text"
+                        id="cardHolderName"
+                        name="cardHolderName"
                         placeholder="Card Holder Name*"
+                        value={formData.cardHolderName}
+                        onChange={handleChange}
                         required
                     />
                     <input 
                         type="text"
+                        id="cardNumber"
+                        name="cardNumber"
                         placeholder="Card Number*"
+                        value={formData.cardNumber}
+                        onChange={handleChange}
                         required
                     />
                     <div className="cvv">
                         <input 
                             type="text"
+                            id="expireDate"
+                            name="expireDate"
                             placeholder="Expired Date*"
+                            value={formData.expireDate}
+                            onChange={handleChange}
                             required
                         />
                         <input 
                             type="text"
+                            id="cvv"
+                            name="cvv"
                             placeholder="CVV*"
+                            value={formData.cvv}
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -147,6 +185,7 @@ const Paymentdetail = () => {
                 className="pay_now"
                 onClick={handleSubmit}
             >Pay Now</button>
+            </form>
         </div>
     );
 };

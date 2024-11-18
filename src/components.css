@@ -29,7 +29,7 @@
 }
 
 .screen_search_button:hover {
-    color: #007BFF;
+    background-color: #004d40;
 }
 
 .mobile_search_box {
@@ -105,6 +105,6 @@
 }
 
 .mobile_search_button:hover {
-    color: #007BFF;
+    background-color: #004d40;
 }
 

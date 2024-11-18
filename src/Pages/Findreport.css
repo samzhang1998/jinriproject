@@ -60,8 +60,8 @@
     text-decoration: none;
 }
 
-.contact_button a:hover {
-    color: #007BFF;
+.contact_button button:hover {
+    background-color: #004d40;
 }
 
 .building2 {

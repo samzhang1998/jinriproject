@@ -198,8 +198,8 @@
     text-decoration: none;
 }
 
-.purchase_button2 a:hover {
-    color: #007BFF;
+.purchase_button2 button:hover {
+    background-color: #004d40;
 }
 
 .mobile_purchase_button2 {

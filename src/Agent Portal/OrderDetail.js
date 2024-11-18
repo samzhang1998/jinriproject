@@ -17,7 +17,7 @@ const OrderDetail = () => {
         const mockOrderDetails = {
             id: orderId,
             date: '09 Sep 2024, Friday',
-            lastdate: '12 Sep, Tuesday',
+            lastupdatedate: '12 Sep, Tuesday',
             address: '45 Hills street, Marricville NSW 2301',
             status: orderStatus,
             trackings: [
@@ -76,7 +76,7 @@ const OrderDetail = () => {
                             <p>Your order is</p>
                             <h1>{order.status}</h1>
                             <h2>as on {order.date}</h2>
-                            <h3>Last update on {order.lastdate}</h3>
+                            <h3>Last update on {order.lastupdatedate}</h3>
                         </div>
                         {type === 'customer' && <div className="download_area">
                             {order.status === 'Processing' ? (

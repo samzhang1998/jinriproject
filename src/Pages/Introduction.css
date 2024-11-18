@@ -79,7 +79,7 @@
 }
 
 .intro_contact:hover {
-    color: #007BFF;
+    background-color: #004d40;
 }
 
 @media (max-width: 768px) {
