@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/jinriproject/static/css/main.869fee8a.css",
-    "main.js": "/jinriproject/static/js/main.5f557829.js",
+    "main.css": "/jinriproject/static/css/main.dbcae178.css",
+    "main.js": "/jinriproject/static/js/main.98331c7c.js",
     "static/js/453.f69bbbff.chunk.js": "/jinriproject/static/js/453.f69bbbff.chunk.js",
     "static/media/image_individual.png": "/jinriproject/static/media/image_individual.fde05ec089c7688c9068.png",
     "static/media/image_home.png": "/jinriproject/static/media/image_home.601cf0875eb54ed223b1.png",
@@ -61,12 +61,12 @@
     "static/media/logo.png": "/jinriproject/static/media/logo.f9b9c002f680970373cb.png",
     "static/media/Mask group4.png": "/jinriproject/static/media/Mask group4.dbdabd2db546271907d0.png",
     "index.html": "/jinriproject/index.html",
-    "main.869fee8a.css.map": "/jinriproject/static/css/main.869fee8a.css.map",
-    "main.5f557829.js.map": "/jinriproject/static/js/main.5f557829.js.map",
+    "main.dbcae178.css.map": "/jinriproject/static/css/main.dbcae178.css.map",
+    "main.98331c7c.js.map": "/jinriproject/static/js/main.98331c7c.js.map",
     "453.f69bbbff.chunk.js.map": "/jinriproject/static/js/453.f69bbbff.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.869fee8a.css",
-    "static/js/main.5f557829.js"
+    "static/css/main.dbcae178.css",
+    "static/js/main.98331c7c.js"
   ]
 }
