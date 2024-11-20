@@ -15,6 +15,7 @@ const Searchresult2 = () => {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
     const handleSearch = () => {
+        localStorage.setItem('reportOK', false);
         navigate('/purchasereport', { state: { query } });
     };
 

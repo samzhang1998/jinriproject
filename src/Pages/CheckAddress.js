@@ -18,7 +18,7 @@ const CheckAddress = () => {
         roomNumber: 2,
         postcode: ''
     });
-    const query = `${formData.streetNumber} ${formData.streetName}, ${formData.suburb} ${formData.state}${formData.postcode}`;
+    const query = `${formData.streetNumber} ${formData.streetName}, ${formData.suburb} ${formData.state} ${formData.postcode}`;
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -45,12 +45,10 @@ const CheckAddress = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
-            navigate(`/bookinspect/${query}`, { state: { 
-                streetName: formData.streetName, 
-                streetNumber: formData.streetNumber, 
-            }});
+            navigate(`/report`, { state: { query }});
         } catch (error) {
             console.error('Failed to submit address:', error);
+            navigate(`/bookinspector`, { state: { query }});
         }
     };
 
@@ -81,7 +79,7 @@ const CheckAddress = () => {
                         <option value="">Unit Type (Optional)</option>
                         <option value="Apartment">Apartment</option>
                         <option value="ATM">ATM</option>
-                        <option value="Chambers">Chambers</option>
+                        <option value="House">House</option>
                         <option value="Suite">Suite</option>
                         <option value="Unit">Unit</option>
                     </select>

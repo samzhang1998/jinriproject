@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import FetchFunc from '../API';
 import YourDetailsForm from './Yourdetails';
@@ -49,8 +49,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                         <div className="selection">
                             <label>
                                 <input 
-                                    type="radio" 
-                                    name="coolingOff" 
+                                    type="radio"  
                                     value={formPurchase.coolingPeriod}
                                     onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
@@ -58,9 +57,8 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                             </label>
                             <label>
                                 <input 
-                                    type="radio" 
-                                    name="coolingOff" 
-                                    value="no"
+                                    type="radio"  
+                                    value={formPurchase.coolingPeriod}
                                     onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
                                 /> No
@@ -147,18 +145,39 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                 </div>
             </div>
             <YourDetailsForm formPurchase={formPurchase} onUpdate={onUpdate}/>
-            <button 
-                onClick={handleClick}
-                className="tostep2"
-            >NEXT</button>
+            <button onClick={handleClick} className='tostep2'>NEXT</button>
         </div>
     );
 };
 
 const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, onUpdate }) => {
-    const [getMortgageAdvice,setGetMortgageAdvice] = useState(false);
-    const [consultExpert,setConsultExpert] = useState(false);
-    const [getValueReport,setGetValueReport] = useState(false);
+    // const [getMortgageAdvice,setGetMortgageAdvice] = useState(false);
+    // const [consultExpert,setConsultExpert] = useState(false);
+    // const [getValueReport,setGetValueReport] = useState(false);
+    const [getService,setGetService] = useState(false);
+    const [services,setServices] = useState([]);
+
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const response = await FetchFunc(
+                    '/service/all',
+                    'Get',
+                );
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Response from server:', response);
+                const data = await response.json();
+                console.log('data response:', data);
+                setServices(data);
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+            }
+        };
+        fetchServices();
+    }, []);
+
     const scrollToTop = () => {
         window.scrollTo({
           top: 0,
@@ -168,30 +187,54 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, onUpdate }
     const handleClick = () => {
         showStepThree();
         scrollToTop();
-    }
+    };
     const role = localStorage.getItem('role');
 
-    const handleMortgageAdviceChange = () => {
-        const selected = !getMortgageAdvice;
-        setGetMortgageAdvice(selected);
-        updatePaymentSummary({ getMortgageAdvice: selected, mortgageAdvicePrice: selected ? 0 : 0 });
-    };
-    const handleConsultExpert = () => {
-        const selected = !consultExpert;
-        setConsultExpert(selected);
-        updatePaymentSummary({ consultExpert: selected, consultExpertPrice: selected ? 0 : 0 });
-    };
-    const handleValueReportChange = () => {
-        const selected = !getValueReport;
-        setGetValueReport(selected);
-        updatePaymentSummary({ getValueReport: selected, valueReportPrice: selected ? 0 : 0 });
-    };
+    const handleGetService = () => {
+        const selected = !getService;
+        setGetService(selected);
+        updatePaymentSummary({ getService: selected, servicePrice: selected ? 0 : 0 });
+    }
+
+    // const handleMortgageAdviceChange = () => {
+    //     const selected = !getMortgageAdvice;
+    //     setGetMortgageAdvice(selected);
+    //     updatePaymentSummary({ getMortgageAdvice: selected, mortgageAdvicePrice: selected ? 0 : 0 });
+    // };
+    // const handleConsultExpert = () => {
+    //     const selected = !consultExpert;
+    //     setConsultExpert(selected);
+    //     updatePaymentSummary({ consultExpert: selected, consultExpertPrice: selected ? 0 : 0 });
+    // };
+    // const handleValueReportChange = () => {
+    //     const selected = !getValueReport;
+    //     setGetValueReport(selected);
+    //     updatePaymentSummary({ getValueReport: selected, valueReportPrice: selected ? 0 : 0 });
+    // };
     return (
         <div>
             <div className="service_details">
                 <h1>Addition Service</h1>
                 <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
-                <div
+                {Array.isArray(services) && services.map((service) => (
+                    <div 
+                        key={service.serviceId}
+                        onClick={() => handleGetService()}
+                        style={{
+                            background: getService ? 'rgba(0, 130, 134, 0.17)' :  '#F9F8F8',
+                            border: getService ? '1px solid #008286' :  'none',
+                            borderRadius: '1rem',
+                            width: '95%',
+                            marginBottom: '5%',
+                            paddingLeft: '5%',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        <h1>{service.title}</h1>
+                        <p>{service.descaiption}</p>
+                    </div>
+                ))}
+                {/* <div
                     onClick={() => handleMortgageAdviceChange()}
                     style={{
                         background: getMortgageAdvice ? 'rgba(0, 130, 134, 0.17)' :  '#F9F8F8',
@@ -251,10 +294,10 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, onUpdate }
                         is what you need. These experts buy properties from agents <br /> regularly 
                         and the best part is there is no fee if they're not successful for you!
                     </p>
-                </div>
+                </div> */}
             </div>
             {role === 'Partner' && <button 
-                onClick={handleClick}
+                type='submit'
                 className='tostep3'
             >ORDER</button>}
             {role === 'Customer' && <button
@@ -314,8 +357,12 @@ const PaymentSummary = ({ summary }) => {
 };
 
 const PurchasePage = () => {
+    const id = localStorage.getItem('userId');
+    const role = localStorage.getItem('role');
+    const location = useLocation();
+    const { query } = location.state || {};
     const [formPurchase,setFormPurchase] = useState({
-        propertyAddress: '',
+        propertyAddress: query,
         coolingPeriod: false,
         acution: false,
         numberBedroom: '',
@@ -334,8 +381,8 @@ const PurchasePage = () => {
         agentLastName: '',
         agentEmail: '',
         agentMobile: '',
-        userId: '',
-        service: [],
+        userId: id,
+        service: [''],
     });
 
     const handleUpdate = (key, value) => {
@@ -345,12 +392,13 @@ const PurchasePage = () => {
         }));
     };
 
-    const handleSubmit = async (e) => {
+    const handlePartnerSubmit = async (e) => {
         e.preventDefault();
         const dataToSend = {
             ...formPurchase,
         };
         try {
+            console.log('data sent:', dataToSend)
             const response = await FetchFunc(
                 '/partner-order/create',
                 'POST',
@@ -364,19 +412,43 @@ const PurchasePage = () => {
         } catch (error) {
             console.error('Error submitting form:', error);
         }
-    }
+    };
+
+    const handleCustomerSubmit = async (e) => {
+        e.preventDefault();
+        const dataToSend = {
+            ...formPurchase,
+        };
+        try {
+            console.log('data sent:', dataToSend)
+            const response = await FetchFunc(
+                '/customer-order/create',
+                'POST',
+                JSON.stringify(dataToSend)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
+            navigate('/thankyou');
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    };
 
     const [currentStep, setCurrentStep] = useState(1);
     const navigate = useNavigate();
     const [paymentSummary, setPaymentSummary] = useState({
         hasGrannyFlat: false,
         grannyFlatPrice: 0,
-        getMortgageAdvice: false,
-        mortgageAdvicePrice: 0,
-        consultExpert: false,
-        consultExpertPrice: 0,
-        getValueReport: false,
-        valueReportPrice: 0,
+        getService: false,
+        servicePrice: 0,
+        // getMortgageAdvice: false,
+        // mortgageAdvicePrice: 0,
+        // consultExpert: false,
+        // consultExpertPrice: 0,
+        // getValueReport: false,
+        // valueReportPrice: 0,
     });
 
     const showStepTwo = () => {
@@ -465,7 +537,7 @@ const PurchasePage = () => {
                 </div>
             </div>
             <div className='payment_steps'>
-                <form onSubmit={handleSubmit}>
+                {role === 'Partner' && <form onSubmit={handlePartnerSubmit}>
                     <div className='payment_choice'>                        
                         {currentStep === 1 && 
                             <StepOne 
@@ -492,7 +564,35 @@ const PurchasePage = () => {
                             />
                         }
                     </div>
-                </form>
+                </form>}
+                {role === 'Customer' && <form onSubmit={handleCustomerSubmit}>
+                    <div className='payment_choice'>                        
+                        {currentStep === 1 && 
+                            <StepOne 
+                                showStepTwo={showStepTwo} 
+                                updatePaymentSummary={updatePaymentSummary}
+                                formPurchase={formPurchase} 
+                                onUpdate={handleUpdate}
+                            />
+                        }
+                        {currentStep === 2 && (
+                            <StepTwo showStepThree={showStepThree} 
+                                showStepOne={showStepOne} 
+                                updatePaymentSummary={updatePaymentSummary}
+                                formPurchase={formPurchase} 
+                                onUpdate={handleUpdate} 
+                            />
+                        )}
+                        {currentStep === 3 && 
+                            <StepThree showStepTwo={showStepTwo} 
+                                showStepOne={showStepOne}
+                                updatePaymentSummary={updatePaymentSummary}
+                                formPurchase={formPurchase} 
+                                onUpdate={handleUpdate} 
+                            />
+                        }
+                    </div>
+                </form>}
                 <div className='payment_summary'>
                     <PaymentSummary summary={paymentSummary} />
                 </div>

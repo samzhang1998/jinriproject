@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Orders.css";
-import { GetData } from "../API";
+import FetchFunc from "../API";
 
 const Orders = ({ type,id }) => {
     const [orders, setOrders] = useState([]);
@@ -9,15 +9,35 @@ const Orders = ({ type,id }) => {
 
     useEffect(() => {
         const fetchOrders = async () => {
+            const id = localStorage.getItem('userId');
+            const role = localStorage.getItem('role');
+            let url = '';
+            if (role === 'Customer') {
+                url = '/customer-order/all';
+            } else if (role === 'Partner') {
+                url = '/partner-order/all';
+            } else {
+                console.error('Invalid role!');
+                return;
+            }
             try {
-                const data = await GetData();
+                const response = await FetchFunc(
+                    `${url}?customerId=${id}`,
+                    'POST',
+                );
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Response from server:', response);
+                const data = await response.json();
+                console.log('data response:', data);
                 setOrders(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
             }
         };
         fetchOrders();
-    }, []);
+    }, [id]);
 
     const filteredOrders = orders.filter(order => {
         if (filter === 'all') return true;
@@ -43,7 +63,7 @@ const Orders = ({ type,id }) => {
                 >Completed</span>
             </div>
             <div className="order_list">
-                {filteredOrders.map((order) => (
+                {Array.isArray(filteredOrders) && filteredOrders.map((order) => (
                     <div key={order.id} className="order_item">                        
                         <div className="order_detail">
                             <p>{order.date}</p>

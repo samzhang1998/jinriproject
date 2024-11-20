@@ -1,4 +1,4 @@
-const Backend_url = 'http://192.168.1.108:8080';
+const Backend_url = 'http://localhost:8080';
 
 export default async function FetchFunc(path, method, body) {
   return await fetch(`${Backend_url}` + path, {
@@ -7,6 +7,7 @@ export default async function FetchFunc(path, method, body) {
       'Content-Type': 'application/json',
     },
     body: body,
+    credentials:'include',
   })
     .catch(err => console.warn(err));
 }
@@ -38,6 +39,7 @@ export const PostData = async (url,payload) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
+      credentials: 'include',
     });
     if (!response.ok) {
       throw new Error('Network response was not ok');

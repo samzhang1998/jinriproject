@@ -38,12 +38,12 @@ const Login = () => {
             ...formData,
         };
         try {
-            const response = await PostData('http://192.168.1.108:8080/login/', dataToSend);
+            const response = await PostData('http://localhost:8080/login/', dataToSend);
             console.log('Response from server:', response);
             localStorage.setItem('isLoggedIn', true);
             localStorage.setItem('username', response.username);
             localStorage.setItem('role', response.role);
-            localStorage.setItem('userId', response.userId)
+            localStorage.setItem('userId', response.userId);
             navigate("/");
         } catch (error) {
             console.error('Error submitting form:', error);

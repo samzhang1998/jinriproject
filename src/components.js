@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate,Link } from 'react-router-dom';
+import FetchFunc from "./API";
 import "./components.css";
 import fill from './asset/Pin_alt_fill.png';
 import { Autocomplete, useJsApiLoader } from "@react-google-maps/api";
@@ -30,9 +31,16 @@ export default Colorbutton1;
 
 // search box
 const SearchBox = () => {
-    const address = [
-        '36-38 Walker Street, Rhodes NSW 2138',
-    ];
+    const [formData, setFormData] = useState({
+        address:'',
+        type: '',
+        streetNumber: '',
+        streetName: '',
+        suburb: '',
+        state: '',
+        roomNumber: 2,
+        postcode: ''
+    });
 
     const [query, setQuery] = useState('');
     const [autocomplete, setAutocomplete] = useState(null);
@@ -83,21 +91,32 @@ const SearchBox = () => {
 
     const handleInputChange = (e) => {
         setQuery(e.target.value);
+        setFormData((prevData) => ({
+            ...prevData,
+            address: query,
+        }));
     };
 
-    const handleSearch = () => {
-        if (query.trim() === '') {
-            alert('Please enter a search term.');
-            return;
-        }
-        const results = address.filter((item) =>
-            item.toLowerCase().includes(query.toLowerCase())
-        );
-        
-        if (results.length > 0) {
-            navigate('/report', { state: { query } });
-        } else {
-            navigate('/bookinspector', { state: { query } });
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        const dataToSend = {
+            ...formData,
+        };
+        try {
+            console.log('Data send:', dataToSend);
+            const response = await FetchFunc(
+                '/search/',
+                'POST',
+                JSON.stringify(dataToSend)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
+            navigate(`/report`, { state: { query }});
+        } catch (error) {
+            console.error('Failed to submit address:', error);
+            navigate(`/bookinspector`, { state: { query }});
         }
     };
 

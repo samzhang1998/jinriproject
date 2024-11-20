@@ -92,21 +92,21 @@ const MobileModal = ({ closeModal, setBottomMobile }) => {
     const role = localStorage.getItem('role');
     const id = localStorage.getItem('userId');
     const userData = {
-        email: 'NaN',
+        email: '',
         userId: id,
-        firstName: 'NaN',
-        lastName: 'NaN',
+        firstName: '',
+        lastName: '',
         mobile: mobile,
-        company: 'NaN',
-        oldPassword: 'NaN',
-        newPassword: 'NaN',
-        username: 'NaN'
+        company: '',
+        oldPassword: '',
+        newPassword: '',
+        username: ''
     }
     const handleCustomerSave = async () => {
         try {
             console.log('Data to be posted:', userData);
             const response = await FetchFunc(
-                '/partner-profile/editMobile',
+                '/customer-profile/editMobile',
                 'POST',
                 JSON.stringify(userData)
             );
@@ -174,15 +174,15 @@ const PasswordModal = ({ closeModal }) => {
     const handleOldPasswordChange = (e) => setOldPassword(e.target.value);
     const handleNewPasswordChange = (e) => setNewPassword(e.target.value);
     const userData = {
-        email: 'NaN',
+        email: '',
         userId: id,
-        firstName: 'NaN',
-        lastName: 'NaN',
-        mobile: NaN,
-        company: 'NaN',
+        firstName: '',
+        lastName: '',
+        mobile: null,
+        company: '',
         oldPassword: oldPassword,
         newPassword: newPassword,
-        username: 'NaN'
+        username: ''
     }
     const handleCustomerSave = async () => {
         try {
@@ -294,7 +294,7 @@ const UserSettings = () => {
                 {showMobileModal && (
                     <MobileModal
                         closeModal={() => setShowMobileModal(false)}
-                        setBottomEmail={setBottomMobile}
+                        setBottomMobile={setBottomMobile}
                     />
                 )}
             </div>

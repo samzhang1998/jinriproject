@@ -5,6 +5,7 @@ import fill1 from '../asset/File_dock_fill (1).png';
 import logout from '../asset/Sign_in_squre_fill.png';
 import Header from "../Header";
 import Changeorders from "./Changeorders";
+import Changeproperty from "./Changeproperty";
 
 const OrderStatus = () => {
     return (
@@ -22,10 +23,10 @@ const CustomerStatus = () => {
     );
 };
 
-const PropertyStatus = () => {
+const PropertyStatus = () => {    
     return (
         <div>
-            <h1>Property</h1>
+            <Changeproperty />
         </div>
     );
 };

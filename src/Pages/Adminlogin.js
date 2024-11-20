@@ -31,7 +31,7 @@ const Adminlogin = () => {
             ...formData,
         };
         try {
-            const response = await PostData('http://192.168.1.108:8080/login/', dataToSend);
+            const response = await PostData('http://localhost:8080/login/', dataToSend);
             console.log('Response from server:', response);
             localStorage.setItem('isLoggedIn', true);
             localStorage.setItem('username', userId);
