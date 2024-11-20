@@ -5,9 +5,7 @@ export default async function FetchFunc(path, method, body) {
     method: method,
     headers: {
       'Content-Type': 'application/json',
-      // 'Authorization': 'Bearer ' + token,
     },
-    credentials: "include",
     body: body,
   })
     .catch(err => console.warn(err));
@@ -17,7 +15,6 @@ export const GetData = async () => {
   try {
     const response = await fetch(`${Backend_url}/data`, {
       method: 'GET',
-      credentials: "include",
       headers: {
         'Content-Type': 'application/json',
       },
@@ -39,7 +36,6 @@ export const PostData = async (url,payload) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer' + token,
       },
       body: JSON.stringify(payload),
     });

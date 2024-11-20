@@ -10,16 +10,24 @@ const EmailModal = ({ closeModal, setBottomEmail }) => {
     };
     const role = localStorage.getItem('role');
     const id = localStorage.getItem('userId');
+    const userData = {
+        email: email,
+        userId: id,
+        firstName: '',
+        lastName: '',
+        mobile: null,
+        company: '',
+        oldPassword: '',
+        newPassword: '',
+        username: ''
+    }
     const handleCustomerSave = async () => {
-        try {
-            const body = {
-                email: email,
-                id: id,
-            }
+        try {            
+            console.log('Data to be posted:', userData);
             const response = await FetchFunc(
                 '/customer-profile/editEmail',
                 'POST',
-                JSON.stringify(body)
+                JSON.stringify(userData)
             );
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -33,15 +41,11 @@ const EmailModal = ({ closeModal, setBottomEmail }) => {
     };
     const handlePartnerSave = async () => {
         try {
-            const body = {
-                email: email,
-                id: id,
-            }
-            console.log('Data to be posted:', body);
+            console.log('Data to be posted:', userData);
             const response = await FetchFunc(
                 '/partner-profile/editEmail',
                 'POST',
-                JSON.stringify(body)
+                JSON.stringify(userData)
             );
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -81,22 +85,30 @@ const EmailModal = ({ closeModal, setBottomEmail }) => {
 };
 
 const MobileModal = ({ closeModal, setBottomMobile }) => {
-    const [mobile, setMobile] = useState('');
+    const [mobile, setMobile] = useState();
     const handleChange = (e) => {
         setMobile(e.target.value);
     };
     const role = localStorage.getItem('role');
     const id = localStorage.getItem('userId');
+    const userData = {
+        email: 'NaN',
+        userId: id,
+        firstName: 'NaN',
+        lastName: 'NaN',
+        mobile: mobile,
+        company: 'NaN',
+        oldPassword: 'NaN',
+        newPassword: 'NaN',
+        username: 'NaN'
+    }
     const handleCustomerSave = async () => {
         try {
-            const body = {
-                mobile: mobile,
-                id: id,
-            }
+            console.log('Data to be posted:', userData);
             const response = await FetchFunc(
                 '/partner-profile/editMobile',
                 'POST',
-                JSON.stringify(body)
+                JSON.stringify(userData)
             );
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -110,15 +122,11 @@ const MobileModal = ({ closeModal, setBottomMobile }) => {
     };
     const handlePartnerSave = async () => {
         try {
-            const body = {
-                mobile: mobile,
-                id: id,
-            }
-            console.log('Data to be posted:', body);
+            console.log('Data to be posted:', userData);
             const response = await FetchFunc(
                 '/partner-profile/editMobile',
                 'POST',
-                JSON.stringify(body)
+                JSON.stringify(userData)
             );
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -165,18 +173,24 @@ const PasswordModal = ({ closeModal }) => {
     const id = localStorage.getItem('userId');
     const handleOldPasswordChange = (e) => setOldPassword(e.target.value);
     const handleNewPasswordChange = (e) => setNewPassword(e.target.value);
+    const userData = {
+        email: 'NaN',
+        userId: id,
+        firstName: 'NaN',
+        lastName: 'NaN',
+        mobile: NaN,
+        company: 'NaN',
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+        username: 'NaN'
+    }
     const handleCustomerSave = async () => {
         try {
-            const body = {
-                id: id,
-                oldPassword: oldPassword,
-                newPassword: newPassword,
-            }
-            console.log('Data to be posted:', body);
+            console.log('Data to be posted:', userData);
             const response = await FetchFunc(
                 '/customer-profile/editPassword',
                 'POST',
-                JSON.stringify(body)
+                JSON.stringify(userData)
             );
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -190,15 +204,11 @@ const PasswordModal = ({ closeModal }) => {
     };
     const handlePartnerSave = async () => {
         try {
-            const body = {
-                oldPassword: oldPassword,
-                newPassword: newPassword,
-            }
-            console.log('Data to be posted:', body);
+            console.log('Data to be posted:', userData);
             const response = await FetchFunc(
                 '/customer-profile/editPassword',
                 'POST',
-                JSON.stringify(body)
+                JSON.stringify(userData)
             );
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

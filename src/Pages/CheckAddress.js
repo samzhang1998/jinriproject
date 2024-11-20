@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./CheckAddress.css";
 import { useNavigate } from "react-router-dom";
-import { PostData } from "../API";
+import FetchFunc from "../API";
 import Header from "../Header";
 import back from '../asset/Expand_left.png';
 import searchaddress from '../asset/Search_duotone.png';
@@ -9,33 +9,45 @@ import searchaddress from '../asset/Search_duotone.png';
 const CheckAddress = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        unitType: '',
-        unitNumber: '',
+        address:'',
+        type: '',
         streetNumber: '',
         streetName: '',
-        streetType: '',
         suburb: '',
         state: '',
+        roomNumber: 2,
         postcode: ''
     });
-    const query = `${formData.unitNumber}-${formData.streetNumber} ${formData.streetName}, ${formData.suburb} ${formData.state}${formData.postcode}`;
+    const query = `${formData.streetNumber} ${formData.streetName}, ${formData.suburb} ${formData.state}${formData.postcode}`;
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
           ...prevData,
           [name]: value,
+          address: query,
         }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const dataToSend = {
+            ...formData,
+        };
         try {
-            await PostData('/submit-address', formData);
+            console.log('Data send:', dataToSend);
+            const response = await FetchFunc(
+                '/search/',
+                'POST',
+                JSON.stringify(dataToSend)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
             navigate(`/bookinspect/${query}`, { state: { 
                 streetName: formData.streetName, 
                 streetNumber: formData.streetNumber, 
-                unitNumber: formData.unitNumber 
             }});
         } catch (error) {
             console.error('Failed to submit address:', error);
@@ -61,8 +73,8 @@ const CheckAddress = () => {
                 <h1>Please enter your full address</h1>
                 <form onSubmit={handleSubmit}>
                     <select 
-                        name="unitType" 
-                        value={formData.unitType} 
+                        name="type" 
+                        value={formData.type} 
                         onChange={handleChange}
                         className="select_input"
                     >
@@ -78,8 +90,6 @@ const CheckAddress = () => {
                             type="text"
                             name="unitNumber"
                             placeholder="Unit Number"
-                            value={formData.unitNumber}
-                            onChange={handleChange}
                         />
                         <input
                             type="text"
@@ -98,8 +108,6 @@ const CheckAddress = () => {
                     />
                     <select 
                         name="streetType" 
-                        value={formData.streetType} 
-                        onChange={handleChange}
                         className="street_type"
                     >
                         <option value="">Street Type</option>
@@ -137,11 +145,11 @@ const CheckAddress = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    {/* <button type="submit">Check your address</button> */}
-                    <button 
+                    <button type="submit" className="check_ad_button">Check your address</button>
+                    {/* <button 
                         className="check_ad_button" 
                         onClick={() => navigate(`/bookinspector/${query}`)}
-                    >Check your address</button>
+                    >Check your address</button> */}
                 </form>
                 <button className="back_button1" onClick={handleBack}>← Back</button>
             </div>
