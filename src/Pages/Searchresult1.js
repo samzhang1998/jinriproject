@@ -12,8 +12,10 @@ const Searchresult1 = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { query } = location.state || {};
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
     const handleSearch = () => {
+        localStorage.setItem('reportOK', true);
         navigate('/purchasereport', { state: { query } });
     };
 
@@ -50,16 +52,24 @@ const Searchresult1 = () => {
                     <h5>Inspectors</h5>
                     <span>Max</span>
                     <div className="purchase_button">
-                        <button onClick={handleSearch}>
+                        {isLoggedIn ? (<button onClick={handleSearch}>
                             Purchase Report
-                        </button>
+                        </button>) : (
+                            <button onClick={()=>navigate('/login')}>
+                                Purchase Report
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
             <div className="mobile_purchase_button">
-                <button onClick={handleSearch}>
-                    Purchase Report
-                </button>
+                {isLoggedIn ? (<button onClick={handleSearch}>
+                        Purchase Report
+                    </button>) : (
+                    <button onClick={()=>navigate('/login')}>
+                        Purchase Report
+                    </button>
+                )}
             </div>
             <div className='check'>
                 <div className='check_text'>

@@ -1,6 +1,6 @@
 import React, { useState }from "react";
 import "./UserSettings.css";
-import { PostData,GetData } from "../API";
+import FetchFunc from "../API";
 import close from "../asset/Close_round.png";
 
 const EmailModal = ({ closeModal, setBottomEmail }) => {
@@ -8,9 +8,45 @@ const EmailModal = ({ closeModal, setBottomEmail }) => {
     const handleChange = (e) => {
         setEmail(e.target.value);
     };
-    const handleSave = async () => {
+    const role = localStorage.getItem('role');
+    const id = localStorage.getItem('userId');
+    const handleCustomerSave = async () => {
         try {
-            await PostData('/update-email', { email });
+            const body = {
+                email: email,
+                id: id,
+            }
+            const response = await FetchFunc(
+                '/customer-profile/editEmail',
+                'POST',
+                JSON.stringify(body)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
+            setBottomEmail(email);
+            closeModal();
+        } catch (error) {
+            console.error('Failed to update email:', error);
+        }
+    };
+    const handlePartnerSave = async () => {
+        try {
+            const body = {
+                email: email,
+                id: id,
+            }
+            console.log('Data to be posted:', body);
+            const response = await FetchFunc(
+                '/partner-profile/editEmail',
+                'POST',
+                JSON.stringify(body)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
             setBottomEmail(email);
             closeModal();
         } catch (error) {
@@ -31,10 +67,14 @@ const EmailModal = ({ closeModal, setBottomEmail }) => {
                     value={email}
                     onChange={handleChange}
                 />
-                <button
-                    onClick={handleSave}
+                {role === 'Partner' && <button
+                    onClick={handlePartnerSave}
                     className="save_change"
-                >Save</button>
+                >Save</button>}
+                {role === 'Customer' && <button
+                    onClick={handleCustomerSave}
+                    className="save_change"
+                >Save</button>}
             </div>
         </div>
     );
@@ -45,9 +85,45 @@ const MobileModal = ({ closeModal, setBottomMobile }) => {
     const handleChange = (e) => {
         setMobile(e.target.value);
     };
-    const handleSave = async () => {
+    const role = localStorage.getItem('role');
+    const id = localStorage.getItem('userId');
+    const handleCustomerSave = async () => {
         try {
-            await PostData('/update-mobile', { mobile });
+            const body = {
+                mobile: mobile,
+                id: id,
+            }
+            const response = await FetchFunc(
+                '/partner-profile/editMobile',
+                'POST',
+                JSON.stringify(body)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
+            setBottomMobile(mobile);
+            closeModal();
+        } catch (error) {
+            console.error('Failed to update mobile:', error);
+        } 
+    };
+    const handlePartnerSave = async () => {
+        try {
+            const body = {
+                mobile: mobile,
+                id: id,
+            }
+            console.log('Data to be posted:', body);
+            const response = await FetchFunc(
+                '/partner-profile/editMobile',
+                'POST',
+                JSON.stringify(body)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
             setBottomMobile(mobile);
             closeModal();
         } catch (error) {
@@ -68,10 +144,14 @@ const MobileModal = ({ closeModal, setBottomMobile }) => {
                     value={mobile}
                     onChange={handleChange}
                 />
-                <button
-                    onClick={handleSave}
+                {role === 'Partner' && <button
+                    onClick={handlePartnerSave}
                     className="save_change"
-                >Save</button>
+                >Save</button>}
+                {role === 'Customer' && <button
+                    onClick={handleCustomerSave}
+                    className="save_change"
+                >Save</button>}
             </div>
         </div>
     );
@@ -81,17 +161,49 @@ const PasswordModal = ({ closeModal }) => {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const role = localStorage.getItem('role');
+    const id = localStorage.getItem('userId');
     const handleOldPasswordChange = (e) => setOldPassword(e.target.value);
     const handleNewPasswordChange = (e) => setNewPassword(e.target.value);
-    const handleSave = async () => {
+    const handleCustomerSave = async () => {
         try {
-            const storedPassword = await GetData('/get-password');
-            if (storedPassword !== oldPassword) {
-                setErrorMessage('Old password is incorrect');
-                return;
+            const body = {
+                id: id,
+                oldPassword: oldPassword,
+                newPassword: newPassword,
             }
-            await PostData('/update-password', { newPassword });
-            alert('Password updated successfully');
+            console.log('Data to be posted:', body);
+            const response = await FetchFunc(
+                '/customer-profile/editPassword',
+                'POST',
+                JSON.stringify(body)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
+            closeModal();
+        } catch (error) {
+            console.error('Failed to update password:', error);
+            setErrorMessage('Failed to update password');
+        }
+    };
+    const handlePartnerSave = async () => {
+        try {
+            const body = {
+                oldPassword: oldPassword,
+                newPassword: newPassword,
+            }
+            console.log('Data to be posted:', body);
+            const response = await FetchFunc(
+                '/customer-profile/editPassword',
+                'POST',
+                JSON.stringify(body)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
             closeModal();
         } catch (error) {
             console.error('Failed to update password:', error);
@@ -119,10 +231,14 @@ const PasswordModal = ({ closeModal }) => {
                     onChange={handleNewPasswordChange}
                 />
                 {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
-                <button
-                    onClick={handleSave}
+                {role === 'Partner' && <button
+                    onClick={handlePartnerSave}
                     className="save_change"
-                >Save</button>
+                >Save</button>}
+                {role === 'Customer' && <button
+                    onClick={handleCustomerSave}
+                    className="save_change"
+                >Save</button>}
             </div>
         </div>
     );

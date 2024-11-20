@@ -181,6 +181,10 @@
     justify-content: center;
 }
 
+.payment_steps form {
+    width: 55%;
+}
+
 /* step1 */
 .property_form {
     width: 100%;

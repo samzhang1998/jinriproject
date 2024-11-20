@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { authenticateUser } from '../API';
 import { Link, useNavigate } from 'react-router-dom';
+import { PostData } from '../API';
 import "./Login.css";
 import Header from '../Header';
 import back from '../asset/Expand_left.png';
@@ -8,18 +8,45 @@ import usericon from '../asset/usericon.png';
 import passwordicon from '../asset/passwordicon.png';
 
 const Login = () => {
-    const [userId, setUserId] = useState('');
-    const [password, setPassword] = useState('');
-    const [userType, setUserType] = useState('customer');
-    const [loginStatus, setLoginStatus] = useState('');
+    const [userType, setUserType] = useState('Customer');
     const navigate = useNavigate();
+    const [formData,setFormData] = useState({
+        username: '',
+        password: '',
+        role: 'Customer',
+    });
 
-    const handleLogin = () => {
-        const isAuthenticated = authenticateUser(userId, password, userType);
-        if (isAuthenticated) {
-                navigate(`/${userType}/${userId}`);
-        } else {
-            setLoginStatus('Invalid user ID or password.');
+    const handleUserTypeChange = (type) => {
+        setUserType(type);
+        setFormData((prevData) => ({
+            ...prevData,
+            role: type,
+        }));
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+    };
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        const dataToSend = {
+            ...formData,
+        };
+        try {
+            const response = await PostData('http://192.168.1.108:8080/login/', dataToSend);
+            console.log('Response from server:', response);
+            localStorage.setItem('isLoggedIn', true);
+            localStorage.setItem('username', response.username);
+            localStorage.setItem('role', response.role);
+            localStorage.setItem('userId', response.userId)
+            navigate("/");
+        } catch (error) {
+            console.error('Error submitting form:', error);
         }
     };
 
@@ -38,12 +65,12 @@ const Login = () => {
             <div className='login_box'>
                 <h1>Login</h1>
                 <div className='user_type'>
-                    <h2 onClick={() => setUserType('customer')} 
-                        style={{ color: userType === 'customer' ? "#008286" : "#A4A4A4"}}
+                    <h2 onClick={() => handleUserTypeChange('Customer')} 
+                        style={{ color: userType === 'Customer' ? "#008286" : "#A4A4A4"}}
                     >Individual</h2>
                     <div className='user_divide'>l</div>
-                    <h2 onClick={() => setUserType('agent')} 
-                        style={{ color: userType === 'agent' ? "#008286" : "#A4A4A4"}}
+                    <h2 onClick={() => handleUserTypeChange('Partner')} 
+                        style={{ color: userType === 'Partner' ? "#008286" : "#A4A4A4"}}
                     >Partner</h2>
                 </div>
                 <div className='login_detail'>
@@ -53,9 +80,10 @@ const Login = () => {
                         </span>
                         <input 
                             type="text"
-                            value={userId}
+                            name="username"
+                            value={formData.username}
                             placeholder='Username'
-                            onChange={(e) => setUserId(e.target.value)}
+                            onChange={handleInputChange}
                         />
                     </label>
                     <label className="input_container">
@@ -64,16 +92,16 @@ const Login = () => {
                         </span>
                         <input 
                             type="password"
-                            value={password}
+                            name="password"
+                            value={formData.password}
                             placeholder='Password'
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={handleInputChange}
                         />
                     </label>
                 </div>
                 <div className='login_page_button'>
                     <button onClick={handleLogin}>SIGN IN</button>
                 </div>
-                {loginStatus && <p>{loginStatus}</p>}
                 <h3>Forgot password?</h3>
                 <h3>Don't have an account yet?<Link to="/signup"><span>Sign up</span></Link></h3>
             </div>

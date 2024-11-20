@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Link,useParams } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 import fill from '../asset/File_dock_fill.png';
 import fill1 from '../asset/File_dock_fill (1).png';
 import logout from '../asset/Sign_in_squre_fill.png';
 import Header from "../Header";
+import Changeorders from "./Changeorders";
 
 const OrderStatus = () => {
     return (
         <div>
-            <h1>Order Status</h1>
+            <Changeorders />
         </div>
     );
 };
@@ -31,6 +32,7 @@ const PropertyStatus = () => {
 
 const Admin = () => {
     const [currentPage, setCurrentPage] = useState(1);
+    const navigate = useNavigate();
     const { id } = useParams();
     const showOrderStatus = () => {
         setCurrentPage(1);
@@ -40,6 +42,11 @@ const Admin = () => {
     };
     const showSettings = () => {
         setCurrentPage(3);
+    };
+    const handleClick = () => {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('username');
+        navigate('/');
     };
 
     return (
@@ -94,12 +101,10 @@ const Admin = () => {
                             }}
                         >Property Status</p>
                     </div>
-                    <Link to={"/"} style={{textDecoration: 'none'}}>
-                        <div className="to_details">
-                            <img src={logout} alt="logout" />
-                            <p style={{color: '#A4A4A4'}}>Logout</p>                        
-                        </div>
-                    </Link>
+                    <div className="to_details" onClick={handleClick}>
+                        <img src={logout} alt="logout" />
+                        <p style={{color: '#A4A4A4'}}>Logout</p>                        
+                    </div>
                 </div>            
                 <div className="portal_details">
                     {currentPage === 1 && <OrderStatus />}

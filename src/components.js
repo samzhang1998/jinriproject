@@ -4,50 +4,23 @@ import "./components.css";
 import fill from './asset/Pin_alt_fill.png';
 import { Autocomplete, useJsApiLoader } from "@react-google-maps/api";
 
-// search button selection
+// search button
 const Colorbutton1 = () => {
-    const [isGreenSelected, setIsGreenSelected] = useState(true);
-    const handleWhiteClick = () => { 
-        setIsGreenSelected(true); 
-    };
-    const handleGreenClick = () => {
-        setIsGreenSelected(false);
-    };
-
     return (
         <div className="select_button">
             <button
-                onClick={handleGreenClick}
                 style={{
-                    backgroundColor: isGreenSelected ? 'white' : '#008286',
-                    color: isGreenSelected ? 'black' : 'white',
+                    backgroundColor: '#008286',
+                    color: 'white',
                     borderRadius: '0.9rem 0.9rem 0px 0px',
                     width: '14rem',
                     height: '2.56rem',
                     border: 'none',
-                    cursor: 'pointer',
                     fontSize: '0.875rem',
                     fontFamily: 'Montserrat',
                 }}
             >
                 Building & Pest inspection
-            </button>
-
-            <button
-                onClick={handleWhiteClick}
-                style={{
-                    backgroundColor: isGreenSelected ? '#008286' : 'white',
-                    color: isGreenSelected ? 'white' : 'black',
-                    borderRadius: '0.9rem 0.9rem 0px 0px',
-                    width: '8rem',
-                    height: '2.56rem',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontSize: '0.875rem',
-                    fontFamily: 'Montserrat',
-                }}
-            >
-                Strata Report        
             </button>
         </div>
     );
@@ -167,13 +140,6 @@ const MobileSearchBox = () => {
     const navigate = useNavigate();
     const libraries = ['places'];
     const [bounds, setBounds] = useState(null);
-    const [isGreenSelected, setIsGreenSelected] = useState(true);
-    const handleWhiteClick = () => { 
-        setIsGreenSelected(true); 
-    };
-    const handleGreenClick = () => {
-        setIsGreenSelected(false);
-    };
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
@@ -240,36 +206,18 @@ const MobileSearchBox = () => {
             <div className='mobile_search_box'>
                 <div className="mobile_select_button">
                     <button
-                        onClick={handleGreenClick}
                         style={{
-                            backgroundColor: isGreenSelected ? 'white' : '#008286',
-                            color: isGreenSelected ? 'black' : 'white',
+                            backgroundColor: '#008286',
+                            color: 'white',
                             borderRadius: '0.9rem',
                             width: '14rem',
                             height: '2.56rem',
                             border: 'none',
-                            cursor: 'pointer',
                             fontSize: '0.875rem',
                             fontFamily: 'Montserrat',
                         }}
                     >
                         Building & Pest inspection
-                    </button>
-                    <button
-                        onClick={handleWhiteClick}
-                        style={{
-                            backgroundColor: isGreenSelected ? '#008286' : 'white',
-                            color: isGreenSelected ? 'white' : 'black',
-                            borderRadius: '0.9rem',
-                            width: '14rem',
-                            height: '2.56rem',
-                            border: 'none',
-                            cursor: 'pointer',
-                            fontSize: '0.875rem',
-                            fontFamily: 'Montserrat',
-                        }}
-                    >
-                        Strata Report        
                     </button>
                 </div>
                 <div className='mobile_type_area'>

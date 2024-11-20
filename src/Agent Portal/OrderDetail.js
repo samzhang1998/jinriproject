@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from "../Header";
 import { Link } from "react-router-dom";
 import "./OrderDetail.css";
@@ -11,7 +11,14 @@ import download from '../asset/Import_duotone_line.png';
 
 const OrderDetail = () => {
     const { orderId,orderStatus,id,type } = useParams();
+    const navigate = useNavigate();
     const [order, setOrder] = useState(null);
+
+    const handleClick = () => {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('username');
+        navigate('/');
+    };
 
     useEffect(() => {
         const mockOrderDetails = {
@@ -61,12 +68,10 @@ const OrderDetail = () => {
                             <p style={{color: '#A4A4A4'}}>Account Settings</p>
                         </div>
                     </Link>
-                    <Link to={"/"} style={{textDecoration: 'none'}}>
-                        <div className="to_details">
-                            <img src={logout} alt="logout" />
-                            <p style={{color: '#A4A4A4'}}>Logout</p>                        
-                        </div>
-                    </Link>
+                    <div className="to_details" onClick={handleClick}>
+                        <img src={logout} alt="logout" />
+                        <p style={{color: '#A4A4A4'}}>Logout</p>                        
+                    </div>
                 </div>
                 <div className="download_order">
                     <h1>Order #{order.id}</h1>

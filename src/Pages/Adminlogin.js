@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { authenticateUser } from '../API';
 import { Link, useNavigate } from 'react-router-dom';
+import { PostData } from '../API';
 import "./Login.css";
 import Header from '../Header';
 import back from '../asset/Expand_left.png';
@@ -8,18 +8,37 @@ import usericon from '../asset/usericon.png';
 import passwordicon from '../asset/passwordicon.png';
 
 const Adminlogin = () => {
-    const [userId, setUserId] = useState('');
-    const [password, setPassword] = useState('');
-    const userType = 'admin';
-    const [loginStatus, setLoginStatus] = useState('');
     const navigate = useNavigate();
+    const [formData,setFormData] = useState({
+        username: '',
+        password: '',
+        role: 'Admin',
+    });
+    const userId = formData.username
+    const userType = formData.role
 
-    const handleLogin = () => {
-        const isAuthenticated = authenticateUser(userId, password, userType);
-        if (isAuthenticated) {
-                navigate(`/admin/${userId}`);
-        } else {
-            setLoginStatus('Invalid user ID or password.');
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+    };
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        const dataToSend = {
+            ...formData,
+        };
+        try {
+            const response = await PostData('http://192.168.1.108:8080/login/', dataToSend);
+            console.log('Response from server:', response);
+            localStorage.setItem('isLoggedIn', true);
+            localStorage.setItem('username', userId);
+            localStorage.setItem('role', userType);
+            navigate(`/${userType}/${userId}`);
+        } catch (error) {
+            console.error('Error submitting form:', error);
         }
     };
 
@@ -44,9 +63,10 @@ const Adminlogin = () => {
                         </span>
                         <input 
                             type="text"
-                            value={userId}
+                            name="username"
+                            value={formData.username}
                             placeholder='Username'
-                            onChange={(e) => setUserId(e.target.value)}
+                            onChange={handleInputChange}
                         />
                     </label>
                     <label className="input_container">
@@ -55,16 +75,16 @@ const Adminlogin = () => {
                         </span>
                         <input 
                             type="password"
-                            value={password}
+                            name="password"
+                            value={formData.password}
                             placeholder='Password'
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={handleInputChange}
                         />
                     </label>
                 </div>
                 <div className='login_page_button'>
                     <button onClick={handleLogin}>SIGN IN</button>
                 </div>
-                {loginStatus && <p>{loginStatus}</p>}
             </div>
         </div>
     );

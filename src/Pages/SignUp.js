@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { PostData } from '../API';
+import { Link,useNavigate } from 'react-router-dom';
+import FetchFunc from '../API';
 import "./SignUp.css";
 import SignUpIcon from '../asset/signupicon.png';
 import Header from '../Header';
 import back from '../asset/Expand_left.png';
 
 const SignUp = () => {
-    const [userType, setUserType] = useState('Individual');
+    const [userType, setUserType] = useState('Customer')
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -15,10 +16,14 @@ const SignUp = () => {
         email: '',
         companyName: '',
         password: '',
-        confirmPassword: '',
-    });
+        role: 'customer'
+    }); 
     const handleUserTypeChange = (type) => {
         setUserType(type);
+        setFormData((prevData) => ({
+            ...prevData,
+            role: type,
+        }));
     };
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -31,11 +36,18 @@ const SignUp = () => {
         e.preventDefault();
         const dataToSend = {
             ...formData,
-            userType,
         };
         try {
-            const response = await PostData('/create-account', dataToSend);
+            const response = await FetchFunc(
+                '/signup/',
+                'POST',
+                JSON.stringify(dataToSend)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
             console.log('Response from server:', response);
+            navigate('/login');
         } catch (error) {
             console.error('Error submitting form:', error);
         }
@@ -56,8 +68,8 @@ const SignUp = () => {
                 <h1>Create Account</h1>
                 <div className='sign_up_selection'>
                     <h2
-                        onClick={() => handleUserTypeChange('Individual')}
-                        style={{ color: userType === 'Individual' ? "#008286" : "#A4A4A4" }}
+                        onClick={() => handleUserTypeChange('Customer')}
+                        style={{ color: userType === 'Customer' ? "#008286" : "#A4A4A4" }}
                     >Individual</h2>
                     <div className='user_divide'>l</div>
                     <h2
@@ -123,8 +135,6 @@ const SignUp = () => {
                             type="password"
                             name="confirmPassword"
                             placeholder="Confirm Password"
-                            value={formData.confirmPassword}
-                            onChange={handleInputChange}
                             required
                         />
                     </div>

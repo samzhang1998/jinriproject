@@ -9,6 +9,9 @@ const Header = () => {
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const username = localStorage.getItem('username');
+    const role = localStorage.getItem('role');
 
     return (
         <header className="header">
@@ -28,14 +31,25 @@ const Header = () => {
                 </ul>
             </nav>
             <div className="login">
-                <button>
-                    <Link to="/login">
-                        <div className='login_text'>
-                            <img src={userfill} alt='user' />
-                            LOGIN
-                        </div>
-                    </Link>
-                </button>
+                {!isLoggedIn ? (
+                    <button>
+                        <Link to="/login">
+                            <div className='login_text'>
+                                <img src={userfill} alt='user' />
+                                LOGIN
+                            </div>
+                        </Link>
+                    </button>
+                ) : (
+                    <button>
+                        <Link to={{ pathname: `/${role}/${username}`}}>
+                            <div className='login_text'>
+                                <img src={userfill} alt='user' />
+                                {username}
+                            </div>
+                        </Link>
+                    </button>
+                )}
             </div>
         </header>
     );

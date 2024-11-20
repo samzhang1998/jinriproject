@@ -2,7 +2,8 @@ import React, { useState,useEffect } from "react";
 import OrderOverview from "./OrderOverview";
 import Orders from "./Orders";
 import Header from '../Header';
-import { Link,useLocation,useParams } from "react-router-dom";
+import FetchFunc from "../API";
+import { useLocation,useParams,useNavigate } from "react-router-dom";
 import UserSettings from "./UserSettings";
 import "./AgentPortal.css";
 import add from '../asset/File_dock_add_fill.png';
@@ -42,7 +43,8 @@ const AgentPortal = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const { id } = useParams();
     const location = useLocation();
-    const isAgent = location.pathname.includes('/agent');
+    const navigate = useNavigate();
+    const isAgent = location.pathname.includes('/Partner');
     const showOrderOverview = () => {
         setCurrentPage(1);
     };
@@ -51,6 +53,33 @@ const AgentPortal = () => {
     };
     const showSettings = () => {
         setCurrentPage(3);
+    };  
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+            const role = localStorage.getItem('role');
+            const username = localStorage.getItem('username'); 
+            const body = {
+                username: username,
+                role: role,
+            };
+            const response = await FetchFunc(
+                '/logout/',
+                'POST',
+                JSON.stringify(body)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
+            localStorage.removeItem('role');
+            navigate("/");
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
     };
 
     useEffect(() => {
@@ -121,12 +150,10 @@ const AgentPortal = () => {
                             }}
                         >Account Setting</p>
                     </div>
-                    <Link to={"/"} style={{textDecoration: 'none'}}>
-                        <div className="to_details">
-                            <img src={logout} alt="logout" />
-                            <p style={{color: '#A4A4A4'}}>Logout</p>                        
-                        </div>
-                    </Link>
+                    <div className="to_details" onClick={handleLogout}>
+                        <img src={logout} alt="logout" />
+                        <p style={{color: '#A4A4A4'}}>Logout</p>                        
+                    </div>
                 </div>            
                 <div className="portal_details">
                     {currentPage === 1 && <OrderRequirement showOrders={showOrders}/>}

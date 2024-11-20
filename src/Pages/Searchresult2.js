@@ -1,7 +1,7 @@
 import React from 'react';
 import './Searchresult2.css';
 import Header from '../Header';
-import { Link,useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Findreport from './Findreport';
 import building from '../asset/图层 2 1.png';
 import ok from '../asset/Check_fill.png';
@@ -11,6 +11,13 @@ import outer from '../asset/pexels-tobiasbjorkli-2119713.png';
 const Searchresult2 = () => {
     const location = useLocation();
     const { query } = location.state || {};
+    const navigate = useNavigate();
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+    const handleSearch = () => {
+        navigate('/purchasereport', { state: { query } });
+    };
+
     return (
         <div className='search_result2'>
             <Header />
@@ -44,12 +51,16 @@ const Searchresult2 = () => {
                     <h5>Inspectors</h5>
                     <span>Max</span>
                     <div className="purchase_button2">
-                        <button><Link to="/contact">Book Inspector</Link></button>
+                        {isLoggedIn ? (<button onClick={handleSearch}>Book Inspector</button>) : (
+                            <button onClick={() => navigate('/login')}>Book Inspector</button>
+                        )}
                     </div>
                 </div>
             </div>
             <div className="mobile_purchase_button2">
-                <button><Link to="/contact">Book Inspector</Link></button>
+                {isLoggedIn ? (<button onClick={handleSearch}>Book Inspector</button>) : (
+                    <button onClick={() => navigate('/login')}>Book Inspector</button>
+                )}
             </div>
             <div className='check2'>
                 <div className='check_text2'>

@@ -1,0 +1,33 @@
+.edit_order {
+    color: #008286;
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 200%;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.change_modal_content form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.change_modal_content label {
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    align-items: center;
+    width: 80%;
+}
+
+.confirm_change {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 50%;
+}

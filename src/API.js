@@ -1,9 +1,23 @@
-const Backend_url = 'http://localhost:5000';
+const Backend_url = 'http://192.168.1.108:8080';
+
+export default async function FetchFunc(path, method, body) {
+  return await fetch(`${Backend_url}` + path, {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json',
+      // 'Authorization': 'Bearer ' + token,
+    },
+    credentials: "include",
+    body: body,
+  })
+    .catch(err => console.warn(err));
+}
 
 export const GetData = async () => {
   try {
     const response = await fetch(`${Backend_url}/data`, {
       method: 'GET',
+      credentials: "include",
       headers: {
         'Content-Type': 'application/json',
       },
@@ -19,12 +33,13 @@ export const GetData = async () => {
   }
 };
 
-export const PostData = async (payload) => {
+export const PostData = async (url,payload) => {
   try {
-    const response = await fetch(`${Backend_url}/data`, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        // 'Authorization': 'Bearer' + token,
       },
       body: JSON.stringify(payload),
     });
@@ -36,41 +51,5 @@ export const PostData = async (payload) => {
   } catch (error) {
     console.error('Error posting data:', error);
     throw error;
-  }
-};
-
-const customers = [
-  { id: 'customer1', password: 'password1' },
-  { id: 'customer2', password: 'password2' },
-];
-  
-const agents = [
-  { id: 'agent1', password: 'password1' },
-  { id: 'agent2', password: 'password2' },
-];
-
-const admin = [
-  { id: 'admin', password: '123456'},
-];
-
-export const authenticateUser = (userId, password, userType) => {
-  let users;
-
-  if (userType === 'customer') {
-    users = customers;
-  } else if (userType === 'agent') {
-    users = agents;
-  } else if (userType === 'admin') {
-    users = admin;
-  } else {
-    return false;
-  }
-
-  const user = users.find((user) => user.id === userId);
-
-  if (user && user.password === password) {
-    return true;
-  } else {
-    return false;
   }
 };

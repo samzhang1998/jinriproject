@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import FetchFunc from '../API';
 import YourDetailsForm from './Yourdetails';
 import Paymentdetail from './Paymentdetail';
 import Header from '../Header';
@@ -7,7 +8,8 @@ import './Purchasereport.css';
 import check from '../asset/Check_fill.png';
 import back from '../asset/Expand_left.png';
 
-const StepOne = ({ showStepTwo, updatePaymentSummary }) => {
+const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) => {
+    const isReportOk = localStorage.getItem('reportOK') === 'true';
     const [hasGrannyFlat, setHasGrannyFlat] = useState(false);
     const scrollToTop = () => {
         window.scrollTo({
@@ -19,9 +21,19 @@ const StepOne = ({ showStepTwo, updatePaymentSummary }) => {
         showStepTwo();
         scrollToTop();
     }
+    const handleUpdate = (e) => {
+        const { name, value, type, checked } = e.target;
+        if (type === 'checkbox') {
+            onUpdate(name, checked);
+        } else {
+            onUpdate(name, value);
+        }
+    };
     
     const handleGrannyFlatChange = (e) => {
         const isSelected = e.target.value === 'yes';
+        const { name, checked } = e.target;
+        onUpdate(name, checked);
         setHasGrannyFlat(isSelected);
         updatePaymentSummary({ hasGrannyFlat: isSelected, grannyFlatPrice: isSelected ? 99 : 0 }); 
     };
@@ -39,8 +51,8 @@ const StepOne = ({ showStepTwo, updatePaymentSummary }) => {
                                 <input 
                                     type="radio" 
                                     name="coolingOff" 
-                                    value="yes"
-                                    onChange={() => {}}
+                                    value={formPurchase.coolingPeriod}
+                                    onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
                                 /> Yes
                             </label>
@@ -49,7 +61,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary }) => {
                                     type="radio" 
                                     name="coolingOff" 
                                     value="no"
-                                    onChange={() => {}}
+                                    onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
                                 /> No
                             </label>
@@ -61,7 +73,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary }) => {
                                     type="radio" 
                                     name="auction" 
                                     value="yes"
-                                    onChange={() => {}}
+                                    onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
                                 /> Yes
                             </label>
@@ -70,25 +82,25 @@ const StepOne = ({ showStepTwo, updatePaymentSummary }) => {
                                     type="radio" 
                                     name="auction" 
                                     value="no"
-                                    onChange={() => {}}
+                                    onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
                                 /> No
                             </label>
                         </div>
-                        <label>How many bedrooms does the property have?</label>
-                        <div className="selection">
+                        {!isReportOk && <label>How many bedrooms does the property have?</label>}
+                        {!isReportOk && <div className="selection">
                             {[1, 2, 3, 4, 5, '6 or more'].map((bedroom) => (
                                 <label key={bedroom}>
                                     <input 
                                         type="radio" 
                                         name="bedrooms" 
                                         value={bedroom}
-                                        onChange={() => {}}
+                                        onChange={handleUpdate}
                                         style={{ width: '1.2rem' }}
                                     /> {bedroom}
                                 </label>
                             ))}
-                        </div>
+                        </div>}
                         <label>Does the property have an additional dwelling / granny flat?</label>
                         <div className="selection">
                             <label>
@@ -116,21 +128,25 @@ const StepOne = ({ showStepTwo, updatePaymentSummary }) => {
                     <label>Is there anything in particular you would like the inspector to look out for? (optional)</label>
                     <div>
                         <textarea
+                            name='notes'
+                            value={formPurchase.notes}
+                            onChange={handleUpdate}
                             style={{
-                                width: '100%',
+                                width: '90%',
                                 height: '6.25rem',
-                                padding: '0px',  
+                                padding: '5%',  
                                 textAlign: 'left',
                                 resize: 'none',
                                 marginTop: '3%',
                                 borderRadius: '1rem',
                                 border: '1px solid #DDD',
+                                outline: 'none',
                             }}
                         />
                     </div>
                 </div>
             </div>
-            <YourDetailsForm />
+            <YourDetailsForm formPurchase={formPurchase} onUpdate={onUpdate}/>
             <button 
                 onClick={handleClick}
                 className="tostep2"
@@ -139,7 +155,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary }) => {
     );
 };
 
-const StepTwo = ({ showStepThree, updatePaymentSummary }) => {
+const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, onUpdate }) => {
     const [getMortgageAdvice,setGetMortgageAdvice] = useState(false);
     const [consultExpert,setConsultExpert] = useState(false);
     const [getValueReport,setGetValueReport] = useState(false);
@@ -153,6 +169,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary }) => {
         showStepThree();
         scrollToTop();
     }
+    const role = localStorage.getItem('role');
 
     const handleMortgageAdviceChange = () => {
         const selected = !getMortgageAdvice;
@@ -236,10 +253,14 @@ const StepTwo = ({ showStepThree, updatePaymentSummary }) => {
                     </p>
                 </div>
             </div>
-            <button 
+            {role === 'Partner' && <button 
                 onClick={handleClick}
                 className='tostep3'
-            >NEXT</button>
+            >ORDER</button>}
+            {role === 'Customer' && <button
+                onClick={handleClick}
+                className='tostep3'
+            >NEXT</button>}
         </div>
     );
 };
@@ -293,6 +314,58 @@ const PaymentSummary = ({ summary }) => {
 };
 
 const PurchasePage = () => {
+    const [formPurchase,setFormPurchase] = useState({
+        propertyAddress: '',
+        coolingPeriod: false,
+        acution: false,
+        numberBedroom: '',
+        grannyFlat: false,
+        notes: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        mobile: '',
+        homeAddress: '',
+        secondContact: '',
+        secondFirstName: '',
+        secondLastName: '',
+        firstTimeBuyer: false,
+        agentFirstName: '',
+        agentLastName: '',
+        agentEmail: '',
+        agentMobile: '',
+        userId: '',
+        service: [],
+    });
+
+    const handleUpdate = (key, value) => {
+        setFormPurchase((prevData) => ({
+            ...prevData,
+            [key]: value,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const dataToSend = {
+            ...formPurchase,
+        };
+        try {
+            const response = await FetchFunc(
+                '/partner-order/create',
+                'POST',
+                JSON.stringify(dataToSend)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
+            navigate('/thankyou');
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    }
+
     const [currentStep, setCurrentStep] = useState(1);
     const navigate = useNavigate();
     const [paymentSummary, setPaymentSummary] = useState({
@@ -392,13 +465,34 @@ const PurchasePage = () => {
                 </div>
             </div>
             <div className='payment_steps'>
-                <div className='payment_choice'>                        
-                    {currentStep === 1 && <StepOne showStepTwo={showStepTwo} updatePaymentSummary={updatePaymentSummary} />}
-                    {currentStep === 2 && (
-                        <StepTwo showStepThree={showStepThree} showStepOne={showStepOne} updatePaymentSummary={updatePaymentSummary} />
-                    )}
-                    {currentStep === 3 && <StepThree showStepTwo={showStepTwo} showStepOne={showStepOne} updatePaymentSummary={updatePaymentSummary} />}
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <div className='payment_choice'>                        
+                        {currentStep === 1 && 
+                            <StepOne 
+                                showStepTwo={showStepTwo} 
+                                updatePaymentSummary={updatePaymentSummary}
+                                formPurchase={formPurchase} 
+                                onUpdate={handleUpdate}
+                            />
+                        }
+                        {currentStep === 2 && (
+                            <StepTwo showStepThree={showStepThree} 
+                                showStepOne={showStepOne} 
+                                updatePaymentSummary={updatePaymentSummary}
+                                formPurchase={formPurchase} 
+                                onUpdate={handleUpdate} 
+                            />
+                        )}
+                        {currentStep === 3 && 
+                            <StepThree showStepTwo={showStepTwo} 
+                                showStepOne={showStepOne}
+                                updatePaymentSummary={updatePaymentSummary}
+                                formPurchase={formPurchase} 
+                                onUpdate={handleUpdate} 
+                            />
+                        }
+                    </div>
+                </form>
                 <div className='payment_summary'>
                     <PaymentSummary summary={paymentSummary} />
                 </div>

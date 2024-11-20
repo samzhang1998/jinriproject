@@ -18,36 +18,7 @@ const Orders = ({ type,id }) => {
         };
         fetchOrders();
     }, []);
-    
-    // useEffect(() => {
-    //     const mockOrders = [
-    //         {
-    //             id: '1598723',
-    //             date: '09-04-2023',
-    //             address: 'Unit654/311 high Street, Kingsford NSW 2037',
-    //             status: 'Processing'
-    //         },
-    //         {
-    //             id: '1598724',
-    //             date: '09-04-2023',
-    //             address: 'Unit654/311 high Street, Kingsford NSW 2037',
-    //             status: 'Completed'
-    //         },
-    //         {
-    //             id: '16124256',
-    //             date: '09-04-2023',
-    //             address: '45 Hills street, Marricville NSW 2301',
-    //             status: 'Completed'
-    //         },
-    //         {
-    //             id: '16124257',
-    //             date: '09-04-2023',
-    //             address: '45 Hills street, Marricville NSW 2301',
-    //             status: 'Processing'
-    //         },
-    //     ];
-    //     setOrders(mockOrders);
-    // }, []);
+
     const filteredOrders = orders.filter(order => {
         if (filter === 'all') return true;
         return order.status.toLowerCase() === filter;
@@ -79,7 +50,7 @@ const Orders = ({ type,id }) => {
                             <h1>Order #{order.id}</h1>
                             <h2>{order.address}</h2>
                         </div>
-                        <Link to={{ pathname: `/${type}/${id}/orders/${order.id}/${order.status}` }} className="view_order">
+                        <Link to={{ pathname: `/${type}/${id}/orders/${order.id}/${order.status}` }} className="view_order1">
                             View order
                         </Link>
                     </div>

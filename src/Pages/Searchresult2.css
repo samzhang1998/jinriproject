@@ -186,9 +186,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.purchase_button2 a {
     color: #FFF;
     font-family: Montserrat;
     font-size: 1.125rem;
