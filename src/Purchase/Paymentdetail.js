@@ -3,9 +3,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Paymentdetail.css';
 import Policy from "./Policy";
-import { PostData } from "../API";
+import FetchFunc from "../API";
 
-const Paymentdetail = () => {
+const Paymentdetail = ({ formPurchase, setFormPurchase }) => {
     const [paymentMethod, setPaymentMethod] = useState('creditCard');
     const [isPaypalSelected, setIsPaypalSelected] = useState(false);
     const navigate = useNavigate();
@@ -23,8 +23,10 @@ const Paymentdetail = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("Payload being sent:", JSON.stringify(formPurchase, null, 2));
         try {
-            const response = await PostData('/card', formData);
+            console.log(formPurchase)
+            const response = await FetchFunc('/customer-order/create', 'POST', JSON.stringify(formPurchase));
             console.log('Payment Response:', response);
             navigate('/thankyou');
         } catch (error) {

@@ -1,0 +1,144 @@
+.property_modal {
+    width: 30rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 3%;
+    background: #fff;
+    border: none;
+    border-radius: 1rem;
+}
+
+.property_modal form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    overflow-y: scroll;
+}
+
+.property_modal p {
+    margin: 2%;
+    margin-left: 0;
+}
+
+.property_modal input {
+    width: 90%;
+    padding-left: 5%;
+    height: 2.8rem;
+    border-radius: 0.625rem;
+    border: 1px solid #DDD;
+}
+
+.change_property_title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.change_property_title h1 {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    margin-top: 0;
+}
+
+.change_property_title button {
+    width: 10rem;
+    height: 2.5rem;
+    background: #008286;
+    border: none;
+    border-radius: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.change_property_title button:hover {
+    background-color: #004d40;
+}
+
+.admin_property {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3%;
+}
+
+.admin_property h2 {
+    color: #030303;
+    font-family: Montserrat;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.admin_property_detail {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin_property_detail p {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    margin-bottom: 0;
+}
+
+.admin_property_detail span {
+    text-decoration: underline;
+    color: #008286;
+    cursor: pointer;
+}
+
+.admin_property_detail span:hover {
+    color: blueviolet;
+}
+
+.upload_report {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3%;
+}
+
+.upload_report p {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    margin-bottom: 0;
+}
+
+.upload_report span {
+    text-decoration: underline;
+    color: #008286;
+    cursor: pointer;
+}
+
+.upload_report span:hover {
+    color: blueviolet;
+}

@@ -39,9 +39,11 @@ const Orders = ({ type,id }) => {
         fetchOrders();
     }, [id]);
 
+    console.log(orders);
+
     const filteredOrders = orders.filter(order => {
         if (filter === 'all') return true;
-        return order.status.toLowerCase() === filter;
+        return order.currentStatus.toLowerCase() === filter;
     });
 
     return (
@@ -64,13 +66,13 @@ const Orders = ({ type,id }) => {
             </div>
             <div className="order_list">
                 {Array.isArray(filteredOrders) && filteredOrders.map((order) => (
-                    <div key={order.id} className="order_item">                        
+                    <div key={order.orderId} className="order_item">                        
                         <div className="order_detail">
-                            <p>{order.date}</p>
-                            <h1>Order #{order.id}</h1>
-                            <h2>{order.address}</h2>
+                            <p>{order.createTime}</p>
+                            <h1>Order #{order.orderId}</h1>
+                            <h2>{order.info}</h2>
                         </div>
-                        <Link to={{ pathname: `/${type}/${id}/orders/${order.id}/${order.status}` }} className="view_order1">
+                        <Link to={{ pathname: `/${type}/${id}/orders/${order.orderId}/${order.currentStatus}` }} className="view_order1">
                             View order
                         </Link>
                     </div>

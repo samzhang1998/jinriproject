@@ -30,8 +30,30 @@ const Colorbutton1 = () => {
 export default Colorbutton1;
 
 // search box
+const parseAddress = (address) => {
+    const addressRegex = /^(\d+[A-Za-z]?)\s+(.+?),\s+(.+?)\s+(NSW|VIC|QLD|WA|SA|TAS|NT|ACT)\s+(\d{4})(?:,\s*(.+))$/;
+    const match = address.match(addressRegex);
+
+    if (!match) {
+        console.error("Invalid address format: " + address);
+        return null;
+    }
+
+    const [_, streetNumber, streetName, suburb, state, postcode] = match;
+    
+    return {
+        address,
+        streetName,
+        streetNumber,
+        suburb,
+        state,
+        postcode,
+    };
+};
+
 const SearchBox = () => {
     const [formData, setFormData] = useState({
+        propertyId: '',
         address:'',
         type: '',
         streetNumber: '',
@@ -65,6 +87,13 @@ const SearchBox = () => {
             }
         );
     }, []);
+
+    React.useEffect(() => {
+        setFormData((prevData) => ({
+            ...prevData,
+            address: query,
+        }));
+    }, [query]);
 
     const onLoad = (autocompleteInstance) => {
         setAutocomplete(autocompleteInstance);
@@ -101,7 +130,9 @@ const SearchBox = () => {
         e.preventDefault();
         const dataToSend = {
             ...formData,
+            ...parseAddress(query),
         };
+        console.log(dataToSend);
         try {
             console.log('Data send:', dataToSend);
             const response = await FetchFunc(
@@ -109,14 +140,16 @@ const SearchBox = () => {
                 'POST',
                 JSON.stringify(dataToSend)
             );
-            if (!response.ok) {
+            if (response.status === 200) {
+                console.log('Response from server:', response);
+                navigate(`/report`, { state: { query }});
+            } else if (response.status === 404) {
+                navigate(`/bookinspector`, { state: { query }});
+            } else {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            console.log('Response from server:', response);
-            navigate(`/report`, { state: { query }});
         } catch (error) {
             console.error('Failed to submit address:', error);
-            navigate(`/bookinspector`, { state: { query }});
         }
     };
 
@@ -150,9 +183,17 @@ const SearchBox = () => {
 export { SearchBox };
 
 const MobileSearchBox = () => {
-    const address = [
-        '36-38 Walker Street, Rhodes NSW 2138',
-    ];
+    const [formData, setFormData] = useState({
+        propertyId: '',
+        address:'',
+        type: '',
+        streetNumber: '',
+        streetName: '',
+        suburb: '',
+        state: '',
+        roomNumber: 2,
+        postcode: ''
+    });
 
     const [query, setQuery] = useState('');
     const [autocomplete, setAutocomplete] = useState(null);
@@ -200,23 +241,39 @@ const MobileSearchBox = () => {
     if (!isLoaded) {
         return <div>Loading...</div>;
     }
-
+    
     const handleInputChange = (e) => {
         setQuery(e.target.value);
+        setFormData((prevData) => ({
+            ...prevData,
+            address: query,
+        }));
     };
-    const handleSearch = () => {
-        if (query.trim() === '') {
-            alert('Please enter a search term.');
-            return;
-        }
-        const results = address.filter((item) =>
-            item.toLowerCase().includes(query.toLowerCase())
-        );
-        
-        if (results.length > 0) {
-            navigate('/report', { state: { query } });
-        } else {
-            navigate('/bookinspector', { state: { query } });
+
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        const dataToSend = {
+            ...formData,
+            ...parseAddress(query),
+        };
+        console.log(dataToSend);
+        try {
+            console.log('Data send:', dataToSend);
+            const response = await FetchFunc(
+                '/search/',
+                'POST',
+                JSON.stringify(dataToSend)
+            );
+            if (response.status === 200) {
+                console.log('Response from server:', response);
+                navigate(`/report`, { state: { query }});
+            } else if (response.status === 404) {
+                navigate(`/bookinspector`, { state: { query }});
+            } else {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Failed to submit address:', error);
         }
     };
 

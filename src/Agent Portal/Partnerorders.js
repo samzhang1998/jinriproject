@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from "react";
-import "./Changeorders.css";
-import { GetData, PostData } from "../API";
+import React, {useState, useEffect} from "react";
+import FetchFunc from "../API";
 
-const Changeorders = () => {
+const Partnerorders = () => {
     const [orders, setOrders] = useState([]);
     const [filter, setFilter] = useState('all');
-    const [showModal, setShowModal] = useState(false);
-    const [formData, setFormData] = useState({
-        address: '',
-        status: '',
-    });
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const data = await GetData();
+                const response = await FetchFunc(
+                    `/admin/allPartnerOrders`,
+                    'GET',
+                );
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Response from server:', response);
+                const data = await response.json();
+                console.log('data response:', data);
                 setOrders(data);
-                setFormData({ address: data.address, status: data.status });
             } catch (error) {
                 console.error('Error fetching orders:', error);
             }
@@ -28,37 +30,6 @@ const Changeorders = () => {
         if (filter === 'all') return true;
         return order.status.toLowerCase() === filter;
     });
-
-    const handleOpenModal = () => {
-        setShowModal(true);
-    };
-    
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await PostData({ ...formData, id: orders.id });
-            setOrders({ ...orders, ...formData });
-            setShowModal(false);
-            alert('Data updated successfully');
-        } catch (error) {
-            console.error('Error updating data:', error);
-            alert('Failed to update data');
-        }
-    };
-
-    if (!orders) {
-        return <p>Loading...</p>;
-    }
-
     return (
         <div className="orders">
             <h1>Orders</h1>
@@ -85,13 +56,13 @@ const Changeorders = () => {
                             <h1>Order #{order.id}</h1>
                             <h2>{order.address}</h2>
                         </div>
-                        <div onClick={handleOpenModal} className="edit_order">
+                        <div className="edit_order">
                             Edit order
                         </div>
                     </div>
                 ))}
             </div>
-            {showModal && (
+            {/* {showModal && (
                 <div className="change_modal">
                     <div className="change_modal_content">
                         <form onSubmit={handleSubmit}>
@@ -126,9 +97,9 @@ const Changeorders = () => {
                         </form>
                     </div>
                 </div>
-            )}
+            )} */}
         </div>
     );
 };
 
-export default Changeorders;
+export default Partnerorders;

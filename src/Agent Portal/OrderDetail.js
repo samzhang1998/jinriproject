@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from "../Header";
 import { Link } from "react-router-dom";
+import FetchFunc from "../API";
 import "./OrderDetail.css";
 import add1 from '../asset/File_dock_add_fill (1).png';
 import fill1 from '../asset/File_dock_fill (1).png';
@@ -14,29 +15,50 @@ const OrderDetail = () => {
     const navigate = useNavigate();
     const [order, setOrder] = useState(null);
 
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const response = await FetchFunc(
+                    `/partner-order/detail?orderId=${orderId}`,
+                    'POST',
+                );
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Response from server:', response);
+                const data = await response.json();
+                console.log('data response:', data);
+                setOrder(data);
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+            }
+        };
+        fetchOrders();
+    }, [orderId]);
+
     const handleClick = () => {
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('username');
         navigate('/');
     };
 
-    useEffect(() => {
-        const mockOrderDetails = {
-            id: orderId,
-            date: '09 Sep 2024, Friday',
-            lastupdatedate: '12 Sep, Tuesday',
-            address: '45 Hills street, Marricville NSW 2301',
-            status: orderStatus,
-            trackings: [
-                { datehistory: '09 Sep, Monday', trackhistory: 'Order Received', completed: true },
-                { datehistory: '10 Sep, Tuesday', trackhistory: 'Inspector Assigned', completed: false },
-                { datehistory: '10 Sep, Tuesday', trackhistory: 'Inspection Scheduled', completed: false },
-                { datehistory: '11 Sep, Wednesday', trackhistory: 'Inspection in process', completed: false },
-                { datehistory: '12 Sep, Thursday', trackhistory: 'Inspection completed', completed: false },
-            ]
-        };
-        setOrder(mockOrderDetails);
-    }, [orderId,orderStatus]);
+    // useEffect(() => {
+    //     const mockOrderDetails = {
+    //         id: orderId,
+    //         date: '09 Sep 2024, Friday',
+    //         lastupdatedate: '12 Sep, Tuesday',
+    //         address: '45 Hills street, Marricville NSW 2301',
+    //         status: orderStatus,
+    //         trackings: [
+    //             { datehistory: '09 Sep, Monday', trackhistory: 'Order Received', completed: true },
+    //             { datehistory: '10 Sep, Tuesday', trackhistory: 'Inspector Assigned', completed: false },
+    //             { datehistory: '10 Sep, Tuesday', trackhistory: 'Inspection Scheduled', completed: false },
+    //             { datehistory: '11 Sep, Wednesday', trackhistory: 'Inspection in process', completed: false },
+    //             { datehistory: '12 Sep, Thursday', trackhistory: 'Inspection completed', completed: false },
+    //         ]
+    //     };
+    //     setOrder(mockOrderDetails);
+    // }, [orderId,orderStatus]);
 
     if (!order) {
         return <p>Loading...</p>;

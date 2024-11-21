@@ -42,12 +42,12 @@ export const PostData = async (url,payload) => {
       credentials: 'include',
     });
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      console.log(response.text());
     }
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error posting data:', error);
+    console.error('Error posting data:', error.message);
     throw error;
   }
 };

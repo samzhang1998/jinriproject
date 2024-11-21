@@ -76,6 +76,9 @@ const AgentPortal = () => {
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('username');
             localStorage.removeItem('role');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('email');
+            localStorage.removeItem('mobile');
             navigate("/");
         } catch (error) {
             console.error('Error submitting form:', error);

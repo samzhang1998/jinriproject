@@ -4,21 +4,22 @@ import fill from '../asset/File_dock_fill.png';
 import fill1 from '../asset/File_dock_fill (1).png';
 import logout from '../asset/Sign_in_squre_fill.png';
 import Header from "../Header";
-import Changeorders from "./Changeorders";
+import Customerorders from "./Customerorders";
+import Partnerorders from "./Partnerorders";
 import Changeproperty from "./Changeproperty";
 
-const OrderStatus = () => {
+const Customerorder = () => {
     return (
         <div>
-            <Changeorders />
+            <Customerorders />
         </div>
     );
 };
 
-const CustomerStatus = () => {
+const Partnerorder = () => {
     return (
         <div>
-            <h1>Customers</h1>
+            <Partnerorders />
         </div>
     );
 };
@@ -35,10 +36,10 @@ const Admin = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
     const { id } = useParams();
-    const showOrderStatus = () => {
+    const showCustomer = () => {
         setCurrentPage(1);
     };
-    const showCustomer = () => {
+    const showPartner = () => {
         setCurrentPage(2);
     };
     const showSettings = () => {
@@ -58,7 +59,7 @@ const Admin = () => {
                 <div className="portal_selection">
                     <h1>Welcome {id}</h1>
                     <div 
-                        onClick={showOrderStatus} 
+                        onClick={showCustomer} 
                         className="to_details"
                         style={{
                             background: currentPage === 1 ? "#F4F4F4" : "#FFF",
@@ -70,10 +71,10 @@ const Admin = () => {
                             style={{
                                 color: currentPage === 1 ? "#008286" : "#A4A4A4",
                             }}
-                        >Order Status</p>
+                        >Customer Orders</p>
                     </div>
                     <div 
-                        onClick={showCustomer} 
+                        onClick={showPartner} 
                         className="to_details"
                         style={{
                             background: currentPage === 2 ? "#F4F4F4" : "#FFF",
@@ -85,7 +86,7 @@ const Admin = () => {
                             style={{
                                 color: currentPage === 2 ? "#008286" : "#A4A4A4",
                             }}
-                        >Customer Status</p>
+                        >Partner Orders</p>
                     </div>
                     <div 
                         onClick={showSettings} 
@@ -108,8 +109,8 @@ const Admin = () => {
                     </div>
                 </div>            
                 <div className="portal_details">
-                    {currentPage === 1 && <OrderStatus />}
-                    {currentPage === 2 && <CustomerStatus />}
+                    {currentPage === 1 && <Customerorder />}
+                    {currentPage === 2 && <Partnerorder />}
                     {currentPage === 3 && <PropertyStatus />}
                 </div>
             </div>

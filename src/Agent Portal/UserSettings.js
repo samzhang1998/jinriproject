@@ -3,13 +3,14 @@ import "./UserSettings.css";
 import FetchFunc from "../API";
 import close from "../asset/Close_round.png";
 
-const EmailModal = ({ closeModal, setBottomEmail }) => {
+const EmailModal = ({ closeModal }) => {
     const [email, setEmail] = useState('');
     const handleChange = (e) => {
         setEmail(e.target.value);
     };
     const role = localStorage.getItem('role');
     const id = localStorage.getItem('userId');
+    
     const userData = {
         email: email,
         userId: id,
@@ -33,7 +34,7 @@ const EmailModal = ({ closeModal, setBottomEmail }) => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
-            setBottomEmail(email);
+            localStorage.setItem('email', email);
             closeModal();
         } catch (error) {
             console.error('Failed to update email:', error);
@@ -51,7 +52,7 @@ const EmailModal = ({ closeModal, setBottomEmail }) => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
-            setBottomEmail(email);
+            localStorage.setItem('email', email);
             closeModal();
         } catch (error) {
             console.error('Failed to update email:', error);
@@ -114,7 +115,7 @@ const MobileModal = ({ closeModal, setBottomMobile }) => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
-            setBottomMobile(mobile);
+            localStorage.setItem('mobile', mobile);
             closeModal();
         } catch (error) {
             console.error('Failed to update mobile:', error);
@@ -132,7 +133,7 @@ const MobileModal = ({ closeModal, setBottomMobile }) => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
-            setBottomMobile(mobile);
+            localStorage.setItem('mobile', mobile);
             closeModal();
         } catch (error) {
             console.error('Failed to update mobile:', error);
@@ -193,7 +194,7 @@ const PasswordModal = ({ closeModal }) => {
                 JSON.stringify(userData)
             );
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                console.log(response.text());
             }
             console.log('Response from server:', response);
             closeModal();
@@ -211,7 +212,7 @@ const PasswordModal = ({ closeModal }) => {
                 JSON.stringify(userData)
             );
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                console.log(response.text());
             }
             console.log('Response from server:', response);
             closeModal();
@@ -256,10 +257,10 @@ const PasswordModal = ({ closeModal }) => {
 
 const UserSettings = () => {
     const [showEmailModal, setShowEmailModal] = useState(false);
-    const [bottomEmail, setBottomEmail] = useState('');
     const [showMobileModal, setShowMobileModal] = useState(false);
-    const [bottomMobile, setBottomMobile] = useState('');
     const [showPasswordModal, setShowPasswordModal] = useState(false);
+    const useremail = localStorage.getItem('email');
+    const usermobile = localStorage.getItem('mobile');
 
     return (
         <div className="change_settings">
@@ -268,7 +269,7 @@ const UserSettings = () => {
             <div className="change">
                 <div>
                     <h1>Email Address</h1>
-                    <p>Your email address is {bottomEmail}</p>
+                    <p>Your email address is {useremail}</p>
                 </div>
                 <button 
                     className="change1"
@@ -277,7 +278,6 @@ const UserSettings = () => {
                 {showEmailModal && (
                     <EmailModal
                         closeModal={() => setShowEmailModal(false)}
-                        setBottomEmail={setBottomEmail}
                     />
                 )}
             </div>
@@ -285,7 +285,7 @@ const UserSettings = () => {
             <div className="change">
                 <div>
                     <h1>Mobile Number</h1>
-                    <p>Your mobile number is {bottomMobile}</p>
+                    <p>Your mobile number is {usermobile}</p>
                 </div>
                 <button 
                     className="change1"
@@ -294,7 +294,6 @@ const UserSettings = () => {
                 {showMobileModal && (
                     <MobileModal
                         closeModal={() => setShowMobileModal(false)}
-                        setBottomMobile={setBottomMobile}
                     />
                 )}
             </div>

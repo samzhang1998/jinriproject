@@ -7,6 +7,7 @@ import Header from '../Header';
 import './Purchasereport.css';
 import check from '../asset/Check_fill.png';
 import back from '../asset/Expand_left.png';
+import { text } from 'express';
 
 const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) => {
     const isReportOk = localStorage.getItem('reportOK') === 'true';
@@ -23,12 +24,16 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
     }
     const handleUpdate = (e) => {
         const { name, value, type, checked } = e.target;
+        console.log("check is " + checked + " value is " + value + " type " + type)
         if (type === 'checkbox') {
             onUpdate(name, checked);
+        } else if (name === 'coolingPeriod' || name === 'auction') {
+            onUpdate(name, value === 'true');
         } else {
             onUpdate(name, value);
         }
     };
+    console.log(formPurchase);
     
     const handleGrannyFlatChange = (e) => {
         const isSelected = e.target.value === 'yes';
@@ -49,8 +54,9 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                         <div className="selection">
                             <label>
                                 <input 
-                                    type="radio"  
-                                    value={formPurchase.coolingPeriod}
+                                    type="radio"
+                                    name="coolingPeriod"  
+                                    value="true"
                                     onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
                                 /> Yes
@@ -58,7 +64,8 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                             <label>
                                 <input 
                                     type="radio"  
-                                    value={formPurchase.coolingPeriod}
+                                    name='coolingPeriod'
+                                    value="false"
                                     onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
                                 /> No
@@ -70,7 +77,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                                 <input 
                                     type="radio" 
                                     name="auction" 
-                                    value="yes"
+                                    value="true"
                                     onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
                                 /> Yes
@@ -79,7 +86,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                                 <input 
                                     type="radio" 
                                     name="auction" 
-                                    value="no"
+                                    value="false"
                                     onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
                                 /> No
@@ -150,11 +157,8 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
     );
 };
 
-const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, onUpdate }) => {
-    // const [getMortgageAdvice,setGetMortgageAdvice] = useState(false);
-    // const [consultExpert,setConsultExpert] = useState(false);
-    // const [getValueReport,setGetValueReport] = useState(false);
-    const [getService,setGetService] = useState(false);
+const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPurchase }) => {
+    const [selectedServices,setSelectedServices] = useState([]);
     const [services,setServices] = useState([]);
 
     useEffect(() => {
@@ -162,7 +166,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, onUpdate }
             try {
                 const response = await FetchFunc(
                     '/service/all',
-                    'Get',
+                    'GET',
                 );
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -190,27 +194,53 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, onUpdate }
     };
     const role = localStorage.getItem('role');
 
-    const handleGetService = () => {
-        const selected = !getService;
-        setGetService(selected);
-        updatePaymentSummary({ getService: selected, servicePrice: selected ? 0 : 0 });
-    }
+    const calculateTotalPrice = (services) => {
+        return services.reduce((sum, service) => sum + (service.price || 0), 0);
+    };
 
-    // const handleMortgageAdviceChange = () => {
-    //     const selected = !getMortgageAdvice;
-    //     setGetMortgageAdvice(selected);
-    //     updatePaymentSummary({ getMortgageAdvice: selected, mortgageAdvicePrice: selected ? 0 : 0 });
-    // };
-    // const handleConsultExpert = () => {
-    //     const selected = !consultExpert;
-    //     setConsultExpert(selected);
-    //     updatePaymentSummary({ consultExpert: selected, consultExpertPrice: selected ? 0 : 0 });
-    // };
-    // const handleValueReportChange = () => {
-    //     const selected = !getValueReport;
-    //     setGetValueReport(selected);
-    //     updatePaymentSummary({ getValueReport: selected, valueReportPrice: selected ? 0 : 0 });
-    // };
+    const handleGetService = (id, serviceData) => {
+        setSelectedServices((prevSelectedServices) => {
+            // let updatedServices;
+            // if (prevSelectedServices.includes(id)) {
+            //     updatedServices = prevSelectedServices.filter((serviceId) => serviceId !== id);
+            // } else {
+            //     updatedServices = [...prevSelectedServices, id];
+            // }            
+            
+            let updatedServices;
+            if (prevSelectedServices.some((service) => service.serviceId === id)) {
+                // Remove the service if it already exists
+                updatedServices = prevSelectedServices.filter((service) => service.serviceId !== id);
+            } else {
+                // Add the full service object if it doesn't exist
+                const newService = serviceData.find((service) => service.serviceId === id);
+                if (newService) {
+                    updatedServices = [...prevSelectedServices, newService];
+                } else {
+                    updatedServices = prevSelectedServices; // No change if service not found
+                }
+            }
+            
+            const updatedServiceIds = updatedServices.map((service) => service.serviceId);
+
+            setFormPurchase((prevFormPurchase) => ({
+                ...prevFormPurchase,
+                services: updatedServiceIds, // Update service with IDs only
+            }));            
+            
+            const totalPrice = calculateTotalPrice(updatedServices); // Calculate the total price
+            updatePaymentSummary({
+                getService: updatedServices, // Update the list of services
+                servicePrice: totalPrice, // Update the total price
+            });            
+            
+            return updatedServices;
+            
+        });
+        // updatePaymentSummary({ getService: selected, servicePrice: selected ? 0 : 0 });
+    };
+    console.log(formPurchase)
+
     return (
         <div>
             <div className="service_details">
@@ -219,10 +249,10 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, onUpdate }
                 {Array.isArray(services) && services.map((service) => (
                     <div 
                         key={service.serviceId}
-                        onClick={() => handleGetService()}
+                        onClick={() => handleGetService(service.serviceId, services)}
                         style={{
-                            background: getService ? 'rgba(0, 130, 134, 0.17)' :  '#F9F8F8',
-                            border: getService ? '1px solid #008286' :  'none',
+                            background: selectedServices.includes(service) ? 'rgba(0, 130, 134, 0.17)' :  '#F9F8F8',
+                            border: selectedServices.includes(service) ? '1px solid #008286' :  'none',
                             borderRadius: '1rem',
                             width: '95%',
                             marginBottom: '5%',
@@ -231,70 +261,9 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, onUpdate }
                         }}
                     >
                         <h1>{service.title}</h1>
-                        <p>{service.descaiption}</p>
+                        <p>{service.description}</p>
                     </div>
                 ))}
-                {/* <div
-                    onClick={() => handleMortgageAdviceChange()}
-                    style={{
-                        background: getMortgageAdvice ? 'rgba(0, 130, 134, 0.17)' :  '#F9F8F8',
-                        border: getMortgageAdvice ? '1px solid #008286' :  'none',
-                        borderRadius: '1rem',
-                        width: '95%',
-                        marginBottom: '5%',
-                        paddingLeft: '5%',
-                        cursor: 'pointer',
-                    }}
-                >
-                    <h2>Get advice about your mortgage</h2>
-                    <p>
-                        Sei Finance is your lifetime finance partner. We do more than securing 
-                        a loan, we <br /> believe in helping you achieve your financial goals.
-                    </p>
-                </div>
-                <div
-                    onClick={handleConsultExpert}
-                    style={{
-                        background: consultExpert ? 'rgba(0, 130, 134, 0.17)' : '#F9F8F8',
-                        border: consultExpert ? '1px solid #008286' : 'none',
-                        borderRadius: '1rem',
-                        width: '95%',
-                        marginBottom: '5%',
-                        paddingLeft: '5%',
-                        cursor: 'pointer',
-                    }}
-                >
-                    <h2>Consult with a negotiation expert</h2>
-                    <p>
-                        A independent valuation from Opteon will give you confidence in your 
-                        property <br /> decision making. Our qualified local market experts will 
-                        assess the true market <br /> value & highlight any risks associated with your 
-                        dream home or investment <br /> property. Desktop assessments start from as 
-                        little as $170.
-                    </p>
-                </div>
-                <div
-                   onClick={handleValueReportChange}
-                   style={{
-                       background: getValueReport ? 'rgba(0, 130, 134, 0.17)' : '#F9F8F8',
-                       border: getValueReport ? '1px solid #008286' :  'none',
-                       borderRadius: '1rem',
-                       width: '95%',
-                       marginBottom: '5%',
-                       paddingLeft: '5%',
-                       cursor: 'pointer',
-                   }} 
-                >
-                    <h2>Get a valuation report for your property</h2>
-                    <p>
-                        A negotiation expert can help you get a property at the right price. If 
-                        you aren't <br /> experienced with dealing with real estate agents and 
-                        negotiating large financial <br /> transactions than you may want to have 
-                        a free no obligation call with a negotiation <br /> expert to see if that 
-                        is what you need. These experts buy properties from agents <br /> regularly 
-                        and the best part is there is no fee if they're not successful for you!
-                    </p>
-                </div> */}
             </div>
             {role === 'Partner' && <button 
                 type='submit'
@@ -308,10 +277,10 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, onUpdate }
     );
 };
 
-const StepThree = () => {
+const StepThree = ({ formPurchase }) => {
     return (
         <div>
-            <Paymentdetail />
+            <Paymentdetail formPurchase={formPurchase} />
         </div>
     );
 };
@@ -319,7 +288,7 @@ const StepThree = () => {
 const PaymentSummary = ({ summary }) => {
     const location = useLocation();
     const { query } = location.state || {};
-    const totalAmount = 199 + (summary.hasGrannyFlat ? 99 : 0);
+    const totalAmount = 199 + (summary.hasGrannyFlat ? 99 : 0) + summary.servicePrice;
 
     return (
         <div className="order_summary">
@@ -340,15 +309,13 @@ const PaymentSummary = ({ summary }) => {
             </div>
             <div>
                 <div className="addition">Additional Services</div>
-                {summary.getMortgageAdvice && (
-                    <div className="calculation2"><p>Mortgage Advice</p><span>Free</span></div>
-                )}
-                {summary.consultExpert && (
-                    <div className="calculation2"><p>Expert Consultation</p><span>Free</span></div>
-                )}
-                {summary.getValueReport && (
-                    <div className="calculation2"><p>Value Report</p><span>Free</span></div>
-                )}
+                {summary.getService && summary.getService.map(item => (
+                    //  <div className="calculation2"><p>{item.title}</p><span>{item.price}</span></div>
+                    <div className="calculation2" key={item.serviceId}>
+                        <p>{item.title}</p>
+                        <span>${item.price}</span>
+                    </div>
+                ))}
             </div>
             <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
             <div className="total"><h4>Total <p>(GST Inc)</p>:</h4><h5>${totalAmount}</h5></div>
@@ -365,24 +332,24 @@ const PurchasePage = () => {
         propertyAddress: query,
         coolingPeriod: false,
         acution: false,
-        numberBedroom: '',
+        numberBedroom: null,
         grannyFlat: false,
-        notes: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        mobile: '',
-        homeAddress: '',
-        secondContact: '',
-        secondFirstName: '',
-        secondLastName: '',
+        notes: null,
+        firstName: null,
+        lastName: null,
+        email: null,
+        mobile: null,
+        homeAddress: null,
+        secondContact: null,
+        secondFirstName: null,
+        secondLastName: null,
         firstTimeBuyer: false,
-        agentFirstName: '',
-        agentLastName: '',
-        agentEmail: '',
-        agentMobile: '',
+        agentFirstName: null,
+        agentLastName: null,
+        agentEmail: null,
+        agentMobile: null,
         userId: id,
-        service: [''],
+        service: [],
     });
 
     const handleUpdate = (key, value) => {
@@ -405,7 +372,7 @@ const PurchasePage = () => {
                 JSON.stringify(dataToSend)
             );
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                console.log(response.text());
             }
             console.log('Response from server:', response);
             navigate('/thankyou');
@@ -441,14 +408,8 @@ const PurchasePage = () => {
     const [paymentSummary, setPaymentSummary] = useState({
         hasGrannyFlat: false,
         grannyFlatPrice: 0,
-        getService: false,
+        getService: [],
         servicePrice: 0,
-        // getMortgageAdvice: false,
-        // mortgageAdvicePrice: 0,
-        // consultExpert: false,
-        // consultExpertPrice: 0,
-        // getValueReport: false,
-        // valueReportPrice: 0,
     });
 
     const showStepTwo = () => {
@@ -464,6 +425,8 @@ const PurchasePage = () => {
     const updatePaymentSummary = (newSummary) => {
         setPaymentSummary((prevSummary) => ({ ...prevSummary, ...newSummary }));
     };
+
+    console.log(paymentSummary);
 
     const handleBack = () => {
         navigate(-1);
@@ -545,6 +508,7 @@ const PurchasePage = () => {
                                 updatePaymentSummary={updatePaymentSummary}
                                 formPurchase={formPurchase} 
                                 onUpdate={handleUpdate}
+                                setFormPurchase={setFormPurchase}
                             />
                         }
                         {currentStep === 2 && (
@@ -552,7 +516,8 @@ const PurchasePage = () => {
                                 showStepOne={showStepOne} 
                                 updatePaymentSummary={updatePaymentSummary}
                                 formPurchase={formPurchase} 
-                                onUpdate={handleUpdate} 
+                                onUpdate={handleUpdate}
+                                setFormPurchase={setFormPurchase} 
                             />
                         )}
                         {currentStep === 3 && 
@@ -560,7 +525,8 @@ const PurchasePage = () => {
                                 showStepOne={showStepOne}
                                 updatePaymentSummary={updatePaymentSummary}
                                 formPurchase={formPurchase} 
-                                onUpdate={handleUpdate} 
+                                onUpdate={handleUpdate}
+                                setFormPurchase={setFormPurchase} 
                             />
                         }
                     </div>
@@ -573,6 +539,7 @@ const PurchasePage = () => {
                                 updatePaymentSummary={updatePaymentSummary}
                                 formPurchase={formPurchase} 
                                 onUpdate={handleUpdate}
+                                setFormPurchase={setFormPurchase}
                             />
                         }
                         {currentStep === 2 && (
@@ -580,7 +547,8 @@ const PurchasePage = () => {
                                 showStepOne={showStepOne} 
                                 updatePaymentSummary={updatePaymentSummary}
                                 formPurchase={formPurchase} 
-                                onUpdate={handleUpdate} 
+                                onUpdate={handleUpdate}
+                                setFormPurchase={setFormPurchase} 
                             />
                         )}
                         {currentStep === 3 && 
@@ -588,7 +556,8 @@ const PurchasePage = () => {
                                 showStepOne={showStepOne}
                                 updatePaymentSummary={updatePaymentSummary}
                                 formPurchase={formPurchase} 
-                                onUpdate={handleUpdate} 
+                                onUpdate={handleUpdate}
+                                setFormPurchase={setFormPurchase} 
                             />
                         }
                     </div>

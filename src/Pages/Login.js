@@ -44,6 +44,8 @@ const Login = () => {
             localStorage.setItem('username', response.username);
             localStorage.setItem('role', response.role);
             localStorage.setItem('userId', response.userId);
+            localStorage.setItem('email', response.email);
+            localStorage.setItem('mobile', response.mobile);
             navigate("/");
         } catch (error) {
             console.error('Error submitting form:', error);
