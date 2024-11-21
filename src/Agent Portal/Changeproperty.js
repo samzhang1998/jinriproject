@@ -263,7 +263,7 @@ const AddPropertyModal = ({ closeModal }) => {
     );
 };
 
-const UploadModal = ({ closeModal, type, name }) => {
+const UploadModal = ({ closeModal, type, name, id }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState('');
     const handleFileChange = (e) => {
@@ -279,7 +279,7 @@ const UploadModal = ({ closeModal, type, name }) => {
         formData.append('file', selectedFile);
         try {
             console.log('data sent:', formData);
-            const response = await fetch(`http://localhost:8080/oss/upload?reportType=${type}&fileName=${name}`, {
+            const response = await fetch(`http://localhost:8080/admin/uploadReport?reportType=${type}&fileName=${name}&propertyId=${id}`, {
                 method: 'POST',
                 body: formData,
                 credentials:'include',
@@ -317,9 +317,9 @@ const UploadModal = ({ closeModal, type, name }) => {
 const Changeproperty = () => {
     const [property,setProperty] = useState([]);
     const [filter, setFilter] = useState('all');
-    const [showPropertyModal, setShowPropertyModal] = useState(false);
     const [showNewModal, setShowNewModal] = useState(false);
-    const [uploadModal, setUploadModal] = useState(false)
+    const [activePropertyId, setActivePropertyId] = useState(null);
+    const [uploadModalPropertyId, setUploadModalPropertyId] = useState(null);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -347,12 +347,19 @@ const Changeproperty = () => {
         if (filter === 'notDeleted') return !item.isDeleted;
         return true;
     });
+
+    const openPropertyModal = (propertyId) => {
+        setActivePropertyId(propertyId);
+    };
     const closePropertyModal = () => {
-        setShowPropertyModal(false);
+        setActivePropertyId(null);
         // window.location.reload();
     };
+    const openUploadModal = (propertyId) => {
+        setUploadModalPropertyId(propertyId);
+    };
     const closeUploadModal = () => {
-        setUploadModal(false);
+        setUploadModalPropertyId(null);
         // window.location.reload();
     };
 
@@ -387,8 +394,8 @@ const Changeproperty = () => {
                     <h2>{property.propertyAddress}</h2>
                     <div className="admin_property_detail">
                         <p>Property type: {property.type}</p>
-                        <span onClick={() => setShowPropertyModal(true)}>Edit Property</span>
-                        {showPropertyModal && (
+                        <span onClick={() => openPropertyModal(property.propertyId)}>Edit Property</span>
+                        {activePropertyId && (
                             <ChangePropertyModal
                                 id={property.propertyId}
                                 closeModal={closePropertyModal}
@@ -397,11 +404,12 @@ const Changeproperty = () => {
                     </div>
                     <div className="upload_report">
                         <p>Report: {property.reportName}</p>
-                        <span onClick={() => setUploadModal(true)}>Upload Report</span>
+                        <span onClick={() => openUploadModal(property.propertyId)}>Upload Report</span>
                     </div>
-                    {uploadModal && (
+                    {uploadModalPropertyId && (
                         <UploadModal
                             type={property.type}
+                            id={property.propertyId}
                             name={property.reportName}
                             closeModal={closeUploadModal}
                         />
