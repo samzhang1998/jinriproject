@@ -52,9 +52,9 @@ const Partnerorders = () => {
                 {filteredOrders.map((order) => (
                     <div key={order.id} className="order_item">                        
                         <div className="order_detail">
-                            <p>{order.date}</p>
-                            <h1>Order #{order.id}</h1>
-                            <h2>{order.address}</h2>
+                            <p>{order.createTime}</p>
+                            <h1>Order #{order.orderId}</h1>
+                            <h2>{order.info}</h2>
                         </div>
                         <div className="edit_order">
                             Edit order
