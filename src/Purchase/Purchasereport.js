@@ -7,7 +7,6 @@ import Header from '../Header';
 import './Purchasereport.css';
 import check from '../asset/Check_fill.png';
 import back from '../asset/Expand_left.png';
-import { text } from 'express';
 
 const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) => {
     const isReportOk = localStorage.getItem('reportOK') === 'true';

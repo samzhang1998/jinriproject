@@ -263,7 +263,7 @@ const AddPropertyModal = ({ closeModal }) => {
     );
 };
 
-const UploadModal = ({ closeModal, type }) => {
+const UploadModal = ({ closeModal, type, name }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState('');
     const handleFileChange = (e) => {
@@ -279,7 +279,7 @@ const UploadModal = ({ closeModal, type }) => {
         formData.append('file', selectedFile);
         try {
             console.log('data sent:', formData);
-            const response = await fetch(`http://localhost:8080/oss/upload?reportType=${type}`, {
+            const response = await fetch(`http://localhost:8080/oss/upload?reportType=${type}&fileName=${name}`, {
                 method: 'POST',
                 body: formData,
                 credentials:'include',
@@ -298,12 +298,12 @@ const UploadModal = ({ closeModal, type }) => {
 
     return (
         <div className="change_modal">
-            <div className="property_modal">
+            <div className="upload_modal">
                 <div onClick={closeModal} className="close_modal">
                     <img src={close} alt="close" />
                 </div>
-                <h2>Upload Report</h2>
-                <input type="file" onChange={handleFileChange} />
+                <h2>Upload Report {name}</h2>
+                <input type="file" onChange={handleFileChange} className="upload_file"/>
                 <button onClick={handleUpload}>Upload</button>
                 <p style={{color: 'red'}}>{uploadStatus}</p>
                 {uploadStatus === 'File uploaded successfully!' && 
@@ -349,11 +349,11 @@ const Changeproperty = () => {
     });
     const closePropertyModal = () => {
         setShowPropertyModal(false);
-        window.location.reload();
+        // window.location.reload();
     };
     const closeUploadModal = () => {
         setUploadModal(false);
-        window.location.reload();
+        // window.location.reload();
     };
 
     return (
@@ -402,6 +402,7 @@ const Changeproperty = () => {
                     {uploadModal && (
                         <UploadModal
                             type={property.type}
+                            name={property.reportName}
                             closeModal={closeUploadModal}
                         />
                     )}

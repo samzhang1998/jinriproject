@@ -190,6 +190,10 @@
     height: auto;
 }
 
+.download_report1:hover {
+    background-color: #004d40;
+}
+
 .question {
     grid-column: 3;
 }

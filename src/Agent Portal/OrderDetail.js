@@ -11,19 +11,29 @@ import logout from '../asset/Sign_in_squre_fill.png';
 import download from '../asset/Import_duotone_line.png';
 
 const OrderDetail = () => {
-    const { orderId,orderStatus,id,type } = useParams();
+    const { orderId, orderStatus, id, type } = useParams();
     const navigate = useNavigate();
     const [order, setOrder] = useState(null);
+    console.log('Params:', { orderId, orderStatus, id, type });
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
+                let url = '';
+                if (type === 'Customer') {
+                    url = '/customer-order/detail';
+                } else if (type === 'Partner') {
+                    url = '/partner-order/detail';
+                } else {
+                    console.error('Invalid role!');
+                    return;
+                }
                 const response = await FetchFunc(
-                    `/partner-order/detail?orderId=${orderId}`,
+                    `${url}?orderId=${orderId}`,
                     'POST',
                 );
                 if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+                    console.log(response.text());
                 }
                 console.log('Response from server:', response);
                 const data = await response.json();
@@ -34,7 +44,11 @@ const OrderDetail = () => {
             }
         };
         fetchOrders();
-    }, [orderId]);
+    }, [type, orderId]);
+
+    if (!order) {
+        return <p>Loading...</p>;
+    }
 
     const handleClick = () => {
         localStorage.removeItem('isLoggedIn');
@@ -60,9 +74,20 @@ const OrderDetail = () => {
     //     setOrder(mockOrderDetails);
     // }, [orderId,orderStatus]);
 
-    if (!order) {
-        return <p>Loading...</p>;
-    }
+    const handleDownload = async () => {
+        try {
+            const response = await FetchFunc(
+                `/oss/download?fileName=${order.reportName}&reportType=${order.reportType}`,
+                'GET',
+            );
+            if (!response.ok) {
+                console.log(response.text());
+            }
+            console.log('Response from server:', response);
+        } catch (error) {
+            console.error('Failed to update password:', error);
+        }
+    };
 
     return (
         <div className="order_page">
@@ -96,23 +121,23 @@ const OrderDetail = () => {
                     </div>
                 </div>
                 <div className="download_order">
-                    <h1>Order #{order.id}</h1>
+                    <h1>Order #{orderId}</h1>
                     <hr />
                     <div className="download">
                         <div className="processing">
                             <p>Your order is</p>
-                            <h1>{order.status}</h1>
-                            <h2>as on {order.date}</h2>
-                            <h3>Last update on {order.lastupdatedate}</h3>
+                            <h1>{orderStatus}</h1>
+                            <h2>as on {order.createTime}</h2>
+                            <h3>Last update on {order.lastUpdate}</h3>
                         </div>
-                        {type === 'customer' && <div className="download_area">
-                            {order.status === 'Processing' ? (
+                        {type === 'Customer' && <div className="download_area">
+                            {order.reportName === null ? (
                                 <button className="download_report">
                                     <img src={download} alt="download" />
                                     Download Report
                                 </button>
                             ) : (
-                                <button className="download_report1">
+                                <button onClick={handleDownload} className="download_report1">
                                     <img src={download} alt="download" />
                                     Download Report
                                 </button>
@@ -125,7 +150,7 @@ const OrderDetail = () => {
                         </div>
                     </div>
                     <hr />
-                    <div className="tracking">
+                    {/* <div className="tracking">
                         <p>Tracking History</p>
                         {order.trackings.map((tracking, index) => (
                             <div key={index} className="track_history">
@@ -136,7 +161,11 @@ const OrderDetail = () => {
                                 <p>{tracking.trackhistory}</p>
                             </div>
                         ))}
-                    </div>
+                    </div> */}
+                    <Link to={{ pathname: `/${type}/${id}` }} 
+                        state={{ showContent: 2 }} 
+                        style={{textDecoration: 'none'}}
+                    ><button className="back_button1">← Back</button></Link>
                 </div>
             </div>
         </div>

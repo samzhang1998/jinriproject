@@ -30,7 +30,7 @@ const Customerorders = () => {
 
     const filteredOrders = orders.filter(order => {
         if (filter === 'all') return true;
-        return order.status.toLowerCase() === filter;
+        return order.currentStatus.toLowerCase() === filter;
     });
 
     const handleOpenModal = () => {
@@ -60,12 +60,12 @@ const Customerorders = () => {
                 >Completed</span>
             </div>
             <div className="order_list">
-                {filteredOrders.map((order) => (
-                    <div key={order.id} className="order_item">                        
+                {Array.isArray(filteredOrders) && filteredOrders.map((order) => (
+                    <div key={order.orderId} className="order_item">                        
                         <div className="order_detail">
-                            <p>{order.date}</p>
-                            <h1>Order #{order.id}</h1>
-                            <h2>{order.address}</h2>
+                            <p>{order.createTime}</p>
+                            <h1>Order #{order.orderId}</h1>
+                            <h2>{order.info}</h2>
                         </div>
                         <div onClick={handleOpenModal} className="edit_order">
                             Edit order

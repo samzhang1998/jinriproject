@@ -142,3 +142,20 @@
 .upload_report span:hover {
     color: blueviolet;
 }
+
+.upload_modal {
+    width: 30rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding: 3%;
+    background: #fff;
+    border: none;
+    border-radius: 1rem;
+}
+
+.upload_file {
+    width: 50%;
+}
