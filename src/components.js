@@ -29,10 +29,19 @@ const Colorbutton1 = () => {
 
 export default Colorbutton1;
 
+const preprocessAddress = (address) => {
+    // Ensure a space after commas
+    return address.replace(/,([^\s])/g, ', $1').trim();
+};
+
 // search box
 const parseAddress = (address) => {
-    const addressRegex = /^(\d+[A-Za-z]?)\s+(.+?),\s+(.+?)\s+(NSW|VIC|QLD|WA|SA|TAS|NT|ACT)\s+(\d{4})(?:,\s*(.+))$/;
-    const match = address.match(addressRegex);
+    const normalizedAddress = preprocessAddress(address);
+    console.log("Normalized Address:", normalizedAddress);
+    // const addressRegex = /^(\d+[A-Za-z]?)\s+(.+?),\s*(.+?)\s+(NSW|VIC|QLD|WA|SA|TAS|NT|ACT)\s+(\d{4})(?:,\s*(.+))$/i;
+    // const match = normalizedAddress.match(addressRegex);
+    const addressRegex = /^(\d+[A-Za-z]?)\s+([\w\s]+?),\s*([\w\s]+)\s+(NSW|VIC|QLD|WA|SA|TAS|NT|ACT)\s+(\d{4})(?:,\s*(.+))?$/i;
+    const match = normalizedAddress.match(addressRegex);
 
     if (!match) {
         console.error("Invalid address format: " + address);
@@ -146,6 +155,8 @@ const SearchBox = () => {
             } else if (response.status === 404) {
                 navigate(`/bookinspector`, { state: { query }});
             } else {
+                navigate(`/bookinspector`, { state: { query }});
+                console.log(response.text());
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
         } catch (error) {
