@@ -5,7 +5,9 @@ import FetchFunc from "../API";
 const Customerorders = () => {
     const [orders, setOrders] = useState([]);
     const [filter, setFilter] = useState('all');
-    const [showModal, setShowModal] = useState(false);
+    const [status, setStatus] = useState('');
+    const [refresh, setRefresh] = useState(false);
+    const [activeOrderId, setActiveOrderId] = useState(null);
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -33,13 +35,42 @@ const Customerorders = () => {
         return order.currentStatus.toLowerCase() === filter;
     });
 
-    const handleOpenModal = () => {
-        setShowModal(true);
+    const handleOpenModal = (orderId) => {
+        console.log(orderId)
+        setActiveOrderId(orderId);
     };
+
+    const handleChange = (e) => {
+        setStatus(e.target.value);
+    }
     
     const handleCloseModal = () => {
-        setShowModal(false);
+        setActiveOrderId(null);
     };
+
+    const handleSubmit = async () => {
+        const dataToSend = {
+            status: status,
+            orderId: activeOrderId,
+        };
+        try {
+            console.log('data sent:', dataToSend);
+            const response = await FetchFunc(
+                '/admin/editProperty',
+                'POST',
+                JSON.stringify(dataToSend)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
+            // setRefresh(!refresh);
+            handleCloseModal();
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    };
+
 
     return (
         <div className="orders">
@@ -67,31 +98,21 @@ const Customerorders = () => {
                             <h1>Order #{order.orderId}</h1>
                             <h2>{order.info}</h2>
                         </div>
-                        <div onClick={handleOpenModal} className="edit_order">
+                        <div onClick={() => handleOpenModal(orders.orderId)} className="edit_order">
                             Edit order
                         </div>
                     </div>
                 ))}
             </div>
-            {/* {showModal && (
+            {activeOrderId === orders.orderId && (
                 <div className="change_modal">
                     <div className="change_modal_content">
                         <form onSubmit={handleSubmit}>
                             <label>
-                                Address:
-                                <input 
-                                    type="text"
-                                    name="address"
-                                    value={formData.address}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </label>
-                            <label>
                                 Status:
                                 <select
                                     name="status"
-                                    value={formData.status}
+                                    value={status}
                                     onChange={handleChange}
                                     required
                                 >
@@ -108,7 +129,7 @@ const Customerorders = () => {
                         </form>
                     </div>
                 </div>
-            )} */}
+            )}
         </div>
     );
 };
