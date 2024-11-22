@@ -84,6 +84,22 @@ const OrderDetail = () => {
                 console.log(response.text());
             }
             console.log('Response from server:', response);
+            const blob = await response.blob();
+
+            // Create a temporary URL for the blob
+            const downloadUrl = window.URL.createObjectURL(blob);
+    
+            // Create a link element and trigger the download
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = order.reportName || 'downloaded_file';
+            document.body.appendChild(link);
+            link.click();
+    
+            // Cleanup: Remove the link and revoke the URL
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(downloadUrl);
+            
         } catch (error) {
             console.error('Failed to update password:', error);
         }
