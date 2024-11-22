@@ -56,7 +56,7 @@ const Customerorders = () => {
         try {
             console.log('data sent:', dataToSend);
             const response = await FetchFunc(
-                '/admin/editProperty',
+                '/admin/addPartnerOrderStatus',
                 'POST',
                 JSON.stringify(dataToSend)
             );

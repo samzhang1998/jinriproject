@@ -63,7 +63,7 @@ const Partnerorders = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
-            // setRefresh(!refresh);
+            setRefresh(!refresh);
             handleCloseModal();
         } catch (error) {
             console.error('Error submitting form:', error);
