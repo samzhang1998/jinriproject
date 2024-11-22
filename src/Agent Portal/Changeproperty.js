@@ -349,6 +349,7 @@ const Changeproperty = () => {
     });
 
     const openPropertyModal = (propertyId) => {
+        console.log(propertyId)
         setActivePropertyId(propertyId);
     };
     const closePropertyModal = () => {
@@ -356,6 +357,7 @@ const Changeproperty = () => {
         // window.location.reload();
     };
     const openUploadModal = (propertyId) => {
+        console.log(propertyId)
         setUploadModalPropertyId(propertyId);
     };
     const closeUploadModal = () => {
@@ -395,7 +397,7 @@ const Changeproperty = () => {
                     <div className="admin_property_detail">
                         <p>Property type: {property.type}</p>
                         <span onClick={() => openPropertyModal(property.propertyId)}>Edit Property</span>
-                        {activePropertyId && (
+                        {activePropertyId === property.propertyId && (
                             <ChangePropertyModal
                                 id={property.propertyId}
                                 closeModal={closePropertyModal}
@@ -406,7 +408,7 @@ const Changeproperty = () => {
                         <p>Report: {property.reportName}</p>
                         <span onClick={() => openUploadModal(property.propertyId)}>Upload Report</span>
                     </div>
-                    {uploadModalPropertyId && (
+                    {uploadModalPropertyId === property.propertyId && (
                         <UploadModal
                             type={property.type}
                             id={property.propertyId}
