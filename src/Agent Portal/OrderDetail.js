@@ -166,18 +166,18 @@ const OrderDetail = () => {
                         </div>
                     </div>
                     <hr />
-                    {/* <div className="tracking">
+                    <div className="tracking">
                         <p>Tracking History</p>
-                        {order.trackings.map((tracking, index) => (
-                            <div key={index} className="track_history">
-                                <p>{tracking.datehistory}</p>
-                                <div className={`track_circle ${tracking.completed ? 'completed' : ''}`}>
-                                    <div className={`track_inside ${tracking.completed ? 'completed' : ''}`}></div>
+                        {Object.entries(order.history).map(([key, value]) => (
+                            <div key={key} className="track_history">
+                                <p>{key}</p>
+                                <div className="track_circle">
+                                    <div className="track_inside"></div>
                                 </div>
-                                <p>{tracking.trackhistory}</p>
+                                <p>{value}</p>
                             </div>
                         ))}
-                    </div> */}
+                    </div>
                     <Link to={{ pathname: `/${type}/${id}` }} 
                         state={{ showContent: 2 }} 
                         style={{textDecoration: 'none'}}
