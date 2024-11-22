@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Yourdetails.css';
 
 const YourDetailsForm = ({ formPurchase, onUpdate}) => {
-    const [addSecond,setAddSecond] = useState(false)
+    const [addSecond,setAddSecond] = useState(false);
     const handleUpdate = (e) => {
         const { name, value, type, checked } = e.target;
         if (type === 'checkbox') {
