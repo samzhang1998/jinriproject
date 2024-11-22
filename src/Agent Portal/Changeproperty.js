@@ -3,7 +3,7 @@ import FetchFunc from "../API";
 import "./Changeproperty.css";
 import close from "../asset/Close_round.png";
 
-const ChangePropertyModal = ({ closeModal,id }) => {
+const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh }) => {
     const [property, setProperty] = useState({
         address: '',
         type: '',
@@ -42,6 +42,7 @@ const ChangePropertyModal = ({ closeModal,id }) => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
+            setRefresh(!refresh);
             closeModal();
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -142,7 +143,7 @@ const ChangePropertyModal = ({ closeModal,id }) => {
     );
 };
 
-const AddPropertyModal = ({ closeModal }) => {
+const AddPropertyModal = ({ closeModal, refresh, setRefresh }) => {
     const [property, setProperty] = useState({
         address: '',
         type: '',
@@ -180,6 +181,7 @@ const AddPropertyModal = ({ closeModal }) => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
+            setRefresh(!refresh);
             closeModal();
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -263,7 +265,7 @@ const AddPropertyModal = ({ closeModal }) => {
     );
 };
 
-const UploadModal = ({ closeModal, type, name, id }) => {
+const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState('');
     const handleFileChange = (e) => {
@@ -289,6 +291,7 @@ const UploadModal = ({ closeModal, type, name, id }) => {
                 setUploadStatus(`Upload failed. Status: ${response.status}`);
             }
             console.log('Response from server:', response);
+            setRefresh(!refresh);
             setUploadStatus('File uploaded successfully!');
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -320,6 +323,7 @@ const Changeproperty = () => {
     const [showNewModal, setShowNewModal] = useState(false);
     const [activePropertyId, setActivePropertyId] = useState(null);
     const [uploadModalPropertyId, setUploadModalPropertyId] = useState(null);
+    const [refresh, setRefresh] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -339,7 +343,7 @@ const Changeproperty = () => {
             }
         };
         fetchData();
-    }, []);
+    }, [refresh]);
 
     const filteredProperty = property.filter((item) => {
         if (filter === 'all') return true;
@@ -373,6 +377,8 @@ const Changeproperty = () => {
                 {showNewModal && (
                     <AddPropertyModal
                         closeModal={() => setShowNewModal(false)}
+                        refresh={refresh}
+                        setRefresh={setRefresh}
                     />
                 )}
             </div>
@@ -401,6 +407,8 @@ const Changeproperty = () => {
                             <ChangePropertyModal
                                 id={property.propertyId}
                                 closeModal={closePropertyModal}
+                                refresh={refresh}
+                                setRefresh={setRefresh}
                             />
                         )}
                     </div>
@@ -414,6 +422,8 @@ const Changeproperty = () => {
                             id={property.propertyId}
                             name={property.reportName}
                             closeModal={closeUploadModal}
+                            refresh={refresh}
+                            setRefresh={setRefresh}
                         />
                     )}
                 </div>
