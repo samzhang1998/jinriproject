@@ -41,7 +41,7 @@ const Searchresult2 = () => {
                     <h3>{query}</h3>
                     <div className='available2'>
                         <img src={ok} alt='ok' />
-                        <p>Report available now!</p>
+                        <p>Report ready in 2-4 days!</p>
                     </div>
                     <h4>Details</h4>
                     <p>SUPERIOR SERVICE, EXCEPTIONAL VALUE. <br />

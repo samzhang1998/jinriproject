@@ -2,10 +2,86 @@ import React, { useEffect, useState } from "react";
 import "./Customerorders.css";
 import FetchFunc from "../API";
 
+const EditCustomerOrderModal = ({ id, closeModal }) => {
+    const [refresh, setRefresh] = useState(false)
+    const [formData, setFormData] = useState({
+        currentStatus: '',
+        orderId: id,
+        statusInfo: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const dataToSend = {
+            ...formData,
+        };
+        try {
+            console.log('data sent:', dataToSend);
+            const response = await FetchFunc(
+                '/admin/addCustomerOrderStatus',
+                'POST',
+                JSON.stringify(dataToSend)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
+            setRefresh(!refresh);
+            closeModal();
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    };
+
+    return (
+        <div className="change_modal">
+            <div className="change_modal_content">
+                <p>Order: {id}</p>
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        Status:
+                        <select
+                            name="currentStatus"
+                            value={formData.currentStatus}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="">Order Status</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Complete">Complete</option>
+                        </select>
+                    </label>
+                    <label>
+                        History:
+                        <input 
+                            name="statusInfo"
+                            value={formData.statusInfo}
+                            onChange={handleChange}
+                        />
+                    </label>
+                    <div className="confirm_change">
+                        <button type="submit">Save</button>
+                        <button type="button" onClick={closeModal}>
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+};
+
 const Customerorders = () => {
-    const [orders, setOrders] = useState([]);
+    const [order, setOrder] = useState([]);
     const [filter, setFilter] = useState('all');
-    const [status, setStatus] = useState('');
     const [refresh, setRefresh] = useState(false);
     const [activeOrderId, setActiveOrderId] = useState(null);
 
@@ -22,7 +98,7 @@ const Customerorders = () => {
                 console.log('Response from server:', response);
                 const data = await response.json();
                 console.log('data response:', data);
-                setOrders(data);
+                setOrder(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
             }
@@ -30,7 +106,7 @@ const Customerorders = () => {
         fetchOrders();
     }, []);
 
-    const filteredOrders = orders.filter(order => {
+    const filteredOrders = order.filter(order => {
         if (filter === 'all') return true;
         return order.currentStatus.toLowerCase() === filter;
     });
@@ -39,38 +115,10 @@ const Customerorders = () => {
         console.log(orderId)
         setActiveOrderId(orderId);
     };
-
-    const handleChange = (e) => {
-        setStatus(e.target.value);
-    }
     
     const handleCloseModal = () => {
         setActiveOrderId(null);
     };
-
-    const handleSubmit = async () => {
-        const dataToSend = {
-            status: status,
-            orderId: activeOrderId,
-        };
-        try {
-            console.log('data sent:', dataToSend);
-            const response = await FetchFunc(
-                '/admin/addPartnerOrderStatus',
-                'POST',
-                JSON.stringify(dataToSend)
-            );
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            console.log('Response from server:', response);
-            // setRefresh(!refresh);
-            handleCloseModal();
-        } catch (error) {
-            console.error('Error submitting form:', error);
-        }
-    };
-
 
     return (
         <div className="orders">
@@ -86,50 +134,32 @@ const Customerorders = () => {
                     className={filter === 'processing' ? 'active' : ''}
                 >Processing</span>
                 <span 
-                    onClick={() => setFilter('completed')}
-                    className={filter === 'completed' ? 'active' : ''}
+                    onClick={() => setFilter('complete')}
+                    className={filter === 'complete' ? 'active' : ''}
                 >Completed</span>
             </div>
             <div className="order_list">
-                {Array.isArray(filteredOrders) && filteredOrders.map((order) => (
+                {Array.isArray(order) && filteredOrders.map((order) => (
                     <div key={order.orderId} className="order_item">                        
                         <div className="order_detail">
                             <p>{order.createTime}</p>
                             <h1>Order #{order.orderId}</h1>
                             <h2>{order.info}</h2>
                         </div>
-                        <div onClick={() => handleOpenModal(orders.orderId)} className="edit_order">
+                        <div onClick={() => handleOpenModal(order.orderId)} className="edit_order">
                             Edit order
                         </div>
+                        {activeOrderId === order.orderId && (
+                            <EditCustomerOrderModal 
+                                id={order.orderId}
+                                closeModal={handleCloseModal}
+                                refresh={refresh}
+                                setRefresh={setRefresh}
+                            />
+                        )}
                     </div>
                 ))}
             </div>
-            {activeOrderId === orders.orderId && (
-                <div className="change_modal">
-                    <div className="change_modal_content">
-                        <form onSubmit={handleSubmit}>
-                            <label>
-                                Status:
-                                <select
-                                    name="status"
-                                    value={status}
-                                    onChange={handleChange}
-                                    required
-                                >
-                                    <option value="Processing">Processing</option>
-                                    <option value="Complete">Complete</option>
-                                </select>
-                            </label>
-                            <div className="confirm_change">
-                                <button type="submit">Save</button>
-                                <button type="button" onClick={handleCloseModal}>
-                                    Cancel
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };

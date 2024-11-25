@@ -60,8 +60,8 @@ const Orders = ({ type,id }) => {
                     className={filter === 'processing' ? 'active' : ''}
                 >Processing</span>
                 <span 
-                    onClick={() => setFilter('completed')}
-                    className={filter === 'completed' ? 'active' : ''}
+                    onClick={() => setFilter('complete')}
+                    className={filter === 'complete' ? 'active' : ''}
                 >Completed</span>
             </div>
             <div className="order_list">

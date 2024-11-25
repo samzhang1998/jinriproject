@@ -56,24 +56,6 @@ const OrderDetail = () => {
         navigate('/');
     };
 
-    // useEffect(() => {
-    //     const mockOrderDetails = {
-    //         id: orderId,
-    //         date: '09 Sep 2024, Friday',
-    //         lastupdatedate: '12 Sep, Tuesday',
-    //         address: '45 Hills street, Marricville NSW 2301',
-    //         status: orderStatus,
-    //         trackings: [
-    //             { datehistory: '09 Sep, Monday', trackhistory: 'Order Received', completed: true },
-    //             { datehistory: '10 Sep, Tuesday', trackhistory: 'Inspector Assigned', completed: false },
-    //             { datehistory: '10 Sep, Tuesday', trackhistory: 'Inspection Scheduled', completed: false },
-    //             { datehistory: '11 Sep, Wednesday', trackhistory: 'Inspection in process', completed: false },
-    //             { datehistory: '12 Sep, Thursday', trackhistory: 'Inspection completed', completed: false },
-    //         ]
-    //     };
-    //     setOrder(mockOrderDetails);
-    // }, [orderId,orderStatus]);
-
     const handleDownload = async () => {
         try {
             const response = await FetchFunc(
@@ -169,13 +151,15 @@ const OrderDetail = () => {
                     <div className="tracking">
                         <p>Tracking History</p>
                         {Object.entries(order.history).map(([key, value]) => (
-                            <div key={key} className="track_history">
-                                <p>{key}</p>
-                                <div className="track_circle">
-                                    <div className="track_inside"></div>
+                            value? (
+                                <div key={key} className="track_history">
+                                    <p>{key}</p>
+                                    <div className="track_circle">
+                                        <div className="track_inside"></div>
+                                    </div>
+                                    <p>{value}</p>
                                 </div>
-                                <p>{value}</p>
-                            </div>
+                            ) : null
                         ))}
                     </div>
                     <Link to={{ pathname: `/${type}/${id}` }} 

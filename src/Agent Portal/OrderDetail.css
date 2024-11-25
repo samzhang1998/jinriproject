@@ -132,8 +132,8 @@
 
 .track_history {
     display: grid;
-    grid-template-columns: 5fr 2fr 5fr;
-    width: 70%;
+    grid-template-columns: 8fr 2fr 4fr;
+    width: 100%;
     justify-content: start;
     align-items: center;
 }
@@ -230,7 +230,7 @@
     width: 0.875rem;
     height: 0.875rem;
     border-radius: 50%;
-    border: 2px solid#A4A4A4;
+    border: 2px solid#008286;
     background-color: #FFF;
     position: relative;
     display: flex;
@@ -242,8 +242,8 @@
     width: 0.4375rem;
     height: 0.4375rem;
     border-radius: 50%;
-    border: 2px solid#A4A4A4;
-    background-color: #A4A4A4;
+    border: 2px solid#008286;
+    background-color: #008286;
     position: relative;
 }
 

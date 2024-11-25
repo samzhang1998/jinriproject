@@ -48,7 +48,7 @@ const parseAddress = (address) => {
         return null;
     }
 
-    const [_, streetNumber, streetName, suburb, state, postcode] = match;
+    const [streetNumber, streetName, suburb, state, postcode] = match;
     
     return {
         address,
@@ -80,6 +80,10 @@ const SearchBox = () => {
     const [bounds, setBounds] = useState(null);
 
     useEffect(() => {
+        if (!window.google || !window.google.maps) {
+            console.error("Google Maps API is not loaded.");
+            return;
+        }
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;

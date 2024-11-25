@@ -358,7 +358,6 @@ const Changeproperty = () => {
     };
     const closePropertyModal = () => {
         setActivePropertyId(null);
-        // window.location.reload();
     };
     const openUploadModal = (propertyId) => {
         console.log(propertyId)
@@ -366,7 +365,6 @@ const Changeproperty = () => {
     };
     const closeUploadModal = () => {
         setUploadModalPropertyId(null);
-        // window.location.reload();
     };
 
     return (

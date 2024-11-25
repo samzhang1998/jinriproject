@@ -2,11 +2,15 @@ import React, {useState, useEffect} from "react";
 import FetchFunc from "../API";
 
 const Partnerorders = () => {
-    const [orders, setOrders] = useState([]);
+    const [order, setOrder] = useState([]);
     const [filter, setFilter] = useState('all');
-    const [status, setStatus] = useState('');
     const [refresh, setRefresh] = useState(false);
     const [activeOrderId, setActiveOrderId] = useState(null);
+    const [formData, setFormData] = useState({
+        currentStatus: '',
+        orderId: '',
+        statusInfo: ''
+    });
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -21,7 +25,7 @@ const Partnerorders = () => {
                 console.log('Response from server:', response);
                 const data = await response.json();
                 console.log('data response:', data);
-                setOrders(data);
+                setOrder(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
             }
@@ -29,9 +33,9 @@ const Partnerorders = () => {
         fetchOrders();
     }, []);
 
-    const filteredOrders = orders.filter(order => {
+    const filteredOrders = order.filter(order => {
         if (filter === 'all') return true;
-        return order.status.toLowerCase() === filter;
+        return order.currentStatus.toLowerCase() === filter;
     });
 
     const handleOpenModal = (orderId) => {
@@ -40,22 +44,27 @@ const Partnerorders = () => {
     };
 
     const handleChange = (e) => {
-        setStatus(e.target.value);
-    }
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+            orderId: order.orderId
+        }));
+    };
     
     const handleCloseModal = () => {
         setActiveOrderId(null);
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         const dataToSend = {
-            status: status,
-            orderId: activeOrderId,
+            ...formData,
         };
         try {
             console.log('data sent:', dataToSend);
             const response = await FetchFunc(
-                '/admin/editProperty',
+                '/admin/addPartnerOrderStatus',
                 'POST',
                 JSON.stringify(dataToSend)
             );
@@ -96,27 +105,37 @@ const Partnerorders = () => {
                             <h1>Order #{order.orderId}</h1>
                             <h2>{order.info}</h2>
                         </div>
-                        <div onClick={() => handleOpenModal(orders.orderId)} className="edit_order">
+                        <div onClick={() => handleOpenModal(order.orderId)} className="edit_order">
                             Edit order
                         </div>
                     </div>
                 ))}
             </div>
-            {activeOrderId === orders.orderId && (
+            {activeOrderId === order.orderId && (
                 <div className="change_modal">
                     <div className="change_modal_content">
+                        <p>{order.orderId}</p>
                         <form onSubmit={handleSubmit}>
                             <label>
                                 Status:
                                 <select
-                                    name="status"
-                                    value={status}
+                                    name="currentStatus"
+                                    value={formData.currentStatus}
                                     onChange={handleChange}
                                     required
                                 >
                                     <option value="Processing">Processing</option>
                                     <option value="Complete">Complete</option>
                                 </select>
+                            </label>
+                            <label>
+                                History:
+                                <input 
+                                    name="statusInfo"
+                                    value={formData.statusInfo}
+                                    onChange={handleChange}
+                                    required
+                                />
                             </label>
                             <div className="confirm_change">
                                 <button type="submit">Save</button>
