@@ -13,7 +13,7 @@ const OrderOverview = () => {
             return null;
         }
     
-        const [_, streetNumber, streetName, suburb, state, postcode] = match;
+        const [streetNumber, streetName, suburb, state, postcode] = match;
         
         return {
             address,
@@ -67,6 +67,8 @@ const OrderOverview = () => {
                 navigate(`/report`, { state: { query }});
             } else if (response.status === 404) {
                 navigate(`/bookinspector`, { state: { query }});
+            } else if (response.status === 401) {
+                navigate('/login');
             } else {
                 console.log(response.text());
             }
@@ -86,6 +88,7 @@ const OrderOverview = () => {
                             value={query}
                             onChange={handleInputChange}
                             placeholder="Property Address*"
+                            required
                             style={{
                                 padding: '0.625rem',
                                 position: 'relative',                     

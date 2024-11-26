@@ -2,17 +2,19 @@ import React,{ useState, useEffect } from "react";
 import FetchFunc from "../API";
 import "./Changeproperty.css";
 import close from "../asset/Close_round.png";
+import { useNavigate } from "react-router-dom";
 
-const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh }) => {
+const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData,filter }) => {
+    const navigate = useNavigate();
     const [property, setProperty] = useState({
-        address: '',
-        type: '',
-        streetName: '',
-        streetNumber: '',
-        suburb: '',
-        state: '',
-        roomNumber: '',
-        postcode: '',
+        address: existingData.propertyAddress || '',
+        type: existingData.type || '',
+        streetName: existingData.streetName || '',
+        streetNumber: existingData.streetNumber || '',
+        suburb: existingData.suburb || '',
+        state: existingData.state || '',
+        roomNumber: existingData.roomNumber || '',
+        postcode: existingData.postcode || '',
         propertyId: id
     });
     const Change = `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`;
@@ -38,7 +40,9 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh }) => {
                 'POST',
                 JSON.stringify(dataToSend)
             );
-            if (!response.ok) {
+            if (response === 401) {
+                navigate('/login');
+            } else if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
@@ -51,12 +55,20 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh }) => {
 
     const handleDelete = async () => {
         try {
+            let url = '';
+            if (filter === "notDeleted") {
+                url = '/admin/deleteProperty';
+            } else {
+                url = '/admin/recoverProperty';
+            }
             const response = await FetchFunc(
-                `/admin/deleteProperty?propertiesId=${id}`,
+                `${url}?propertiesId=${id}`,
                 'DELETE',
             );
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+            if (response === 401) {
+                navigate('/login');
+            } else if (!response.ok) {
+                console.log(response.text());
             }
             console.log('Response from server:', response);
             closeModal();
@@ -68,8 +80,132 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh }) => {
     return (
         <div className="change_modal">
             <div className="property_modal">
-                <div className="close_modal">
-                    <button onClick={handleDelete}>Delete this property</button>
+                <div className="close_change_property_modal">
+                    {filter === "notDeleted" && 
+                        <button onClick={handleDelete}>Delete this property</button>
+                    }
+                    {filter === "deleted" && 
+                        <button onClick={handleDelete}>Recover this property</button>
+                    }
+                    <img src={close} alt="close" onClick={closeModal} />
+                </div>
+                <form onSubmit={handleSubmit}>
+                    <p>Property Street Number:</p>
+                    <input
+                        type="text"
+                        name="streetNumber"
+                        placeholder={existingData.streetNumber}
+                        value={property.streetNumber}
+                        onChange={handleInputChange}
+                    />
+                    <p>Property Street Name:</p>
+                    <input
+                        type="text"
+                        name="streetName"
+                        placeholder={existingData.streetName}
+                        value={property.streetName}
+                        onChange={handleInputChange}
+                    />
+                    <p>Property Suburb:</p>
+                    <input
+                        type="text"
+                        name="suburb"
+                        placeholder={existingData.suburb}
+                        value={property.suburb}
+                        onChange={handleInputChange}
+                    />
+                    <p>Property State:</p>
+                    <input
+                        type="text"
+                        name="state"
+                        placeholder={existingData.state}
+                        value={property.state}
+                        onChange={handleInputChange}
+                    />
+                    <p>Property Type:</p>
+                    <input
+                        type="text"
+                        name="type"
+                        placeholder={existingData.type}
+                        value={property.type}
+                        onChange={handleInputChange}
+                    />
+                    <p>Property Room Number:</p>
+                    <input
+                        type="text"
+                        name="roomNumber"
+                        placeholder={existingData.roomNumber}
+                        value={property.roomNumber}
+                        onChange={handleInputChange}
+                    />
+                    <p>Property Postcode:</p>
+                    <input
+                        type="text"
+                        name="postcode"
+                        placeholder={existingData.postcode}
+                        value={property.postcode}
+                        onChange={handleInputChange}
+                    />
+                    <button type="submit" className="save_change_modal">Save</button>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+const AddPropertyModal = ({ closeModal, refresh, setRefresh }) => {
+    const navigate = useNavigate();
+    const [property, setProperty] = useState({
+        address: '',
+        type: '',
+        streetName: '',
+        streetNumber: '',
+        suburb: '',
+        state: '',
+        roomNumber: '',
+        postcode: '',
+    });
+    const Change = `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`;
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setProperty((prevData) => ({
+          ...prevData,
+          [name]: value,
+          address: Change,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const dataToSend = {
+            ...property,
+        };
+        try {
+            console.log('data sent:', dataToSend);
+            const response = await FetchFunc(
+                '/admin/addProperty',
+                'POST',
+                JSON.stringify(dataToSend)
+            );
+            if (response === 401) {
+                navigate('/login');
+            } else if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
+            setRefresh(!refresh);
+            closeModal();
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    };
+
+    return (
+        <div className="change_modal">
+            <div className="property_modal">
+                <div className="close_property_modal">
+                    <h1>New Property</h1>
                     <img src={close} alt="close" onClick={closeModal} />
                 </div>
                 <form onSubmit={handleSubmit}>
@@ -136,129 +272,7 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh }) => {
                         onChange={handleInputChange}
                         required
                     />
-                    <button type="submit">Save</button>
-                </form>
-            </div>
-        </div>
-    );
-};
-
-const AddPropertyModal = ({ closeModal, refresh, setRefresh }) => {
-    const [property, setProperty] = useState({
-        address: '',
-        type: '',
-        streetName: '',
-        streetNumber: '',
-        suburb: '',
-        state: '',
-        roomNumber: '',
-        postcode: '',
-    });
-    const Change = `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`;
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setProperty((prevData) => ({
-          ...prevData,
-          [name]: value,
-          address: Change,
-        }));
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const dataToSend = {
-            ...property,
-        };
-        try {
-            console.log('data sent:', dataToSend);
-            const response = await FetchFunc(
-                '/admin/addProperty',
-                'POST',
-                JSON.stringify(dataToSend)
-            );
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            console.log('Response from server:', response);
-            setRefresh(!refresh);
-            closeModal();
-        } catch (error) {
-            console.error('Error submitting form:', error);
-        }
-    };
-
-    return (
-        <div className="change_modal">
-            <div className="property_modal">
-                <div onClick={closeModal} className="close_modal">
-                    <img src={close} alt="close" />
-                </div>
-                <form onSubmit={handleSubmit}>
-                    <p>Property Street Number:</p>
-                    <input
-                        type="text"
-                        name="streetNumber"
-                        placeholder="Property Street Number"
-                        value={property.streetNumber}
-                        onChange={handleInputChange}
-                        required
-                    />
-                    <p>Property Street Name:</p>
-                    <input
-                        type="text"
-                        name="streetName"
-                        placeholder="Property Street Name"
-                        value={property.streetName}
-                        onChange={handleInputChange}
-                        required
-                    />
-                    <p>Property Suburb:</p>
-                    <input
-                        type="text"
-                        name="suburb"
-                        placeholder="Property Suburb"
-                        value={property.suburb}
-                        onChange={handleInputChange}
-                        required
-                    />
-                    <p>Property State:</p>
-                    <input
-                        type="text"
-                        name="state"
-                        placeholder="Property State"
-                        value={property.state}
-                        onChange={handleInputChange}
-                        required
-                    />
-                    <p>Property Type:</p>
-                    <input
-                        type="text"
-                        name="type"
-                        placeholder="Property Type"
-                        value={property.type}
-                        onChange={handleInputChange}
-                        required
-                    />
-                    <p>Property Room Number:</p>
-                    <input
-                        type="text"
-                        name="roomNumber"
-                        placeholder="Property Room Number"
-                        value={property.roomNumber}
-                        onChange={handleInputChange}
-                        required
-                    />
-                    <p>Property Postcode:</p>
-                    <input
-                        type="text"
-                        name="postcode"
-                        placeholder="Property Postcode"
-                        value={property.postcode}
-                        onChange={handleInputChange}
-                        required
-                    />
-                    <button type="submit">Save</button>
+                    <button type="submit" className="save_add_modal">Save</button>
                 </form>
             </div>
         </div>
@@ -267,6 +281,7 @@ const AddPropertyModal = ({ closeModal, refresh, setRefresh }) => {
 
 const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
     const [selectedFile, setSelectedFile] = useState(null);
+    const navigate = useNavigate();
     const [uploadStatus, setUploadStatus] = useState('');
     const handleFileChange = (e) => {
         setSelectedFile(e.target.files[0]);
@@ -286,7 +301,9 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
                 body: formData,
                 credentials:'include',
             });
-            if (!response.ok) {
+            if (response === 401) {
+                navigate('/login');
+            } else if (!response.ok) {
                 console.log(response.text());
                 setUploadStatus(`Upload failed. Status: ${response.status}`);
             }
@@ -319,7 +336,7 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
 
 const Changeproperty = () => {
     const [property,setProperty] = useState([]);
-    const [filter, setFilter] = useState('all');
+    const [filter, setFilter] = useState('notDeleted');
     const [showNewModal, setShowNewModal] = useState(false);
     const [activePropertyId, setActivePropertyId] = useState(null);
     const [uploadModalPropertyId, setUploadModalPropertyId] = useState(null);
@@ -382,18 +399,18 @@ const Changeproperty = () => {
             </div>
             <hr style={{background: '#DDD', width: '100%', }} />
             <div className="order_status">
-                <span 
+            <span 
                     onClick={() => setFilter('all')}
                     className={filter === 'all' ? 'active' : ''}
                 >All</span>
                 <span 
-                    onClick={() => setFilter('notDeleted')}
-                    className={filter === 'notDeleted' ? 'active' : ''}
-                >Active</span>
-                <span 
                     onClick={() => setFilter('deleted')}
                     className={filter === 'deleted' ? 'active' : ''}
                 >Deleted</span>
+                <span 
+                    onClick={() => setFilter('notDeleted')}
+                    className={filter === 'notDeleted' ? 'active' : ''}
+                >Active</span>               
             </div>
             {Array.isArray(property) && filteredProperty.map((property) => (
                 <div key={property.propertyId} className="admin_property">
@@ -407,6 +424,8 @@ const Changeproperty = () => {
                                 closeModal={closePropertyModal}
                                 refresh={refresh}
                                 setRefresh={setRefresh}
+                                existingData={property}
+                                filter={filter}
                             />
                         )}
                     </div>

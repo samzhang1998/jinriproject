@@ -20,7 +20,7 @@
 
 .order_status {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: start;
     margin-bottom: 3%;
     color: #A4A4A4;

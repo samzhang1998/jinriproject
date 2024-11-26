@@ -158,6 +158,8 @@ const SearchBox = () => {
                 navigate(`/report`, { state: { query }});
             } else if (response.status === 404) {
                 navigate(`/bookinspector`, { state: { query }});
+            } else if (response.status === 401) {
+                navigate('/login');
             } else {
                 navigate(`/bookinspector`, { state: { query }});
                 console.log(response.text());

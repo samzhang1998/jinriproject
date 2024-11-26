@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { PostData } from '../API';
+import FetchFunc from '../API';
 import "./Login.css";
 import Header from '../Header';
 import back from '../asset/Expand_left.png';
@@ -9,6 +9,7 @@ import passwordicon from '../asset/passwordicon.png';
 
 const Login = () => {
     const [userType, setUserType] = useState('Customer');
+    const [loginStatus, setLoginStatus] = useState('');
     const navigate = useNavigate();
     const [formData,setFormData] = useState({
         username: '',
@@ -38,15 +39,29 @@ const Login = () => {
             ...formData,
         };
         try {
-            const response = await PostData('http://localhost:8080/login/', dataToSend);
+            console.log('Data send:', dataToSend);
+            const response = await FetchFunc(
+                '/login/',
+                'POST',
+                JSON.stringify(dataToSend)
+            );
+            const responseData = await response.json();
             console.log('Response from server:', response);
-            localStorage.setItem('isLoggedIn', true);
-            localStorage.setItem('username', response.username);
-            localStorage.setItem('role', response.role);
-            localStorage.setItem('userId', response.userId);
-            localStorage.setItem('email', response.email);
-            localStorage.setItem('mobile', response.mobile);
-            navigate("/");
+            if (response.status === 200) {
+                localStorage.setItem('isLoggedIn', true);
+                localStorage.setItem('username', responseData.username);
+                localStorage.setItem('role', responseData.role);
+                localStorage.setItem('userId', responseData.userId);
+                localStorage.setItem('email', responseData.email);
+                localStorage.setItem('mobile', responseData.mobile);
+                navigate("/");
+            } else if (response.status === 401) {
+                setLoginStatus("Unauthorized - Invalid Password!")
+            } else if (response.status === 404) {
+                setLoginStatus("Not Found - User doesn't exist!")
+            } else {
+                console.log('Error:', response);
+            }
         } catch (error) {
             console.error('Error submitting form:', error);
         }
@@ -104,6 +119,7 @@ const Login = () => {
                 <div className='login_page_button'>
                     <button onClick={handleLogin}>SIGN IN</button>
                 </div>
+                <p style={{color: 'red'}}>{loginStatus}</p>
                 <h3>Forgot password?</h3>
                 <h3>Don't have an account yet?<Link to="/signup"><span>Sign up</span></Link></h3>
             </div>

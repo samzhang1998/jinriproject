@@ -79,7 +79,7 @@ const Footer = () => {
             </div>
             <div className="other">
                 <div className="subscribe">Subscribe</div>
-                <p>Subscribe to get latest property, <br /> blog news from us</p>
+                <p>Subscribe to get latest property, blog news from us</p>
                 <div className="contact_search">
                     <input 
                         type="text"

@@ -1,36 +1,4 @@
-.property_modal {
-    width: 30rem;
-    height: 20rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    padding: 3%;
-    background: #fff;
-    border: none;
-    border-radius: 1rem;
-}
-
-.property_modal form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    overflow-y: scroll;
-}
-
-.property_modal p {
-    margin: 2%;
-    margin-left: 0;
-}
-
-.property_modal input {
-    width: 90%;
-    padding-left: 5%;
-    height: 2.8rem;
-    border-radius: 0.625rem;
-    border: 1px solid #DDD;
-}
-
+/* property list */
 .change_property_title {
     display: flex;
     flex-direction: row;
@@ -48,6 +16,7 @@
 }
 
 .change_property_title button {
+    flex-shrink: 0;
     width: 10rem;
     height: 2.5rem;
     background: #008286;
@@ -143,6 +112,149 @@
     color: blueviolet;
 }
 
+/* change property */
+.property_modal {
+    width: 30rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 2%;
+    background: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.property_modal form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    overflow-y: scroll;
+}
+
+.property_modal p {
+    margin: 2%;
+    margin-left: 0;
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.property_modal input {
+    flex-shrink: 0;
+    width: 90%;
+    padding-left: 5%;
+    height: 2.8rem;
+    border-radius: 0.625rem;
+    border: 1px solid #DDD;
+}
+
+.close_change_property_modal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.close_change_property_modal img {
+    cursor: pointer;
+}
+
+.close_change_property_modal button {
+    width: 15rem;
+    height: 2.5rem;
+    background: #008286;
+    border: none;
+    border-radius: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.close_change_property_modal button:hover {
+    background-color: #004d40;
+}
+
+.save_change_modal {
+    flex-shrink: 0;
+    width: 10rem;
+    height: 2.5rem;
+    background: #008286;
+    border: none;
+    border-radius: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 5%;
+}
+
+.save_change_modal:hover {
+    background-color: #004d40;
+}
+
+/* add property */
+.close_property_modal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.close_property_modal h1 {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.close_property_modal img {
+    cursor: pointer;
+}
+
+.save_add_modal {
+    flex-shrink: 0;
+    width: 10rem;
+    height: 2.5rem;
+    background: #008286;
+    border: none;
+    border-radius: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 5%;
+}
+
+.save_add_modal:hover {
+    background-color: #004d40;
+}
+
 .upload_modal {
     width: 30rem;
     height: auto;
@@ -153,7 +265,7 @@
     padding: 3%;
     background: #fff;
     border: none;
-    border-radius: 1rem;
+    border-radius: 5px;
 }
 
 .upload_file {
@@ -178,4 +290,8 @@
     font-style: normal;
     font-weight: 600;
     text-decoration: none;
+}
+
+.upload_modal button:hover {
+    background-color: #004d40;
 }

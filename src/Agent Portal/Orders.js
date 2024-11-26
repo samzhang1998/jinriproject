@@ -5,7 +5,7 @@ import FetchFunc from "../API";
 
 const Orders = ({ type,id }) => {
     const [orders, setOrders] = useState([]);
-    const [filter, setFilter] = useState('all');
+    const [filter, setFilter] = useState('complete');
 
     useEffect(() => {
         const fetchOrders = async () => {

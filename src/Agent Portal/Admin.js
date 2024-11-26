@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate,useParams } from "react-router-dom";
+import FetchFunc from "../API";
 import fill from '../asset/File_dock_fill.png';
 import fill1 from '../asset/File_dock_fill (1).png';
 import logout from '../asset/Sign_in_squre_fill.png';
@@ -45,10 +46,37 @@ const Admin = () => {
     const showSettings = () => {
         setCurrentPage(3);
     };
-    const handleClick = () => {
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('username');
-        navigate('/');
+    // const handleClick = () => {
+    //     localStorage.removeItem('isLoggedIn');
+    //     localStorage.removeItem('username');
+    //     navigate('/');
+    // };
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+            const role = localStorage.getItem('role');
+            const username = localStorage.getItem('username'); 
+            const body = {
+                username: username,
+                role: role,
+            };
+            const response = await FetchFunc(
+                '/logout/',
+                'POST',
+                JSON.stringify(body)
+            );
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
+            localStorage.removeItem('role');
+            localStorage.removeItem('userId');
+            navigate("/");
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
     };
 
     return (
@@ -103,7 +131,7 @@ const Admin = () => {
                             }}
                         >Property Status</p>
                     </div>
-                    <div className="to_details" onClick={handleClick}>
+                    <div className="to_details" onClick={handleLogout}>
                         <img src={logout} alt="logout" />
                         <p style={{color: '#A4A4A4'}}>Logout</p>                        
                     </div>

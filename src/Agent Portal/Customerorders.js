@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./Customerorders.css";
 import FetchFunc from "../API";
+import { useNavigate } from "react-router-dom";
 
 const EditCustomerOrderModal = ({ id, closeModal }) => {
+    const navigate = useNavigate();
     const [refresh, setRefresh] = useState(false)
     const [formData, setFormData] = useState({
         currentStatus: '',
@@ -30,7 +32,9 @@ const EditCustomerOrderModal = ({ id, closeModal }) => {
                 'POST',
                 JSON.stringify(dataToSend)
             );
-            if (!response.ok) {
+            if (response === 401) {
+                navigate('/login');
+            } else if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
@@ -43,8 +47,8 @@ const EditCustomerOrderModal = ({ id, closeModal }) => {
 
     return (
         <div className="change_modal">
-            <div className="change_modal_content">
-                <p>Order: {id}</p>
+            <div className="change_order_modal_content">
+                <h1>Order: {id}</h1>
                 <form onSubmit={handleSubmit}>
                     <label>
                         Status:
@@ -81,7 +85,8 @@ const EditCustomerOrderModal = ({ id, closeModal }) => {
 
 const Customerorders = () => {
     const [order, setOrder] = useState([]);
-    const [filter, setFilter] = useState('all');
+    const navigate = useNavigate();
+    const [filter, setFilter] = useState('complete');
     const [refresh, setRefresh] = useState(false);
     const [activeOrderId, setActiveOrderId] = useState(null);
 
@@ -92,7 +97,9 @@ const Customerorders = () => {
                     `/admin/allCustomerOrders`,
                     'GET',
                 );
-                if (!response.ok) {
+                if (response === 401) {
+                    navigate('/login');
+                } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 console.log('Response from server:', response);
@@ -104,7 +111,7 @@ const Customerorders = () => {
             }
         };
         fetchOrders();
-    }, []);
+    }, [navigate]);
 
     const filteredOrders = order.filter(order => {
         if (filter === 'all') return true;

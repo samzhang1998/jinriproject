@@ -9,19 +9,64 @@
     cursor: pointer;
 }
 
-.change_modal_content form {
+.change_order_modal_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: white;
+    border-radius: 5px;
+    padding: 3%;
+    width: 30rem;
+    height: 15rem;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+}
+
+.change_order_modal_content h1 {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.change_order_modal_content form {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    margin-bottom: 5%;
 }
 
-.change_modal_content label {
+.change_order_modal_content label {
     display: grid;
     grid-template-columns: 2fr 8fr;
     align-items: center;
     width: 80%;
+}
+
+.change_order_modal_content select {
+    height: 2.8rem;
+    outline: none;
+    border-radius: 0.625rem;
+    border: 1px solid #DDD;
+}
+
+.change_order_modal_content input {
+    height: 2.8rem;
+    border-radius: 0.625rem;
+    border: 1px solid #DDD;
+    padding-left: 3%;
+    color: #656565;
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
 }
 
 .confirm_change {
@@ -29,5 +74,27 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 50%;
+    gap: 10%;
+}
+
+.confirm_change button {
+    width: 10rem;
+    height: 2.5rem;
+    background: #008286;
+    border: none;
+    border-radius: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.confirm_change button:hover {
+    background-color: #004d40;
 }
