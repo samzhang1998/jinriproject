@@ -22,7 +22,7 @@ import Adminlogin from './Pages/Adminlogin';
 
 function App () {
   return(
-    <Router basename='/jinriproject'>
+    <Router>
       <ScrollToTop />
       <div>
         <Routes>
