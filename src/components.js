@@ -48,7 +48,7 @@ const parseAddress = (address) => {
         return null;
     }
 
-    const [streetNumber, streetName, suburb, state, postcode] = match;
+    const [_, streetNumber, streetName, suburb, state, postcode] = match;
     
     return {
         address,
@@ -286,6 +286,8 @@ const MobileSearchBox = () => {
                 navigate(`/report`, { state: { query }});
             } else if (response.status === 404) {
                 navigate(`/bookinspector`, { state: { query }});
+            } else if (response.status === 401) {
+                navigate('/login');
             } else {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }

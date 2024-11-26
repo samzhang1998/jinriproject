@@ -530,7 +530,7 @@ const PurchasePage = () => {
                         }
                     </div>
                 </form>}
-                {role === 'Customer' && <form onSubmit={handleCustomerSubmit}>
+                {role === 'Customer' && currentStep !== 3 && <form onSubmit={handleCustomerSubmit}>
                     <div className='payment_choice'>                        
                         {currentStep === 1 && 
                             <StepOne 
@@ -550,17 +550,17 @@ const PurchasePage = () => {
                                 setFormPurchase={setFormPurchase} 
                             />
                         )}
-                        {currentStep === 3 && 
-                            <StepThree showStepTwo={showStepTwo} 
-                                showStepOne={showStepOne}
-                                updatePaymentSummary={updatePaymentSummary}
-                                formPurchase={formPurchase} 
-                                onUpdate={handleUpdate}
-                                setFormPurchase={setFormPurchase} 
-                            />
-                        }
                     </div>
                 </form>}
+                {currentStep === 3 && <div className='payment_choice1'>                     
+                    <StepThree showStepTwo={showStepTwo} 
+                        showStepOne={showStepOne}
+                        updatePaymentSummary={updatePaymentSummary}
+                        formPurchase={formPurchase} 
+                        onUpdate={handleUpdate}
+                        setFormPurchase={setFormPurchase} 
+                    />                    
+                </div>}
                 <div className='payment_summary'>
                     <PaymentSummary summary={paymentSummary} />
                 </div>

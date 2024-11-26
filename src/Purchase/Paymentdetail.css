@@ -1,7 +1,7 @@
 .payment_detail {
     display: flex;
     flex-direction: column;
-    width: 97%;
+    width: 90%;
     padding: 5%;
     border-radius: 1.25rem;
     background: #FFF;

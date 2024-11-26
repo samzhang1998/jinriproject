@@ -46,6 +46,7 @@ const Paymentdetail = ({ formPurchase, setFormPurchase }) => {
     };
 
     const [showModal, setShowModal] = useState(false);
+    const [test, setTest] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const handleCheckboxChange = () => {
         const newCheckedState = !isChecked;
@@ -59,6 +60,10 @@ const Paymentdetail = ({ formPurchase, setFormPurchase }) => {
 
     const handleCloseModal = () => {
         setShowModal(false);
+    };
+
+    const handleClick = () => {
+        setTest(true);
     };
 
     return (
@@ -117,7 +122,7 @@ const Paymentdetail = ({ formPurchase, setFormPurchase }) => {
                     Paypal
                 </label>
             </div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 {paymentMethod === 'creditCard' && (
                     <div className="card_detail">
                         <input 
@@ -181,12 +186,19 @@ const Paymentdetail = ({ formPurchase, setFormPurchase }) => {
                     </label>
                 </div>
                 <Policy showModal={showModal} onClose={handleCloseModal} />
-                <button 
+                {/* <button 
                     disabled={!isChecked} 
                     type="submit" 
                     className="pay_now"
-                    onClick={handleSubmit}
-                >Pay Now</button>
+                >Pay Now</button> */}
+                <button
+                    disabled={!isChecked}  
+                    className="pay_now"
+                    onClick={handleClick}
+                >
+                    Pay Now
+                </button>
+                {test === true && <div style={{ color: 'red'}}>This function is testing!</div>}
             </form>
         </div>
     );
