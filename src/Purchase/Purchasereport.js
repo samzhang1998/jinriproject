@@ -499,6 +499,7 @@ const PurchasePage = () => {
                 </div>
             </div>
             <div className='payment_steps'>
+                {role === 'Admin' && <h1>Not Available</h1>}
                 {role === 'Partner' && <form onSubmit={handlePartnerSubmit}>
                     <div className='payment_choice'>                        
                         {currentStep === 1 && 
@@ -561,9 +562,9 @@ const PurchasePage = () => {
                         setFormPurchase={setFormPurchase} 
                     />                    
                 </div>}
-                <div className='payment_summary'>
+                {role !== 'Admin' && <div className='payment_summary'>
                     <PaymentSummary summary={paymentSummary} />
-                </div>
+                </div>}
             </div>
         </div>   
     );
