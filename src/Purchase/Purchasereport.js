@@ -423,7 +423,7 @@ const PurchasePage = () => {
         agentEmail: null,
         agentMobile: null,
         userId: id,
-        service: [],
+        services: [],
     });
 
     const handleUpdate = (key, value) => {
@@ -506,6 +506,8 @@ const PurchasePage = () => {
     const handleBack = () => {
         navigate(-1);
     };
+    
+    sessionStorage.setItem("formPurchase", JSON.stringify(formPurchase));
 
     return (
         <div className='purchase1'>

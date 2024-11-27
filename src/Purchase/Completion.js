@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import FetchFunc from '../API';
 
 function Completion(props) {
   const [ messageBody, setMessageBody ] = useState('');
@@ -17,6 +18,34 @@ function Completion(props) {
       ));
     });
   }, [stripePromise]);
+  
+  useEffect(() => {
+  
+    const submitForm = async () => {
+      try {
+        const response = await FetchFunc(
+          '/customer-order/create',
+          'POST',
+          sessionStorage.getItem("formPurchase")
+        );
+  
+        if (!response.ok) {
+          console.log(await response.text()); // Wait for the response text
+        } else {
+          console.log('Response from server:', await response.json()); // Process response
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+      }
+    };
+  
+    submitForm();
+  
+  }, [])
+  
+
+  const paymentContext = JSON.parse(sessionStorage.getItem("formPurchase"));
+  console.log(paymentContext);
 
   return (
     <>
