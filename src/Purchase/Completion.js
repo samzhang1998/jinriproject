@@ -22,17 +22,23 @@ function Completion(props) {
   useEffect(() => {
   
     const submitForm = async () => {
+      const formPurchase = sessionStorage.getItem("formPurchase");
+      if (!formPurchase) {
+        // console.error("No formPurchase data found in sessionStorage.");
+        return; // Exit the function if the data is missing
+      }
       try {
         const response = await FetchFunc(
           '/customer-order/create',
           'POST',
-          sessionStorage.getItem("formPurchase")
+          formPurchase
         );
   
         if (!response.ok) {
           console.log(await response.text()); // Wait for the response text
         } else {
           console.log('Response from server:', await response.json()); // Process response
+          sessionStorage.removeItem("formPurchase");
         }
       } catch (error) {
         console.error('Error submitting form:', error);
