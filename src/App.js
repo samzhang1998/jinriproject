@@ -22,9 +22,8 @@ import Adminlogin from './Pages/Adminlogin';
 
 function App () {
   return(
-    <Router basename='/jinriproject'>
+    <Router >
       <ScrollToTop />
-      <div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
@@ -41,10 +40,10 @@ function App () {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/:type/:id/orders/:orderId/:orderStatus" element={<OrderDetail />} />
           <Route path="/adminlogin" element={<Adminlogin />} />
-          <Route path="/admin/:id" element={<Admin />} />                    
+          <Route path="/admin/:id" element={<Admin />} />  
+          {/* <Route path="*" element={<Home />} />  */}
         </Routes>
         <Footer />
-      </div>      
     </Router>
   );    
 };

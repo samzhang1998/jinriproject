@@ -1,8 +1,8 @@
 {
   "name": "mywebsite",
   "version": "0.1.0",
-  "homepage": "https://samzhang1998.github.io/jinriproject",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@react-email/components": "^0.0.28",
     "@react-google-maps/api": "^2.20.3",
@@ -15,7 +15,6 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
-    "react-script": "^2.0.5",
     "react-scripts": "5.0.1",
     "typeface-montserrat": "^1.1.13",
     "web-vitals": "^2.1.4"
@@ -25,9 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start:server": "node src/server.js",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "start:server": "node src/server.js"
   },
   "eslintConfig": {
     "extends": [
