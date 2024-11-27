@@ -44,13 +44,30 @@
     margin-bottom: 3%;
 }
 
-.admin_property h2 {
+.property_price {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.property_price h2 {
     color: #030303;
     font-family: Montserrat;
     font-size: 1.2rem;
     font-style: normal;
     font-weight: 600;
     line-height: 150%;
+}
+
+.property_price span {
+    text-decoration: underline;
+    color: #008286;
+    cursor: pointer;
+}
+
+.property_price span:hover {
+    color: blueviolet;
 }
 
 .admin_property_detail {
@@ -151,6 +168,7 @@
     height: 2.8rem;
     border-radius: 0.625rem;
     border: 1px solid #DDD;
+    outline: none;
 }
 
 .close_change_property_modal {
@@ -294,4 +312,41 @@
 
 .upload_modal button:hover {
     background-color: #004d40;
+}
+
+/* set price */
+.price_modal {
+    width: 30rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 5%;
+    padding: 2%;
+    background: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.set_price {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+}
+
+.set_price input {
+    height: 2.8rem;
+    border-radius: 0.625rem;
+    border: 1px solid #DDD;
+    padding-left: 3%;
+    color: #656565;
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    outline: none;
 }

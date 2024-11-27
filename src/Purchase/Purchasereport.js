@@ -286,8 +286,8 @@ const StepThree = ({ formPurchase }) => {
 
 const PaymentSummary = ({ summary }) => {
     const location = useLocation();
-    const { query } = location.state || {};
-    const totalAmount = 199 + (summary.hasGrannyFlat ? 99 : 0) + summary.servicePrice;
+    const { query, price } = location.state || {};
+    const totalAmount = parseInt(price) + parseInt(summary.hasGrannyFlat ? 99 : 0) + parseInt(summary.servicePrice);
 
     return (
         <div className="order_summary">
@@ -297,7 +297,7 @@ const PaymentSummary = ({ summary }) => {
             </div>
             <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
             <div>
-                <div className="calculation"><p>Building & Pest Report</p><span>$199</span></div>
+                <div className="calculation"><p>Building & Pest Report</p><span>{price}</span></div>
                 <div className="report_available">
                     <img src={check} alt="check" />
                     <h4>Report available now!</h4>

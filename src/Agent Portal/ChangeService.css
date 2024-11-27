@@ -1,0 +1,51 @@
+.service_title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.service_title h1 {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    margin: 0;
+}
+
+.service_item {
+    display: flex;
+    flex-direction: column;
+}
+
+.service_item h1 {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    margin: 0;
+}
+
+.service_item p {
+    color: #343434;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+    margin: 0;
+}
+
+.service_id {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.service_id p {
+    color: #008286;
+}

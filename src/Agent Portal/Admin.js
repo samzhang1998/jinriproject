@@ -8,6 +8,7 @@ import Header from "../Header";
 import Customerorders from "./Customerorders";
 import Partnerorders from "./Partnerorders";
 import Changeproperty from "./Changeproperty";
+import ChangeService from "./ChangeService";
 
 const Customerorder = () => {
     return (
@@ -33,6 +34,14 @@ const PropertyStatus = () => {
     );
 };
 
+const ServiceStatus = () => {
+    return (
+        <div>
+            <ChangeService />
+        </div>
+    );
+};
+
 const Admin = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
@@ -46,11 +55,10 @@ const Admin = () => {
     const showSettings = () => {
         setCurrentPage(3);
     };
-    // const handleClick = () => {
-    //     localStorage.removeItem('isLoggedIn');
-    //     localStorage.removeItem('username');
-    //     navigate('/');
-    // };
+    const showServices = () => {
+        setCurrentPage(4);
+    }
+
     const handleLogout = async (e) => {
         e.preventDefault();
         try {
@@ -131,6 +139,21 @@ const Admin = () => {
                             }}
                         >Property Status</p>
                     </div>
+                    <div 
+                        onClick={showServices} 
+                        className="to_details"
+                        style={{
+                            background: currentPage === 3 ? "#F4F4F4" : "#FFF",
+                        }}
+                    >
+                        {currentPage === 4 && <img src={fill1} alt="fill1" />}
+                        {currentPage !== 4 && <img src={fill} alt="fill" />}
+                        <p
+                            style={{
+                                color: currentPage === 4 ? "#008286" : "#A4A4A4",
+                            }}
+                        >Service Status</p>
+                    </div>
                     <div className="to_details" onClick={handleLogout}>
                         <img src={logout} alt="logout" />
                         <p style={{color: '#A4A4A4'}}>Logout</p>                        
@@ -140,6 +163,7 @@ const Admin = () => {
                     {currentPage === 1 && <Customerorder />}
                     {currentPage === 2 && <Partnerorder />}
                     {currentPage === 3 && <PropertyStatus />}
+                    {currentPage === 4 && <ServiceStatus />}
                 </div>
             </div>
         </div>
