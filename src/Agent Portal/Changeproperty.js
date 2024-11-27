@@ -334,13 +334,72 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
     );
 };
 
+const PriceModal = ({ closeModal, id, refresh, setRefresh, prevPrice }) => {
+    const [price, setPrice] = useState(null);
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        const newValue = e.target.value;
+        setPrice(parseFloat(newValue));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            console.log(price, id);
+            const response = await FetchFunc(
+                `/admin/editReportPrice/?price=${price}&propertyId=${id}`,
+                'POST',
+            );
+            if (response === 401) {
+                navigate('/login');
+            } else if (!response.ok) {
+                console.log(response.text())
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
+            setRefresh(!refresh);
+            closeModal();
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    };
+
+    return (
+        <div className="change_modal">
+            <div className="price_modal">
+                <div className="close_modal">
+                    <img src={close} alt="close" onClick={closeModal} />
+                </div>
+                <h1>Set Report Price</h1>
+                <div className="set_price">
+                    <p>Price:</p>
+                    <input 
+                        type="number"
+                        value={price}
+                        onChange={handleChange}
+                        placeholder={prevPrice}
+                        required
+                    />
+                </div>
+                <button 
+                    onClick={handleSubmit} 
+                    className="save_add_modal"
+                >Save</button>
+            </div>
+        </div>
+    );
+};
+
 const Changeproperty = () => {
     const [property,setProperty] = useState([]);
     const [filter, setFilter] = useState('notDeleted');
     const [showNewModal, setShowNewModal] = useState(false);
     const [activePropertyId, setActivePropertyId] = useState(null);
     const [uploadModalPropertyId, setUploadModalPropertyId] = useState(null);
+    const [pricePropertyId, setPricePropertyId] = useState(null);
     const [refresh, setRefresh] = useState(false);
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -383,6 +442,15 @@ const Changeproperty = () => {
     const closeUploadModal = () => {
         setUploadModalPropertyId(null);
     };
+    const openPriceModal = (propertyId) => {
+        console.log(propertyId)
+        setPricePropertyId(propertyId);
+    };
+    const closePriceModal = () => {
+        setPricePropertyId(null);
+    };
+
+     
 
     return (
         <div className="orders">
@@ -414,7 +482,19 @@ const Changeproperty = () => {
             </div>
             {Array.isArray(property) && filteredProperty.map((property) => (
                 <div key={property.propertyId} className="admin_property">
-                    <h2>{property.propertyAddress}</h2>
+                    <div className="property_price">
+                        <h2>{property.propertyAddress}</h2>
+                        <span onClick={() => openPriceModal(property.propertyId)}>Set Price</span>
+                        {pricePropertyId === property.propertyId && (
+                            <PriceModal 
+                                id={property.propertyId}
+                                closeModal={closePriceModal}
+                                prevPrice={property.reportPrice}
+                                refresh={refresh}
+                                setRefresh={setRefresh}                           
+                            />
+                        )}
+                    </div>
                     <div className="admin_property_detail">
                         <p>Property type: {property.type}</p>
                         <span onClick={() => openPropertyModal(property.propertyId)}>Edit Property</span>

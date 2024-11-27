@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import './Searchresult2.css';
 import Header from '../Header';
 import { useLocation, useNavigate } from "react-router-dom";
+import FetchFunc from '../API';
 import Findreport from './Findreport';
 import building from '../asset/图层 2 1.png';
 import ok from '../asset/Check_fill.png';
@@ -12,12 +13,34 @@ const Searchresult2 = () => {
     const location = useLocation();
     const { query } = location.state || {};
     const navigate = useNavigate();
+    const [price,setPrice] = useState('');
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
     const handleSearch = () => {
         localStorage.setItem('reportOK', false);
-        navigate('/purchasereport', { state: { query } });
+        navigate('/purchasereport', { state: { query, price } });
     };
+
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const response = await FetchFunc(
+                    '/search/inspection',
+                    'GET',
+                );
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Response from server:', response);
+                const data = await response.json();
+                console.log('data response:', data);
+                setPrice(data);
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+            }
+        };
+        fetchServices();
+    }, []);
 
     return (
         <div className='search_result2'>
@@ -31,7 +54,7 @@ const Searchresult2 = () => {
                     <h2>Building & Pest Report</h2>
                 </div>
                 <div className='sell_price2'>
-                    <h1>$499</h1>
+                    <h1>${price}</h1>
                     <p>ETA: 2-4 Days</p>
                 </div>
                 <div className='details2'>

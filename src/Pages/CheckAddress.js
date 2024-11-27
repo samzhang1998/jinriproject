@@ -144,10 +144,6 @@ const CheckAddress = () => {
                         />
                     </div>
                     <button type="submit" className="check_ad_button">Check your address</button>
-                    {/* <button 
-                        className="check_ad_button" 
-                        onClick={() => navigate(`/bookinspector/${query}`)}
-                    >Check your address</button> */}
                 </form>
                 <button className="back_button1" onClick={handleBack}>← Back</button>
             </div>

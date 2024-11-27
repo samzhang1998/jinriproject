@@ -19,10 +19,11 @@ import ThankYou from './Purchase/ThankYou';
 import CheckAddress from './Pages/CheckAddress';
 import Admin from './Agent Portal/Admin';
 import Adminlogin from './Pages/Adminlogin';
+import Completion from './Purchase/Completion';
 
 function App () {
   return(
-    <Router >
+    <Router>
       <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -40,8 +41,8 @@ function App () {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/:type/:id/orders/:orderId/:orderStatus" element={<OrderDetail />} />
           <Route path="/adminlogin" element={<Adminlogin />} />
-          <Route path="/admin/:id" element={<Admin />} />  
-          {/* <Route path="*" element={<Home />} />  */}
+          <Route path="/admin/:id" element={<Admin />} />
+          <Route path="/completion" element={<Completion />} />                    
         </Routes>
         <Footer />
     </Router>

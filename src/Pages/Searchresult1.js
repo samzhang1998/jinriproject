@@ -13,10 +13,11 @@ const Searchresult1 = () => {
     const location = useLocation();
     const { query } = location.state || {};
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const price = localStorage.getItem('price');
 
     const handleSearch = () => {
         localStorage.setItem('reportOK', true);
-        navigate('/purchasereport', { state: { query } });
+        navigate('/purchasereport', { state: { query, price } });
     };
 
     return (
@@ -31,7 +32,7 @@ const Searchresult1 = () => {
                     <h2>Building & Pest Report</h2>
                 </div>
                 <div className='sell_price'>
-                    <h1>$199</h1>
+                    <h1>${price}</h1>
                     <p>ETA: Up to 30mins</p>
                 </div>
                 <div className='details'>

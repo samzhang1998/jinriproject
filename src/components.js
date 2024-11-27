@@ -155,6 +155,9 @@ const SearchBox = () => {
             );
             if (response.status === 200) {
                 console.log('Response from server:', response);
+                const data = await response.json();
+                localStorage.setItem('price', data.reportPrice);
+                console.log(data);
                 navigate(`/report`, { state: { query }});
             } else if (response.status === 404) {
                 navigate(`/bookinspector`, { state: { query }});
@@ -214,6 +217,7 @@ const MobileSearchBox = () => {
 
     const [query, setQuery] = useState('');
     const [autocomplete, setAutocomplete] = useState(null);
+    const [price, setPrice] = useState('');
     const navigate = useNavigate();
     const libraries = ['places'];
     const [bounds, setBounds] = useState(null);
@@ -283,7 +287,9 @@ const MobileSearchBox = () => {
             );
             if (response.status === 200) {
                 console.log('Response from server:', response);
-                navigate(`/report`, { state: { query }});
+                const data = await response.json();
+                setPrice(data.reportPrice);
+                navigate(`/report`, { state: { query, price }});
             } else if (response.status === 404) {
                 navigate(`/bookinspector`, { state: { query }});
             } else if (response.status === 401) {
