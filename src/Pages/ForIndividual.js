@@ -22,7 +22,7 @@ const ForIndividual = () => {
             the property's condition, including any structural issues or pest infestations. 
             With fast turnaround times and competitive pricing, our reports ensure you have 
             the information you need quickly and affordably. Protect your investment and make 
-            an informed decision—get your report today</p>
+            an informed decision—get your report today!</p>
         </div>
         <Search />          
       </div>

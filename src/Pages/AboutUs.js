@@ -35,8 +35,8 @@ const AboutUs = () => {
                 <div className='line'></div>
               </div>
               <div className='feature_text'>
-                <h2>Here is the Feature one</h2>
-                <p>Get informed Before You Buy. Have our <br /> qualified inspectors</p>
+                <h2>Comprehensive Inspections</h2>
+                <p>Get informed Before You Buy. Have our qualified inspectors.</p>
               </div>
             </div>
             <div className='feature'>
@@ -45,8 +45,9 @@ const AboutUs = () => {
                 <div className='line'></div>
               </div>
               <div className='feature_text'>
-                <h2>Here is the Feature two</h2>
-                <p>Get informed Before You Buy. Have our <br /> qualified inspectors</p>
+                <h2>Detailed Property Reports</h2>
+                <p>Access detailed property reports with ease. Make confident 
+                  decisions backed by our expertise.</p>
               </div>
             </div>
             <div className='feature'>
@@ -54,8 +55,8 @@ const AboutUs = () => {
                 <div className='about_cricle'>1</div>
               </div>
               <div className='feature_text'>
-                <h2>Here is the Feature three</h2>
-                <p>Get informed Before You Buy. Have our <br /> qualified inspectors</p>
+                <h2>Transparent and Reliable Process</h2>
+                <p>Trust in transparency and quality. Let us simplify your property inspection process.</p>
               </div>
             </div>
           </div>

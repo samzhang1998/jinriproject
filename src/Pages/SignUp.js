@@ -7,14 +7,14 @@ import Header from '../Header';
 import back from '../asset/Expand_left.png';
 
 const SignUp = () => {
-    const [userType, setUserType] = useState('Customer')
+    const [userType, setUserType] = useState('customer')
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         username: '',
         email: '',
-        companyName: '',
+        company: '',
         password: '',
         role: 'customer'
     }); 
@@ -44,6 +44,7 @@ const SignUp = () => {
                 JSON.stringify(dataToSend)
             );
             if (!response.ok) {
+                console.log(response.text());
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
@@ -68,13 +69,13 @@ const SignUp = () => {
                 <h1>Create Account</h1>
                 <div className='sign_up_selection'>
                     <h2
-                        onClick={() => handleUserTypeChange('Customer')}
-                        style={{ color: userType === 'Customer' ? "#008286" : "#A4A4A4" }}
+                        onClick={() => handleUserTypeChange('customer')}
+                        style={{ color: userType === 'customer' ? "#008286" : "#A4A4A4" }}
                     >Individual</h2>
                     <div className='user_divide'>l</div>
                     <h2
-                        onClick={() => handleUserTypeChange('Partner')}
-                        style={{ color: userType === 'Partner' ? "#008286" : "#A4A4A4" }}
+                        onClick={() => handleUserTypeChange('partner')}
+                        style={{ color: userType === 'partner' ? "#008286" : "#A4A4A4" }}
                     >Partner</h2>
                 </div>
                 <form onSubmit={handleSubmit}>
@@ -112,12 +113,12 @@ const SignUp = () => {
                         onChange={handleInputChange}
                         required
                     />
-                    {userType === 'Partner' && (
+                    {userType === 'partner' && (
                         <input
                             type="text"
-                            name="companyName"
+                            name="company"
                             placeholder="Company Name"
-                            value={formData.companyName}
+                            value={formData.company}
                             onChange={handleInputChange}
                             required
                         />
@@ -138,7 +139,7 @@ const SignUp = () => {
                             required
                         />
                     </div>
-                    <button className='sign_up_button'>
+                    <button type="submit" className='sign_up_button'>
                         <img src={SignUpIcon} alt='sign up' />
                         <p>SIGN UP</p>
                     </button>
