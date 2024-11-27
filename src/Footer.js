@@ -57,11 +57,11 @@ const Footer = () => {
                 <div className="take_a_tour">Take a tour</div>
                 <nav className="menu_footer">
                     <ul>
+                        <li><Link to="/">Home</Link></li>
                         <li><Link to="/about">About Us</Link></li>
                         <li><Link to="/individual">For Individual</Link></li>
                         <li><Link to="/partner">For Partner</Link></li>
-                        <li><Link to="/contact">Location</Link></li>
-                        <li><Link to="/adminlogin">Media</Link></li>
+                        <li><Link to="/contact">Contact Us</Link></li>                        
                     </ul>
                 </nav>
             </div>
