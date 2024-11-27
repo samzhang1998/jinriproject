@@ -2,11 +2,12 @@ import React, { useState,useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import FetchFunc from '../API';
 import YourDetailsForm from './Yourdetails';
-import Paymentdetail from './Paymentdetail';
+// import Paymentdetail from './CheckoutForm';
 import Header from '../Header';
 import './Purchasereport.css';
 import check from '../asset/Check_fill.png';
 import back from '../asset/Expand_left.png';
+import Payment from './Payment';
 
 const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) => {
     const isReportOk = localStorage.getItem('reportOK') === 'true';
@@ -156,9 +157,13 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
     );
 };
 
-const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPurchase }) => {
+const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPurchase, clientSecret, setClientSecret }) => {
     const [selectedServices,setSelectedServices] = useState([]);
     const [services,setServices] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(null);
+    const location = useLocation();
+    const { price } = location.state || {};
+    const totalAmount = parseInt(price) + parseInt(totalPrice);
 
     useEffect(() => {
         const fetchServices = async () => {
@@ -187,10 +192,63 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
           behavior: 'smooth',
         });
     };
-    const handleClick = () => {
-        showStepThree();
-        scrollToTop();
+    // const handleClick = () => {
+    //     const dataToSend = {
+    //         currency: 'aud',
+    //         amount: totalAmount,
+    //         paymentMethod: 'card'
+    //     }
+    //     console.log(dataToSend);
+    //     const response = fetch("http://localhost:8080/create-payment-intent", {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(dataToSend)
+    //     });
+    //     response.then((res) => 
+    //         res.json().then(secret => (
+    //             // console.log(secret)
+    //             setClientSecret(secret.clientSecret)
+    //         ))        
+    //     )
+    //     showStepThree();
+    //     scrollToTop();
+    // };
+
+    // const handleClick = () => {
+    //     showStepThree();
+    //     scrollToTop();
+    // };
+
+    const handleClick = async () => {
+        const dataToSend = {
+            currency: 'aud',
+            amount: totalAmount,
+            paymentMethod: 'card',
+        };    
+        console.log('Sending data:', dataToSend);    
+        try {
+            const response = await fetch("http://localhost:8080/create-payment-intent", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataToSend),
+            });    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const secret = await response.json();
+            setClientSecret(secret.clientSecret);
+            console.log('Client Secret:', secret.clientSecret);
+            showStepThree();
+            scrollToTop();
+        } catch (error) {
+            console.error('Error creating payment intent:', error);
+        }
     };
+
     const role = localStorage.getItem('role');
 
     const calculateTotalPrice = (services) => {
@@ -231,7 +289,8 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
             updatePaymentSummary({
                 getService: updatedServices, // Update the list of services
                 servicePrice: totalPrice, // Update the total price
-            });            
+            });
+            setTotalPrice(totalPrice);            
             
             return updatedServices;
             
@@ -276,10 +335,10 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
     );
 };
 
-const StepThree = ({ formPurchase }) => {
+const StepThree = ({ clientSecret }) => {
     return (
         <div>
-            <Paymentdetail formPurchase={formPurchase} />
+            <Payment clientSecret={clientSecret}/>
         </div>
     );
 };
@@ -333,7 +392,7 @@ const PurchasePage = () => {
         acution: false,
         numberBedroom: null,
         grannyFlat: false,
-        notes: null,
+        notes: '',
         firstName: null,
         lastName: null,
         email: null,
@@ -404,6 +463,7 @@ const PurchasePage = () => {
 
     const [currentStep, setCurrentStep] = useState(1);
     const navigate = useNavigate();
+    const [clientSecret, setClientSecret] = useState('');
     const [paymentSummary, setPaymentSummary] = useState({
         hasGrannyFlat: false,
         grannyFlatPrice: 0,
@@ -531,7 +591,7 @@ const PurchasePage = () => {
                         }
                     </div>
                 </form>}
-                {role === 'Customer' && currentStep !== 3 && <form onSubmit={handleCustomerSubmit}>
+                {role === 'Customer' && <form onSubmit={handleCustomerSubmit}>
                     <div className='payment_choice'>                        
                         {currentStep === 1 && 
                             <StepOne 
@@ -548,20 +608,23 @@ const PurchasePage = () => {
                                 updatePaymentSummary={updatePaymentSummary}
                                 formPurchase={formPurchase} 
                                 onUpdate={handleUpdate}
-                                setFormPurchase={setFormPurchase} 
+                                setFormPurchase={setFormPurchase}
+                                setClientSecret={setClientSecret} 
+                                clientSecret={clientSecret} 
                             />
                         )}
+                        {currentStep === 3 &&                      
+                            <StepThree showStepTwo={showStepTwo} 
+                                showStepOne={showStepOne}
+                                updatePaymentSummary={updatePaymentSummary}
+                                formPurchase={formPurchase} 
+                                onUpdate={handleUpdate}
+                                setFormPurchase={setFormPurchase}
+                                clientSecret={clientSecret}
+                            />                    
+                        }
                     </div>
-                </form>}
-                {currentStep === 3 && <div className='payment_choice1'>                     
-                    <StepThree showStepTwo={showStepTwo} 
-                        showStepOne={showStepOne}
-                        updatePaymentSummary={updatePaymentSummary}
-                        formPurchase={formPurchase} 
-                        onUpdate={handleUpdate}
-                        setFormPurchase={setFormPurchase} 
-                    />                    
-                </div>}
+                </form>}                
                 {role !== 'Admin' && <div className='payment_summary'>
                     <PaymentSummary summary={paymentSummary} />
                 </div>}

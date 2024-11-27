@@ -14,9 +14,10 @@ const AboutUs = () => {
         <Header />
         <div className='overlay_text'>
           <h1>About Us</h1>
-          <p>“Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-           Lorem Ipsum has been the <br /> industry's standard dummy text ever since the 1500s,
-            when an unknown printer took”	</p>
+          <p>Welcome to Check for Sure, the inspection platform you can trust. Our mission 
+            is to provide comprehensive, all-encompassing inspection reports that leave no 
+            detail unnoticed. Whether you're buying, selling, or managing a property, we deliver 
+            accurate insights that empower you to make informed decisions.	</p>
         </div>
       </div>
       <div className='who_we_are'>
