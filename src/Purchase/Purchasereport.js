@@ -157,13 +157,13 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
     );
 };
 
-const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPurchase, clientSecret, setClientSecret }) => {
+const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPurchase, clientSecret, setClientSecret, handlePartnerSubmit }) => {
     const [selectedServices,setSelectedServices] = useState([]);
     const [services,setServices] = useState([]);
     const [totalPrice, setTotalPrice] = useState(null);
     const location = useLocation();
     const { price } = location.state || {};
-    const totalAmount = parseInt(price) + parseInt(totalPrice);
+    const totalAmount = (parseInt(price) + parseInt(totalPrice)) * 100;
 
     useEffect(() => {
         const fetchServices = async () => {
@@ -339,7 +339,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
                 ))}
             </div>
             {role === 'Partner' && <button 
-                type='submit'
+                onClick={handlePartnerSubmit}
                 className='tostep3'
             >ORDER</button>}
             {role === 'Customer' && <button
@@ -576,7 +576,7 @@ const PurchasePage = () => {
             </div>
             <div className='payment_steps'>
                 {role === 'Admin' && <h1>Not Available</h1>}
-                {role === 'Partner' && <form onSubmit={handlePartnerSubmit}>
+                {role === 'Partner' && 
                     <div className='payment_choice'>                        
                         {currentStep === 1 && 
                             <StepOne 
@@ -593,7 +593,8 @@ const PurchasePage = () => {
                                 updatePaymentSummary={updatePaymentSummary}
                                 formPurchase={formPurchase} 
                                 onUpdate={handleUpdate}
-                                setFormPurchase={setFormPurchase} 
+                                setFormPurchase={setFormPurchase}
+                                handlePartnerSubmit={handlePartnerSubmit} 
                             />
                         )}
                         {currentStep === 3 && 
@@ -606,7 +607,7 @@ const PurchasePage = () => {
                             />
                         }
                     </div>
-                </form>}
+                }
                 {role === 'Customer' &&
                     <div className='payment_choice'>
                         {currentStep === 1 && 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
+import "./Payment.css";
 
 // const CheckoutForm = () => {
 //     const stripe = useStripe();
@@ -47,10 +48,10 @@ function Payment({ clientSecret }) {
     const stripePromise = loadStripe("pk_test_51QPcunABwpEZeajXo2pch6nBD11Mj3NckAnEKJIXBa6GVNbByataVG6CuGnlRlfWmoOt9RpHatjU47piXri1d1O700u6TfquCT");
     console.log("payment here:" + clientSecret)
     return (
-    <div>
+    <div className='payment_detail'>
         <h1>Payment</h1>
         {clientSecret && stripePromise && (
-            <Elements stripe={stripePromise} options={{ clientSecret }}>
+            <Elements stripe={stripePromise} options={{ clientSecret, locale: 'en' }}>
                 <CheckoutForm clientSecret={clientSecret}/>
             </Elements>
         )}

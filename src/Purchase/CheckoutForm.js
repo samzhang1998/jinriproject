@@ -341,7 +341,7 @@ export default function CheckoutForm({ clientSecret }) {
           hidePostalCode: true, // Hides the postal code field
         }}
        id="card-element" /> */}
-      <button disabled={isLoading || !stripe || !elements} id="submit">
+      <button disabled={isLoading || !stripe || !elements} id="submit" className='tostep3'>
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>

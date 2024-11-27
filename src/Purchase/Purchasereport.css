@@ -322,8 +322,8 @@
 /* step3 */
 .payment_choice {
     position: relative;
-    width: 90%;
-    margin-left: 4%;
+    width: 50%;
+
 }
 
 /* payment summary */
@@ -334,7 +334,7 @@
 
 .order_summary {
     width: 70%;
-    margin-left: 15%;
+    margin-left: 20%;
     height: auto;
     border-radius: 1.25rem;
     background: #FFF;
