@@ -17,9 +17,11 @@ const ForPartner = () => {
         </div>      
         <div className='partner_text1'>
           <h1>For Partner</h1>
-          <p>Get informed Before You Buy. Have our qualified inspectors provide the reports 
-            you need at the best possible priceGet informed Before You Buy. Have our qualified 
-            inspectors provide the reports you need at the best possible price</p>
+          <p>As a real estate agent, you can order our Building & Pest Reports at no upfront 
+            cost! Simply request the report, and we'll handle the rest—your clients can review 
+            and purchase it directly. This hassle-free process helps you provide added value 
+            to your clients, streamline the sales process, and close deals faster. Partner with 
+            us today and make property sales easier than ever!</p>
         </div>
         <Search />          
       </div>

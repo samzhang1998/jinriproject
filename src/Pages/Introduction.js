@@ -13,15 +13,13 @@ const Introduction = () => {
             <div className="intro_text">
                 <h1>Why Choose Us</h1>
                 <h2>for Your Inspection</h2>
-                <p>We provide more than just a basic inspection—our thorough, accurate 
-                    reports give clients the insights they need to make confident decisions. 
-                    Our experienced team ensures every aspect of the property is carefully 
-                    assessed, with results you can trust.</p>
-                <p>Our commitment to service excellence means fast report turnaround, accessible 
-                    digital storage, and easy-to-understand findings presented with clarity. 
-                    Trusted by both buyers and real estate professionals, we strive to make the 
-                    inspection process transparent and hassle-free. Choose us for a reliable inspection 
-                    partner dedicated to quality, transparency, and your peace of mind.</p>
+                <p>At Check for Sure, we specialize in delivering the most accurate and detailed 
+                    inspection reports in the industry.</p>
+                <p>With Check for Sure, you can make informed decisions with confidence, knowing 
+                    that our reports provide a complete and transparent picture. Whether you're 
+                    a homeowner, buyer, or industry professional, trust us to set the standard for 
+                    excellence in inspections.</p>
+                <p>When it comes to inspections, don't just check -- Check for Sure!</p>
                 <button 
                     className="intro_contact"
                     onClick={() => navigate('/contact')}

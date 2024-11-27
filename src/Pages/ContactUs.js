@@ -41,9 +41,10 @@ const ContactUs = () => {
         <Header />
         <div className='overlay_text1'>
           <h1>Contact Us</h1>
-          <p>“Lorem Ipsum is simply dummy text of the printing and typesetting 
-            industry. Lorem Ipsum has been the industry's standard dummy text 
-            ever since the 1500s, when an unknown printer took”</p>
+          <p>Have questions or need assistance? We're here to help! Whether you're looking 
+            for more information about our reports or need support with your order, feel 
+            free to reach out. Simply fill out the contact form below, and our team will 
+            get back to you as soon as possible. We look forward to hearing from you!</p>
         </div>
       </div>
       <div className='contact_details'>

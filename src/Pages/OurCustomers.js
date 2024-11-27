@@ -7,7 +7,7 @@ import right from '../asset/ArrowSquareRight.png';
 import info from '../asset/ico-quote.png';
 
 const OurCustomers = () => {
-    const customerText = "“Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took”";
+    const customerText = "The building and pest report I purchased was incredibly detailed and easy to understand. It gave me the confidence to proceed with my property purchase, knowing there were no hidden surprises. The service was quick and professional—I highly recommend it!";
     const customers = [
         [
             { name: 'Gladina Samantha', location: 'NSW 2000', imgSrc: nsw },

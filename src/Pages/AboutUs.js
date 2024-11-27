@@ -25,8 +25,8 @@ const AboutUs = () => {
           <div className='introduction'>
             <h2>WHO WE ARE</h2>
             <h3>A one-stop shop <br /> for all your property report</h3>
-            <p>Get informed Before You Buy. Have our qualified inspectors 
-              provide the reports you need at the best possible price</p>
+            <p>At Check for Sure, we believe trust is built on transparency and quality. Let 
+              us be your partner in ensuring peace of mind with inspections you can depend on.</p>
           </div>
           <div className='feature_box'>
             <div className='feature'>
@@ -62,9 +62,11 @@ const AboutUs = () => {
         </div>
         <div className='container2'>
           <h2>Here is the <br /> Feature one</h2>
-          <div className='container2_text1'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took“Lorem Ipsum 
-            is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industr</div>
+          <div className='container2_text1'>What sets us apart is our dedication to thoroughness 
+            and reliability. Every report we produce is crafted with precision, covering every 
+            aspect of the property to ensure you have a complete understanding of its condition. 
+            From structural integrity to minor details, we provide a full picture so there are no 
+            surprises.</div>
           <img src={office} alt='office' />
           <div className='show_data'>
             <div className='report_data'>
