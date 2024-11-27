@@ -42,7 +42,7 @@ function App () {
           <Route path="/:type/:id/orders/:orderId/:orderStatus" element={<OrderDetail />} />
           <Route path="/adminlogin" element={<Adminlogin />} />
           <Route path="/admin/:id" element={<Admin />} />
-          <Route path="/completion" element={<Completion />} />                    
+          <Route path="/complete" element={<Completion />} />                    
         </Routes>
         <Footer />
     </Router>

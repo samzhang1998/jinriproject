@@ -211,25 +211,65 @@ import {
   LinkAuthenticationElement
 } from '@stripe/react-stripe-js'
 import {useState} from 'react'
-import {useStripe, useElements} from '@stripe/react-stripe-js';
+import {Elements, useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 
 export default function CheckoutForm({ clientSecret }) {
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState('');
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
+    
+    // const cardElement = elements.getElement(CardElement);
+    
+    // setIsLoading(true);
+    // console.log(clientSecret)
+    // const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
+    //   payment_method: {
+    //     card: cardElement,
+    //     billing_details: {
+    //       name: 'John Doe', // Collect the user's name
+    //     },
+    //   },
+    // });
 
-    setIsLoading(true);
-
+    // if (error) {
+    //   console.error(error.message);
+    //   setPaymentStatus(`Payment failed: ${error.message}`);
+    // } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+    //   setPaymentStatus('Payment successful!');
+    // }
+    
+    try {
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${window.location.origin}/complete`, // Optional: Use if redirection is required
+        },
+      });
+  
+      if (error) {
+        console.error("Payment failed:", error.message);
+        setPaymentStatus(`Payment failed: ${error.message}`);
+      } else {
+        setPaymentStatus("Payment successful!");
+      }
+    } catch (error) {
+      console.error("An unexpected error occurred:", error);
+      setPaymentStatus("An unexpected error occurred. Please try again.");
+    }
+    
+    
     // const { error } = await stripe.confirmPayment({
     //   elements,
     //   confirmParams: {
@@ -238,18 +278,18 @@ export default function CheckoutForm({ clientSecret }) {
     //   },
     // });
 
-    stripe
-      .confirmCardPayment({clientSecret}, {
-        payment_method: {
-          card: elements,
-          billing_details: {
-            name: 'Jenny Rosen',
-          },
-        },
-      })
-      .then(function(result) {
-        // Handle result.error or result.paymentIntent
-      });
+    // stripe
+    //   .confirmCardPayment({clientSecret}, {
+    //     payment_method: {
+    //       card: elements,
+    //       billing_details: {
+    //         name: 'Jenny Rosen',
+    //       },
+    //     },
+    //   })
+    //   .then(function(result) {
+    //     // Handle result.error or result.paymentIntent
+    //   });
 
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
@@ -265,6 +305,24 @@ export default function CheckoutForm({ clientSecret }) {
     setIsLoading(false);
   }
 
+  const CARD_ELEMENT_OPTIONS = {
+    style: {
+      base: {
+        color: "#32325d",
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: "antialiased",
+        fontSize: "16px",
+        "::placeholder": {
+          color: "#aab7c4",
+        },
+      },
+      invalid: {
+        color: "#fa755a",
+        iconColor: "#fa755a",
+      },
+    },
+  };
+
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       {/* <LinkAuthenticationElement id="link-authentication-element"
@@ -277,13 +335,19 @@ export default function CheckoutForm({ clientSecret }) {
         // options={{defaultValues: {email: 'foo@bar.com'}}}
         /> */}
       <PaymentElement id="payment-element" />
+      {/* <CardElement 
+        options={{
+          style: CARD_ELEMENT_OPTIONS,
+          hidePostalCode: true, // Hides the postal code field
+        }}
+       id="card-element" /> */}
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>
       </button>
       {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
+      {paymentStatus && <div id="payment-message">{paymentStatus}</div>}
     </form>
   )
 }

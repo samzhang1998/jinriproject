@@ -221,7 +221,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
     //     scrollToTop();
     // };
 
-    const handleClick = async () => {
+    const handleClick = () => {
         const dataToSend = {
             currency: 'aud',
             amount: totalAmount,
@@ -229,19 +229,34 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
         };    
         console.log('Sending data:', dataToSend);    
         try {
-            const response = await fetch("http://localhost:8080/create-payment-intent", {
+            fetch("http://localhost:8080/create-payment-intent", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(dataToSend),
-            });    
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const secret = await response.json();
-            setClientSecret(secret.clientSecret);
-            console.log('Client Secret:', secret.clientSecret);
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json(); // Parse JSON response
+            })
+            .then(data => {
+                if (data.clientSecret) {
+                    setClientSecret(data.clientSecret); // Set client secret
+                    console.log('Client Secret:', data.clientSecret);
+                } else {
+                    console.error("Client secret not found in response");
+                }
+            })
+
+            // if (!response.ok) {
+            //     throw new Error(`HTTP error! status: ${response.status}`);
+            // }
+            // const secret = response.json();
+            // setClientSecret(secret.clientSecret);
+            console.log('1111Client Secret:', clientSecret);
             showStepThree();
             scrollToTop();
         } catch (error) {
@@ -336,6 +351,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
 };
 
 const StepThree = ({ clientSecret }) => {
+    console.log("here is secret: " + clientSecret)
     return (
         <div>
             <Payment clientSecret={clientSecret}/>
@@ -591,8 +607,8 @@ const PurchasePage = () => {
                         }
                     </div>
                 </form>}
-                {role === 'Customer' && <form onSubmit={handleCustomerSubmit}>
-                    <div className='payment_choice'>                        
+                {role === 'Customer' &&
+                    <div className='payment_choice'>
                         {currentStep === 1 && 
                             <StepOne 
                                 showStepTwo={showStepTwo} 
@@ -604,7 +620,7 @@ const PurchasePage = () => {
                         }
                         {currentStep === 2 && (
                             <StepTwo showStepThree={showStepThree} 
-                                showStepOne={showStepOne} 
+                                showStepOne={showStepOne}
                                 updatePaymentSummary={updatePaymentSummary}
                                 formPurchase={formPurchase} 
                                 onUpdate={handleUpdate}
@@ -624,7 +640,7 @@ const PurchasePage = () => {
                             />                    
                         }
                     </div>
-                </form>}                
+                }                
                 {role !== 'Admin' && <div className='payment_summary'>
                     <PaymentSummary summary={paymentSummary} />
                 </div>}
