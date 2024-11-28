@@ -3,18 +3,67 @@ import './Yourdetails.css';
 
 const YourDetailsForm = ({ formPurchase, onUpdate}) => {
     const [addSecond,setAddSecond] = useState(false);
-    const handleUpdate = (e) => {
-        const { name, value, type, checked } = e.target;
-        if (type === 'checkbox') {
-            onUpdate(name, checked);
-        } else {
-            onUpdate(name, value);
-        }
-    };
+    // const handleUpdate = (e) => {
+    //     const { name, value, type, checked } = e.target;
+    //     if (type === 'checkbox') {
+    //         onUpdate(name, checked);
+    //     } else {
+    //         onUpdate(name, value);
+    //     }
+    // };
 
     const handleClick = () => {
         const choose = !addSecond
         setAddSecond(choose);
+    };
+
+    const [errors, setErrors] = useState({});
+    const validateField = (name, value, relatedValue) => {
+        let error = '';
+
+        if (name === 'email') {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                error = 'Invalid email format';
+            }
+        } else if (name === 'mobile') {
+            const mobileRegex = /^\d{10,15}$/;
+            if (!mobileRegex.test(value)) {
+                error = 'Invalid mobile number';
+            }
+        } else if (name === 'confirmEmail') {
+            if (value !== relatedValue) {
+                error = 'Emails do not match';
+            }
+        } else if (name === 'agentEmail') {
+            const agentEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!agentEmailRegex.test(value)) {
+                error = 'Invalid email format';
+            }
+        } else if (name === 'agentMobile') {
+            const agentMobileRegex = /^\d{10,15}$/;
+            if (!agentMobileRegex.test(value)) {
+                error = 'Invalid mobile number';
+            }
+        }
+
+        return error;
+    };
+
+    const handleUpdate = (e) => {
+        const { name, value, type, checked } = e.target;
+        const fieldValue = type === 'checkbox' ? checked : value;
+        const relatedValue = name === 'confirmEmail' ? formPurchase.email : null;
+
+        const error = validateField(name, fieldValue, relatedValue);
+        if (name === 'confirmEmail') {
+            setErrors((prev) => ({ ...prev, [name]: error }));
+            return;
+        }
+
+        setErrors((prev) => ({ ...prev, [name]: error }));
+        
+        onUpdate(name, fieldValue);
     };
 
     return (
@@ -52,12 +101,17 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                     placeholder="Email*"
                     required
                 />
+                {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
                 <input 
                     type="email"
                     name="confirmEmail"
                     placeholder="Confirm Email*"
+                    onChange={handleUpdate}
                     required
                 />
+                {errors.confirmEmail && (
+                    <p style={{ color: 'red' }}>{errors.confirmEmail}</p>
+                )}
                 <input 
                     type="text"
                     name="mobile"
@@ -66,6 +120,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                     placeholder="Contact Number*"
                     required
                 />
+                {errors.mobile && <p style={{ color: 'red' }}>{errors.mobile}</p>}
                 <input 
                     type="text"
                     name="homeAddress"
@@ -141,6 +196,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                     placeholder="Agent Email*"
                     required
                 />
+                {errors.agentEmail && <p style={{ color: 'red' }}>{errors.agentEmail}</p>}
                 <input 
                     type="text"
                     name="agentMobile"
@@ -148,7 +204,8 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                     onChange={handleUpdate}
                     placeholder="Agent Contact Number*"
                     required
-                />                
+                />
+                {errors.agentMobile && <p style={{ color: 'red' }}>{errors.agentMobile}</p>}                
             </div>
         </div>
     );

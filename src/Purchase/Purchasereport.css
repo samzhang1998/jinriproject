@@ -330,6 +330,7 @@
 .payment_summary {
     position: relative;
     width: 35%;
+    margin-bottom: 5%;
 }
 
 .order_summary {

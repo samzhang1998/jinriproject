@@ -1,5 +1,8 @@
 import {useEffect, useState} from 'react';
+import { Link } from 'react-router-dom';
+import Header from '../Header';
 import FetchFunc from '../API';
+import back from "../asset/Expand_left.png";
 
 function Completion(props) {
   const [ messageBody, setMessageBody ] = useState('');
@@ -54,11 +57,25 @@ function Completion(props) {
   console.log(paymentContext);
 
   return (
-    <>
-      <h1>Thank you!</h1>
-      <a href="/">home</a>
+    <div className="thank_you">
+      <Header />
+      <div className='header_bg'></div>
+      <Link to='/'>
+        <button className='back'>
+          <div className='back_text'>
+            <img src={back} alt='back' />
+            <p>Back</p>
+          </div>
+        </button>
+      </Link>
+      <div className="thank_you_text">
+        <h1>Thank You!</h1>
+        <p>A Confirmation has been send to your email! 
+          You can check via your email or our customer portal.</p>
+        <Link to='/' style={{textDecoration: 'none'}}><button className="back_to_home">Back</button></Link>
+      </div>
       <div id="messages" role="alert" style={messageBody ? {display: 'block'} : {}}>{messageBody}</div>
-    </>
+    </div>
   );
 }
 

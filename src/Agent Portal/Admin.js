@@ -143,7 +143,7 @@ const Admin = () => {
                         onClick={showServices} 
                         className="to_details"
                         style={{
-                            background: currentPage === 3 ? "#F4F4F4" : "#FFF",
+                            background: currentPage === 4 ? "#F4F4F4" : "#FFF",
                         }}
                     >
                         {currentPage === 4 && <img src={fill1} alt="fill1" />}
@@ -154,9 +154,9 @@ const Admin = () => {
                             }}
                         >Service Status</p>
                     </div>
-                    <div className="to_details" onClick={handleLogout}>
-                        <img src={logout} alt="logout" />
-                        <p style={{color: '#A4A4A4'}}>Logout</p>                        
+                    <div className="to_details">
+                        <img src={logout} alt="logout" onClick={handleLogout}/>
+                        <p style={{color: '#A4A4A4'}} onClick={handleLogout}>Logout</p>                        
                     </div>
                 </div>            
                 <div className="portal_details">
