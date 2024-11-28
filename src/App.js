@@ -22,6 +22,7 @@ import Adminlogin from './Pages/Adminlogin';
 import Completion from './Purchase/Completion';
 
 function App () {
+  // localStorage.clear();
   return(
     <Router>
       <ScrollToTop />

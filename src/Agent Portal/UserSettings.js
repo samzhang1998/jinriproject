@@ -261,6 +261,8 @@ const UserSettings = () => {
     const [showPasswordModal, setShowPasswordModal] = useState(false);
     const useremail = localStorage.getItem('email');
     const usermobile = localStorage.getItem('mobile');
+    console.log(useremail)
+    console.log(usermobile)
 
     return (
         <div className="change_settings">
