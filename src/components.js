@@ -330,8 +330,8 @@ const MobileSearchBox = () => {
                         onPlaceChanged={onPlaceChanged}
                         bounds={bounds}
                         options={{
-                            strictBounds: true,
-                            types: ['address'],
+                            // strictBounds: true,
+                            // types: ['address'],
                             componentRestrictions: { country: "AU" }, // Restrict to Australia
                         }}
                     >

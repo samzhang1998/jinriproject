@@ -165,14 +165,25 @@ const AddPropertyModal = ({ closeModal, refresh, setRefresh }) => {
         roomNumber: '',
         postcode: '',
     });
-    const Change = `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`;
+    // const Change = `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`;
+    const getAddress = () => {
+        const { streetNumber, streetName, suburb, state, postcode } = property;
+        return `${streetNumber} ${streetName}, ${suburb} ${state} ${postcode}`.trim();
+    };
 
+    // const handleInputChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setProperty((prevData) => ({
+    //       ...prevData,
+    //       [name]: value,
+    //       address: Change,
+    //     }));
+    // };
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProperty((prevData) => ({
-          ...prevData,
-          [name]: value,
-          address: Change,
+            ...prevData,
+            [name]: value,
         }));
     };
 
@@ -180,6 +191,7 @@ const AddPropertyModal = ({ closeModal, refresh, setRefresh }) => {
         e.preventDefault();
         const dataToSend = {
             ...property,
+            address: getAddress(),
         };
         try {
             console.log('data sent:', dataToSend);
