@@ -27,47 +27,48 @@ const SignUp = () => {
             role: type,
         }));
     };
+    // const handleInputChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData((prevData) => ({
+    //       ...prevData,
+    //       [name]: value,
+    //     }));
+    // };
+    
+    const [errors, setErrors] = useState({});
+    const [status, setStatus] = useState('');
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
-    };
 
-    // let debounceTimer;
-    // const handleUsernameChange = (e) => {
-    //     const value = e.target.value;
-    //     setUsername(value);
-    //     setFormData((prevData) => ({
-    //         ...prevData,
-    //         username: value,
-    //     }));
-    //     if (debounceTimer) {
-    //         clearTimeout(debounceTimer);
-    //     }
-    //     debounceTimer = setTimeout(() => {
-    //         checkUser(value);
-    //     }, 700);
-    // };
- 
-    // const checkUser = async () => {
-    //     try {
-    //         console.log(username, userType);
-    //         const response = await FetchFunc(
-    //             `/signup/check?username=${username}&role=${userType}`,
-    //             'POST',
-    //         );      
-    //         if (!response.ok) {
-    //             console.log(response.text());
-    //             setStatus('This username is not available');
-    //         } else {
-    //             console.log('Response from server:', await response.json());
-    //         }
-    //     } catch (error) {
-    //         console.error('Error submitting form:', error);
-    //     }
-    // };      
+        const validateField = (fieldName, fieldValue) => {
+            if (fieldName === 'email') {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(fieldValue)) {
+                    return 'Invalid email format';
+                }
+            } else if (fieldName === 'confirmPassword') {
+                if (fieldValue !== formData.password) {
+                    return 'Passwords do not match';
+                }
+            }
+            return '';
+        };
+
+        const error = validateField(name, value);
+
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: error,
+        }));
+
+        if (name !== 'confirmPassword') {
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: value,
+            }));
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -82,9 +83,11 @@ const SignUp = () => {
             );      
             if (!response1.ok) {
                 console.log(response1.text());
-                setStatus('This username is not available');
             } else {
-                console.log('Response from server:', await response1.json());
+                const check = await response1.json();
+                if (check === false) {
+                    setStatus('This username is not available');
+                }
             }
             console.log("data sent:", dataToSend);
             const response = await FetchFunc(
@@ -154,7 +157,6 @@ const SignUp = () => {
                         onChange={handleInputChange}
                         required
                     />
-                    {/* {status && <p style={{color: 'red'}}>{status}</p>} */}
                     <input
                         type="text"
                         name="email"
@@ -163,6 +165,7 @@ const SignUp = () => {
                         onChange={handleInputChange}
                         required
                     />
+                    {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
                     {userType === 'partner' && (
                         <input
                             type="text"
@@ -186,13 +189,18 @@ const SignUp = () => {
                             type="password"
                             name="confirmPassword"
                             placeholder="Confirm Password *"
+                            onChange={handleInputChange}
                             required
                         />
                     </div>
+                    {errors.confirmPassword && (
+                        <p style={{ color: 'red' }}>{errors.confirmPassword}</p>
+                    )}
                     <button type="submit" className='sign_up_button'>
                         <img src={SignUpIcon} alt='sign up' />
                         <p>SIGN UP</p>
                     </button>
+                    {status && <p style={{color: 'red'}}>{status}</p>}
                 </form>
             </div>
         </div>
