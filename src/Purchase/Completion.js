@@ -23,7 +23,6 @@ function Completion(props) {
   }, [stripePromise]);
   
   useEffect(() => {
-  
     const submitForm = async () => {
       const formPurchase = sessionStorage.getItem("formPurchase");
       if (!formPurchase) {
