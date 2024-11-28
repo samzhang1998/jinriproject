@@ -5,7 +5,7 @@ import FetchFunc from "../API";
 
 const Orders = ({ type,id }) => {
     const [orders, setOrders] = useState([]);
-    const [filter, setFilter] = useState('complete');
+    const [filter, setFilter] = useState('completed');
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -60,8 +60,8 @@ const Orders = ({ type,id }) => {
                     className={filter === 'processing' ? 'active' : ''}
                 >Processing</span>
                 <span 
-                    onClick={() => setFilter('complete')}
-                    className={filter === 'complete' ? 'active' : ''}
+                    onClick={() => setFilter('completed')}
+                    className={filter === 'completed' ? 'active' : ''}
                 >Completed</span>
             </div>
             <div className="order_list">

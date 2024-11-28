@@ -61,7 +61,7 @@ const EditCustomerOrderModal = ({ id, closeModal }) => {
                         >
                             <option value="">Order Status</option>
                             <option value="Processing">Processing</option>
-                            <option value="Complete">Complete</option>
+                            <option value="Completed">Completed</option>
                         </select>
                     </label>
                     <label>
@@ -167,7 +167,7 @@ const InspectionPriceModal = ({ closeModal, refresh, setRefresh }) => {
 const Customerorders = () => {
     const [order, setOrder] = useState([]);
     const navigate = useNavigate();
-    const [filter, setFilter] = useState('complete');
+    const [filter, setFilter] = useState('completed');
     const [refresh, setRefresh] = useState(false);
     const [activeOrderId, setActiveOrderId] = useState(null);
     const [priceModal, setPriceModal] = useState(false);
@@ -241,8 +241,8 @@ const Customerorders = () => {
                     className={filter === 'processing' ? 'active' : ''}
                 >Processing</span>
                 <span 
-                    onClick={() => setFilter('complete')}
-                    className={filter === 'complete' ? 'active' : ''}
+                    onClick={() => setFilter('completed')}
+                    className={filter === 'completed' ? 'active' : ''}
                 >Completed</span>
             </div>
             <div className="order_list">
