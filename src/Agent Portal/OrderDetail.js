@@ -129,13 +129,13 @@ const OrderDetail = () => {
                             <h3>Last update on {order.lastUpdate}</h3>
                         </div>
                         {type === 'Customer' && <div className="download_area">
-                            {order.reportName === null ? (
-                                <button className="download_report">
+                            {order.orderStatus === 'completed' && order.reportName !== null ? (
+                                <button onClick={handleDownload} className="download_report1">
                                     <img src={download} alt="download" />
                                     Download Report
                                 </button>
                             ) : (
-                                <button onClick={handleDownload} className="download_report1">
+                                <button className="download_report">
                                     <img src={download} alt="download" />
                                     Download Report
                                 </button>
