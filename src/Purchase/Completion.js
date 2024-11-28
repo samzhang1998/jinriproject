@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header';
 import FetchFunc from '../API';
+import back from "../asset/Expand_left.png";
 
 function Completion(props) {
   const [ messageBody, setMessageBody ] = useState('');
