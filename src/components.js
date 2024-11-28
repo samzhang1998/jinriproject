@@ -60,6 +60,8 @@ const parseAddress = (address) => {
     };
 };
 
+const libraries = ['places'];
+
 const SearchBox = () => {
     const [formData, setFormData] = useState({
         propertyId: '',
@@ -76,7 +78,6 @@ const SearchBox = () => {
     const [query, setQuery] = useState('');
     const [autocomplete, setAutocomplete] = useState(null);
     const navigate = useNavigate();
-    const libraries = ['places'];
     const [bounds, setBounds] = useState(null);
 
     useEffect(() => {
@@ -329,7 +330,8 @@ const MobileSearchBox = () => {
                         bounds={bounds}
                         options={{
                             strictBounds: true,
-                            types: ['address']
+                            types: ['address'],
+                            componentRestrictions: { country: "AU" }, // Restrict to Australia
                         }}
                     >
                         <input className="mobile_search"
