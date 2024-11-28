@@ -42,9 +42,10 @@
 
 .customer_card {
     width: 95%;
-    aspect-ratio: 540 / 241;
+    height: 20rem;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     padding: 5%;
     box-sizing: border-box;
     background: #FFF;
@@ -79,7 +80,7 @@
     width: 95%;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: end;
 }
 
 .customer_info img {

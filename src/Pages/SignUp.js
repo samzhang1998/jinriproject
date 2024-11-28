@@ -9,6 +9,8 @@ import back from '../asset/Expand_left.png';
 const SignUp = () => {
     const [userType, setUserType] = useState('customer')
     const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [status,setStatus] = useState('');
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -32,6 +34,41 @@ const SignUp = () => {
           [name]: value,
         }));
     };
+
+    let debounceTimer;
+    const handleUsernameChange = (e) => {
+        const value = e.target.value;
+        setUsername(value);
+        setFormData((prevData) => ({
+            ...prevData,
+            username: value,
+        }));
+        if (debounceTimer) {
+            clearTimeout(debounceTimer);
+        }
+        debounceTimer = setTimeout(() => {
+            checkUser(value);
+        }, 700);
+    };
+ 
+    const checkUser = async () => {
+        try {
+            console.log(username, userType);
+            const response = await FetchFunc(
+                `/signup/check?username=${username}&role=${userType}`,
+                'POST',
+            );      
+            if (!response.ok) {
+                console.log(response.text());
+                setStatus('This username is not available');
+            } else {
+                console.log('Response from server:', await response.json());
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    };      
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const dataToSend = {
@@ -102,10 +139,11 @@ const SignUp = () => {
                         type="text"
                         name="username"
                         placeholder="Username *"
-                        value={formData.username}
-                        onChange={handleInputChange}
+                        value={username}
+                        onChange={handleUsernameChange}
                         required
                     />
+                    {status && <p style={{color: 'red'}}>{status}</p>}
                     <input
                         type="text"
                         name="email"
