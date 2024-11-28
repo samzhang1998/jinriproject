@@ -182,7 +182,8 @@ const SearchBox = () => {
                 bounds={bounds}
                 options={{
                     strictBounds: true,
-                    types: ['address']
+                    types: ['address'],
+                    componentRestrictions: { country: "AU" },
                 }}
             >
                 <input className="screen_search"
