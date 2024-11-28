@@ -79,9 +79,9 @@ const ContactUs = () => {
         </div>
         <div className='send_message'>
           <h1>Send Message</h1>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting 
-            industry. Lorem Ipsum has been the industry's standard dummy 
-            text ever since the 1500s, when an unknown printer took</p>
+          <p>Feel free to reach out to us with any questions or concerns. 
+            We're here to assist you and ensure your experience is seamless 
+            and stress-free.</p>
           <form onSubmit={handleSubmit}>
             <div className='message_name'>
               <input 

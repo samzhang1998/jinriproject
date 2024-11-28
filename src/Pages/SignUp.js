@@ -38,6 +38,7 @@ const SignUp = () => {
             ...formData,
         };
         try {
+            console.log("data sent:", dataToSend);
             const response = await FetchFunc(
                 '/signup/',
                 'POST',
@@ -83,7 +84,7 @@ const SignUp = () => {
                         <input
                             type="text"
                             name="firstName"
-                            placeholder="First Name"
+                            placeholder="First Name *"
                             value={formData.firstName}
                             onChange={handleInputChange}
                             required
@@ -91,7 +92,7 @@ const SignUp = () => {
                         <input
                             type="text"
                             name="lastName"
-                            placeholder="Last Name"
+                            placeholder="Last Name *"
                             value={formData.lastName}
                             onChange={handleInputChange}
                             required
@@ -100,7 +101,7 @@ const SignUp = () => {
                     <input
                         type="text"
                         name="username"
-                        placeholder="Username"
+                        placeholder="Username *"
                         value={formData.username}
                         onChange={handleInputChange}
                         required
@@ -108,7 +109,7 @@ const SignUp = () => {
                     <input
                         type="text"
                         name="email"
-                        placeholder="email"
+                        placeholder="email *"
                         value={formData.email}
                         onChange={handleInputChange}
                         required
@@ -117,7 +118,7 @@ const SignUp = () => {
                         <input
                             type="text"
                             name="company"
-                            placeholder="Company Name"
+                            placeholder="Company Name *"
                             value={formData.company}
                             onChange={handleInputChange}
                             required
@@ -127,7 +128,7 @@ const SignUp = () => {
                         <input
                             type="password"
                             name="password"
-                            placeholder="Password"
+                            placeholder="Password *"
                             value={formData.password}
                             onChange={handleInputChange}
                             required
@@ -135,7 +136,7 @@ const SignUp = () => {
                         <input
                             type="password"
                             name="confirmPassword"
-                            placeholder="Confirm Password"
+                            placeholder="Confirm Password *"
                             required
                         />
                     </div>
