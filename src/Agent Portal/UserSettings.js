@@ -5,8 +5,15 @@ import close from "../asset/Close_round.png";
 
 const EmailModal = ({ closeModal }) => {
     const [email, setEmail] = useState('');
+    const [status,setStatus] = useState('');
     const handleChange = (e) => {
-        setEmail(e.target.value);
+        const value = e.target.value;
+        setEmail(value);
+        if (value === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+            setStatus('');
+        } else {
+            setStatus('Invalid email format!');
+        }       
     };
     const role = localStorage.getItem('role');
     const id = localStorage.getItem('userId');
@@ -72,6 +79,7 @@ const EmailModal = ({ closeModal }) => {
                     value={email}
                     onChange={handleChange}
                 />
+                {status && <p style={{color: 'red'}}>{status}</p>}
                 {role === 'Partner' && <button
                     onClick={handlePartnerSave}
                     className="save_change"
@@ -87,8 +95,15 @@ const EmailModal = ({ closeModal }) => {
 
 const MobileModal = ({ closeModal, setBottomMobile }) => {
     const [mobile, setMobile] = useState();
+    const [status,setStatus] = useState('');
     const handleChange = (e) => {
-        setMobile(e.target.value);
+        const value = e.target.value;
+        setMobile(value);
+        if (value === '' || /^\d{0,15}$/.test(value)) {
+            setStatus('');
+        } else {
+            setStatus('Invalid mobile number!');
+        }        
     };
     const role = localStorage.getItem('role');
     const id = localStorage.getItem('userId');
@@ -153,6 +168,7 @@ const MobileModal = ({ closeModal, setBottomMobile }) => {
                     value={mobile}
                     onChange={handleChange}
                 />
+                {status && <p style={{color: 'red'}}>{status}</p>}
                 {role === 'Partner' && <button
                     onClick={handlePartnerSave}
                     className="save_change"
@@ -174,6 +190,7 @@ const PasswordModal = ({ closeModal }) => {
     const id = localStorage.getItem('userId');
     const handleOldPasswordChange = (e) => setOldPassword(e.target.value);
     const handleNewPasswordChange = (e) => setNewPassword(e.target.value);
+    const [status,setStatus] = useState('');
     const userData = {
         email: '',
         userId: id,
@@ -193,11 +210,14 @@ const PasswordModal = ({ closeModal }) => {
                 'POST',
                 JSON.stringify(userData)
             );
-            if (!response.ok) {
+            if (response.status === 401) {
+                setStatus('Old password is wrong!')
+            } else if (!response.ok) {
                 console.log(response.text());
-            }
-            console.log('Response from server:', response);
-            closeModal();
+            } else {
+                console.log('Response from server:', response);
+                closeModal();
+            }            
         } catch (error) {
             console.error('Failed to update password:', error);
             setErrorMessage('Failed to update password');
@@ -211,11 +231,14 @@ const PasswordModal = ({ closeModal }) => {
                 'POST',
                 JSON.stringify(userData)
             );
-            if (!response.ok) {
+            if (response.status === 401) {
+                setStatus('Old password is wrong!')
+            } else if (!response.ok) {
                 console.log(response.text());
+            } else {
+                console.log('Response from server:', response);
+                closeModal();
             }
-            console.log('Response from server:', response);
-            closeModal();
         } catch (error) {
             console.error('Failed to update password:', error);
             setErrorMessage('Failed to update password');
@@ -250,6 +273,7 @@ const PasswordModal = ({ closeModal }) => {
                     onClick={handleCustomerSave}
                     className="save_change"
                 >Save</button>}
+                {status && <p style={{color: 'red'}}>{status}</p>}
             </div>
         </div>
     );
