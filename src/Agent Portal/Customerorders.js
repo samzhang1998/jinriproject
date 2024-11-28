@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Customerorders.css";
 import FetchFunc from "../API";
 import { useNavigate } from "react-router-dom";
+import close from "../asset/Close_round.png";
 
 const EditCustomerOrderModal = ({ id, closeModal }) => {
     const navigate = useNavigate();
@@ -83,12 +84,93 @@ const EditCustomerOrderModal = ({ id, closeModal }) => {
     );
 };
 
+const InspectionPriceModal = ({ closeModal, refresh, setRefresh }) => {
+    const [price, setPrice] = useState(null);
+    const [prevPrice, setPrevPrice] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const response = await FetchFunc(
+                    '/search/inspection',
+                    'GET',
+                );
+                if (!response.ok) {
+                    console.log(response.text());
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Response from server:', response);
+                const data = await response.json();
+                console.log('data response:', data);
+                setPrevPrice(data);
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+            }
+        };
+        fetchServices();
+    }, []);
+
+    const handleChange = (e) => {
+        const newValue = e.target.value;
+        setPrice(parseFloat(newValue));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            console.log(price);
+            const response = await FetchFunc(
+                `/admin/editInspection/?price=${price}`,
+                'POST',
+            );
+            if (response === 401) {
+                navigate('/login');
+            } else if (!response.ok) {
+                console.log(response.text())
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            console.log('Response from server:', response);
+            setRefresh(!refresh);
+            closeModal();
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    };
+
+    return (
+        <div className="change_modal">
+            <div className="price_modal">
+                <div className="close_modal">
+                    <img src={close} alt="close" onClick={closeModal} />
+                </div>
+                <h1>Set Inspection Price</h1>
+                <div className="set_price">
+                    <p>Price:</p>
+                    <input 
+                        type="number"
+                        value={price}
+                        onChange={handleChange}
+                        placeholder={prevPrice}
+                        required
+                    />
+                </div>
+                <button 
+                    onClick={handleSubmit} 
+                    className="save_add_modal"
+                >Save</button>
+            </div>
+        </div>
+    );
+};
+
 const Customerorders = () => {
     const [order, setOrder] = useState([]);
     const navigate = useNavigate();
     const [filter, setFilter] = useState('complete');
     const [refresh, setRefresh] = useState(false);
     const [activeOrderId, setActiveOrderId] = useState(null);
+    const [priceModal, setPriceModal] = useState(false);
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -127,9 +209,27 @@ const Customerorders = () => {
         setActiveOrderId(null);
     };
 
+    const handleChangePrice = () => {
+        setPriceModal(true);
+    };
+
+    const handleFinishChangePrice = () => {
+        setPriceModal(false);
+    };
+
     return (
         <div className="orders">
-            <h1>Orders</h1>
+            <div className="change_property_title">
+                <h1>Orders</h1>
+                <button onClick={handleChangePrice} style={{width: '15rem'}}>Edit Inspection Price</button>
+                {priceModal === true &&(
+                    <InspectionPriceModal 
+                        closeModal={handleFinishChangePrice}
+                        refresh={refresh}
+                        setRefresh={setRefresh}
+                    />
+                )}
+            </div>
             <hr style={{background: '#DDD', width: '100%', }} />
             <div className="order_status">
                 <span 

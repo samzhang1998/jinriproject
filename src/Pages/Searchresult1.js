@@ -45,11 +45,11 @@ const Searchresult1 = () => {
                         <p>Report available now!</p>
                     </div>
                     <h4>Details</h4>
-                    <p>SUPERIOR SERVICE, EXCEPTIONAL VALUE. <br />
-                        At QC Property Inspections, our experienced inspectors ensure building 
-                        safety and integrity through thorough visual inspections. With over 
-                        10 years of industry exposure, we empower you to make confident 
-                        decisions about your property or your next purchase.</p>
+                    <p>SUPERIOR SERVICE, EXCEPTIONAL VALUE. <br />At QC Property Inspections, 
+                    our skilled professionals provide comprehensive visual assessments to 
+                    ensure the safety and structural integrity of your property. Backed by over 
+                    a decade of industry expertise, we are committed to helping you make informed 
+                    and confident choices for your current property or future investment.</p>
                     <h5>Inspectors</h5>
                     <span>Max</span>
                     <div className="purchase_button">
@@ -75,29 +75,29 @@ const Searchresult1 = () => {
             <div className='check'>
                 <div className='check_text'>
                     <h6>Check For Sure</h6>
-                    <p>For most people, buying a property is the 
-                        biggest financial decision of their life.</p>
-                    <p>There are real risks involved - you could buy a “lemon” and be 
-                        left paying thousands to fix a property that was hiding significant issues.</p>
-                    <p>At BYB, we have a panel of independent inspectors that can 
-                        help you with your property due diligence. We also have a cash 
-                        back model to ensure that you don't waste money when looking 
-                        at properties that you don't end up buying.</p>
+                    <p>For most people, buying a property is one of the biggest 
+                        financial decisions of their life.</p>
+                    <p>There are real risks involved -- you might end up purchasing a property 
+                        with hidden issues, costing you thousands in unexpected repairs.</p>
+                    <p>At Check For Sure, we offer access to a panel of independent, qualified 
+                        inspectors to assist you with your property due diligence. Additionally, 
+                        our unique cashback model ensures you don't waste money on properties 
+                        that don't end up being the right fit for you.</p>
                     <div className='dummy_text'>
                         <img src={ok} alt='ok' />
-                        <p>Lorem Ipsum is simply dummy text of the</p>
+                        <p>Mitigate risks of hidden property issues</p>
                     </div>
                     <div className='dummy_text'>
                         <img src={ok} alt='ok' />
-                        <p>Lorem Ipsum is simply dummy text of the</p>
+                        <p>Access to trusted independent inspectors</p>
                     </div>
                     <div className='dummy_text'>
                         <img src={ok} alt='ok' />
-                        <p>Lorem Ipsum is simply dummy text of the</p>
+                        <p>Save money with cashback guarantee</p>
                     </div>
                     <div className='dummy_text'>
                         <img src={ok} alt='ok' />
-                        <p>Lorem Ipsum is simply dummy text of the</p>
+                        <p>Make confident, informed property decisions</p>
                     </div>
                 </div>
                 <div className='check_img'>

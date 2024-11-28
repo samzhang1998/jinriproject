@@ -7,23 +7,22 @@ import right from '../asset/ArrowSquareRight.png';
 import info from '../asset/ico-quote.png';
 
 const OurCustomers = () => {
-    const customerText = "The building and pest report I purchased was incredibly detailed and easy to understand. It gave me the confidence to proceed with my property purchase, knowing there were no hidden surprises. The service was quick and professional—I highly recommend it!";
     const customers = [
         [
-            { name: 'Gladina Samantha', location: 'NSW 2000', imgSrc: nsw },
-            { name: 'John Doe', location: 'VIC 3200', imgSrc: vic }
+            { name: 'Gladina Samantha', location: 'NSW 2000', imgSrc: nsw, text: 'The building and pest report I purchased was incredibly detailed and easy to understand. It gave me the confidence to proceed with my property purchase, knowing there were no hidden surprises. The service was quick and professional—I highly recommend it!' },
+            { name: 'John Doe', location: 'VIC 3200', imgSrc: vic, text: 'The inspection report I received was thorough and well-organized. It highlighted every detail I needed to know about the property, allowing me to move forward with confidence. The process was seamless, and the team was highly professional—highly recommended!' }
         ],
         [
-            { name: 'Jane Smith', location: 'NSW 2000', imgSrc: nsw },
-            { name: 'Emily Johnson', location: 'VIC 3200', imgSrc: vic }
+            { name: 'Emily Carter', location: 'NSW 2000', imgSrc: nsw, text: 'I was impressed with how clear and concise the report was. It provided all the information I needed to make an informed decision. The team was prompt, reliable, and extremely helpful throughout the process. Definitely worth it!' },
+            { name: 'James Bennett', location: 'VIC 3200', imgSrc: vic, text: 'The property report exceeded my expectations. It was detailed, accurate, and very easy to follow. Thanks to their expert insights, I felt fully informed before making my purchase. The service was fantastic—efficient and friendly!' }
         ],
         [
-            { name: 'Gladina Samantha', location: 'NSW 2000', imgSrc: nsw },
-            { name: 'John Doe', location: 'VIC 3200', imgSrc: vic }
+            { name: 'Sophia Wright', location: 'NSW 2000', imgSrc: nsw, text: "This report was a game-changer for me. It outlined everything clearly, with no jargon, making the property's condition easy to understand. The team was professional and prompt, making the entire experience stress-free. I can't recommend them enough!" },
+            { name: 'Michael Foster', location: 'VIC 3200', imgSrc: vic, text: 'The level of detail in the report was outstanding. It covered every aspect I was concerned about and gave me peace of mind to move forward. The service was fast, and the inspectors were very knowledgeable—an excellent experience overall!' }
         ],
         [
-            { name: 'Jane Smith', location: 'NSW 2000', imgSrc: nsw },
-            { name: 'Emily Johnson', location: 'VIC 3200', imgSrc: vic }
+            { name: 'Olivia Turner', location: 'NSW 2000', imgSrc: nsw, text: "I couldn't be happier with the quality of the building and pest report. It was detailed yet simple to understand, helping me avoid potential issues down the line. The team's professionalism and efficiency made the process a breeze. I'd highly recommend their service!" },
+            { name: 'Daniel Hayes', location: 'VIC 3200', imgSrc: vic, text: "From start to finish, the service was exceptional. The report was incredibly detailed, uncovering key insights about the property. It gave me confidence in my purchase and eliminated any guesswork. The team was professional and quick—I'd use them again in a heartbeat!" }
         ]
     ];
 
@@ -46,7 +45,7 @@ const OurCustomers = () => {
                         <div key={index} className="carousel_item">
                             <div className="customer_card">
                                 <div className="customer_card_up">
-                                    <p>{customerText}</p>
+                                    <p>{customer.text}</p>
                                     <img src={customer.imgSrc} alt={customer.name} />
                                 </div>
                                 <div className="customer_info">                                                                   

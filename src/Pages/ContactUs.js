@@ -4,7 +4,7 @@ import './ContactUs.css';
 import email from '../asset/Message_alt_fill.png';
 import phone from '../asset/Phone_fill.png';
 import address from '../asset/Pin_alt_fill1.png';
-import { PostData } from '../API';
+import emailjs from 'emailjs-com';
 
 const ContactUs = () => {
   const [formData,setFormData] = useState ({
@@ -25,14 +25,25 @@ const ContactUs = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      await PostData('/data', formData);
-      setSuccess(true);
-    } catch (err) {
-      setError('Failed to send data');
-    }
+
+    emailjs
+      .send(
+        'service_ftaumqi',
+        'template_urc793n',
+        formData,
+        'DE2qNaIU2eFpMb7xK'
+      )
+      .then(
+        (result) => {
+          setSuccess('Message sent successfully!');
+        },
+        (error) => {
+          console.error('Failed to send message:', error);
+          setError('Failed to send message. Please try again later.');
+        }
+      );
   };
 
   return (
@@ -79,9 +90,9 @@ const ContactUs = () => {
         </div>
         <div className='send_message'>
           <h1>Send Message</h1>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting 
-            industry. Lorem Ipsum has been the industry's standard dummy 
-            text ever since the 1500s, when an unknown printer took</p>
+          <p>Feel free to reach out to us with any questions or concerns. 
+            We're here to assist you and ensure your experience is seamless 
+            and stress-free.</p>
           <form onSubmit={handleSubmit}>
             <div className='message_name'>
               <input 
