@@ -160,10 +160,12 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
 const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPurchase, clientSecret, setClientSecret, handlePartnerSubmit }) => {
     const [selectedServices,setSelectedServices] = useState([]);
     const [services,setServices] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(null);
+    const [totalPrice, setTotalPrice] = useState(0);
     const location = useLocation();
     const { price } = location.state || {};
+    console.log(price);
     const totalAmount = (parseInt(price) + parseInt(totalPrice)) * 100;
+    console.log(totalAmount);
 
     useEffect(() => {
         const fetchServices = async () => {
