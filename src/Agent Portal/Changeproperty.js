@@ -347,8 +347,9 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
 };
 
 const PriceModal = ({ closeModal, id, refresh, setRefresh, prevPrice }) => {
-    const [price, setPrice] = useState(null);
+    const [price, setPrice] = useState(parseFloat(prevPrice));
     const navigate = useNavigate();
+    console.log('old price:', price);
 
     const handleChange = (e) => {
         const newValue = e.target.value;
