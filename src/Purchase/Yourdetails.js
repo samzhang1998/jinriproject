@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Yourdetails.css';
 
-const YourDetailsForm = ({ formPurchase, onUpdate}) => {
+const YourDetailsForm = ({ formPurchase, onUpdate, validateField, errors }) => {
     const [addSecond,setAddSecond] = useState(false);
     // const handleUpdate = (e) => {
     //     const { name, value, type, checked } = e.target;
@@ -17,38 +17,32 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
         setAddSecond(choose);
     };
 
-    const [errors, setErrors] = useState({});
-    const validateField = (name, value, relatedValue) => {
-        let error = '';
+    const [status, setStatus] = useState({});
+    // const validateField = (name, value, relatedValue) => {
+    //     let error = '';
+    //     const requiredFields = ['firstName', 'lastName', 'homeAddress', 'agentFirstName', 'agentLastName'];
+    //     if (requiredFields.includes(name) && !value.trim()) {
+    //         error = 'This field is required';
+    //         return error;
+    //     }
 
-        if (name === 'email') {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(value)) {
-                error = 'Invalid email format';
-            }
-        } else if (name === 'mobile') {
-            const mobileRegex = /^\d{10,15}$/;
-            if (!mobileRegex.test(value)) {
-                error = 'Invalid mobile number';
-            }
-        } else if (name === 'confirmEmail') {
-            if (value !== relatedValue) {
-                error = 'Emails do not match';
-            }
-        } else if (name === 'agentEmail') {
-            const agentEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!agentEmailRegex.test(value)) {
-                error = 'Invalid email format';
-            }
-        } else if (name === 'agentMobile') {
-            const agentMobileRegex = /^\d{10,15}$/;
-            if (!agentMobileRegex.test(value)) {
-                error = 'Invalid mobile number';
-            }
-        }
-
-        return error;
-    };
+    //     if (name === 'email' || name === 'agentEmail') {
+    //         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //         if (!emailRegex.test(value)) {
+    //             error = 'Invalid email format';
+    //         }
+    //     } else if (name === 'mobile' || name === 'agentMobile') {
+    //         const mobileRegex = /^(\+61|0)4\d{8}$/;
+    //         if (!mobileRegex.test(value)) {
+    //             error = 'Invalid mobile number';
+    //         }
+    //     } else if (name === 'confirmEmail') {
+    //         if (value !== relatedValue) {
+    //             error = 'Emails do not match';
+    //         }
+    //     }
+    //     return error;
+    // };
 
     const handleUpdate = (e) => {
         const { name, value, type, checked } = e.target;
@@ -57,11 +51,11 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
 
         const error = validateField(name, fieldValue, relatedValue);
         if (name === 'confirmEmail') {
-            setErrors((prev) => ({ ...prev, [name]: error }));
+            setStatus((prev) => ({ ...prev, [name]: error }));
             return;
         }
 
-        setErrors((prev) => ({ ...prev, [name]: error }));
+        setStatus((prev) => ({ ...prev, [name]: error }));
         
         onUpdate(name, fieldValue);
     };
@@ -84,6 +78,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                         placeholder="First Name*"
                         required
                     />
+                    {errors.firstName && <p style={{ color: 'red' }}>*</p>}
                     <input 
                         type="text"
                         name="lastName"
@@ -92,6 +87,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                         placeholder="Last Name*"
                         required
                     />
+                    {errors.lastName && <p style={{ color: 'red' }}>*</p>}
                 </div>
                 <input
                     type="email"
@@ -101,7 +97,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                     placeholder="Email*"
                     required
                 />
-                {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
+                {status.email && <p style={{ color: 'red' }}>{status.email}</p>}
                 <input 
                     type="email"
                     name="confirmEmail"
@@ -109,8 +105,8 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                     onChange={handleUpdate}
                     required
                 />
-                {errors.confirmEmail && (
-                    <p style={{ color: 'red' }}>{errors.confirmEmail}</p>
+                {status.confirmEmail && (
+                    <p style={{ color: 'red' }}>{status.confirmEmail}</p>
                 )}
                 <input 
                     type="text"
@@ -120,7 +116,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                     placeholder="Contact Number*"
                     required
                 />
-                {errors.mobile && <p style={{ color: 'red' }}>{errors.mobile}</p>}
+                {status.mobile && <p style={{ color: 'red' }}>{status.mobile}</p>}
                 <input 
                     type="text"
                     name="homeAddress"
@@ -129,6 +125,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                     placeholder="Home Address*"
                     required
                 />
+                {errors.homeAddress && <p style={{ color: 'red' }}>*</p>}
                 <label>
                     <input 
                         type="checkbox"
@@ -154,7 +151,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                             value={formPurchase.secondLastName}
                             onChange={handleUpdate}
                             placeholder="Last Name*"
-                        />
+                        />                        
                     </div>
                 )}
                 <label>
@@ -180,6 +177,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                         onChange={handleUpdate}
                         placeholder="Agent First Name*"
                     />
+                    {errors.agentFirstName && <p style={{ color: 'red' }}>*</p>}
                     <input 
                         type="text"
                         name="agentLastName"
@@ -187,6 +185,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                         onChange={handleUpdate}
                         placeholder="Agent Last Name*"
                     />
+                    {errors.agentLastName && <p style={{ color: 'red' }}>*</p>}
                 </div>
                 <input 
                     type="email"
@@ -196,7 +195,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                     placeholder="Agent Email*"
                     required
                 />
-                {errors.agentEmail && <p style={{ color: 'red' }}>{errors.agentEmail}</p>}
+                {status.agentEmail && <p style={{ color: 'red' }}>{status.agentEmail}</p>}
                 <input 
                     type="text"
                     name="agentMobile"
@@ -205,7 +204,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
                     placeholder="Agent Contact Number*"
                     required
                 />
-                {errors.agentMobile && <p style={{ color: 'red' }}>{errors.agentMobile}</p>}                
+                {status.agentMobile && <p style={{ color: 'red' }}>{status.agentMobile}</p>}                
             </div>
         </div>
     );

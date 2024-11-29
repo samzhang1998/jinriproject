@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useNavigation } from 'react-router-dom';
 import FetchFunc from '../API';
 import YourDetailsForm from './Yourdetails';
 // import Paymentdetail from './CheckoutForm';
@@ -12,16 +12,61 @@ import Payment from './Payment';
 const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) => {
     const isReportOk = localStorage.getItem('reportOK') === 'true';
     const [hasGrannyFlat, setHasGrannyFlat] = useState(false);
+    const [errors, setErrors] = useState('');
+
+    const validateField = (name, value, relatedValue) => {
+        let error = '';
+        const requiredFields = ['firstName', 'lastName', 'homeAddress', 'agentFirstName', 'agentLastName'];
+        if (requiredFields.includes(name) && !value) {
+            error = 'This field is required';
+            return error;
+        }
+        
+        if (name === 'email' || name === 'agentEmail') {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                error = 'Invalid email format';
+            }
+        } else if (name === 'mobile' || name === 'agentMobile') {
+            const mobileRegex = /^(\+61|0)4\d{8}$/;
+            if (!mobileRegex.test(value)) {
+                error = 'Invalid mobile number';
+            }
+        } else if (name === 'confirmEmail') {
+            if (value !== relatedValue) {
+                error = 'Emails do not match';
+            }
+        }
+        return error;
+    };
+
     const scrollToTop = () => {
         window.scrollTo({
           top: 0,
           behavior: 'smooth',
         });
     };
-    const handleClick = () => {
-        showStepTwo();
-        scrollToTop();
-    }
+    const handleClick = (e) => {
+        e.preventDefault();
+        const newErrors = {};
+        let isValid = true;
+        Object.keys(formPurchase).forEach((key) => {
+            const relatedValue = key === 'confirmEmail' ? formPurchase.email : null;
+            const error = validateField(key, formPurchase[key], relatedValue);    
+            if (error) {
+                isValid = false;
+                newErrors[key] = error;
+            }
+        });    
+        setErrors(newErrors);    
+        if (isValid) {
+            console.log('Data saved:', formPurchase);
+            showStepTwo();
+            scrollToTop();
+        } else {
+            console.log('Form has errors:', newErrors);
+        }        
+    };
     const handleUpdate = (e) => {
         const { name, value, type, checked } = e.target;
         console.log("check is " + checked + " value is " + value + " type " + type)
@@ -151,7 +196,12 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                     </div>
                 </div>
             </div>
-            <YourDetailsForm formPurchase={formPurchase} onUpdate={onUpdate}/>
+            <YourDetailsForm 
+                formPurchase={formPurchase} 
+                onUpdate={onUpdate}
+                validateField={validateField}
+                errors={errors}
+            />
             <button onClick={handleClick} className='tostep2'>NEXT</button>
         </div>
     );
@@ -161,6 +211,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
     const [selectedServices,setSelectedServices] = useState([]);
     const [services,setServices] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    const navigate = useNavigate();
     const location = useLocation();
     const { price } = location.state || {};
     console.log(price);
@@ -174,7 +225,9 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
                     '/service/all',
                     'GET',
                 );
-                if (!response.ok) {
+                if (response.status === '401') {
+                    navigate('/login');
+                } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 console.log('Response from server:', response);
@@ -194,34 +247,6 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
           behavior: 'smooth',
         });
     };
-    // const handleClick = () => {
-    //     const dataToSend = {
-    //         currency: 'aud',
-    //         amount: totalAmount,
-    //         paymentMethod: 'card'
-    //     }
-    //     console.log(dataToSend);
-    //     const response = fetch("http://localhost:8080/create-payment-intent", {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(dataToSend)
-    //     });
-    //     response.then((res) => 
-    //         res.json().then(secret => (
-    //             // console.log(secret)
-    //             setClientSecret(secret.clientSecret)
-    //         ))        
-    //     )
-    //     showStepThree();
-    //     scrollToTop();
-    // };
-
-    // const handleClick = () => {
-    //     showStepThree();
-    //     scrollToTop();
-    // };
 
     const handleClick = () => {
         const dataToSend = {
@@ -449,28 +474,6 @@ const PurchasePage = () => {
             );
             if (!response.ok) {
                 console.log(response.text());
-            }
-            console.log('Response from server:', response);
-            navigate('/thankyou');
-        } catch (error) {
-            console.error('Error submitting form:', error);
-        }
-    };
-
-    const handleCustomerSubmit = async (e) => {
-        e.preventDefault();
-        const dataToSend = {
-            ...formPurchase,
-        };
-        try {
-            console.log('data sent:', dataToSend)
-            const response = await FetchFunc(
-                '/customer-order/create',
-                'POST',
-                JSON.stringify(dataToSend)
-            );
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
             navigate('/thankyou');

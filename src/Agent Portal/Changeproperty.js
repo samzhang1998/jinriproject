@@ -17,14 +17,18 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
         postcode: existingData.postcode || '',
         propertyId: id
     });
-    const Change = `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`;
+    // const Change = `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`;
+    const getAddress = () => {
+        const { streetNumber, streetName, suburb, state, postcode } = property;
+        return `${streetNumber} ${streetName}, ${suburb} ${state} ${postcode}`.trim();
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProperty((prevData) => ({
           ...prevData,
           [name]: value,
-          address: Change,
+          address: getAddress(),
         }));
     };
 
@@ -71,6 +75,7 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
                 console.log(response.text());
             }
             console.log('Response from server:', response);
+            setRefresh(!refresh);
             closeModal();
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -171,14 +176,6 @@ const AddPropertyModal = ({ closeModal, refresh, setRefresh }) => {
         return `${streetNumber} ${streetName}, ${suburb} ${state} ${postcode}`.trim();
     };
 
-    // const handleInputChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setProperty((prevData) => ({
-    //       ...prevData,
-    //       [name]: value,
-    //       address: Change,
-    //     }));
-    // };
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProperty((prevData) => ({
@@ -411,6 +408,7 @@ const Changeproperty = () => {
     const [uploadModalPropertyId, setUploadModalPropertyId] = useState(null);
     const [pricePropertyId, setPricePropertyId] = useState(null);
     const [refresh, setRefresh] = useState(false);
+    const navigate = useNavigate();
     
     useEffect(() => {
         const fetchData = async () => {
@@ -419,7 +417,9 @@ const Changeproperty = () => {
                     '/admin/allProperties',
                     'Get',
                 );
-                if (!response.ok) {
+                if (response.status === 401) {
+                    navigate('/login');
+                } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 console.log('Response from server:', response);
@@ -431,7 +431,7 @@ const Changeproperty = () => {
             }
         };
         fetchData();
-    }, [refresh]);
+    }, [refresh, navigate]);
 
     const filteredProperty = property.filter((item) => {
         if (filter === 'all') return true;

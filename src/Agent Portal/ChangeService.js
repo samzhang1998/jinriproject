@@ -34,7 +34,7 @@ const ChangeService = () => {
             }
         };
         fetchServices();
-    }, []);
+    }, [refresh]);
 
     const handleAddService = () => {
         setServiceModal(true);

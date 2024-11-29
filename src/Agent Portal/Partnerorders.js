@@ -2,9 +2,8 @@ import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import FetchFunc from "../API";
 
-const EditPartnerOrderModal = ({ id, closeModal }) => {
+const EditPartnerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
     const navigate = useNavigate();
-    const [refresh, setRefresh] = useState(false)
     const [formData, setFormData] = useState({
         currentStatus: '',
         orderId: id,
@@ -107,7 +106,7 @@ const Partnerorders = () => {
             }
         };
         fetchOrders();
-    }, []);
+    }, [refresh]);
 
     const filteredOrders = order.filter(order => {
         if (filter === 'all') return true;
