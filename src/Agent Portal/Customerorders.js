@@ -6,11 +6,36 @@ import close from "../asset/Close_round.png";
 
 const EditCustomerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
     const navigate = useNavigate();
+    const [customerOrder, setCustomerOrder] = useState([]);
     const [formData, setFormData] = useState({
         currentStatus: '',
         orderId: id,
         statusInfo: ''
     });
+
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const response = await FetchFunc(
+                    `/admin/getCustomerOrderInfo?orderId=${id}`,
+                    'GET',
+                );
+                if (response === 401) {
+                    navigate('/login');
+                } else if (!response.ok) {
+                    console.log(response.text());
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Response from server:', response);
+                const data = await response.json();
+                console.log('data response:', data);
+                setCustomerOrder(data);
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+            }
+        };
+        fetchOrders();
+    }, [navigate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -48,7 +73,22 @@ const EditCustomerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
     return (
         <div className="change_modal">
             <div className="change_order_modal_content">
+                <div className="close_modal">
+                    <img src={close} alt="close" onClick={closeModal} />
+                </div>
                 <h1>Order: {id}</h1>
+                <div className="customer_order_detail_info">
+                    <div className="order_detail_info">
+                        <p>Customer: {customerOrder.firstName} {customerOrder.lastName}</p>
+                        <p>Customer email: {customerOrder.email}</p>
+                        <p>Customer mobile: {customerOrder.mobile}</p>
+                    </div>
+                    <div className="order_detail_info">
+                        <p>Agent: {customerOrder.agentFirstName} {customerOrder.agentLastName}</p>
+                        <p>Agent email: {customerOrder.agentEmail}</p>
+                        <p>Agent mobile: {customerOrder.agentMobile}</p>
+                    </div>
+                </div>
                 <form onSubmit={handleSubmit}>
                     <label>
                         Status:

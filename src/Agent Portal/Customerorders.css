@@ -9,6 +9,10 @@
     cursor: pointer;
 }
 
+.edit_order:hover {
+    color: blueviolet;
+}
+
 .change_order_modal_content {
     display: flex;
     flex-direction: column;
@@ -17,11 +21,30 @@
     background: white;
     border-radius: 5px;
     padding: 3%;
-    width: 30rem;
-    height: 15rem;
+    width: 40rem;
+    height: 25rem;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1001;
+}
+
+.customer_order_detail_info {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5%;
+    margin-bottom: 5%;
+}
+
+.order_detail_info {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.order_detail_info p {
+    margin: 0;
 }
 
 .change_order_modal_content h1 {
