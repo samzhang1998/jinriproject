@@ -37,36 +37,50 @@ const SignUp = () => {
     
     const [errors, setErrors] = useState({});
     const [status, setStatus] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const validateField = (fieldName, fieldValue) => {
+        if (fieldName === 'email') {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(fieldValue)) {
+                return 'Invalid email format';
+            }
+        } else if (fieldName === 'confirmPassword') {
+            if (fieldValue !== formData.password) {
+                return 'Passwords do not match';
+            }
+        }
+        return '';
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-
-        const validateField = (fieldName, fieldValue) => {
-            if (fieldName === 'email') {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(fieldValue)) {
-                    return 'Invalid email format';
-                }
-            } else if (fieldName === 'confirmPassword') {
-                if (fieldValue !== formData.password) {
-                    return 'Passwords do not match';
-                }
-            }
-            return '';
-        };
-
-        const error = validateField(name, value);
-
-        setErrors((prevErrors) => ({
-            ...prevErrors,
-            [name]: error,
-        }));
-
         if (name !== 'confirmPassword') {
+            const error = validateField(name, value);
+
             setFormData((prevData) => ({
                 ...prevData,
                 [name]: value,
             }));
+
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                [name]: error,
+            }));
+        } else {
+            setConfirmPassword(value);
+
+            if (value !== formData.password) {
+                setErrors((prevErrors) => ({
+                    ...prevErrors,
+                    confirmPassword: 'Passwords do not match',
+                }));
+            } else {
+                setErrors((prevErrors) => ({
+                    ...prevErrors,
+                    confirmPassword: '',
+                }));
+            }
         }
     };
 
@@ -75,36 +89,55 @@ const SignUp = () => {
         const dataToSend = {
             ...formData,
         };
-        try {
-            console.log(formData.username, formData.role);
-            const response1 = await FetchFunc(
-                `/signup/check?username=${formData.username}&role=${formData.role}`,
-                'POST',
-            );      
-            if (!response1.ok) {
-                console.log(response1.text());
-            } else {
-                const check = await response1.json();
-                if (check === false) {
-                    setStatus('This username is not available');
-                }
+        const newErrors = {};
+        let isValid = true;
+        Object.keys(formData).forEach((key) => {
+            const error = validateField(key, formData[key]);
+            if (error) {
+                isValid = false;
+                newErrors[key] = error;
             }
-            console.log("data sent:", dataToSend);
-            const response = await FetchFunc(
-                '/signup/',
-                'POST',
-                JSON.stringify(dataToSend)
-            );
-            if (!response.ok) {
-                console.log(response.text());
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            console.log('Response from server:', response);
-            navigate('/login');
-        } catch (error) {
-            console.error('Error submitting form:', error);
+        });
+        if (confirmPassword !== formData.password) {
+            isValid = false;
+            newErrors.confirmPassword = 'Passwords do not match';
         }
-    };
+        setErrors(newErrors);
+        if (isValid) {
+            console.log('Form submitted successfully:', formData);
+            try {
+                console.log(formData.username, formData.role);
+                const response1 = await FetchFunc(
+                    `/signup/check?username=${formData.username}&role=${formData.role}`,
+                    'POST',
+                );      
+                if (!response1.ok) {
+                    console.log(response1.text());
+                } else {
+                    const check = await response1.json();
+                    if (check === false) {
+                        setStatus('This username is not available');
+                    }
+                }
+                console.log("data sent:", dataToSend);
+                const response = await FetchFunc(
+                    '/signup/',
+                    'POST',
+                    JSON.stringify(dataToSend)
+                );
+                if (!response.ok) {
+                    console.log(response.text());
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Response from server:', response);
+                navigate('/login');
+            } catch (error) {
+                console.error('Error submitting form:', error);
+            }
+        } else {
+            console.log('Form contains errors:', newErrors);
+        }
+        };
     return (
         <div className='sign_page'>
             <Header />
