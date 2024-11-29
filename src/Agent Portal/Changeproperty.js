@@ -308,7 +308,7 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
         formData.append('file', selectedFile);
         try {
             console.log('data sent:', formData);
-            const response = await fetch(`/api/admin/uploadReport?reportType=${type}&fileName=${name}&propertyId=${id}`, {
+            const response = await fetch(`http://localhost:8080/admin/uploadReport?reportType=${type}&fileName=${name}&propertyId=${id}`, {
                 method: 'POST',
                 body: formData,
                 credentials:'include',

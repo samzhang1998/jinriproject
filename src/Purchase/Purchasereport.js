@@ -231,7 +231,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
         };    
         console.log('Sending data:', dataToSend);    
         try {
-            fetch("/api/create-payment-intent", {
+            fetch("http://localhost:8080/create-payment-intent", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
