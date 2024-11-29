@@ -4,9 +4,8 @@ import FetchFunc from "../API";
 import { useNavigate } from "react-router-dom";
 import close from "../asset/Close_round.png";
 
-const EditCustomerOrderModal = ({ id, closeModal }) => {
+const EditCustomerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
     const navigate = useNavigate();
-    const [refresh, setRefresh] = useState(false)
     const [formData, setFormData] = useState({
         currentStatus: '',
         orderId: id,
@@ -109,7 +108,7 @@ const InspectionPriceModal = ({ closeModal, refresh, setRefresh }) => {
             }
         };
         fetchServices();
-    }, []);
+    }, [refresh]);
 
     const handleChange = (e) => {
         const newValue = e.target.value;
@@ -193,7 +192,7 @@ const Customerorders = () => {
             }
         };
         fetchOrders();
-    }, [navigate]);
+    }, [navigate, refresh]);
 
     const filteredOrders = order.filter(order => {
         if (filter === 'all') return true;
