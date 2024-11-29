@@ -20,14 +20,13 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
     const [errors, setErrors] = useState({});
     const validateField = (name, value, relatedValue) => {
         let error = '';
-
-        if (name === 'email') {
+        if (name === 'email' || name === 'agentEmail') {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(value)) {
                 error = 'Invalid email format';
             }
-        } else if (name === 'mobile') {
-            const mobileRegex = /^\d{10,15}$/;
+        } else if (name === 'mobile' || name === 'agentMobile') {
+            const mobileRegex = /^(\+61|0)4\d{8}$/;
             if (!mobileRegex.test(value)) {
                 error = 'Invalid mobile number';
             }
@@ -35,18 +34,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate}) => {
             if (value !== relatedValue) {
                 error = 'Emails do not match';
             }
-        } else if (name === 'agentEmail') {
-            const agentEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!agentEmailRegex.test(value)) {
-                error = 'Invalid email format';
-            }
-        } else if (name === 'agentMobile') {
-            const agentMobileRegex = /^\d{10,15}$/;
-            if (!agentMobileRegex.test(value)) {
-                error = 'Invalid mobile number';
-            }
         }
-
         return error;
     };
 

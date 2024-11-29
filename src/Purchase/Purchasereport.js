@@ -194,34 +194,6 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
           behavior: 'smooth',
         });
     };
-    // const handleClick = () => {
-    //     const dataToSend = {
-    //         currency: 'aud',
-    //         amount: totalAmount,
-    //         paymentMethod: 'card'
-    //     }
-    //     console.log(dataToSend);
-    //     const response = fetch("http://localhost:8080/create-payment-intent", {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(dataToSend)
-    //     });
-    //     response.then((res) => 
-    //         res.json().then(secret => (
-    //             // console.log(secret)
-    //             setClientSecret(secret.clientSecret)
-    //         ))        
-    //     )
-    //     showStepThree();
-    //     scrollToTop();
-    // };
-
-    // const handleClick = () => {
-    //     showStepThree();
-    //     scrollToTop();
-    // };
 
     const handleClick = () => {
         const dataToSend = {
@@ -449,28 +421,6 @@ const PurchasePage = () => {
             );
             if (!response.ok) {
                 console.log(response.text());
-            }
-            console.log('Response from server:', response);
-            navigate('/thankyou');
-        } catch (error) {
-            console.error('Error submitting form:', error);
-        }
-    };
-
-    const handleCustomerSubmit = async (e) => {
-        e.preventDefault();
-        const dataToSend = {
-            ...formPurchase,
-        };
-        try {
-            console.log('data sent:', dataToSend)
-            const response = await FetchFunc(
-                '/customer-order/create',
-                'POST',
-                JSON.stringify(dataToSend)
-            );
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
             navigate('/thankyou');

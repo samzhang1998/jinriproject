@@ -17,14 +17,18 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
         postcode: existingData.postcode || '',
         propertyId: id
     });
-    const Change = `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`;
+    // const Change = `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`;
+    const getAddress = () => {
+        const { streetNumber, streetName, suburb, state, postcode } = property;
+        return `${streetNumber} ${streetName}, ${suburb} ${state} ${postcode}`.trim();
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setProperty((prevData) => ({
           ...prevData,
           [name]: value,
-          address: Change,
+          address: getAddress(),
         }));
     };
 

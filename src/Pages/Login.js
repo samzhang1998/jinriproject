@@ -54,7 +54,7 @@ const Login = () => {
                 localStorage.setItem('userId', responseData.userId);
                 localStorage.setItem('email', responseData.email);
                 localStorage.setItem('mobile', responseData.mobile);
-                navigate("/");
+                navigate(-1);
             } else if (response.status === 401) {
                 setLoginStatus("Unauthorized - Invalid Password!")
             } else if (response.status === 404) {
