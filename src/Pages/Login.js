@@ -101,6 +101,7 @@ const Login = () => {
                             value={formData.username}
                             placeholder='Username'
                             onChange={handleInputChange}
+                            required
                         />
                     </label>
                     <label className="input_container">
@@ -113,6 +114,7 @@ const Login = () => {
                             value={formData.password}
                             placeholder='Password'
                             onChange={handleInputChange}
+                            required
                         />
                     </label>
                 </div>
@@ -120,7 +122,7 @@ const Login = () => {
                     <button onClick={handleLogin}>SIGN IN</button>
                 </div>
                 {loginStatus && <p style={{color: 'red'}}>{loginStatus}</p>}
-                <h3>Forgot password?</h3>
+                {/* <h3>Forgot password?</h3> */}
                 <h3>Don't have an account yet?<Link to="/signup"><span>Sign up</span></Link></h3>
             </div>
         </div>
