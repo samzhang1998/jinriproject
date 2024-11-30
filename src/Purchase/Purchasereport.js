@@ -9,19 +9,24 @@ import check from '../asset/Check_fill.png';
 import back from '../asset/Expand_left.png';
 import Payment from './Payment';
 
+
+const Backend_url = 'http://localhost:8080';
+// const Backend_url = '/api';
+
 const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) => {
     const isReportOk = localStorage.getItem('reportOK') === 'true';
     const [hasGrannyFlat, setHasGrannyFlat] = useState(false);
     const [errors, setErrors] = useState('');
+    const [confirmEmail, setConfirmEmail] = useState('');
 
     const validateField = (name, value, relatedValue) => {
         let error = '';
-        const requiredFields = ['firstName', 'lastName', 'homeAddress', 'agentFirstName', 'agentLastName'];
+        const requiredFields = ['firstName', 'lastName', 'homeAddress', 'agentFirstName', 'agentLastName', 'mobile', 'agentMobile', 'agentEmail'];
         if (requiredFields.includes(name) && !value) {
             error = 'This field is required';
             return error;
         }
-        
+
         if (name === 'email' || name === 'agentEmail') {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(value)) {
@@ -37,6 +42,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                 error = 'Emails do not match';
             }
         }
+        console.log(`Validation result for ${name}: ${error}`);
         return error;
     };
 
@@ -52,13 +58,18 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
         let isValid = true;
         Object.keys(formPurchase).forEach((key) => {
             const relatedValue = key === 'confirmEmail' ? formPurchase.email : null;
-            const error = validateField(key, formPurchase[key], relatedValue);    
+            const error = validateField(key, formPurchase[key], relatedValue);
             if (error) {
                 isValid = false;
                 newErrors[key] = error;
             }
-        });    
-        setErrors(newErrors);    
+        });
+        if(formPurchase['email'] !== confirmEmail) {
+            isValid = false;
+            newErrors['confirmEmail'] = 'Emails do not match';
+        }
+        setErrors(newErrors);
+        console.log(newErrors)
         if (isValid) {
             console.log('Data saved:', formPurchase);
             showStepTwo();
@@ -201,6 +212,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                 onUpdate={onUpdate}
                 validateField={validateField}
                 errors={errors}
+                setConfirmEmail={setConfirmEmail}
             />
             <button onClick={handleClick} className='tostep2'>NEXT</button>
         </div>
@@ -256,7 +268,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
         };    
         console.log('Sending data:', dataToSend);    
         try {
-            fetch("http://localhost:8080/create-payment-intent", {
+            fetch(`${Backend_url}/create-payment-intent`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

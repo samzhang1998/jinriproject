@@ -4,6 +4,9 @@ import "./Changeproperty.css";
 import close from "../asset/Close_round.png";
 import { useNavigate } from "react-router-dom";
 
+const Backend_url = 'http://localhost:8080';
+// const Backend_url = '/api';
+
 const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData,filter }) => {
     const navigate = useNavigate();
     const [property, setProperty] = useState({
@@ -305,7 +308,7 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
         formData.append('file', selectedFile);
         try {
             console.log('data sent:', formData);
-            const response = await fetch(`http://localhost:8080/admin/uploadReport?reportType=${type}&fileName=${name}&propertyId=${id}`, {
+            const response = await fetch(`${Backend_url}/admin/uploadReport?reportType=${type}&fileName=${name}&propertyId=${id}`, {
                 method: 'POST',
                 body: formData,
                 credentials:'include',

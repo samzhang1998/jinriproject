@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Yourdetails.css';
 
-const YourDetailsForm = ({ formPurchase, onUpdate, validateField, errors }) => {
+const YourDetailsForm = ({ formPurchase, onUpdate, validateField, errors, setConfirmEmail }) => {
     const [addSecond,setAddSecond] = useState(false);
     // const handleUpdate = (e) => {
     //     const { name, value, type, checked } = e.target;
@@ -52,6 +52,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate, validateField, errors }) => {
         const error = validateField(name, fieldValue, relatedValue);
         if (name === 'confirmEmail') {
             setStatus((prev) => ({ ...prev, [name]: error }));
+            setConfirmEmail(value);
             return;
         }
 
@@ -59,7 +60,11 @@ const YourDetailsForm = ({ formPurchase, onUpdate, validateField, errors }) => {
         
         onUpdate(name, fieldValue);
     };
-
+    
+    useEffect(() => {
+        setStatus((prev) => ({ ...prev, ...errors }));
+    }, [errors])
+    console.log(status)
     return (
         <div>
             <div className='your_details'>
