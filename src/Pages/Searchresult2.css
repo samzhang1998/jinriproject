@@ -385,9 +385,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .mobile_purchase_button2 a {
         color: #FFF;
         font-family: Montserrat;
         font-size: 1.6rem;

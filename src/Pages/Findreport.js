@@ -8,7 +8,7 @@ const Findreport = () => {
         <div className="find_report">
             <div className="text4">
                 <h2>Find your report <br /> with us</h2>
-                <p>We provide a complete service for the <br /> sale,
+                <p>We provide a complete service for the sale,
                 purchase or rental of real estate.</p>            
                 <div className="contact_button">
                     <button><Link to="/contact">CONTACT US</Link></button>

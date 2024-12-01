@@ -297,6 +297,7 @@ const MobileSearchBox = () => {
             } else if (response.status === 401) {
                 navigate('/login');
             } else {
+                navigate(`/bookinspector`, { state: { query }});
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
         } catch (error) {

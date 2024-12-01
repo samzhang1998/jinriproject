@@ -93,7 +93,7 @@ const EmailModal = ({ closeModal }) => {
     );
 };
 
-const MobileModal = ({ closeModal, setBottomMobile }) => {
+const MobileModal = ({ closeModal }) => {
     const [mobile, setMobile] = useState();
     const [status,setStatus] = useState('');
     const handleChange = (e) => {
