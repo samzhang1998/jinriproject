@@ -291,7 +291,15 @@ const UserSettings = () => {
     return (
         <div className="change_settings">
             <h1>Account Settings</h1>
-            <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
+            <hr style={{
+                background: '#DDD', 
+                width: '100%', 
+                marginTop: '5%', 
+                marginBottom: '5%',
+                border: 'none',
+                height: '1px'
+                }} 
+            />
             <div className="change">
                 <div>
                     <h1>Email Address</h1>
@@ -307,7 +315,15 @@ const UserSettings = () => {
                     />
                 )}
             </div>
-            <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
+            <hr style={{
+                background: '#DDD', 
+                width: '100%', 
+                marginTop: '5%', 
+                marginBottom: '5%',
+                border: 'none',
+                height: '1px'
+                }} 
+            />
             <div className="change">
                 <div>
                     <h1>Mobile Number</h1>
@@ -323,7 +339,15 @@ const UserSettings = () => {
                     />
                 )}
             </div>
-            <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
+            <hr style={{
+                background: '#DDD', 
+                width: '100%', 
+                marginTop: '5%', 
+                marginBottom: '5%',
+                border: 'none',
+                height: '1px'
+                }} 
+            />
             <div className="change">
                 <div>
                     <h1>Password</h1>

@@ -62,7 +62,7 @@ const AboutUs = () => {
           </div>
         </div>
         <div className='container2'>
-          <h2>Here is the <br /> Feature one</h2>
+          <h2>At Check For Sure</h2>
           <div className='container2_text1'>What sets us apart is our dedication to thoroughness 
             and reliability. Every report we produce is crafted with precision, covering every 
             aspect of the property to ensure you have a complete understanding of its condition. 
@@ -102,7 +102,9 @@ const AboutUs = () => {
         <div className='img2'>
           <img src={logo} alt='logo' />
         </div>
-        <h1>Building & Pest Inspection</h1>        
+        <div className='mobile_about_report'>
+          <h1>Building & Pest Inspection</h1>
+        </div>        
         <button className='mobile_book'><Link to='/contact'>BOOK INSPECTOR</Link></button>        
       </div>
     </div>

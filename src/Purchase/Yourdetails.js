@@ -69,7 +69,15 @@ const YourDetailsForm = ({ formPurchase, onUpdate, validateField, errors, setCon
         <div>
             <div className='your_details'>
                 <h1>Your Details</h1>
-                <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
+                <hr style={{
+                    background: '#DDD', 
+                    width: '100%', 
+                    marginTop: '5%', 
+                    marginBottom: '5%',
+                    border: 'none',
+                    height: '1px'
+                    }} 
+                />
                 <p>*Please ensure the name provided matches the name of the person 
                     interested in purchasing the property. This name will be 
                     used on the report to be relied upon if the buyer is successful in 
@@ -172,7 +180,15 @@ const YourDetailsForm = ({ formPurchase, onUpdate, validateField, errors, setCon
             </div>
             <div className='agent_details'>
                 <h1>Selling Agent Details</h1>
-                <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
+                <hr style={{
+                    background: '#DDD', 
+                    width: '100%', 
+                    marginTop: '5%', 
+                    marginBottom: '5%',
+                    border: 'none',
+                    height: '1px'
+                    }} 
+                />
                 <p>*This information is required to organise access to the property.</p>
                 <div className='agent_name'>
                     <input 

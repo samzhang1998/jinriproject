@@ -117,7 +117,7 @@ const ChangeService = () => {
                     </div>
                 </div>
             )}
-            <hr style={{background: '#DDD', width: '100%', }} />
+            <hr style={{background: '#DDD', width: '100%', border: 'none', height: '1px'}} />
             <div className="service_title">
                 <h1>Service List</h1>
                 <h1>Price</h1>

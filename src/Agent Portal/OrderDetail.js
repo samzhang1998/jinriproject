@@ -120,7 +120,7 @@ const OrderDetail = () => {
                 </div>
                 <div className="download_order">
                     <h1>Order #{orderId}</h1>
-                    <hr />
+                    <hr style={{background: "#DDD", height: '1px', border: 'none'}}/>
                     <div className="download">
                         <div className="processing">
                             <p>Your order is</p>
@@ -143,11 +143,11 @@ const OrderDetail = () => {
                         </div>}
                         <div className="question">
                             <p>If you have any questions about your order, please feel free to contact us.</p>
-                            <hr style={{background: "#DDD", height: '1px'}}/>
+                            <hr style={{background: "#DDD", height: '1px', border: 'none'}}/>
                             <h2>info@checkforsure.com.au</h2>
                         </div>
                     </div>
-                    <hr />
+                    <hr style={{background: "#DDD", height: '1px', border: 'none'}}/>
                     <div className="tracking">
                         <p>Tracking History</p>
                         {Object.entries(order.history).map(([key, value]) => (

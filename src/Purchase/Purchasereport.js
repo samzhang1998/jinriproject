@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { useLocation, useNavigate, useNavigation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import FetchFunc from '../API';
 import YourDetailsForm from './Yourdetails';
 // import Paymentdetail from './CheckoutForm';
@@ -104,7 +104,15 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
             <div className="property_form">                
                 <div className="form_section">
                     <h1>Property Details</h1>
-                    <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
+                    <hr style={{
+                        background: '#DDD', 
+                        width: '100%',
+                        height: '1px', 
+                        marginTop: '5%', 
+                        marginBottom: '5%',
+                        border: 'none',
+                        }} 
+                    />
                     <div>
                         <label>Do you have an offer accepted and a cooling off period?</label>
                         <div className="selection">
@@ -251,7 +259,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
             }
         };
         fetchServices();
-    }, []);
+    }, [navigate]);
 
     const scrollToTop = () => {
         window.scrollTo({
@@ -357,7 +365,15 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
         <div>
             <div className="service_details">
                 <h1>Addition Service</h1>
-                <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
+                <hr style={{
+                    background: '#DDD', 
+                    width: '100%', 
+                    marginTop: '5%', 
+                    marginBottom: '5%',
+                    border: 'none',
+                    height: '1px'
+                    }} 
+                />
                 {Array.isArray(services) && services.map((service) => (
                     <div 
                         key={service.serviceId}
@@ -409,7 +425,15 @@ const PaymentSummary = ({ summary }) => {
             <div className="address">
                 <p>{query}</p>
             </div>
-            <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
+            <hr style={{
+                background: '#DDD', 
+                width: '100%', 
+                marginTop: '5%', 
+                marginBottom: '5%',
+                border: 'none',
+                height: '1px'
+                }} 
+            />
             <div>
                 <div className="calculation"><p>Building & Pest Report</p><span>{price}</span></div>
                 <div className="report_available">
@@ -430,7 +454,15 @@ const PaymentSummary = ({ summary }) => {
                     </div>
                 ))}
             </div>
-            <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
+            <hr style={{
+                background: '#DDD', 
+                width: '100%', 
+                marginTop: '5%', 
+                marginBottom: '5%',
+                border: 'none',
+                height: '1px'
+                }} 
+            />
             <div className="total"><h4>Total <p>(GST Inc)</p>:</h4><h5>${totalAmount}</h5></div>
         </div>
     );
@@ -556,37 +588,37 @@ const PurchasePage = () => {
             )}
             <div className='report_title'>Building & Pest Report</div>
             <div className='step_progress'>
-                <div className="step1">
+                <div className="step">
                     <div className="step-number">1</div>
                     <div className="step-label">Required Details</div>
                 </div>
-                <div className="step2" 
+                <div className="step" 
                     style={{
                         background: currentStep === 1 ? '#F2F2F2' : '#fff',
                     }}
                 >
-                    <div className="step-number2" 
+                    <div className="step-number" 
                         style={{
                             background: currentStep === 1 ? '#A4A4A4' : '#008286',
                         }}
                     >2</div>
-                    <div className="step-label2"
+                    <div className="step-label"
                         style={{
                             color: currentStep === 1 ? '#A4A4A4' : '#343434',
                         }}
                     >Additional Services</div>
                 </div>
-                <div className="step3" 
+                <div className="step" 
                     style={{
                         background: currentStep === 3 ? '#fff' : '#F2F2F2',
                     }}
                 >
-                    <div className="step-number3"
+                    <div className="step-number"
                         style={{
                             background: currentStep === 3 ? '#008286' : '#A4A4A4',
                         }}
                     >3</div>
-                    <div className="step-label3" 
+                    <div className="step-label" 
                         style={{
                             color: currentStep === 3 ? '#343434' : '#A4A4A4',
                         }}

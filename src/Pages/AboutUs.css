@@ -296,7 +296,8 @@
     }
 
     .feature p {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+        width: 100%;
     }
 
     .container2 img {
@@ -327,6 +328,17 @@
         font-weight: 600;
         line-height: 100%;
         margin-top: 12%;
+    }
+
+    .container2_text1 {
+        width: 90%;
+        margin-bottom: 6%;
+        color: #FFF;
+        font-family: Montserrat;
+        font-size: 1.2rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 171.429%;
     }
 
     .text1 {
@@ -373,10 +385,20 @@
     .mobile_about h1 {
         color: #656565;
         font-family: Montserrat;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-style: normal;
         font-weight: 600;
         line-height: 130%;
+    }
+
+    .mobile_about_report {
+        background: #F5F5F5;
+        border-radius: 6px;
+        padding-left: 3%;
+        padding-right: 3%;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top: 3%;
     }
 
     .mobile_book {
@@ -388,8 +410,12 @@
         cursor: pointer;
         border: none;
         width: 60%;
-        height: 6rem;
-        margin-top: 5%;
+        height: 5rem;
+        margin-top: 10%;
+    }
+
+    .mobile_book:hover {
+        background-color: #004d40;
     }
 
     .mobile_about a {

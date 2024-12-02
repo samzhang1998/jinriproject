@@ -480,7 +480,7 @@ const Changeproperty = () => {
                     />
                 )}
             </div>
-            <hr style={{background: '#DDD', width: '100%', }} />
+            <hr style={{background: '#DDD', width: '100%', border: 'none', height: '1px'}} />
             <div className="order_status">
             <span 
                     onClick={() => setFilter('all')}

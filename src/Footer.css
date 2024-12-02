@@ -258,6 +258,7 @@
 
     .other {
         margin-left: 10%;
+        margin-top: 10%;
         width: 90%;
     }
 
@@ -267,6 +268,7 @@
 
     .other p {
         font-size: 1.5rem;
+        margin-top: 0;
     }
 
     .email_input {
@@ -291,6 +293,10 @@
         font-weight: 700;
         line-height: normal;
         margin-bottom: 7%;
+    }
+
+    .info1 {
+        margin-top: 10%;
     }
 
     .info1 p {

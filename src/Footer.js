@@ -95,10 +95,11 @@ const Footer = () => {
             </div>
             <div className="info1">
                 <div className="Logo_footer">CHECH FOR SURE</div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                     nisi ut aliquip ex ea commodo consequat.
+                <p>Welcome to Check for Sure, the inspection platform you can trust. Our 
+                    mission is to provide comprehensive, all-encompassing inspection reports 
+                    that leave no detail unnoticed. Whether you're buying, selling, or managing 
+                    a property, we deliver accurate insights that empower you to make 
+                    informed decisions.
                 </p>
                 <div className="socialmedia">
                     <a

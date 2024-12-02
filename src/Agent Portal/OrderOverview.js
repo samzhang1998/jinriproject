@@ -151,7 +151,15 @@ const OrderOverview = () => {
             <div className="agent_property_form">                
                 <div className="agent_form_section">
                     <h1>Property Details</h1>
-                    <hr style={{background: '#DDD', width: '100%', marginTop: '5%', marginBottom: '5%',}} />
+                    <hr style={{
+                        background: '#DDD', 
+                        width: '100%', 
+                        marginTop: '5%', 
+                        marginBottom: '5%',
+                        border: 'none',
+                        height: '1px'
+                        }} 
+                    />
                     <Autocomplete 
                         onLoad={onLoad} 
                         onPlaceChanged={onPlaceChanged}

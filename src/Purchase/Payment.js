@@ -50,6 +50,15 @@ function Payment({ clientSecret }) {
     return (
     <div className='payment_detail'>
         <h1>Payment</h1>
+        <hr style={{
+            background: '#DDD', 
+            width: '100%', 
+            marginTop: '5%', 
+            marginBottom: '5%',
+            border: 'none',
+            height: '1px'
+            }} 
+        />
         {clientSecret && stripePromise && (
             <Elements stripe={stripePromise} options={{ clientSecret, locale: 'en' }}>
                 <CheckoutForm clientSecret={clientSecret}/>

@@ -32,7 +32,7 @@ const OurCustomers = () => {
         ]
     ];
 
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const nextPage = () => {
         setCurrentPage((prevPage) => (prevPage + 1) % customers.length);
     };
