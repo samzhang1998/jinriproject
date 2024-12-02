@@ -173,10 +173,12 @@ const OrderDetail = () => {
                             ))
                         }
                     </div>
-                    <Link to={{ pathname: `/${type}/${id}` }} 
+                    <button className="back_button2">
+                        <Link to={{ pathname: `/${type}/${id}` }} 
                         state={{ showContent: 2 }} 
-                        style={{textDecoration: 'none'}}
-                    ><button className="back_button1">← Back</button></Link>
+                        style={{textDecoration: 'none', color: '#008286'}}
+                        >← Back</Link>
+                    </button>
                 </div>
             </div>
         </div>

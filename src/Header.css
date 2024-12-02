@@ -121,7 +121,7 @@
     .header img {
         width: 15rem;
         height: auto;
-        margin-left: 10%;
+        margin-left: 5%;
     }
 
     .login {
@@ -129,7 +129,7 @@
     }
 
     .header nav {
-        padding-right: 10%;
+        padding-right: 3%;
     }
 
     .menu {
@@ -137,8 +137,8 @@
         flex-direction: column;
         position: absolute;
         background-color: #FFF;
-        top: 1.5rem;
-        right: 8rem;
+        top: 1.2rem;
+        right: 4.5rem;
         width: 10rem;
         padding: 3rem;
         z-index: 1000;

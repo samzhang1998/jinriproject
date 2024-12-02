@@ -144,8 +144,9 @@
 
 .point {
     border-radius: 50%;
-    width: 10%;
-    height: 100%;
+    width: 0.8rem;
+    height: 0.8rem;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {

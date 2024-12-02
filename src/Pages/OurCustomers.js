@@ -68,16 +68,16 @@ const OurCustomers = () => {
                 <button className="next_button" onClick={nextPage}><img src={right} alt="right" /></button>
             </div>
             <div className='points'>
-                <div className='point' style={{
+                <div className='point' onClick={() => setCurrentPage(1)} style={{
                     background: currentPage === 1 ? '#FFFFFF' : '#ABABAB'
                 }}></div>
-                <div className='point' style={{
+                <div className='point' onClick={() => setCurrentPage(2)} style={{
                     background: currentPage === 2 ? '#FFFFFF' : '#ABABAB'
                 }}></div>
-                <div className='point' style={{
+                <div className='point' onClick={() => setCurrentPage(3)} style={{
                     background: currentPage === 3 ? '#FFFFFF' : '#ABABAB'
                 }}></div>
-                <div className='point' style={{
+                <div className='point' onClick={() => setCurrentPage(0)} style={{
                     background: currentPage === 0 ? '#FFFFFF' : '#ABABAB'
                 }}></div>
             </div>

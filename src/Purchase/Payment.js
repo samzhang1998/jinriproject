@@ -45,7 +45,7 @@ import "./Payment.css";
 // };
 
 function Payment({ clientSecret }) {
-    const stripePromise = loadStripe("pk_test_51QPcunABwpEZeajXo2pch6nBD11Mj3NckAnEKJIXBa6GVNbByataVG6CuGnlRlfWmoOt9RpHatjU47piXri1d1O700u6TfquCT");
+    const stripePromise = loadStripe("pk_live_51QQmjzAE4FfcaEz1LoKF0F22ZDkYX01Ru9zAew0PVKYQ0UL15R85iTfmy1ohuueQiMQmjS9WGBes8HI4iKJyXFU900QRGi0B5h");
     console.log("payment here:" + clientSecret)
     return (
     <div className='payment_detail'>
