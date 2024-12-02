@@ -17,6 +17,7 @@
 
 .back {
     position: relative;
+    width: 3rem;
     margin-top: 5%;
     margin-left: 8%;
     cursor: pointer;   

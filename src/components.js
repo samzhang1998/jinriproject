@@ -139,6 +139,7 @@ const SearchBox = () => {
             address: query,
         }));
     };
+    const addressRegex = /^(\d+[A-Za-z]?)\s+([\w\s]+?),\s*([\w\s]+)\s+(NSW|VIC|QLD|WA|SA|TAS|NT|ACT)\s+(\d{4})(?:,\s*(.+))?$/i;
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -147,30 +148,34 @@ const SearchBox = () => {
             ...parseAddress(query),
         };
         console.log(dataToSend);
-        try {
-            console.log('Data send:', dataToSend);
-            const response = await FetchFunc(
-                '/search/',
-                'POST',
-                JSON.stringify(dataToSend)
-            );
-            if (response.status === 200) {
-                console.log('Response from server:', response);
-                const data = await response.json();
-                localStorage.setItem('price', data.reportPrice);
-                console.log(data);
-                navigate(`/report`, { state: { query }});
-            } else if (response.status === 404) {
-                navigate(`/bookinspector`, { state: { query }});
-            } else if (response.status === 401) {
-                navigate('/login');
-            } else {
-                navigate(`/bookinspector`, { state: { query }});
-                console.log(response.text());
-                throw new Error(`HTTP error! Status: ${response.status}`);
+        if (!addressRegex.test(query)){
+            alert('Invalid Address');
+        } else {
+            try {
+                console.log('Data send:', dataToSend);
+                const response = await FetchFunc(
+                    '/search/',
+                    'POST',
+                    JSON.stringify(dataToSend)
+                );
+                if (response.status === 200) {
+                    console.log('Response from server:', response);
+                    const data = await response.json();
+                    localStorage.setItem('price', data.reportPrice);
+                    console.log(data);
+                    navigate(`/report`, { state: { query }});
+                } else if (response.status === 404) {
+                    navigate(`/bookinspector`, { state: { query }});
+                } else if (response.status === 401) {
+                    navigate('/login');
+                } else {
+                    navigate(`/bookinspector`, { state: { query }});
+                    console.log(response.text());
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Failed to submit address:', error);
             }
-        } catch (error) {
-            console.error('Failed to submit address:', error);
         }
     };
 
@@ -219,7 +224,6 @@ const MobileSearchBox = () => {
 
     const [query, setQuery] = useState('');
     const [autocomplete, setAutocomplete] = useState(null);
-    const [price, setPrice] = useState('');
     const navigate = useNavigate();
     const libraries = ['places'];
     const [bounds, setBounds] = useState(null);
@@ -273,6 +277,8 @@ const MobileSearchBox = () => {
         }));
     };
 
+    const addressRegex = /^(\d+[A-Za-z]?)\s+([\w\s]+?),\s*([\w\s]+)\s+(NSW|VIC|QLD|WA|SA|TAS|NT|ACT)\s+(\d{4})(?:,\s*(.+))?$/i;
+
     const handleSearch = async (e) => {
         e.preventDefault();
         const dataToSend = {
@@ -280,28 +286,34 @@ const MobileSearchBox = () => {
             ...parseAddress(query),
         };
         console.log(dataToSend);
-        try {
-            console.log('Data send:', dataToSend);
-            const response = await FetchFunc(
-                '/search/',
-                'POST',
-                JSON.stringify(dataToSend)
-            );
-            if (response.status === 200) {
-                console.log('Response from server:', response);
-                const data = await response.json();
-                setPrice(data.reportPrice);
-                navigate(`/report`, { state: { query, price }});
-            } else if (response.status === 404) {
-                navigate(`/bookinspector`, { state: { query }});
-            } else if (response.status === 401) {
-                navigate('/login');
-            } else {
-                navigate(`/bookinspector`, { state: { query }});
-                throw new Error(`HTTP error! Status: ${response.status}`);
+        if (!addressRegex.test(query)){
+            alert('Invalid Address');
+        } else {
+            try {
+                console.log('Data send:', dataToSend);
+                const response = await FetchFunc(
+                    '/search/',
+                    'POST',
+                    JSON.stringify(dataToSend)
+                );
+                if (response.status === 200) {
+                    console.log('Response from server:', response);
+                    const data = await response.json();
+                    localStorage.setItem('price', data.reportPrice);
+                    console.log(data);
+                    navigate(`/report`, { state: { query }});
+                } else if (response.status === 404) {
+                    navigate(`/bookinspector`, { state: { query }});
+                } else if (response.status === 401) {
+                    navigate('/login');
+                } else {
+                    navigate(`/bookinspector`, { state: { query }});
+                    console.log(response.text());
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Failed to submit address:', error);
             }
-        } catch (error) {
-            console.error('Failed to submit address:', error);
         }
     };
 

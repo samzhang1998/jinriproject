@@ -68,7 +68,10 @@ const Orders = ({ type,id }) => {
                 >Completed</span>
             </div>
             <div className="order_list">
-                {Array.isArray(filteredOrders) && filteredOrders.map((order) => (
+                {Array.isArray(filteredOrders) && 
+                    filteredOrders
+                    .sort((a, b) => new Date(b.createTime) - new Date(a.createTime))
+                    .map((order) => (
                     <div key={order.orderId} className="order_item">                        
                         <div className="order_detail">
                             <p>{order.createTime}</p>

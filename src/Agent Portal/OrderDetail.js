@@ -164,7 +164,8 @@ const OrderDetail = () => {
                                         <p>{value}</p>
                                     </div>
                                 ) : null
-                        ))}
+                            ))
+                        }
                     </div>
                     <Link to={{ pathname: `/${type}/${id}` }} 
                         state={{ showContent: 2 }} 

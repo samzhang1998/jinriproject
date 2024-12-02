@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import FetchFunc from '../API';
 import "./Login.css";
 import Header from '../Header';
@@ -33,6 +33,16 @@ const Login = () => {
         }));
     };
 
+    const location = useLocation();
+
+    const handleBack = () => {
+        if (location.state?.from === '/signup') {
+            navigate('/');
+        } else {
+            navigate(-1);
+        }
+    };
+
     const handleLogin = async (e) => {
         e.preventDefault();
         const dataToSend = {
@@ -54,7 +64,7 @@ const Login = () => {
                 localStorage.setItem('userId', responseData.userId);
                 localStorage.setItem('email', responseData.email);
                 localStorage.setItem('mobile', responseData.mobile);
-                navigate(-1);
+                handleBack();
                 setTimeout(() => {
                     localStorage.setItem('isLoggedIn', false);
                     localStorage.removeItem('username');
@@ -80,14 +90,12 @@ const Login = () => {
         <div className='login_page'>
             <Header />
             <div className='header_bg'></div>
-            <Link to='/'>
-                <button className='back'>
-                    <div className='back_text'>
-                        <img src={back} alt='back' />
-                        <p>Back</p>
-                    </div>
-                </button>
-            </Link>
+            <button className='back' onClick={() => navigate(-1)}>
+                <div className='back_text'>
+                    <img src={back} alt='back' />
+                    <p>Back</p>
+                </div>
+            </button>
             <div className='login_box'>
                 <h1>Login</h1>
                 <div className='user_type'>

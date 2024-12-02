@@ -130,7 +130,7 @@ const SignUp = () => {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 console.log('Response from server:', response);
-                navigate('/login');
+                navigate('/login', { state: { from: '/signup' } });
             } catch (error) {
                 console.error('Error submitting form:', error);
             }

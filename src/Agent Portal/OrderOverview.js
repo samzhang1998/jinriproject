@@ -116,6 +116,8 @@ const OrderOverview = () => {
         }));
     };
 
+    const addressRegex = /^(\d+[A-Za-z]?)\s+([\w\s]+?),\s*([\w\s]+)\s+(NSW|VIC|QLD|WA|SA|TAS|NT|ACT)\s+(\d{4})(?:,\s*(.+))?$/i;
+
     const handleSearch = async (e) => {
         e.preventDefault();
         const dataToSend = {
@@ -123,26 +125,34 @@ const OrderOverview = () => {
             ...parseAddress(query),
         };
         console.log(dataToSend);
-        try {
-            console.log('Data send:', dataToSend);
-            const response = await FetchFunc(
-                '/search/',
-                'POST',
-                JSON.stringify(dataToSend)
-            );
-            if (response.status === 200) {
-                console.log('Response from server:', response);
-                navigate(`/report`, { state: { query }});
-            } else if (response.status === 404) {
-                navigate(`/bookinspector`, { state: { query }});
-            } else if (response.status === 401) {
-                navigate('/login');
-            } else {
-                console.log(response.text());
-                navigate(`/bookinspector`, { state: { query }})
+        if (!addressRegex.test(query)){
+            alert('Invalid Address');
+        } else {
+            try {
+                console.log('Data send:', dataToSend);
+                const response = await FetchFunc(
+                    '/search/',
+                    'POST',
+                    JSON.stringify(dataToSend)
+                );
+                if (response.status === 200) {
+                    console.log('Response from server:', response);
+                    const data = await response.json();
+                    localStorage.setItem('price', data.reportPrice);
+                    console.log(data);
+                    navigate(`/report`, { state: { query }});
+                } else if (response.status === 404) {
+                    navigate(`/bookinspector`, { state: { query }});
+                } else if (response.status === 401) {
+                    navigate('/login');
+                } else {
+                    navigate(`/bookinspector`, { state: { query }});
+                    console.log(response.text());
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Failed to submit address:', error);
             }
-        } catch (error) {
-            console.error('Failed to submit address:', error);
         }
     };
 
