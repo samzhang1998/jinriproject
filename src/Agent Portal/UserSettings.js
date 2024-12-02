@@ -30,39 +30,55 @@ const EmailModal = ({ closeModal }) => {
         username: ''
     }
     const handleCustomerSave = async () => {
-        try {            
-            console.log('Data to be posted:', userData);
-            const response = await FetchFunc(
-                '/customer-profile/editEmail',
-                'POST',
-                JSON.stringify(userData)
-            );
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+        if (status) {
+            alert('Cannot save. Please enter the valid email.');
+            return;
+        } else if (email === '') {
+            alert('email is required.');
+            return;
+        } else {
+            try {            
+                console.log('Data to be posted:', userData);
+                const response = await FetchFunc(
+                    '/customer-profile/editEmail',
+                    'POST',
+                    JSON.stringify(userData)
+                );
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Response from server:', response);
+                localStorage.setItem('email', email);
+                closeModal();
+            } catch (error) {
+                console.error('Failed to update email:', error);
             }
-            console.log('Response from server:', response);
-            localStorage.setItem('email', email);
-            closeModal();
-        } catch (error) {
-            console.error('Failed to update email:', error);
         }
     };
     const handlePartnerSave = async () => {
-        try {
-            console.log('Data to be posted:', userData);
-            const response = await FetchFunc(
-                '/partner-profile/editEmail',
-                'POST',
-                JSON.stringify(userData)
-            );
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+        if (status) {
+            alert('Cannot save. Please enter the valid email.');
+            return;
+        } else if (email === '') {
+            alert('email is required.');
+            return;
+        } else {
+            try {
+                console.log('Data to be posted:', userData);
+                const response = await FetchFunc(
+                    '/partner-profile/editEmail',
+                    'POST',
+                    JSON.stringify(userData)
+                );
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Response from server:', response);
+                localStorage.setItem('email', email);
+                closeModal();
+            } catch (error) {
+                console.error('Failed to update email:', error);
             }
-            console.log('Response from server:', response);
-            localStorage.setItem('email', email);
-            closeModal();
-        } catch (error) {
-            console.error('Failed to update email:', error);
         }
     };
 
@@ -94,12 +110,12 @@ const EmailModal = ({ closeModal }) => {
 };
 
 const MobileModal = ({ closeModal }) => {
-    const [mobile, setMobile] = useState();
+    const [mobile, setMobile] = useState('');
     const [status,setStatus] = useState('');
     const handleChange = (e) => {
         const value = e.target.value;
         setMobile(value);
-        if (value === '' || /^\d{0,15}$/.test(value)) {
+        if (value === '' || /^(\+61|0)4\d{8}$/.test(value)) {
             setStatus('');
         } else {
             setStatus('Invalid mobile number!');
@@ -119,40 +135,56 @@ const MobileModal = ({ closeModal }) => {
         username: ''
     }
     const handleCustomerSave = async () => {
-        try {
-            console.log('Data to be posted:', userData);
-            const response = await FetchFunc(
-                '/customer-profile/editMobile',
-                'POST',
-                JSON.stringify(userData)
-            );
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            console.log('Response from server:', response);
-            localStorage.setItem('mobile', mobile);
-            closeModal();
-        } catch (error) {
-            console.error('Failed to update mobile:', error);
-        } 
+        if (status) {
+            alert('Cannot save. Please enter the valid mobile number.');
+            return;
+        } else if (mobile === '') {
+            alert('Mobile number is required.');
+            return;
+        } else {
+            try {
+                console.log('Data to be posted:', userData);
+                const response = await FetchFunc(
+                    '/customer-profile/editMobile',
+                    'POST',
+                    JSON.stringify(userData)
+                );
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Response from server:', response);
+                localStorage.setItem('mobile', mobile);
+                closeModal();
+            } catch (error) {
+                console.error('Failed to update mobile:', error);
+            } 
+        }
     };
     const handlePartnerSave = async () => {
-        try {
-            console.log('Data to be posted:', userData);
-            const response = await FetchFunc(
-                '/partner-profile/editMobile',
-                'POST',
-                JSON.stringify(userData)
-            );
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            console.log('Response from server:', response);
-            localStorage.setItem('mobile', mobile);
-            closeModal();
-        } catch (error) {
-            console.error('Failed to update mobile:', error);
-        } 
+        if (status) {
+            alert('Cannot save. Please enter the valid mobile number.');
+            return;
+        } else if (mobile === '') {
+            alert('Mobile number is required.');
+            return;
+        } else {
+            try {
+                console.log('Data to be posted:', userData);
+                const response = await FetchFunc(
+                    '/partner-profile/editMobile',
+                    'POST',
+                    JSON.stringify(userData)
+                );
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Response from server:', response);
+                localStorage.setItem('mobile', mobile);
+                closeModal();
+            } catch (error) {
+                console.error('Failed to update mobile:', error);
+            } 
+        }
     };
 
     return (
@@ -227,7 +259,7 @@ const PasswordModal = ({ closeModal }) => {
         try {
             console.log('Data to be posted:', userData);
             const response = await FetchFunc(
-                '/customer-profile/editPassword',
+                '/partner-profile/editPassword',
                 'POST',
                 JSON.stringify(userData)
             );

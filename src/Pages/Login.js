@@ -73,6 +73,7 @@ const Login = () => {
                     localStorage.removeItem('email');
                     localStorage.removeItem('mobile');
                     console.log('Logged out due to timeout');
+                    navigate('/');
                 }, 60 * 60 * 1000);
             } else if (response.status === 401) {
                 setLoginStatus("Unauthorized - Invalid Password!")
