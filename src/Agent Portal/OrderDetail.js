@@ -58,6 +58,12 @@ const OrderDetail = () => {
         navigate('/');
     };
 
+    const formatToISO = (dateString) => {
+        const [day, month, yearAndTime] = dateString.split('-');
+        const [year, time] = yearAndTime.split(' ');
+        return `${year}-${month}-${day}T${time}`;
+    };
+
     const handleDownload = async () => {
         try {
             const response = await FetchFunc(
@@ -153,7 +159,7 @@ const OrderDetail = () => {
                     <div className="tracking">
                         <p>Tracking History</p>
                         {Object.entries(order.history)
-                            .sort(([keyA], [keyB]) => new Date(keyB) - new Date(keyA))
+                            .sort(([keyA], [keyB]) => new Date(formatToISO(keyB)) - new Date(formatToISO(keyA)))
                             .map(([key, value]) => (
                                 value? (
                                     <div key={key} className="track_history">

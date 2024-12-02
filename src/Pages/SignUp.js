@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import FetchFunc from '../API';
 import "./SignUp.css";
 import SignUpIcon from '../asset/signupicon.png';
@@ -142,14 +142,12 @@ const SignUp = () => {
         <div className='sign_page'>
             <Header />
             <div className='header_bg'></div>
-            <Link to='/login'>
-                <button className='back'>
-                    <div className='back_text'>
-                        <img src={back} alt='back' />
-                        <p>Back</p>
-                    </div>
-                </button>
-            </Link>
+            <button className='back' onClick={() => navigate(-1)}>
+                <div className='back_text'>
+                    <img src={back} alt='back' />
+                    <p>Back</p>
+                </div>
+            </button>
             <div className='sign_up_step'>
                 <h1>Create Account</h1>
                 <div className='sign_up_selection'>

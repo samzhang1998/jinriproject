@@ -132,7 +132,7 @@
 
 .track_history {
     display: grid;
-    grid-template-columns: 8fr 2fr 4fr;
+    grid-template-columns: 5fr 2fr 4fr;
     width: 100%;
     justify-content: start;
     align-items: center;

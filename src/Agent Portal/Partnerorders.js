@@ -154,6 +154,12 @@ const Partnerorders = () => {
         return order.currentStatus.toLowerCase() === filter;
     });
 
+    const formatToISO = (dateString) => {
+        const [day, month, yearAndTime] = dateString.split('-');
+        const [year, time] = yearAndTime.split(' ');
+        return `${year}-${month}-${day}T${time}`;
+    };
+
     const handleOpenModal = (orderId) => {
         console.log(orderId)
         setActiveOrderId(orderId);
@@ -182,7 +188,9 @@ const Partnerorders = () => {
                 >Completed</span>
             </div>
             <div className="order_list">
-                {filteredOrders.map((order) => (
+                {filteredOrders
+                .sort((a, b) => new Date(formatToISO(b.createTime)) - new Date(formatToISO(a.createTime)))
+                .map((order) => (
                     <div key={order.id} className="order_item">                        
                         <div className="order_detail">
                             <p>{order.createTime}</p>

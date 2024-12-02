@@ -1,11 +1,12 @@
 import {useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Header';
 import FetchFunc from '../API';
 import back from "../asset/Expand_left.png";
 
 function Completion(props) {
   const [ messageBody, setMessageBody ] = useState('');
+  const navigate = useNavigate();
   const { stripePromise } = props;
 
   useEffect(() => {
@@ -59,14 +60,12 @@ function Completion(props) {
     <div className="thank_you">
       <Header />
       <div className='header_bg'></div>
-      <Link to='/'>
-        <button className='back'>
+        <button className='back' onClick={() => navigate('/')}>
           <div className='back_text'>
             <img src={back} alt='back' />
             <p>Back</p>
           </div>
         </button>
-      </Link>
       <div className="thank_you_text">
         <h1>Thank You!</h1>
         <p>A Confirmation has been send to your email! 

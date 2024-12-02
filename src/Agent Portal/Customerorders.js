@@ -256,6 +256,12 @@ const Customerorders = () => {
         setPriceModal(false);
     };
 
+    const formatToISO = (dateString) => {
+        const [day, month, yearAndTime] = dateString.split('-');
+        const [year, time] = yearAndTime.split(' ');
+        return `${year}-${month}-${day}T${time}`;
+    };
+
     return (
         <div className="orders">
             <div className="change_property_title">
@@ -285,7 +291,10 @@ const Customerorders = () => {
                 >Completed</span>
             </div>
             <div className="order_list">
-                {Array.isArray(order) && filteredOrders.map((order) => (
+                {Array.isArray(order) && 
+                    filteredOrders
+                    .sort((a, b) => new Date(formatToISO(b.createTime)) - new Date(formatToISO(a.createTime)))
+                    .map((order) => (
                     <div key={order.orderId} className="order_item">                        
                         <div className="order_detail">
                             <p>{order.createTime}</p>

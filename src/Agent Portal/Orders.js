@@ -49,6 +49,12 @@ const Orders = ({ type,id }) => {
         return order.currentStatus.toLowerCase() === filter;
     });
 
+    const formatToISO = (dateString) => {
+        const [day, month, yearAndTime] = dateString.split('-');
+        const [year, time] = yearAndTime.split(' ');
+        return `${year}-${month}-${day}T${time}`;
+    };
+
     return (
         <div className="orders">
             <h1>Orders</h1>
@@ -70,7 +76,7 @@ const Orders = ({ type,id }) => {
             <div className="order_list">
                 {Array.isArray(filteredOrders) && 
                     filteredOrders
-                    .sort((a, b) => new Date(b.createTime) - new Date(a.createTime))
+                    .sort((a, b) => new Date(formatToISO(b.createTime)) - new Date(formatToISO(a.createTime)))
                     .map((order) => (
                     <div key={order.orderId} className="order_item">                        
                         <div className="order_detail">
