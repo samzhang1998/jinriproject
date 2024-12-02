@@ -27,7 +27,7 @@ const Orders = ({ type,id }) => {
                     'POST',
                 );
                 if (response.status === 401) {
-                    navigate('login');
+                    navigate('/login');
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }

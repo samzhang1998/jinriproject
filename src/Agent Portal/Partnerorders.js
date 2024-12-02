@@ -126,6 +126,7 @@ const Partnerorders = () => {
     const [order, setOrder] = useState([]);
     const [filter, setFilter] = useState('complete');
     const [refresh, setRefresh] = useState(false);
+    const navigate = useNavigate();
     const [activeOrderId, setActiveOrderId] = useState(null);
 
     useEffect(() => {
@@ -135,7 +136,9 @@ const Partnerorders = () => {
                     `/admin/allPartnerOrders`,
                     'GET',
                 );
-                if (!response.ok) {
+                if (response.status === 401) {
+                    navigate('/login');
+                } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 console.log('Response from server:', response);

@@ -135,7 +135,9 @@ const InspectionPriceModal = ({ closeModal, refresh, setRefresh }) => {
                     '/search/inspection',
                     'GET',
                 );
-                if (!response.ok) {
+                if (response.status === 401) {
+                    navigate('/login');
+                } else if (!response.ok) {
                     console.log(response.text());
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -163,7 +165,7 @@ const InspectionPriceModal = ({ closeModal, refresh, setRefresh }) => {
                 `/admin/editInspection/?price=${price}`,
                 'POST',
             );
-            if (response === 401) {
+            if (response.status === 401) {
                 navigate('/login');
             } else if (!response.ok) {
                 console.log(response.text())
@@ -218,7 +220,7 @@ const Customerorders = () => {
                     `/admin/allCustomerOrders`,
                     'GET',
                 );
-                if (response === 401) {
+                if (response.status === 401) {
                     navigate('/login');
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);

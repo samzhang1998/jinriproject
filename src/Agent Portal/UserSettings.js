@@ -2,10 +2,12 @@ import React, { useState }from "react";
 import "./UserSettings.css";
 import FetchFunc from "../API";
 import close from "../asset/Close_round.png";
+import { useNavigate } from "react-router-dom";
 
 const EmailModal = ({ closeModal }) => {
     const [email, setEmail] = useState('');
     const [status,setStatus] = useState('');
+    const navigate = useNavigate();
     const handleChange = (e) => {
         const value = e.target.value;
         setEmail(value);
@@ -44,7 +46,9 @@ const EmailModal = ({ closeModal }) => {
                     'POST',
                     JSON.stringify(userData)
                 );
-                if (!response.ok) {
+                if (response.status === 401) {
+                    navigate('/login');
+                } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 console.log('Response from server:', response);
@@ -70,7 +74,9 @@ const EmailModal = ({ closeModal }) => {
                     'POST',
                     JSON.stringify(userData)
                 );
-                if (!response.ok) {
+                if (response.status === 401) {
+                    navigate('/login');
+                } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 console.log('Response from server:', response);
@@ -112,6 +118,7 @@ const EmailModal = ({ closeModal }) => {
 const MobileModal = ({ closeModal }) => {
     const [mobile, setMobile] = useState('');
     const [status,setStatus] = useState('');
+    const navigate = useNavigate();
     const handleChange = (e) => {
         const value = e.target.value;
         setMobile(value);
@@ -149,7 +156,9 @@ const MobileModal = ({ closeModal }) => {
                     'POST',
                     JSON.stringify(userData)
                 );
-                if (!response.ok) {
+                if (response === 401) {
+                    navigate('/login');
+                } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 console.log('Response from server:', response);
