@@ -55,6 +55,15 @@ const Login = () => {
                 localStorage.setItem('email', responseData.email);
                 localStorage.setItem('mobile', responseData.mobile);
                 navigate(-1);
+                setTimeout(() => {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
+                    console.log('Logged out due to timeout');
+                }, 60 * 60 * 1000);
             } else if (response.status === 401) {
                 setLoginStatus("Unauthorized - Invalid Password!")
             } else if (response.status === 404) {
@@ -123,7 +132,7 @@ const Login = () => {
                 </div>
                 {loginStatus && <p style={{color: 'red'}}>{loginStatus}</p>}
                 {/* <h3>Forgot password?</h3> */}
-                <h3>Don't have an account yet?<Link to="/signup"><span>Sign up</span></Link></h3>
+                <h3>Don't have an account yet?<Link to="/signup"><span className='sign_up_span'>Sign up</span></Link></h3>
             </div>
         </div>
     );

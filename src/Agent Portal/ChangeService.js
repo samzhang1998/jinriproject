@@ -22,7 +22,9 @@ const ChangeService = () => {
                     '/service/all',
                     'GET',
                 );
-                if (!response.ok) {
+                if (response.status === 401) {
+                    navigate('/login');
+                } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 console.log('Response from server:', response);
@@ -34,7 +36,7 @@ const ChangeService = () => {
             }
         };
         fetchServices();
-    }, [refresh]);
+    }, [refresh, navigate]);
 
     const handleAddService = () => {
         setServiceModal(true);

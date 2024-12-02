@@ -32,7 +32,9 @@ const OrderDetail = () => {
                     `${url}?orderId=${orderId}`,
                     'POST',
                 );
-                if (!response.ok) {
+                if (response.status === 401) {
+                    navigate('/login');
+                } else if (!response.ok) {
                     console.log(response.text());
                 }
                 console.log('Response from server:', response);
@@ -44,7 +46,7 @@ const OrderDetail = () => {
             }
         };
         fetchOrders();
-    }, [type, orderId]);
+    }, [type, orderId, navigate]);
 
     if (!order) {
         return <p>Loading...</p>;
@@ -150,16 +152,18 @@ const OrderDetail = () => {
                     <hr style={{background: "#DDD", height: '1px', border: 'none'}}/>
                     <div className="tracking">
                         <p>Tracking History</p>
-                        {Object.entries(order.history).map(([key, value]) => (
-                            value? (
-                                <div key={key} className="track_history">
-                                    <p>{key}</p>
-                                    <div className="track_circle">
-                                        <div className="track_inside"></div>
+                        {Object.entries(order.history)
+                            .sort(([keyA], [keyB]) => new Date(keyB) - new Date(keyA))
+                            .map(([key, value]) => (
+                                value? (
+                                    <div key={key} className="track_history">
+                                        <p>{key}</p>
+                                        <div className="track_circle">
+                                            <div className="track_inside"></div>
+                                        </div>
+                                        <p>{value}</p>
                                     </div>
-                                    <p>{value}</p>
-                                </div>
-                            ) : null
+                                ) : null
                         ))}
                     </div>
                     <Link to={{ pathname: `/${type}/${id}` }} 

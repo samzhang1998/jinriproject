@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Orders.css";
 import FetchFunc from "../API";
 
 const Orders = ({ type,id }) => {
     const [orders, setOrders] = useState([]);
+    const navigate = useNavigate();
     const [filter, setFilter] = useState('completed');
 
     useEffect(() => {
@@ -25,7 +26,9 @@ const Orders = ({ type,id }) => {
                     `${url}?customerId=${id}`,
                     'POST',
                 );
-                if (!response.ok) {
+                if (response.status === 401) {
+                    navigate('login');
+                } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 console.log('Response from server:', response);
@@ -37,7 +40,7 @@ const Orders = ({ type,id }) => {
             }
         };
         fetchOrders();
-    }, [id]);
+    }, [id, navigate]);
 
     console.log(orders);
 
