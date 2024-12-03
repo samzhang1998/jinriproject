@@ -81,7 +81,7 @@ const AboutUs = () => {
           </div>
         </div>
         <div className='container2'>
-          <h2>At Check For Sure</h2>
+          {/* <h2>At Check For Sure</h2> */}
           <div className='container2_text1'>What sets us apart is our dedication to thoroughness 
             and reliability. Every report we produce is crafted with precision, covering every 
             aspect of the property to ensure you have a complete understanding of its condition. 

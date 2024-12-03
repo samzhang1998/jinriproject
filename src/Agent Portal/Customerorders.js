@@ -21,6 +21,12 @@ const EditCustomerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
                     'GET',
                 );
                 if (response === 401) {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
                     console.log(response.text());
@@ -58,6 +64,12 @@ const EditCustomerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
                 JSON.stringify(dataToSend)
             );
             if (response === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -136,6 +148,12 @@ const InspectionPriceModal = ({ closeModal, refresh, setRefresh }) => {
                     'GET',
                 );
                 if (response.status === 401) {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
                     console.log(response.text());
@@ -166,6 +184,12 @@ const InspectionPriceModal = ({ closeModal, refresh, setRefresh }) => {
                 'POST',
             );
             if (response.status === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
                 console.log(response.text())
@@ -221,6 +245,12 @@ const Customerorders = () => {
                     'GET',
                 );
                 if (response.status === 401) {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);

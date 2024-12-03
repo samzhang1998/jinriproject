@@ -244,16 +244,16 @@
         background-position: center;
         width: 100%;
         height: auto;
-        aspect-ratio: 390 / 437;
+        aspect-ratio: 390 / 450;
     }
 
     .overlay_text h1 {
         font-size: 3.5rem;
-        margin-top: 18%;
+        margin-top: 10%;
     }
 
     .overlay_text p {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         margin-top: 7%;
         width: 90%;
     }
@@ -271,6 +271,12 @@
         padding-right: 5%;
     }
 
+    .introduction {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .introduction h2 {
         font-size: 2.2rem;
     }
@@ -280,8 +286,11 @@
     }
 
     .introduction p {
-        font-size: 1.6rem;
+        font-size: 1.2rem;
         margin-bottom: 0;
+        text-align: center;
+        width: 90%;
+        margin-bottom: 5%;
     }
 
     .feature h2 {

@@ -144,6 +144,12 @@ const OrderOverview = () => {
                 } else if (response.status === 404) {
                     navigate(`/bookinspector`, { state: { query }});
                 } else if (response.status === 401) {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
                     navigate('/login');
                 } else {
                     navigate(`/bookinspector`, { state: { query }});

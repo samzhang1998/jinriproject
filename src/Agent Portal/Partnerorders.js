@@ -20,6 +20,12 @@ const EditPartnerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
                     'GET',
                 );
                 if (response === 401) {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
                     console.log(response.text());
@@ -57,6 +63,12 @@ const EditPartnerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
                 JSON.stringify(dataToSend)
             );
             if (response === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -137,6 +149,12 @@ const Partnerorders = () => {
                     'GET',
                 );
                 if (response.status === 401) {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);

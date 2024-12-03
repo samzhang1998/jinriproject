@@ -48,6 +48,12 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
                 JSON.stringify(dataToSend)
             );
             if (response === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -73,6 +79,12 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
                 'DELETE',
             );
             if (response === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
                 console.log(response.text());
@@ -201,6 +213,12 @@ const AddPropertyModal = ({ closeModal, refresh, setRefresh }) => {
                 JSON.stringify(dataToSend)
             );
             if (response === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -314,6 +332,12 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
                 credentials:'include',
             });
             if (response === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
                 console.log(response.text());
@@ -366,6 +390,12 @@ const PriceModal = ({ closeModal, id, refresh, setRefresh, prevPrice }) => {
                 'POST',
             );
             if (response === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
                 console.log(response.text())
@@ -423,6 +453,12 @@ const Changeproperty = () => {
                     'Get',
                 );
                 if (response.status === 401) {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
