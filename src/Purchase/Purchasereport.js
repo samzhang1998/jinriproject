@@ -480,10 +480,10 @@ const PurchasePage = () => {
     const { query } = location.state || {};
     const [formPurchase,setFormPurchase] = useState({
         propertyAddress: query,
-        coolingPeriod: null,
-        auction: null,
+        coolingPeriod: false,
+        auction: false,
         numberBedrooms: null,
-        grannyFlat: null,
+        grannyFlat: false,
         notes: '',
         firstName: null,
         lastName: null,
