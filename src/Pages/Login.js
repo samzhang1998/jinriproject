@@ -65,7 +65,11 @@ const Login = () => {
                 localStorage.setItem('email', responseData.email);
                 localStorage.setItem('mobile', responseData.mobile);
                 handleBack();
-                setTimeout(() => {
+                const existingTimeOutId = localStorage.getItem('timeOutId');
+                if (existingTimeOutId) {
+                    clearTimeout(parseInt(existingTimeOutId, 10));
+                }
+                const timeOutId = setTimeout(() => {
                     localStorage.setItem('isLoggedIn', false);
                     localStorage.removeItem('username');
                     localStorage.removeItem('role');
@@ -75,6 +79,7 @@ const Login = () => {
                     console.log('Logged out due to timeout');
                     alert('Logged out due to timeout, please log in again!');
                 }, 60 * 60 * 1000);
+                localStorage.setItem('timeOutId', timeOutId.toString());
             } else if (response.status === 401) {
                 setLoginStatus("Unauthorized - Invalid Password!")
             } else if (response.status === 404) {

@@ -77,6 +77,12 @@ const Admin = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             console.log('Response from server:', response);
+            const timeOutId = localStorage.getItem('timeOutId');
+            if (timeOutId) {
+                clearTimeout(parseInt(timeOutId, 10));
+                localStorage.removeItem('timeOutId');
+                console.log('Timeout cleared');
+            }
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('username');
             localStorage.removeItem('role');
