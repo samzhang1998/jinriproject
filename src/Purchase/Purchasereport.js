@@ -232,8 +232,8 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
     );
 };
 
-const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPurchase, clientSecret, setClientSecret, handlePartnerSubmit, summary }) => {
-    const [selectedServices,setSelectedServices] = useState([]);
+const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPurchase, clientSecret, setClientSecret, handlePartnerSubmit, summary, selectedServices, setSelectedServices }) => {
+    // const [selectedServices,setSelectedServices] = useState([]);
     const [services,setServices] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const navigate = useNavigate();
@@ -365,7 +365,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
         // updatePaymentSummary({ getService: selected, servicePrice: selected ? 0 : 0 });
     };
     console.log(formPurchase)
-
+    console.log(selectedServices)
     return (
         <div>
             <div className="service_details">
@@ -384,8 +384,12 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
                         key={service.serviceId}
                         onClick={() => handleGetService(service.serviceId, services)}
                         style={{
-                            background: selectedServices.includes(service) ? 'rgba(0, 130, 134, 0.17)' :  '#F9F8F8',
-                            border: selectedServices.includes(service) ? '1px solid #008286' :  'none',
+                            background: selectedServices.some((selected) => selected.serviceId === service.serviceId)
+                                ? 'rgba(0, 130, 134, 0.17)'
+                                : '#F9F8F8',
+                            border: selectedServices.some((selected) => selected.serviceId === service.serviceId)
+                                ? '1px solid #008286'
+                                : 'none',
                             borderRadius: '1rem',
                             width: '95%',
                             marginBottom: '5%',
@@ -478,6 +482,7 @@ const PurchasePage = () => {
     const role = localStorage.getItem('role');
     const location = useLocation();
     const { query } = location.state || {};
+    const [selectedServices,setSelectedServices] = useState([]);
     const [formPurchase,setFormPurchase] = useState({
         propertyAddress: query,
         coolingPeriod: false,
@@ -651,7 +656,9 @@ const PurchasePage = () => {
                                 onUpdate={handleUpdate}
                                 setFormPurchase={setFormPurchase}
                                 handlePartnerSubmit={handlePartnerSubmit}
-                                summary={paymentSummary} 
+                                summary={paymentSummary}
+                                selectedServices={selectedServices}
+                                setSelectedServices={setSelectedServices}
                             />
                         )}
                         {currentStep === 3 && 
@@ -685,7 +692,9 @@ const PurchasePage = () => {
                                 setFormPurchase={setFormPurchase}
                                 setClientSecret={setClientSecret} 
                                 clientSecret={clientSecret}
-                                summary={paymentSummary} 
+                                summary={paymentSummary}
+                                selectedServices={selectedServices}
+                                setSelectedServices={setSelectedServices}
                             />
                         )}
                         {currentStep === 3 &&                      
