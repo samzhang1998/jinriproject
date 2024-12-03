@@ -18,31 +18,6 @@ const YourDetailsForm = ({ formPurchase, onUpdate, validateField, errors, setCon
     };
 
     const [status, setStatus] = useState({});
-    // const validateField = (name, value, relatedValue) => {
-    //     let error = '';
-    //     const requiredFields = ['firstName', 'lastName', 'homeAddress', 'agentFirstName', 'agentLastName'];
-    //     if (requiredFields.includes(name) && !value.trim()) {
-    //         error = 'This field is required';
-    //         return error;
-    //     }
-
-    //     if (name === 'email' || name === 'agentEmail') {
-    //         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //         if (!emailRegex.test(value)) {
-    //             error = 'Invalid email format';
-    //         }
-    //     } else if (name === 'mobile' || name === 'agentMobile') {
-    //         const mobileRegex = /^(\+61|0)4\d{8}$/;
-    //         if (!mobileRegex.test(value)) {
-    //             error = 'Invalid mobile number';
-    //         }
-    //     } else if (name === 'confirmEmail') {
-    //         if (value !== relatedValue) {
-    //             error = 'Emails do not match';
-    //         }
-    //     }
-    //     return error;
-    // };
 
     const handleUpdate = (e) => {
         const { name, value, type, checked } = e.target;

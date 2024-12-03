@@ -15,7 +15,7 @@ const Backend_url = 'http://localhost:8080';
 
 const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) => {
     const isReportOk = localStorage.getItem('reportOK') === 'true';
-    const [hasGrannyFlat, setHasGrannyFlat] = useState();
+    const [hasGrannyFlat, setHasGrannyFlat] = useState(formPurchase.grannyFlat);
     const [errors, setErrors] = useState('');
     const [confirmEmail, setConfirmEmail] = useState('');
 
@@ -121,6 +121,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                                     type="radio"
                                     name="coolingPeriod"  
                                     value="true"
+                                    checked={formPurchase.coolingPeriod === true}
                                     onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
                                 /> Yes
@@ -130,6 +131,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                                     type="radio"  
                                     name='coolingPeriod'
                                     value="false"
+                                    checked={formPurchase.coolingPeriod === false}
                                     onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
                                 /> No
@@ -142,6 +144,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                                     type="radio" 
                                     name="auction" 
                                     value="true"
+                                    checked={formPurchase.auction === true}
                                     onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
                                 /> Yes
@@ -151,6 +154,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                                     type="radio" 
                                     name="auction" 
                                     value="false"
+                                    checked={formPurchase.auction === false}
                                     onChange={handleUpdate}
                                     style={{ width: '1.2rem' }}
                                 /> No
@@ -158,12 +162,13 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                         </div>
                         {!isReportOk && <label>How many bedrooms does the property have?</label>}
                         {!isReportOk && <div className="selection">
-                            {[1, 2, 3, 4, 5, '6 or more'].map((bedroom) => (
+                            {['1', '2', '3', '4', '5', '6 or more'].map((bedroom) => (
                                 <label key={bedroom}>
                                     <input 
                                         type="radio" 
-                                        name="bedrooms" 
+                                        name="numberBedrooms" 
                                         value={bedroom}
+                                        checked={formPurchase.numberBedrooms === bedroom}
                                         onChange={handleUpdate}
                                         style={{ width: '1.2rem' }}
                                     /> {bedroom}
@@ -475,10 +480,10 @@ const PurchasePage = () => {
     const { query } = location.state || {};
     const [formPurchase,setFormPurchase] = useState({
         propertyAddress: query,
-        coolingPeriod: false,
-        acution: false,
-        numberBedroom: null,
-        grannyFlat: false,
+        coolingPeriod: null,
+        auction: null,
+        numberBedrooms: null,
+        grannyFlat: null,
         notes: '',
         firstName: null,
         lastName: null,
