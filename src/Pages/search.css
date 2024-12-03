@@ -69,7 +69,7 @@
     color: #FFF;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .color_button {
         display: none;
     }

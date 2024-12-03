@@ -82,7 +82,7 @@
     background-color: #004d40;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .intro {
         display: flex;
         flex-direction: column-reverse;

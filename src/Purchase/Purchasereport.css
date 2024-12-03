@@ -431,7 +431,7 @@
     margin-right: 2%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .header_bg {
         height: 7rem;
     }

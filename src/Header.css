@@ -101,7 +101,7 @@
     padding: 0.625rem;
 }
   
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     html {
         font-size: 10px;
     }
@@ -175,5 +175,11 @@
 @media (max-height: 470px) {
     html {
         font-size: 10px;
+    }
+}
+
+@media (max-width: 800px) {
+    html {
+        font-size: 12px;
     }
 }
