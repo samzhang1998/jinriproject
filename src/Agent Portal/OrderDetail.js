@@ -33,6 +33,12 @@ const OrderDetail = () => {
                     'POST',
                 );
                 if (response.status === 401) {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
                     console.log(response.text());
@@ -70,7 +76,15 @@ const OrderDetail = () => {
                 `/oss/download?fileName=${order.reportName}&reportType=${order.reportType}`,
                 'GET',
             );
-            if (!response.ok) {
+            if (response.status === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
+                navigate('/login');
+            } else if (!response.ok) {
                 console.log(response.text());
             }
             console.log('Response from server:', response);

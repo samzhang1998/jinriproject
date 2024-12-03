@@ -47,6 +47,12 @@ const EmailModal = ({ closeModal }) => {
                     JSON.stringify(userData)
                 );
                 if (response.status === 401) {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -75,6 +81,12 @@ const EmailModal = ({ closeModal }) => {
                     JSON.stringify(userData)
                 );
                 if (response.status === 401) {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -156,7 +168,13 @@ const MobileModal = ({ closeModal }) => {
                     'POST',
                     JSON.stringify(userData)
                 );
-                if (response === 401) {
+                if (response.status === 401) {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -184,7 +202,15 @@ const MobileModal = ({ closeModal }) => {
                     'POST',
                     JSON.stringify(userData)
                 );
-                if (!response.ok) {
+                if (response.status === 401) {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
+                    navigate('/login');
+                } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 console.log('Response from server:', response);

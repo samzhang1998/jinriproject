@@ -23,6 +23,12 @@ const ChangeService = () => {
                     'GET',
                 );
                 if (response.status === 401) {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('role');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('email');
+                    localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -67,6 +73,12 @@ const ChangeService = () => {
                 JSON.stringify(dataToSend)
             );
             if (response === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
