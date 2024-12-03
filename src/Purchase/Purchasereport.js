@@ -240,7 +240,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
     const location = useLocation();
     const { price } = location.state || {};
     console.log(price);
-    const totalAmount = (parseInt(price) + parseInt(totalPrice) + parseInt(summary.hasGrannyFlat ? 99 : 0)) * 100;
+    const totalAmount = (parseFloat(price) + parseFloat(totalPrice) + parseFloat(summary.hasGrannyFlat ? 99 : 0)) * 100;
     console.log(totalAmount);
 
     useEffect(() => {
@@ -426,7 +426,7 @@ const StepThree = ({ clientSecret }) => {
 const PaymentSummary = ({ summary }) => {
     const location = useLocation();
     const { query, price } = location.state || {};
-    const totalAmount = parseInt(price) + parseInt(summary.hasGrannyFlat ? 99 : 0) + parseInt(summary.servicePrice);
+    const totalAmount = parseFloat(price) + parseFloat(summary.hasGrannyFlat ? 99 : 0) + parseFloat(summary.servicePrice);
 
     return (
         <div className="order_summary">
