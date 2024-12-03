@@ -15,7 +15,7 @@ const Backend_url = 'http://localhost:8080';
 
 const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) => {
     const isReportOk = localStorage.getItem('reportOK') === 'true';
-    const [hasGrannyFlat, setHasGrannyFlat] = useState(false);
+    const [hasGrannyFlat, setHasGrannyFlat] = useState();
     const [errors, setErrors] = useState('');
     const [confirmEmail, setConfirmEmail] = useState('');
 
@@ -227,7 +227,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
     );
 };
 
-const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPurchase, clientSecret, setClientSecret, handlePartnerSubmit }) => {
+const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPurchase, clientSecret, setClientSecret, handlePartnerSubmit, summary }) => {
     const [selectedServices,setSelectedServices] = useState([]);
     const [services,setServices] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -235,7 +235,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
     const location = useLocation();
     const { price } = location.state || {};
     console.log(price);
-    const totalAmount = (parseInt(price) + parseInt(totalPrice)) * 100;
+    const totalAmount = (parseInt(price) + parseInt(totalPrice) + parseInt(summary.hasGrannyFlat ? 99 : 0)) * 100;
     console.log(totalAmount);
 
     useEffect(() => {
@@ -645,7 +645,8 @@ const PurchasePage = () => {
                                 formPurchase={formPurchase} 
                                 onUpdate={handleUpdate}
                                 setFormPurchase={setFormPurchase}
-                                handlePartnerSubmit={handlePartnerSubmit} 
+                                handlePartnerSubmit={handlePartnerSubmit}
+                                summary={paymentSummary} 
                             />
                         )}
                         {currentStep === 3 && 
@@ -678,7 +679,8 @@ const PurchasePage = () => {
                                 onUpdate={handleUpdate}
                                 setFormPurchase={setFormPurchase}
                                 setClientSecret={setClientSecret} 
-                                clientSecret={clientSecret} 
+                                clientSecret={clientSecret}
+                                summary={paymentSummary} 
                             />
                         )}
                         {currentStep === 3 &&                      
