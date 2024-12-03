@@ -171,3 +171,9 @@
         font-style: Montserrat;
     }
 }
+
+@media (max-height: 470px) {
+    html {
+        font-size: 10px;
+    }
+}

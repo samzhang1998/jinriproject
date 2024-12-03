@@ -52,6 +52,10 @@
         display: none;
     }
 
+    .partner_box1 {
+        height: auto;
+    }
+
     .mobile_partner {
         display: block;
         width: 100%;

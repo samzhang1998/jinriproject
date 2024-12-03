@@ -109,3 +109,9 @@
     background-color: #004d40;
 }
 
+@media (max-height: 470px) {
+    .screen_search_button {
+        width: 25%;
+    }
+}
+

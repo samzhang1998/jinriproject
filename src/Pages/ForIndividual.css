@@ -52,6 +52,10 @@
         display: none;
     }
 
+    .individual_box1 {
+        height: auto;
+    }
+
     .mobile_individual {
         display: block;
         width: 100%;
