@@ -24,9 +24,9 @@ const AboutUs = () => {
         <div className='container1'>
           <div className='introduction'>
             <h2>WHO WE ARE</h2>
-            <h3>A one-stop shop <br /> for all your property report</h3>
-            <p>At Check for Sure, we believe trust is built on transparency and quality. Let 
-              us be your partner in ensuring peace of mind with inspections you can depend on.</p>
+            <p>CheckForSure provides instant, affordable building inspection reports at the 
+              first open home, eliminating the need for separate arrangements and helping 
+              buyers make faster, more informed decisions with greater efficiency.</p>
           </div>
           <div className='feature_box'>
             <div className='feature'>
@@ -35,8 +35,8 @@ const AboutUs = () => {
                 <div className='line'></div>
               </div>
               <div className='feature_text'>
-                <h2>Comprehensive Inspections</h2>
-                <p>Get informed Before You Buy. Have our qualified inspectors.</p>
+                <h2>Instant Access to Reports:</h2>
+                <p>Building inspection reports are ready by the first open home, no need to wait.</p>
               </div>
             </div>
             <div className='feature'>
@@ -45,9 +45,28 @@ const AboutUs = () => {
                 <div className='line'></div>
               </div>
               <div className='feature_text'>
-                <h2>Detailed Property Reports</h2>
-                <p>Access detailed property reports with ease. Make confident 
-                  decisions backed by our expertise.</p>
+                <h2>No Extra Arrangements:</h2>
+                <p>Buyers don't need to separately order or arrange for a building inspector.</p>
+              </div>
+            </div>
+            <div className='feature'>
+              <div className='feature_left'>
+                <div className='about_cricle'>1</div>
+                <div className='line'></div>
+              </div>
+              <div className='feature_text'>
+                <h2>Affordable Pricing:</h2>
+                <p>Our reports are offered at a lower cost compared to traditional inspection services.</p>
+              </div>
+            </div>
+            <div className='feature'>
+              <div className='feature_left'>
+                <div className='about_cricle'>1</div>
+                <div className='line'></div>
+              </div>
+              <div className='feature_text'>
+                <h2>Faster Decision-Making:</h2>
+                <p>With pre-prepared reports, buyers can make quicker, informed decisions.</p>
               </div>
             </div>
             <div className='feature'>
@@ -55,8 +74,8 @@ const AboutUs = () => {
                 <div className='about_cricle'>1</div>
               </div>
               <div className='feature_text'>
-                <h2>Transparent and Reliable Process</h2>
-                <p>Trust in transparency and quality. Let us simplify your property inspection process.</p>
+                <h2>Increased Efficiency:</h2>
+                <p>Saves time and streamlines the home-buying process, improving overall search efficiency.</p>
               </div>
             </div>
           </div>
@@ -69,7 +88,7 @@ const AboutUs = () => {
             From structural integrity to minor details, we provide a full picture so there are no 
             surprises.</div>
           <img src={office} alt='office' />
-          <div className='show_data'>
+          {/* <div className='show_data'>
             <div className='report_data'>
               <h1>68k</h1>
               <p>Total Report</p>
@@ -89,7 +108,7 @@ const AboutUs = () => {
               <h1>5</h1>
               <p>Location</p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className='screen_about'>

@@ -16,11 +16,11 @@ const Footer = () => {
         <footer className="footer">
             <div className="info">
                 <div className="Logo_footer">CHECK FOR SURE</div>
-                <p>Welcome to Check for Sure, the inspection platform you can trust. Our 
-                    mission is to provide comprehensive, all-encompassing inspection reports 
-                    that leave no detail unnoticed. Whether you're buying, selling, or managing 
-                    a property, we deliver accurate insights that empower you to make 
-                    informed decisions.</p>
+                <p>Our Building Report service is designed to streamline the home-buying 
+                    process, empowering buyers with detailed, reliable information to make 
+                    confident decisions faster.<br />By providing clear insights into property 
+                    conditions, our reports enhance efficiency and simplify the viewing 
+                    experience, making it easier to find the right home with confidence.</p>
                 <div className="socialmedia">
                     <a
                         href="https://www.facebook.com/" 
@@ -95,11 +95,11 @@ const Footer = () => {
             </div>
             <div className="info1">
                 <div className="Logo_footer">CHECH FOR SURE</div>
-                <p>Welcome to Check for Sure, the inspection platform you can trust. Our 
-                    mission is to provide comprehensive, all-encompassing inspection reports 
-                    that leave no detail unnoticed. Whether you're buying, selling, or managing 
-                    a property, we deliver accurate insights that empower you to make 
-                    informed decisions.
+                <p>Our Building Report service is designed to streamline the home-buying 
+                    process, empowering buyers with detailed, reliable information to make 
+                    confident decisions faster.<br />By providing clear insights into property 
+                    conditions, our reports enhance efficiency and simplify the viewing 
+                    experience, making it easier to find the right home with confidence.
                 </p>
                 <div className="socialmedia">
                     <a

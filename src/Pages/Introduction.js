@@ -11,8 +11,7 @@ const Introduction = () => {
     return (
         <div className="intro">
             <div className="intro_text">
-                <h1>Why Choose Us</h1>
-                <h2>for Your Inspection</h2>
+                <h1>Get Faster, Smarter and More Affordable Reports with Us!</h1>
                 <p>At Check for Sure, we specialize in delivering the most accurate and detailed 
                     inspection reports in the industry.</p>
                 <p>With Check for Sure, you can make informed decisions with confidence, knowing 

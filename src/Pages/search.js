@@ -20,8 +20,6 @@ const Search = () => {
             <div className='mobile_search_content'>
                 <MobileSearchBox />
             </div>
-            <span>*If the report is already available, you will pay a lower price and may 
-              receive cash back if it is repurchased</span>
         </div>
     );
 };
