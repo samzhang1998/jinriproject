@@ -1,10 +1,9 @@
 .footer {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     background: #008286;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    padding: 5%;
 }
 
 .info {

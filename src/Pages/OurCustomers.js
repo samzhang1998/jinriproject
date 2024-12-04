@@ -15,20 +15,20 @@ import info from '../asset/ico-quote.png';
 const OurCustomers = () => {
     const customers = [
         [
-            { name: 'Gladina Samantha', location: 'NSW 2000', imgSrc: customer1, text: 'The building and pest report I purchased was incredibly detailed and easy to understand. It gave me the confidence to proceed with my property purchase, knowing there were no hidden surprises. The service was quick and professional—I highly recommend it!' },
+            { name: 'Gladina Samantha', location: 'NSW 2070', imgSrc: customer1, text: 'The building and pest report I purchased was incredibly detailed and easy to understand. It gave me the confidence to proceed with my property purchase, knowing there were no hidden surprises. The service was quick and professional—I highly recommend it!' },
             { name: 'John Doe', location: 'VIC 3200', imgSrc: customer2, text: 'The inspection report I received was thorough and well-organized. It highlighted every detail I needed to know about the property, allowing me to move forward with confidence. The process was seamless, and the team was highly professional—highly recommended!' }
         ],
         [
-            { name: 'Emily Carter', location: 'NSW 2000', imgSrc: customer3, text: 'I was impressed with how clear and concise the report was. It provided all the information I needed to make an informed decision. The team was prompt, reliable, and extremely helpful throughout the process. Definitely worth it!' },
-            { name: 'James Bennett', location: 'VIC 3200', imgSrc: customer4, text: 'The property report exceeded my expectations. It was detailed, accurate, and very easy to follow. Thanks to their expert insights, I felt fully informed before making my purchase. The service was fantastic—efficient and friendly!' }
+            { name: 'Emily Carter', location: 'QLD 4217', imgSrc: customer3, text: 'I was impressed with how clear and concise the report was. It provided all the information I needed to make an informed decision. The team was prompt, reliable, and extremely helpful throughout the process. Definitely worth it!' },
+            { name: 'James Bennett', location: 'VIC 3000', imgSrc: customer4, text: 'The property report exceeded my expectations. It was detailed, accurate, and very easy to follow. Thanks to their expert insights, I felt fully informed before making my purchase. The service was fantastic—efficient and friendly!' }
         ],
         [
-            { name: 'Sophia Wright', location: 'NSW 2000', imgSrc: customer5, text: "This report was a game-changer for me. It outlined everything clearly, with no jargon, making the property's condition easy to understand. The team was professional and prompt, making the entire experience stress-free. I can't recommend them enough!" },
-            { name: 'Michael Foster', location: 'VIC 3200', imgSrc: customer6, text: 'The level of detail in the report was outstanding. It covered every aspect I was concerned about and gave me peace of mind to move forward. The service was fast, and the inspectors were very knowledgeable—an excellent experience overall!' }
+            { name: 'Sophia Wright', location: 'NSW 2037', imgSrc: customer5, text: "This report was a game-changer for me. It outlined everything clearly, with no jargon, making the property's condition easy to understand. The team was professional and prompt, making the entire experience stress-free. I can't recommend them enough!" },
+            { name: 'Michael Foster', location: 'VIC 3186', imgSrc: customer6, text: 'The level of detail in the report was outstanding. It covered every aspect I was concerned about and gave me peace of mind to move forward. The service was fast, and the inspectors were very knowledgeable—an excellent experience overall!' }
         ],
         [
-            { name: 'Olivia Turner', location: 'NSW 2000', imgSrc: customer7, text: "I couldn't be happier with the quality of the building and pest report. It was detailed yet simple to understand, helping me avoid potential issues down the line. The team's professionalism and efficiency made the process a breeze. I'd highly recommend their service!" },
-            { name: 'Daniel Hayes', location: 'VIC 3200', imgSrc: customer8, text: "From start to finish, the service was exceptional. The report was incredibly detailed, uncovering key insights about the property. It gave me confidence in my purchase and eliminated any guesswork. The team was professional and quick—I'd use them again in a heartbeat!" }
+            { name: 'Olivia Turner', location: 'NSW 2290', imgSrc: customer7, text: "I couldn't be happier with the quality of the building and pest report. It was detailed yet simple to understand, helping me avoid potential issues down the line. The team's professionalism and efficiency made the process a breeze. I'd highly recommend their service!" },
+            { name: 'Daniel Hayes', location: 'QLD 4870', imgSrc: customer8, text: "From start to finish, the service was exceptional. The report was incredibly detailed, uncovering key insights about the property. It gave me confidence in my purchase and eliminated any guesswork. The team was professional and quick—I'd use them again in a heartbeat!" }
         ]
     ];
 
