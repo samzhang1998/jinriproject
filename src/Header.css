@@ -31,6 +31,10 @@
     display: flex;
     gap: 3rem;
 }
+
+.menu_hr {
+    display: none;
+}
   
 .menu li {
     display: inline;
@@ -103,7 +107,35 @@
     cursor: pointer;
     padding: 0.625rem;
 }
-  
+
+@media (max-width: 1050px) {
+    .menu li a {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 910px) {
+    .menu li a {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 800px) {
+    html {
+        font-size: 12px;
+    }
+
+    .menu li a {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .menu li a {
+        font-size: 0.6rem;
+    }
+}
+
 @media (max-width: 600px) {
     html {
         font-size: 10px;
@@ -137,19 +169,10 @@
 
     .menu {
         display: none;
-        flex-direction: column;
-        position: absolute;
-        background-color: #FFF;
-        top: 1.2rem;
-        right: 4.5rem;
-        width: 10rem;
-        padding: 3rem;
-        z-index: 1000;
-        border-radius: 1rem;
     }
     
     .menu li {
-        margin: 1rem 0;
+        margin: 0;
     }
     
     .menu li a {
@@ -165,11 +188,33 @@
 
     .menu.show {
         display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        background-color: #FFF;
+        top: 3.5rem;
+        left: 0;
+        width: 94%;
+        height: 43rem;
+        padding: 3%;
         z-index: 1000;
+        border-radius: 0;
+        z-index: 1000;
+    }
+
+    .menu_hr {
+        display: block;        
+        margin: 0;
+        width: 100%;
+        border: none;
+        height: 0.5px;
+        background-color: #DDD;
     }
     
     .mobile_login {
         display: block;
+        grid-column: span 2;
         font-size: 1.5rem;
         font-style: Montserrat;
     }
@@ -178,33 +223,5 @@
 @media (max-height: 470px) {
     html {
         font-size: 10px;
-    }
-}
-
-@media (max-width: 1050px) {
-    .menu li a {
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 910px) {
-    .menu li a {
-        font-size: 0.6rem;
-    }
-}
-
-@media (max-width: 800px) {
-    html {
-        font-size: 12px;
-    }
-
-    .menu li a {
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 700px) {
-    .menu li a {
-        font-size: 0.6rem;
     }
 }

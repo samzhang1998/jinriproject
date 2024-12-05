@@ -104,8 +104,13 @@
         align-items: center;
     }
 
+    .intro_text h1 {
+        text-align: center;
+    }
+
     .intro_text p {
         width: 90%;
         font-size: 1.3rem;
+        text-align: center;
     }
 }

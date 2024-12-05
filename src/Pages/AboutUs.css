@@ -253,7 +253,7 @@
     }
 
     .overlay_text p {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         margin-top: 7%;
         width: 90%;
     }
@@ -281,12 +281,8 @@
         font-size: 2.2rem;
     }
 
-    .introduction h3 {
-        font-size: 2.5rem;
-    }
-
     .introduction p {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         margin-bottom: 0;
         text-align: center;
         width: 90%;
@@ -412,7 +408,7 @@
         cursor: pointer;
         border: none;
         width: 60%;
-        height: 5rem;
+        height: 4rem;
         margin-top: 10%;
     }
 
@@ -424,7 +420,7 @@
         text-decoration: none;
         color: #FFF;
         font-family: Montserrat;
-        font-size: 16px;
+        font-size: 1.3rem;
         font-style: normal;
         font-weight: 600;
         line-height: 225%;

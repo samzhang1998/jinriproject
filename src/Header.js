@@ -23,9 +23,13 @@ const Header = () => {
                 </div>
                 <ul className={`menu ${isOpen ? 'show' : ''}`}>
                     <li><Link to="/individual">For Individual</Link></li>
+                    <hr className='menu_hr'/>
                     <li><Link to="/partner">For Partner</Link></li>
+                    <hr className='menu_hr'/>
                     <li><Link to="/about">About Us</Link></li>
+                    <hr className='menu_hr'/>
                     <li><Link to="/contact">Contact Us</Link></li>
+                    <hr className='menu_hr'/>
                     {!isLoggedIn ? (
                         <div className='mobile_login'><Link to="/login">Login</Link></div>
                     ) : (

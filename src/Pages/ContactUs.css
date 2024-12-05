@@ -232,7 +232,7 @@
     }
 
     .contact_method {
-        width: 80%;
+        width: 90%;
         height: auto;
     }
 
@@ -250,6 +250,7 @@
     }
 
     .overlay_text1 p {
+        font-size: 1.3rem;
         width: 90%;
         margin-bottom: 5%;
     }

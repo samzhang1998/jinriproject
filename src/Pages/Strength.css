@@ -39,4 +39,12 @@
     .advantage {
         padding-left: 8%;
     }
+
+    .strength img {
+        width: 30%;
+    }
+
+    .strength p {
+        font-size: 1.3rem;
+    }
 }
