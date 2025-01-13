@@ -294,12 +294,51 @@ const Customerorders = () => {
         return `${year}-${month}-${day}T${time}`;
     };
 
+    const handleRecordDownload = async () => {
+        try {
+            const response = await FetchFunc(
+                '/admin/exportCustomerOrders',
+                'GET',
+            );
+            if (response.status === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
+                navigate('/adminlogin');
+            } else if (!response.ok) {
+                console.log(response.text());
+            }
+            console.log('Response from server:', response);
+            const blob = await response.blob();
+
+            // Create a temporary URL for the blob
+            const downloadUrl = window.URL.createObjectURL(blob);
+    
+            // Create a link element and trigger the download
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = order.reportName || 'downloaded_file';
+            document.body.appendChild(link);
+            link.click();
+    
+            // Cleanup: Remove the link and revoke the URL
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(downloadUrl);
+            
+        } catch (error) {
+            console.error('Failed to update password:', error);
+        }
+    };
+
     return (
         <div className="orders">
             <div className="change_property_title">
                 <h1>Orders</h1>
                 <button onClick={handleChangePrice} style={{width: '15rem'}}>Edit Inspection Price</button>
-                <button style={{width: '15rem'}}>Download Order Record</button>
+                <button onClick={handleRecordDownload} style={{width: '15rem'}}>Download Order Record</button>
                 {priceModal === true &&(
                     <InspectionPriceModal 
                         closeModal={handleFinishChangePrice}

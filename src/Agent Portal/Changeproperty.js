@@ -459,7 +459,7 @@ const Changeproperty = () => {
                     localStorage.removeItem('userId');
                     localStorage.removeItem('email');
                     localStorage.removeItem('mobile');
-                    navigate('/login');
+                    navigate('/adminlogin');
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }

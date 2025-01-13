@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import './Policy.css';
+import close from "../asset/Close_round.png";
 
-const Policy = ({ showModal, onClose }) => {
+const Policy = ({ showModal, onClose, onConfirm }) => {
     const [isScrolledToBottom, setIsScrolledToBottom] = useState(false);
     const contentRef = useRef(null);
 
@@ -14,16 +15,23 @@ const Policy = ({ showModal, onClose }) => {
     };
 
     const handleConfirm = () => {
-        onClose();
+        onConfirm();
         console.log('Confirmed!');
     };
+
+    const handleClose = () => {
+        onClose();
+    }
 
     if (!showModal) return null;
 
     return (
         <div className='modal'>
             <div className='modal_content'>
-                <h1>Terms & Conditions</h1>
+                <div className='modal_content_title'>
+                    <h1>Terms & Conditions</h1>
+                    <img src={close} alt="close" onClick={handleClose} />
+                </div>
                 <div className='modal_body' ref={contentRef} onScroll={handleScroll}>
                     <p>I have read and agree to Check for sure's Terms & Conditions
                         (which includes our Collection Notice and Cancellation charges 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Searchresult1.css';
 import Header from '../Header';
 import { useNavigate,useLocation } from "react-router-dom";
@@ -7,17 +7,27 @@ import building from '../asset/图层 2 1.png';
 import ok from '../asset/Check_fill.png';
 import inner from '../asset/pexels-emrecan-2079246.png';
 import outer from '../asset/pexels-tobiasbjorkli-2119713.png';
+import Policy from '../Purchase/Policy';
 
 const Searchresult1 = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { query } = location.state || {};
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const price = localStorage.getItem('price');
+    const [condition,setCondition] = useState(false);
 
     const handleSearch = () => {
         localStorage.setItem('reportOK', true);
+        setCondition(true);        
+    };
+
+    const handleConfirm = () => {
+        setCondition(false);
         navigate('/purchasereport', { state: { query, price } });
+    };
+
+    const handleClose = () => {
+        setCondition(false);
     };
 
     return (
@@ -60,14 +70,11 @@ const Searchresult1 = () => {
                 </div>
             </div>
             <div className="mobile_purchase_button">
-                {isLoggedIn ? (<button onClick={handleSearch}>
-                        Purchase Report
-                    </button>) : (
-                    <button onClick={()=>navigate('/login')}>
-                        Purchase Report
-                    </button>
-                )}
+                <button onClick={handleSearch}>
+                    Purchase Report
+                </button>
             </div>
+            {condition === true && <Policy showModal={handleSearch} onConfirm={handleConfirm} onClose={handleClose}/>}
             <div className='check'>
                 <div className='check_text'>
                     <h6>Check For Sure</h6>

@@ -8,17 +8,27 @@ import building from '../asset/图层 2 1.png';
 import ok from '../asset/Check_fill.png';
 import inner from '../asset/pexels-emrecan-2079246.png';
 import outer from '../asset/pexels-tobiasbjorkli-2119713.png';
+import Policy from '../Purchase/Policy';
 
 const Searchresult2 = () => {
     const location = useLocation();
     const { query } = location.state || {};
     const navigate = useNavigate();
     const [price,setPrice] = useState('');
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const [condition, setCondition] = useState(false);
 
     const handleSearch = () => {
         localStorage.setItem('reportOK', false);
+        setCondition(true);
+    };
+
+    const handleConfirm = () => {
+        setCondition(false);
         navigate('/purchasereport', { state: { query, price } });
+    };
+
+    const handleClose = () => {
+        setCondition(false);
     };
 
     useEffect(() => {
@@ -77,14 +87,13 @@ const Searchresult2 = () => {
                     <span>Max</span>
                     <div className="purchase_button2">
                         <button onClick={handleSearch}>Book Inspector</button>
-                    </div>
+                    </div>                    
                 </div>
             </div>
             <div className="mobile_purchase_button2">
-                {isLoggedIn ? (<button onClick={handleSearch}>Book Inspector</button>) : (
-                    <button onClick={() => navigate('/login')}>Book Inspector</button>
-                )}
+                <button onClick={handleSearch}>Book Inspector</button>
             </div>
+            {condition === true && <Policy showModal={handleSearch} onConfirm={handleConfirm} onClose={handleClose}/>}
             <div className='check2'>
                 <div className='check_text2'>
                     <h6>Check For Sure</h6>
