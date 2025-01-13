@@ -83,7 +83,7 @@ const Admin = () => {
                 localStorage.removeItem('timeOutId');
                 console.log('Timeout cleared');
             }
-            localStorage.removeItem('isLoggedIn');
+            localStorage.setItem('isLoggedIn' === false);
             localStorage.removeItem('username');
             localStorage.removeItem('role');
             localStorage.removeItem('userId');

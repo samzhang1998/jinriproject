@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './Yourdetails.css';
 
-const YourDetailsForm = ({ formPurchase, onUpdate, validateField, errors, setConfirmEmail }) => {
+const YourDetailsForm = ({ formPurchase, onUpdate, validateCustomerField, errors, setConfirmEmail }) => {
     const [addSecond,setAddSecond] = useState(false);
+    const role = localStorage.getItem('role');
     // const handleUpdate = (e) => {
     //     const { name, value, type, checked } = e.target;
     //     if (type === 'checkbox') {
@@ -24,7 +25,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate, validateField, errors, setCon
         const fieldValue = type === 'checkbox' ? checked : value;
         const relatedValue = name === 'confirmEmail' ? formPurchase.email : null;
 
-        const error = validateField(name, fieldValue, relatedValue);
+        const error = validateCustomerField(name, fieldValue, relatedValue);
         if (name === 'confirmEmail') {
             setStatus((prev) => ({ ...prev, [name]: error }));
             setConfirmEmail(value);
@@ -42,7 +43,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate, validateField, errors, setCon
     console.log(status)
     return (
         <div>
-            <div className='your_details'>
+            {(role === 'Customer' || role == null) && <div className='your_details'>
                 <h1>Your Details</h1>
                 <hr style={{
                     background: '#DDD', 
@@ -152,7 +153,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate, validateField, errors, setCon
                     />
                     First time buyer?
                 </label>
-            </div>
+            </div>}
             <div className='agent_details'>
                 <h1>Selling Agent Details</h1>
                 <hr style={{

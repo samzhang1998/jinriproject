@@ -76,9 +76,7 @@ const Searchresult2 = () => {
                     <h5>Inspectors</h5>
                     <span>Max</span>
                     <div className="purchase_button2">
-                        {isLoggedIn ? (<button onClick={handleSearch}>Book Inspector</button>) : (
-                            <button onClick={() => navigate('/login')}>Book Inspector</button>
-                        )}
+                        <button onClick={handleSearch}>Book Inspector</button>
                     </div>
                 </div>
             </div>

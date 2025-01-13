@@ -18,8 +18,9 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
     const [hasGrannyFlat, setHasGrannyFlat] = useState(formPurchase.grannyFlat);
     const [errors, setErrors] = useState('');
     const [confirmEmail, setConfirmEmail] = useState('');
+    const role = localStorage.getItem('role');
 
-    const validateField = (name, value, relatedValue) => {
+    const validateCustomerField = (name, value, relatedValue) => {
         let error = '';
         const requiredFields = ['firstName', 'lastName', 'homeAddress', 'agentFirstName', 'agentLastName', 'mobile', 'agentMobile', 'agentEmail'];
         if (requiredFields.includes(name) && !value) {
@@ -46,19 +47,42 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
         return error;
     };
 
+    const validatePartnerField = (name, value) => {
+        let error = '';
+        const requiredFields = ['agentFirstName', 'agentLastName', 'agentMobile', 'agentEmail'];
+        if (requiredFields.includes(name) && !value) {
+            error = 'This field is required';
+            return error;
+        }
+
+        if (name === 'agentEmail') {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                error = 'Invalid email format';
+            }
+        } else if (name === 'agentMobile') {
+            const mobileRegex = /^(\+61|0)4\d{8}$/;
+            if (!mobileRegex.test(value)) {
+                error = 'Invalid mobile number';
+            }
+        }
+        console.log(`Validation result for ${name}: ${error}`);
+        return error;
+    };
+
     const scrollToTop = () => {
         window.scrollTo({
           top: 0,
           behavior: 'smooth',
         });
     };
-    const handleClick = (e) => {
+    const handleCustomerClick = (e) => {
         e.preventDefault();
         const newErrors = {};
         let isValid = true;
         Object.keys(formPurchase).forEach((key) => {
             const relatedValue = key === 'confirmEmail' ? formPurchase.email : null;
-            const error = validateField(key, formPurchase[key], relatedValue);
+            const error = validateCustomerField(key, formPurchase[key], relatedValue);
             if (error) {
                 isValid = false;
                 newErrors[key] = error;
@@ -78,6 +102,29 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
             console.log('Form has errors:', newErrors);
         }        
     };
+
+    const handlePartnerClick = (e) => {
+        e.preventDefault();
+        const newErrors = {};
+        let isValid = true;
+        Object.keys(formPurchase).forEach((key) => {
+            const error = validatePartnerField(key, formPurchase[key]);
+            if (error) {
+                isValid = false;
+                newErrors[key] = error;
+            }
+        });
+        setErrors(newErrors);
+        console.log(newErrors)
+        if (isValid) {
+            console.log('Data saved:', formPurchase);
+            showStepTwo();
+            scrollToTop();
+        } else {
+            console.log('Form has errors:', newErrors);
+        }        
+    };
+
     const handleUpdate = (e) => {
         const { name, value, type, checked } = e.target;
         console.log("check is " + checked + " value is " + value + " type " + type)
@@ -223,11 +270,12 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
             <YourDetailsForm 
                 formPurchase={formPurchase} 
                 onUpdate={onUpdate}
-                validateField={validateField}
+                validateCustomerField={validateCustomerField}
                 errors={errors}
                 setConfirmEmail={setConfirmEmail}
             />
-            <button onClick={handleClick} className='tostep2'>NEXT</button>
+            {role !== 'Partner' && <button onClick={handleCustomerClick} className='tostep2'>NEXT</button>}
+            {role === 'Partner' && <button onClick={handlePartnerClick} className='tostep2'>NEXT</button>}
         </div>
     );
 };
@@ -431,6 +479,7 @@ const StepThree = ({ clientSecret }) => {
 
 const PaymentSummary = ({ summary }) => {
     const location = useLocation();
+    const role = localStorage.getItem('role');
     const { query, price } = location.state || {};
     const totalAmount = parseFloat(price) + parseFloat(summary.hasGrannyFlat ? 99 : 0) + parseFloat(summary.servicePrice);
 
@@ -450,13 +499,17 @@ const PaymentSummary = ({ summary }) => {
                 }} 
             />
             <div>
-                <div className="calculation"><p>Building & Pest Report</p><span>{price}</span></div>
+                <div className="calculation">
+                    <p>Building & Pest Report</p>{role !== 'Partner' && <span>{price}</span>}
+                </div>
                 <div className="report_available">
                     <img src={check} alt="check" />
                     <h4>Report available now!</h4>
                 </div>
                 {summary.hasGrannyFlat && (
-                    <div className="calculation"><p>Second Dwelling / Granny Flat</p><span>$99</span></div>
+                    <div className="calculation">
+                        <p>Second Dwelling / Granny Flat</p>{role !== 'Partner' && <span>$99</span>}
+                    </div>
                 )}
             </div>
             <div>
@@ -465,7 +518,7 @@ const PaymentSummary = ({ summary }) => {
                     //  <div className="calculation2"><p>{item.title}</p><span>{item.price}</span></div>
                     <div className="calculation2" key={item.serviceId}>
                         <p>{item.title}</p>
-                        <span>${item.price}</span>
+                        {role !== 'Partner' && <span>${item.price}</span>}
                     </div>
                 ))}
             </div>
@@ -478,7 +531,7 @@ const PaymentSummary = ({ summary }) => {
                 height: '1px'
                 }} 
             />
-            <div className="total"><h4>Total <p>(GST Inc)</p>:</h4><h5>${totalAmount}</h5></div>
+            {role !== 'Partner' && <div className="total"><h4>Total <p>(GST Inc)</p>:</h4><h5>${totalAmount}</h5></div>}
         </div>
     );
 };
@@ -686,7 +739,7 @@ const PurchasePage = () => {
                         }
                     </div>
                 }
-                {role === 'Customer' &&
+                {(role === 'Customer' || role == null) &&
                     <div className='payment_choice'>
                         {currentStep === 1 && 
                             <StepOne 

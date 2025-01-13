@@ -53,13 +53,9 @@ const Searchresult1 = () => {
                     <h5>Inspectors</h5>
                     <span>Max</span>
                     <div className="purchase_button">
-                        {isLoggedIn ? (<button onClick={handleSearch}>
+                        <button onClick={handleSearch}>
                             Purchase Report
-                        </button>) : (
-                            <button onClick={()=>navigate('/login')}>
-                                Purchase Report
-                            </button>
-                        )}
+                        </button>
                     </div>
                 </div>
             </div>
