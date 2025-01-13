@@ -168,7 +168,7 @@ const InspectionPriceModal = ({ closeModal, refresh, setRefresh }) => {
             }
         };
         fetchServices();
-    }, [refresh]);
+    }, [refresh, navigate]);
 
     const handleChange = (e) => {
         const newValue = e.target.value;
@@ -299,6 +299,7 @@ const Customerorders = () => {
             <div className="change_property_title">
                 <h1>Orders</h1>
                 <button onClick={handleChangePrice} style={{width: '15rem'}}>Edit Inspection Price</button>
+                <button style={{width: '15rem'}}>Download Order Record</button>
                 {priceModal === true &&(
                     <InspectionPriceModal 
                         closeModal={handleFinishChangePrice}

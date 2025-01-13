@@ -168,7 +168,7 @@ const Partnerorders = () => {
             }
         };
         fetchOrders();
-    }, [refresh]);
+    }, [refresh,navigate]);
 
     const filteredOrders = order.filter(order => {
         if (filter === 'all') return true;
@@ -192,7 +192,10 @@ const Partnerorders = () => {
 
     return (
         <div className="orders">
-            <h1>Orders</h1>
+            <div className="change_property_title">
+                <h1>Orders</h1>
+                <button style={{width: '15rem'}}>Download Order Record</button>
+            </div>
             <hr style={{background: '#DDD', width: '100%', border: 'none', height: '1px'}} />
             <div className="order_status">
                 <span 
