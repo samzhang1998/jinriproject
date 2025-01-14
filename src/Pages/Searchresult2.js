@@ -16,6 +16,7 @@ const Searchresult2 = () => {
     const navigate = useNavigate();
     const [price,setPrice] = useState('');
     const [condition, setCondition] = useState(false);
+    const isLoggedIn = localStorage.getItem('isLoggedIn' === true);
 
     const handleSearch = () => {
         localStorage.setItem('reportOK', false);
@@ -86,7 +87,8 @@ const Searchresult2 = () => {
                     <h5>Inspectors</h5>
                     <span>Max</span>
                     <div className="purchase_button2">
-                        <button onClick={handleSearch}>Book Inspector</button>
+                        {isLoggedIn && <button onClick={handleSearch}>Book Inspector</button>}
+                        {!isLoggedIn && <button onClick={() => navigate('/login')}>Book Inspector</button>}
                     </div>                    
                 </div>
             </div>

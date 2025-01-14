@@ -10,6 +10,7 @@ function Completion() {
   const navigate = useNavigate();
   const [status, setStatus] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const isloggedIn = localStorage.getItem('isLoggedIn');
   // const { stripePromise } = props;
   // const stripePromise = loadStripe("pk_test_51QPcunABwpEZeajXo2pch6nBD11Mj3NckAnEKJIXBa6GVNbByataVG6CuGnlRlfWmoOt9RpHatjU47piXri1d1O700u6TfquCT");
 
@@ -19,22 +20,41 @@ function Completion() {
       // console.error("No formPurchase data found in sessionStorage.");
       return; // Exit the function if the data is missing
     }
-    try {
-      const response = await FetchFunc(
-        '/customer-order/create',
-        'POST',
-        formPurchase
-      );
+    if (isloggedIn) {
+      try {
+        const response = await FetchFunc(
+          '/customer-order/create',
+          'POST',
+          formPurchase
+        );
 
-      if (!response.ok) {
-        console.log(await response.text()); // Wait for the response text
-      } else {
-        console.log('Response from server:', await response.json()); // Process response
-        sessionStorage.removeItem("formPurchase");
+        if (!response.ok) {
+          console.log(await response.text()); // Wait for the response text
+        } else {
+          console.log('Response from server:', await response.json()); // Process response
+          sessionStorage.removeItem("formPurchase");
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
       }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
+    } else {
+      try {
+        const response = await FetchFunc(
+          '/guest-order/create',
+          'POST',
+          formPurchase
+        );
+
+        if (!response.ok) {
+          console.log(await response.text()); // Wait for the response text
+        } else {
+          console.log('Response from server:', await response.json()); // Process response
+          sessionStorage.removeItem("formPurchase");
+        }
+      } catch (error) {
+        console.log('Error submitting form:', error);
+      }
+    };
   };
 
   useEffect(() => {
@@ -67,7 +87,7 @@ function Completion() {
       submitForm();
     }
     console.log(status);
-  }, status)
+  }, [status]);
   
   
   // useEffect(() => {

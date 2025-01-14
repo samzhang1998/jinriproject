@@ -9,6 +9,7 @@ import Customerorders from "./Customerorders";
 import Partnerorders from "./Partnerorders";
 import Changeproperty from "./Changeproperty";
 import ChangeService from "./ChangeService";
+import Guestorders from "./Guestorders";
 
 const Customerorder = () => {
     return (
@@ -22,6 +23,14 @@ const Partnerorder = () => {
     return (
         <div>
             <Partnerorders />
+        </div>
+    );
+};
+
+const Guestorder = () => {
+    return (
+        <div>
+            <Guestorders />
         </div>
     );
 };
@@ -46,17 +55,20 @@ const Admin = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
     const { id } = useParams();
-    const showCustomer = () => {
+    const showGuest = () => {
         setCurrentPage(1);
     };
-    const showPartner = () => {
+    const showCustomer = () => {
         setCurrentPage(2);
     };
-    const showSettings = () => {
+    const showPartner = () => {
         setCurrentPage(3);
+    }
+    const showSettings = () => {
+        setCurrentPage(4);
     };
     const showServices = () => {
-        setCurrentPage(4);
+        setCurrentPage(5);
     }
 
     const handleLogout = async (e) => {
@@ -101,7 +113,7 @@ const Admin = () => {
                 <div className="portal_selection">
                     <h1>Welcome {id}</h1>
                     <div 
-                        onClick={showCustomer} 
+                        onClick={showGuest} 
                         className="to_details"
                         style={{
                             background: currentPage === 1 ? "#F4F4F4" : "#FFF",
@@ -113,10 +125,10 @@ const Admin = () => {
                             style={{
                                 color: currentPage === 1 ? "#008286" : "#A4A4A4",
                             }}
-                        >Customer Orders</p>
+                        >Guest Orders</p>
                     </div>
                     <div 
-                        onClick={showPartner} 
+                        onClick={showCustomer} 
                         className="to_details"
                         style={{
                             background: currentPage === 2 ? "#F4F4F4" : "#FFF",
@@ -128,10 +140,10 @@ const Admin = () => {
                             style={{
                                 color: currentPage === 2 ? "#008286" : "#A4A4A4",
                             }}
-                        >Partner Orders</p>
+                        >Customer Orders</p>
                     </div>
                     <div 
-                        onClick={showSettings} 
+                        onClick={showPartner} 
                         className="to_details"
                         style={{
                             background: currentPage === 3 ? "#F4F4F4" : "#FFF",
@@ -143,10 +155,10 @@ const Admin = () => {
                             style={{
                                 color: currentPage === 3 ? "#008286" : "#A4A4A4",
                             }}
-                        >Property Status</p>
+                        >Partner Orders</p>
                     </div>
                     <div 
-                        onClick={showServices} 
+                        onClick={showSettings} 
                         className="to_details"
                         style={{
                             background: currentPage === 4 ? "#F4F4F4" : "#FFF",
@@ -158,6 +170,21 @@ const Admin = () => {
                             style={{
                                 color: currentPage === 4 ? "#008286" : "#A4A4A4",
                             }}
+                        >Property Status</p>
+                    </div>
+                    <div 
+                        onClick={showServices} 
+                        className="to_details"
+                        style={{
+                            background: currentPage === 5 ? "#F4F4F4" : "#FFF",
+                        }}
+                    >
+                        {currentPage === 5 && <img src={fill1} alt="fill1" />}
+                        {currentPage !== 5 && <img src={fill} alt="fill" />}
+                        <p
+                            style={{
+                                color: currentPage === 5 ? "#008286" : "#A4A4A4",
+                            }}
                         >Service Status</p>
                     </div>
                     <div className="to_details">
@@ -166,10 +193,11 @@ const Admin = () => {
                     </div>
                 </div>            
                 <div className="portal_details">
-                    {currentPage === 1 && <Customerorder />}
-                    {currentPage === 2 && <Partnerorder />}
-                    {currentPage === 3 && <PropertyStatus />}
-                    {currentPage === 4 && <ServiceStatus />}
+                    {currentPage === 1 && <Guestorder />}
+                    {currentPage === 2 && <Customerorder />}
+                    {currentPage === 3 && <Partnerorder />}
+                    {currentPage === 4 && <PropertyStatus />}
+                    {currentPage === 5 && <ServiceStatus />}
                 </div>
             </div>
         </div>

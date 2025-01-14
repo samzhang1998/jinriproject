@@ -43,8 +43,8 @@ import "./Payment.css";
 //         </form>
 //     );
 // };
-// export const stripePromise = loadStripe("pk_test_51QPcunABwpEZeajXo2pch6nBD11Mj3NckAnEKJIXBa6GVNbByataVG6CuGnlRlfWmoOt9RpHatjU47piXri1d1O700u6TfquCT");
-export const stripePromise = loadStripe("pk_live_51QPcunABwpEZeajXlLRv6WERosqBv3natRwCetWBz8YEHwtQUja2bsu4FnIF7mrsNI5vKQQAXWTjau3bylleTDhM00j7sYNV3Z")
+export const stripePromise = loadStripe("pk_test_51QPcunABwpEZeajXo2pch6nBD11Mj3NckAnEKJIXBa6GVNbByataVG6CuGnlRlfWmoOt9RpHatjU47piXri1d1O700u6TfquCT");
+// export const stripePromise = loadStripe("pk_live_51QPcunABwpEZeajXlLRv6WERosqBv3natRwCetWBz8YEHwtQUja2bsu4FnIF7mrsNI5vKQQAXWTjau3bylleTDhM00j7sYNV3Z")
 
 function Payment({ clientSecret }) {
     console.log("payment here:" + clientSecret)
