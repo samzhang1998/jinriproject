@@ -460,7 +460,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
                 onClick={handlePartnerSubmit}
                 className='tostep3'
             >ORDER</button>}
-            {role === 'Customer' && <button
+            {role !== 'Partner' && <button
                 onClick={handleClick}
                 className='tostep3'
             >NEXT</button>}
