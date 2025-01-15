@@ -16,7 +16,7 @@ function Completion() {
   const submitForm = async () => {
     const formPurchase = sessionStorage.getItem("formPurchase");
     if (!formPurchase) {
-      // console.error("No formPurchase data found in sessionStorage.");
+      console.error("No formPurchase data found in sessionStorage.");
       return; // Exit the function if the data is missing
     }
     try {
