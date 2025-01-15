@@ -88,17 +88,10 @@ const EditPartnerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
                     <img src={close} alt="close" onClick={closeModal} />
                 </div>
                 <h1>Order: {id}</h1>
-                <div className="customer_order_detail_info">
-                    <div className="order_detail_info">
-                        <p>Customer: {partnerOrder.firstName} {partnerOrder.lastName}</p>
-                        <p>Customer email: {partnerOrder.email}</p>
-                        <p>Customer mobile: {partnerOrder.mobile}</p>
-                    </div>
-                    <div className="order_detail_info">
-                        <p>Agent: {partnerOrder.agentFirstName} {partnerOrder.agentLastName}</p>
-                        <p>Agent email: {partnerOrder.agentEmail}</p>
-                        <p>Agent mobile: {partnerOrder.agentMobile}</p>
-                    </div>
+                <div className="order_detail_info">
+                    <p>Agent: {partnerOrder.agentFirstName} {partnerOrder.agentLastName}</p>
+                    <p>Agent email: {partnerOrder.agentEmail}</p>
+                    <p>Agent mobile: {partnerOrder.agentMobile}</p>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <label>
