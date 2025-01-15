@@ -16,7 +16,7 @@ const Searchresult2 = () => {
     const navigate = useNavigate();
     const [price,setPrice] = useState('');
     const [condition, setCondition] = useState(false);
-    const isLoggedIn = localStorage.getItem('isLoggedIn' === true);
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === "true";
 
     const handleSearch = () => {
         localStorage.setItem('reportOK', false);

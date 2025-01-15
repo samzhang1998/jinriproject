@@ -595,9 +595,10 @@ const PurchasePage = () => {
                 navigate('/login');
             } else if (!response.ok) {
                 console.log(response.text());
+            } else {
+                console.log('Response from server:', response);
+                navigate('/thankyou');
             }
-            console.log('Response from server:', response);
-            navigate('/thankyou');
         } catch (error) {
             console.error('Error submitting form:', error);
         }
