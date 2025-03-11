@@ -17,6 +17,7 @@ const Searchresult2 = () => {
     const [price,setPrice] = useState('');
     const [condition, setCondition] = useState(false);
     const isLoggedIn = localStorage.getItem('isLoggedIn') === "true";
+    const role = localStorage.getItem('role');
 
     const handleSearch = () => {
         localStorage.setItem('reportOK', false);
@@ -66,7 +67,8 @@ const Searchresult2 = () => {
                     <h2>Building & Pest Report</h2>
                 </div>
                 <div className='sell_price2'>
-                    <h1>${price}</h1>
+                    {role !== 'Partner' && <h1>${price}</h1>}
+                    {role === 'Partner' && <h1>Report</h1>}
                     <p>ETA: 2-4 Days</p>
                 </div>
                 <div className='details2'>
