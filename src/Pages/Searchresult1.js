@@ -44,6 +44,7 @@ const Searchresult1 = () => {
                 <div className='sell_price'>
                     <h1>${price}</h1>
                     <p>ETA: Up to 30mins</p>
+                    <p>Charge of $425 for successful property buyers</p>
                 </div>
                 <div className='details'>
                     <div className='title'>
