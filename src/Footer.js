@@ -1,17 +1,40 @@
 import React, { useState } from "react";
 import "./Footer.css";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import facebook from './asset/Facebook - Original.png';
 import twitter from './asset/Twitter - Original.png';
 import instagram from './asset/Group.png';
 import linkedin from './asset/LinkedIn - Original.png';
+import emailjs from 'emailjs-com';
 
 const Footer = () => {
-    const [inputValue, setInputValue] = useState('');
-    const navigate = useNavigate();
-    const handleSearch = () => {
-        navigate('/contact');
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
+    const handleSearch = (e) => {
+        e.preventDefault();
+    
+        emailjs
+            .send(
+                'service_fx2ay7f',
+                'template_znrectq',
+                { email: email },
+                'DE2qNaIU2eFpMb7xK'
+            )
+            .then(
+                (result) => {
+                    setError('');
+                    setSuccess('Message sent successfully!');
+                    setEmail('');
+                },
+                (error) => {
+                    console.error('Failed to send message:', error);
+                    setSuccess('');
+                    setError('Failed to send message. Please try again later.');
+                }
+        );
     };
+
     return (
         <footer className="footer">
             <div className="info">
@@ -85,13 +108,17 @@ const Footer = () => {
                         type="text"
                         className="email_input"
                         placeholder="Email Address"
-                        value={inputValue}
-                        onChange={(e) => setInputValue(e.target.value)}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <button className="search-button" onClick={handleSearch}>
                         ➔
                     </button>
                 </div>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
+                {success && <p style={{ color: 'white' }}>
+                    Subscribe successfully!
+                </p>}
             </div>
             <div className="info1">
                 <div className="Logo_footer">CHECH FOR SURE</div>

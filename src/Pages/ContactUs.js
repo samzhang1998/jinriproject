@@ -30,17 +30,19 @@ const ContactUs = () => {
 
     emailjs
       .send(
-        'service_ftaumqi',
+        'service_fx2ay7f',
         'template_urc793n',
         formData,
         'DE2qNaIU2eFpMb7xK'
       )
       .then(
         (result) => {
+          setError('');
           setSuccess('Message sent successfully!');
         },
         (error) => {
           console.error('Failed to send message:', error);
+          setSuccess('');
           setError('Failed to send message. Please try again later.');
         }
       );
