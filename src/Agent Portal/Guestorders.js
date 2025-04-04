@@ -57,9 +57,9 @@ const Guestorders = () => {
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 const data = await response.json();
-                console.log('data response:', data);
+                // console.log('data response:', data);
                 setOrder(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
@@ -75,7 +75,7 @@ const Guestorders = () => {
     };
 
     const handleOpenModal = (orderId) => {
-        console.log(orderId)
+        // console.log(orderId)
         setActiveOrderId(orderId);
     };
     
@@ -98,9 +98,9 @@ const Guestorders = () => {
                 localStorage.removeItem('mobile');
                 navigate('/adminlogin');
             } else if (!response.ok) {
-                console.log(response.text());
+                // console.log(response.text());
             }
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             const blob = await response.blob();
 
             // Create a temporary URL for the blob

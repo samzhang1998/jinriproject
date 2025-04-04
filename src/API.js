@@ -1,5 +1,5 @@
-// const Backend_url = 'http://localhost:8080';
-const Backend_url = '/api';
+const Backend_url = 'http://localhost:8080';
+// const Backend_url = '/api';
 
 export default async function FetchFunc(path, method, body) {
   return await fetch(`${Backend_url}` + path, {
@@ -42,9 +42,9 @@ export const PostData = async (url,payload) => {
       body: JSON.stringify(payload),
       credentials: 'include',
     });
-    if (!response.ok) {
-      console.log(response.text());
-    }
+    // if (!response.ok) {
+    //   console.log(response.text());
+    // }
     const data = await response.json();
     return data;
   } catch (error) {

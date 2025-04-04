@@ -29,9 +29,9 @@ function Completion() {
         );
 
         if (!response.ok) {
-          console.log(await response.text()); // Wait for the response text
+          // console.log(await response.text()); // Wait for the response text
         } else {
-          console.log('Response from server:', await response.json()); // Process response
+          // console.log('Response from server:', await response.json()); // Process response
           sessionStorage.removeItem("formPurchase");
         }
       } catch (error) {
@@ -46,13 +46,13 @@ function Completion() {
         );
 
         if (!response.ok) {
-          console.log(await response.text()); // Wait for the response text
+          // console.log(await response.text()); // Wait for the response text
         } else {
-          console.log('Response from server:', await response.json()); // Process response
+          // console.log('Response from server:', await response.json()); // Process response
           sessionStorage.removeItem("formPurchase");
         }
       } catch (error) {
-        console.log('Error submitting form:', error);
+        // console.log('Error submitting form:', error);
       }
     };
   };
@@ -82,12 +82,13 @@ function Completion() {
     
   }, []);
   
-  useEffect(() => {
-    if(status === 'succeeded') {
-      submitForm();
-    }
-    console.log(status);
-  }, [status]);
+  // Using webhooks to update the order status
+  // useEffect(() => {
+  //   if(status === 'succeeded') {
+  //     submitForm();
+  //   }
+  //   // console.log(status);
+  // }, [status]);
   
   
   // useEffect(() => {
@@ -121,7 +122,7 @@ function Completion() {
   
 
   const paymentContext = JSON.parse(sessionStorage.getItem("formPurchase"));
-  console.log(paymentContext);
+  // console.log(paymentContext);
 
   return (
     <div className="thank_you">

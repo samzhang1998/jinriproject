@@ -29,12 +29,12 @@ const EditCustomerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
                     localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
-                    console.log(response.text());
+                    // console.log(response.text());
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 const data = await response.json();
-                console.log('data response:', data);
+                // console.log('data response:', data);
                 setCustomerOrder(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
@@ -57,7 +57,7 @@ const EditCustomerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
             ...formData,
         };
         try {
-            console.log('data sent:', dataToSend);
+            // console.log('data sent:', dataToSend);
             const response = await FetchFunc(
                 '/admin/addCustomerOrderStatus',
                 'POST',
@@ -74,7 +74,7 @@ const EditCustomerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
             } else if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             setRefresh(!refresh);
             closeModal();
         } catch (error) {
@@ -156,12 +156,12 @@ const InspectionPriceModal = ({ closeModal, refresh, setRefresh }) => {
                     localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
-                    console.log(response.text());
+                    // console.log(response.text());
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 const data = await response.json();
-                console.log('data response:', data);
+                // console.log('data response:', data);
                 setPrevPrice(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
@@ -178,7 +178,7 @@ const InspectionPriceModal = ({ closeModal, refresh, setRefresh }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(price);
+            // console.log(price);
             const response = await FetchFunc(
                 `/admin/editInspection/?price=${price}`,
                 'POST',
@@ -192,10 +192,10 @@ const InspectionPriceModal = ({ closeModal, refresh, setRefresh }) => {
                 localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
-                console.log(response.text())
+                // console.log(response.text())
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             setRefresh(!refresh);
             closeModal();
         } catch (error) {
@@ -255,9 +255,9 @@ const Customerorders = () => {
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 const data = await response.json();
-                console.log('data response:', data);
+                // console.log('data response:', data);
                 setOrder(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
@@ -272,7 +272,7 @@ const Customerorders = () => {
     });
 
     const handleOpenModal = (orderId) => {
-        console.log(orderId)
+        // console.log(orderId)
         setActiveOrderId(orderId);
     };
     
@@ -309,9 +309,9 @@ const Customerorders = () => {
                 localStorage.removeItem('mobile');
                 navigate('/adminlogin');
             } else if (!response.ok) {
-                console.log(response.text());
+                // console.log(response.text());
             }
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             const blob = await response.blob();
 
             // Create a temporary URL for the blob

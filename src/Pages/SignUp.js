@@ -104,38 +104,38 @@ const SignUp = () => {
         }
         setErrors(newErrors);
         if (isValid) {
-            console.log('Form submitted successfully:', formData);
+            // console.log('Form submitted successfully:', formData);
             try {
-                console.log(formData.username, formData.role);
+                // console.log(formData.username, formData.role);
                 const response1 = await FetchFunc(
                     `/signup/check?username=${formData.username}&role=${formData.role}`,
                     'POST',
                 );      
                 if (!response1.ok) {
-                    console.log(response1.text());
+                    // console.log(response1.text());
                 } else {
                     const check = await response1.json();
                     if (check === false) {
                         setStatus('This username is not available');
                     }
                 }
-                console.log("data sent:", dataToSend);
+                // console.log("data sent:", dataToSend);
                 const response = await FetchFunc(
                     '/signup/',
                     'POST',
                     JSON.stringify(dataToSend)
                 );
                 if (!response.ok) {
-                    console.log(response.text());
+                    // console.log(response.text());
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 navigate('/login', { state: { from: '/signup' } });
             } catch (error) {
                 console.error('Error submitting form:', error);
             }
         } else {
-            console.log('Form contains errors:', newErrors);
+            // console.log('Form contains errors:', newErrors);
         }
         };
     return (

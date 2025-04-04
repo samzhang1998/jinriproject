@@ -35,7 +35,7 @@ const CheckAddress = () => {
             ...formData,
         };
         try {
-            console.log('Data send:', dataToSend);
+            // console.log('Data send:', dataToSend);
             const response = await FetchFunc(
                 '/search/',
                 'POST',
@@ -44,7 +44,7 @@ const CheckAddress = () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             navigate(`/report`, { state: { query }});
         } catch (error) {
             console.error('Failed to submit address:', error);

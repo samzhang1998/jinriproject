@@ -37,9 +37,9 @@ const Orders = ({ type,id }) => {
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 const data = await response.json();
-                console.log('data response:', data);
+                // console.log('data response:', data);
                 setOrders(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
@@ -48,7 +48,7 @@ const Orders = ({ type,id }) => {
         fetchOrders();
     }, [id, navigate]);
 
-    console.log(orders);
+    // console.log(orders);
 
     const filteredOrders = orders.filter(order => {
         if (filter === 'all') return true;

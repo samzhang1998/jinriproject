@@ -14,7 +14,7 @@ const OrderOverview = () => {
     // search box
     const parseAddress = (address) => {
         const normalizedAddress = preprocessAddress(address);
-        console.log("Normalized Address:", normalizedAddress);
+        // console.log("Normalized Address:", normalizedAddress);
         // const addressRegex = /^(\d+[A-Za-z]?)\s+(.+?),\s*(.+?)\s+(NSW|VIC|QLD|WA|SA|TAS|NT|ACT)\s+(\d{4})(?:,\s*(.+))$/i;
         // const match = normalizedAddress.match(addressRegex);
         const addressRegex = /^(\d+[A-Za-z]?)\s+([\w\s]+?),\s*([\w\s]+)\s+(NSW|VIC|QLD|WA|SA|TAS|NT|ACT)\s+(\d{4})(?:,\s*(.+))?$/i;
@@ -102,9 +102,9 @@ const OrderOverview = () => {
         if (autocomplete !== null) {
             const place = autocomplete.getPlace();
             setQuery(place.formatted_address);
-            console.log('Selected Place:', place);
+            // console.log('Selected Place:', place);
         } else {
-            console.log('Autocomplete is not loaded yet!');
+            // console.log('Autocomplete is not loaded yet!');
         }
     };
 
@@ -124,22 +124,22 @@ const OrderOverview = () => {
             ...formData,
             ...parseAddress(query),
         };
-        console.log(dataToSend);
+        // console.log(dataToSend);
         if (!addressRegex.test(query)){
             alert('Invalid Address');
         } else {
             try {
-                console.log('Data send:', dataToSend);
+                // console.log('Data send:', dataToSend);
                 const response = await FetchFunc(
                     '/search/',
                     'POST',
                     JSON.stringify(dataToSend)
                 );
                 if (response.status === 200) {
-                    console.log('Response from server:', response);
+                    // console.log('Response from server:', response);
                     const data = await response.json();
                     localStorage.setItem('price', data.reportPrice);
-                    console.log(data);
+                    // console.log(data);
                     navigate(`/report`, { state: { query }});
                 } else if (response.status === 404) {
                     navigate(`/bookinspector`, { state: { query }});
@@ -153,7 +153,7 @@ const OrderOverview = () => {
                     navigate('/login');
                 } else {
                     navigate(`/bookinspector`, { state: { query }});
-                    console.log(response.text());
+                    // console.log(response.text());
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
             } catch (error) {

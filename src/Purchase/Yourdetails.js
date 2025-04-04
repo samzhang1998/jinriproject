@@ -40,7 +40,7 @@ const YourDetailsForm = ({ formPurchase, onUpdate, validateCustomerField, errors
     useEffect(() => {
         setStatus((prev) => ({ ...prev, ...errors }));
     }, [errors])
-    console.log(status)
+    // console.log(status)
     return (
         <div>
             {(role === 'Customer' || role == null) && <div className='your_details'>

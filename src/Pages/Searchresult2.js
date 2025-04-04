@@ -41,12 +41,12 @@ const Searchresult2 = () => {
                     'GET',
                 );
                 if (!response.ok) {
-                    console.log(response.text());
+                    // console.log(response.text());
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 const data = await response.json();
-                console.log('data response:', data);
+                // console.log('data response:', data);
                 setPrice(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);

@@ -33,9 +33,9 @@ const ChangeService = () => {
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 const data = await response.json();
-                console.log('data response:', data);
+                // console.log('data response:', data);
                 setServices(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
@@ -66,7 +66,7 @@ const ChangeService = () => {
             ...formService,
         };
         try {
-            console.log('data sent:', dataToSend);
+            // console.log('data sent:', dataToSend);
             const response = await FetchFunc(
                 '/admin/addService',
                 'POST',
@@ -83,7 +83,7 @@ const ChangeService = () => {
             } else if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             setRefresh(!refresh);
             closeModal();
         } catch (error) {

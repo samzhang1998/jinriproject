@@ -16,7 +16,7 @@ const Policy = ({ showModal, onClose, onConfirm }) => {
 
     const handleConfirm = () => {
         onConfirm();
-        console.log('Confirmed!');
+        // console.log('Confirmed!');
     };
 
     const handleClose = () => {

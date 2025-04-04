@@ -40,7 +40,7 @@ const EmailModal = ({ closeModal }) => {
             return;
         } else {
             try {            
-                console.log('Data to be posted:', userData);
+                // console.log('Data to be posted:', userData);
                 const response = await FetchFunc(
                     '/customer-profile/editEmail',
                     'POST',
@@ -57,7 +57,7 @@ const EmailModal = ({ closeModal }) => {
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 localStorage.setItem('email', email);
                 closeModal();
             } catch (error) {
@@ -74,7 +74,7 @@ const EmailModal = ({ closeModal }) => {
             return;
         } else {
             try {
-                console.log('Data to be posted:', userData);
+                // console.log('Data to be posted:', userData);
                 const response = await FetchFunc(
                     '/partner-profile/editEmail',
                     'POST',
@@ -91,7 +91,7 @@ const EmailModal = ({ closeModal }) => {
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 localStorage.setItem('email', email);
                 closeModal();
             } catch (error) {
@@ -162,7 +162,7 @@ const MobileModal = ({ closeModal }) => {
             return;
         } else {
             try {
-                console.log('Data to be posted:', userData);
+                // console.log('Data to be posted:', userData);
                 const response = await FetchFunc(
                     '/customer-profile/editMobile',
                     'POST',
@@ -179,7 +179,7 @@ const MobileModal = ({ closeModal }) => {
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 localStorage.setItem('mobile', mobile);
                 closeModal();
             } catch (error) {
@@ -196,7 +196,7 @@ const MobileModal = ({ closeModal }) => {
             return;
         } else {
             try {
-                console.log('Data to be posted:', userData);
+                // console.log('Data to be posted:', userData);
                 const response = await FetchFunc(
                     '/partner-profile/editMobile',
                     'POST',
@@ -213,7 +213,7 @@ const MobileModal = ({ closeModal }) => {
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 localStorage.setItem('mobile', mobile);
                 closeModal();
             } catch (error) {
@@ -271,7 +271,7 @@ const PasswordModal = ({ closeModal }) => {
     }
     const handleCustomerSave = async () => {
         try {
-            console.log('Data to be posted:', userData);
+            // console.log('Data to be posted:', userData);
             const response = await FetchFunc(
                 '/customer-profile/editPassword',
                 'POST',
@@ -280,9 +280,9 @@ const PasswordModal = ({ closeModal }) => {
             if (response.status === 401) {
                 setStatus('Old password is wrong!')
             } else if (!response.ok) {
-                console.log(response.text());
+                // console.log(response.text());
             } else {
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 closeModal();
             }            
         } catch (error) {
@@ -292,7 +292,7 @@ const PasswordModal = ({ closeModal }) => {
     };
     const handlePartnerSave = async () => {
         try {
-            console.log('Data to be posted:', userData);
+            // console.log('Data to be posted:', userData);
             const response = await FetchFunc(
                 '/partner-profile/editPassword',
                 'POST',
@@ -301,9 +301,9 @@ const PasswordModal = ({ closeModal }) => {
             if (response.status === 401) {
                 setStatus('Old password is wrong!')
             } else if (!response.ok) {
-                console.log(response.text());
+                // console.log(response.text());
             } else {
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 closeModal();
             }
         } catch (error) {
@@ -352,8 +352,8 @@ const UserSettings = () => {
     const [showPasswordModal, setShowPasswordModal] = useState(false);
     const useremail = localStorage.getItem('email');
     const usermobile = localStorage.getItem('mobile');
-    console.log(useremail)
-    console.log(usermobile)
+    // console.log(useremail)
+    // console.log(usermobile)
 
     return (
         <div className="change_settings">

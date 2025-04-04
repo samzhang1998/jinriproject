@@ -14,7 +14,7 @@ const OrderDetail = () => {
     const { orderId, orderStatus, id, type } = useParams();
     const navigate = useNavigate();
     const [order, setOrder] = useState(null);
-    console.log('Params:', { orderId, orderStatus, id, type });
+    // console.log('Params:', { orderId, orderStatus, id, type });
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -41,11 +41,11 @@ const OrderDetail = () => {
                     localStorage.removeItem('mobile');
                     navigate('/login');
                 } else if (!response.ok) {
-                    console.log(response.text());
+                    // console.log(response.text());
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 const data = await response.json();
-                console.log('data response:', data);
+                // console.log('data response:', data);
                 setOrder(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
@@ -85,9 +85,9 @@ const OrderDetail = () => {
                 localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
-                console.log(response.text());
+                // console.log(response.text());
             }
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             const blob = await response.blob();
 
             // Create a temporary URL for the blob

@@ -10,8 +10,8 @@ import back from '../asset/Expand_left.png';
 import Payment from './Payment';
 
 
-// const Backend_url = 'http://localhost:8080';
-const Backend_url = '/api';
+const Backend_url = 'http://localhost:8080';
+// const Backend_url = '/api';
 
 const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) => {
     const isReportOk = localStorage.getItem('reportOK') === 'true';
@@ -43,7 +43,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                 error = 'Emails do not match';
             }
         }
-        console.log(`Validation result for ${name}: ${error}`);
+        // console.log(`Validation result for ${name}: ${error}`);
         return error;
     };
 
@@ -66,7 +66,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
                 error = 'Invalid mobile number';
             }
         }
-        console.log(`Validation result for ${name}: ${error}`);
+        // console.log(`Validation result for ${name}: ${error}`);
         return error;
     };
 
@@ -93,13 +93,13 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
             newErrors['confirmEmail'] = 'Emails do not match';
         }
         setErrors(newErrors);
-        console.log(newErrors)
+        // console.log(newErrors)
         if (isValid) {
-            console.log('Data saved:', formPurchase);
+            // console.log('Data saved:', formPurchase);
             showStepTwo();
             scrollToTop();
         } else {
-            console.log('Form has errors:', newErrors);
+            // console.log('Form has errors:', newErrors);
         }        
     };
 
@@ -115,19 +115,19 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
             }
         });
         setErrors(newErrors);
-        console.log(newErrors)
+        // console.log(newErrors)
         if (isValid) {
-            console.log('Data saved:', formPurchase);
+            // console.log('Data saved:', formPurchase);
             showStepTwo();
             scrollToTop();
         } else {
-            console.log('Form has errors:', newErrors);
+            // console.log('Form has errors:', newErrors);
         }        
     };
 
     const handleUpdate = (e) => {
         const { name, value, type, checked } = e.target;
-        console.log("check is " + checked + " value is " + value + " type " + type)
+        // console.log("check is " + checked + " value is " + value + " type " + type)
         if (type === 'checkbox') {
             onUpdate(name, checked);
         } else if (name === 'coolingPeriod' || name === 'auction') {
@@ -136,7 +136,7 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
             onUpdate(name, value);
         }
     };
-    console.log(formPurchase);
+    // console.log(formPurchase);
     
     const handleGrannyFlatChange = (e) => {
         const isSelected = e.target.value === 'yes';
@@ -287,9 +287,9 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
     const navigate = useNavigate();
     const location = useLocation();
     const { price } = location.state || {};
-    console.log(price);
+    // console.log(price);
     const totalAmount = (parseFloat(price) + parseFloat(totalPrice) + parseFloat(summary.hasGrannyFlat ? 99 : 0)) * 100;
-    console.log(totalAmount);
+    // console.log(totalAmount);
 
     useEffect(() => {
         const fetchServices = async () => {
@@ -309,9 +309,9 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 const data = await response.json();
-                console.log('data response:', data);
+                // console.log('data response:', data);
                 setServices(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
@@ -334,7 +334,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
             paymentMethod: 'card',
             ...formPurchase,
         };    
-        console.log('Sending data:', dataToSend);    
+        // console.log('Sending data:', dataToSend);    
         try {
             fetch(`${Backend_url}/create-payment-intent`, {
                 method: 'POST',
@@ -352,7 +352,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
             .then(data => {
                 if (data.clientSecret) {
                     setClientSecret(data.clientSecret); // Set client secret
-                    console.log('Client Secret:', data.clientSecret);
+                    // console.log('Client Secret:', data.clientSecret);
                 } else {
                     console.error("Client secret not found in response");
                 }
@@ -363,7 +363,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
             // }
             // const secret = response.json();
             // setClientSecret(secret.clientSecret);
-            console.log('1111Client Secret:', clientSecret);
+            // console.log('1111Client Secret:', clientSecret);
             showStepThree();
             scrollToTop();
         } catch (error) {
@@ -419,8 +419,8 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
         });
         // updatePaymentSummary({ getService: selected, servicePrice: selected ? 0 : 0 });
     };
-    console.log(formPurchase)
-    console.log(selectedServices)
+    // console.log(formPurchase)
+    // console.log(selectedServices)
     return (
         <div>
             <div className="service_details">
@@ -470,7 +470,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
 };
 
 const StepThree = ({ clientSecret }) => {
-    console.log("here is secret: " + clientSecret)
+    // console.log("here is secret: " + clientSecret)
     return (
         <div>
             <Payment clientSecret={clientSecret}/>
@@ -580,7 +580,7 @@ const PurchasePage = () => {
             ...formPurchase,
         };
         try {
-            console.log('data sent:', dataToSend)
+            // console.log('data sent:', dataToSend)
             const response = await FetchFunc(
                 '/partner-order/create',
                 'POST',
@@ -595,9 +595,9 @@ const PurchasePage = () => {
                 localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
-                console.log(response.text());
+                // console.log(response.text());
             } else {
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 navigate('/thankyou');
             }
         } catch (error) {
@@ -629,7 +629,7 @@ const PurchasePage = () => {
         setPaymentSummary((prevSummary) => ({ ...prevSummary, ...newSummary }));
     };
 
-    console.log(paymentSummary);
+    // console.log(paymentSummary);
 
     const handleBack = () => {
         navigate(-1);

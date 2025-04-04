@@ -49,14 +49,14 @@ const Login = () => {
             ...formData,
         };
         try {
-            console.log('Data send:', dataToSend);
+            // console.log('Data send:', dataToSend);
             const response = await FetchFunc(
                 '/login/',
                 'POST',
                 JSON.stringify(dataToSend)
             );
             const responseData = await response.json();
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             if (response.status === 200) {
                 localStorage.setItem('isLoggedIn', true);
                 localStorage.setItem('username', responseData.username);
@@ -76,7 +76,7 @@ const Login = () => {
                     localStorage.removeItem('userId');
                     localStorage.removeItem('email');
                     localStorage.removeItem('mobile');
-                    console.log('Logged out due to timeout');
+                    // console.log('Logged out due to timeout');
                     alert('Logged out due to timeout, please log in again!');
                 }, 60 * 60 * 1000);
                 localStorage.setItem('timeOutId', timeOutId.toString());
@@ -85,7 +85,7 @@ const Login = () => {
             } else if (response.status === 404) {
                 setLoginStatus("Not Found - User doesn't exist!")
             } else {
-                console.log('Error:', response);
+                // console.log('Error:', response);
             }
         } catch (error) {
             console.error('Error submitting form:', error);

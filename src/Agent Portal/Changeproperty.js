@@ -4,8 +4,8 @@ import "./Changeproperty.css";
 import close from "../asset/Close_round.png";
 import { useNavigate } from "react-router-dom";
 
-// const Backend_url = 'http://localhost:8080';
-const Backend_url = '/api';
+const Backend_url = 'http://localhost:8080';
+// const Backend_url = '/api';
 
 const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData,filter }) => {
     const navigate = useNavigate();
@@ -42,7 +42,7 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
             ...property,
         };
         try {
-            console.log('data sent:', dataToSend);
+            // console.log('data sent:', dataToSend);
             const response = await FetchFunc(
                 '/admin/editProperty',
                 'POST',
@@ -59,7 +59,7 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
             } else if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             setRefresh(!refresh);
             closeModal();
         } catch (error) {
@@ -88,9 +88,9 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
                 localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
-                console.log(response.text());
+                // console.log(response.text());
             }
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             setRefresh(!refresh);
             closeModal();
         } catch (error) {
@@ -207,7 +207,7 @@ const AddPropertyModal = ({ closeModal, refresh, setRefresh }) => {
             address: getAddress(),
         };
         try {
-            console.log('data sent:', dataToSend);
+            // console.log('data sent:', dataToSend);
             const response = await FetchFunc(
                 '/admin/addProperty',
                 'POST',
@@ -224,7 +224,7 @@ const AddPropertyModal = ({ closeModal, refresh, setRefresh }) => {
             } else if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             setRefresh(!refresh);
             closeModal();
         } catch (error) {
@@ -326,7 +326,7 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
         const formData = new FormData();
         formData.append('file', selectedFile);
         try {
-            console.log('data sent:', formData);
+            // console.log('data sent:', formData);
             const response = await fetch(`${Backend_url}/admin/uploadReport?reportType=${type}&fileName=${name}&propertyId=${id}`, {
                 method: 'POST',
                 body: formData,
@@ -341,10 +341,10 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
                 localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
-                console.log(response.text());
+                // console.log(response.text());
                 setUploadStatus(`Upload failed. Status: ${response.status}`);
             }
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             setRefresh(!refresh);
             setUploadStatus('File uploaded successfully!');
         } catch (error) {
@@ -385,7 +385,7 @@ const PriceModal = ({ closeModal, id, refresh, setRefresh, prevPrice }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(price, id);
+            // console.log(price, id);
             const response = await FetchFunc(
                 `/admin/editReportPrice/?price=${price}&propertyId=${id}`,
                 'POST',
@@ -399,10 +399,10 @@ const PriceModal = ({ closeModal, id, refresh, setRefresh, prevPrice }) => {
                 localStorage.removeItem('mobile');
                 navigate('/login');
             } else if (!response.ok) {
-                console.log(response.text())
+                // console.log(response.text())
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             setRefresh(!refresh);
             closeModal();
         } catch (error) {
@@ -464,9 +464,9 @@ const Changeproperty = () => {
                 } else if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
+                // console.log('Response from server:', response);
                 const data = await response.json();
-                console.log('data response:', data);
+                // console.log('data response:', data);
                 setProperty(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
@@ -483,21 +483,21 @@ const Changeproperty = () => {
     });
 
     const openPropertyModal = (propertyId) => {
-        console.log(propertyId)
+        // console.log(propertyId)
         setActivePropertyId(propertyId);
     };
     const closePropertyModal = () => {
         setActivePropertyId(null);
     };
     const openUploadModal = (propertyId) => {
-        console.log(propertyId)
+        // console.log(propertyId)
         setUploadModalPropertyId(propertyId);
     };
     const closeUploadModal = () => {
         setUploadModalPropertyId(null);
     };
     const openPriceModal = (propertyId) => {
-        console.log(propertyId)
+        // console.log(propertyId)
         setPricePropertyId(propertyId);
     };
     const closePriceModal = () => {

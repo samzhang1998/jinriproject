@@ -32,14 +32,14 @@ const Adminlogin = () => {
             ...formData,
         };
         try {
-            console.log('Data send:', dataToSend);
+            // console.log('Data send:', dataToSend);
             const response = await FetchFunc(
                 '/login/',
                 'POST',
                 JSON.stringify(dataToSend)
             );
             const responseData = await response.json();
-            console.log('Response from server:', response);
+            // console.log('Response from server:', response);
             if (response.status === 200) {
                 localStorage.setItem('isLoggedIn', true);
                 localStorage.setItem('username', responseData.username);
@@ -51,7 +51,7 @@ const Adminlogin = () => {
             } else if (response.status === 404) {
                 setLoginStatus("Not Found - User doesn't exist!")
             } else {
-                console.log('Error:', response);
+                // console.log('Error:', response);
             }
         } catch (error) {
             console.error('Error submitting form:', error);
