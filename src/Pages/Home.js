@@ -3,7 +3,7 @@ import './Home.css';
 import Header from '../Header.js';
 import Findreport from './Findreport.js';
 import Search from './search.js';
-import OurCustomers from './OurCustomers.js';
+// import OurCustomers from './OurCustomers.js';
 import MobileHome from '../Mobile/MobileHome.js';
 import Introduction from './Introduction.js';
 import Strength from './Strength.js';
@@ -29,9 +29,9 @@ const Home = () => {
         <div className='box3'>
           <Strength />
         </div>
-        <div className='box4'>        
+        {/* <div className='box4'>        
           <OurCustomers />
-        </div>
+        </div> */}
         <Findreport />
       </div>
     </div>

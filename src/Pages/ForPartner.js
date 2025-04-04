@@ -17,8 +17,8 @@ const ForPartner = () => {
         </div>      
         <div className='partner_text1'>
           <h1>For Partner</h1>
-          <p>As a real estate agent, you can order our Building & Pest Reports at no upfront 
-            cost! Simply request the report, and we'll take care of everything — buyers can 
+          <p>As a real estate agent, you can order our Building & Pest Reports at lower upfront 
+            cost and fast track! Simply request the report, and we'll take care of everything — buyers can 
             purchase and download it directly.<br />This hassle-free process not only streamlines 
             the sales process but also eliminates the need for you to arrange multiple inspections, 
             saving valuable time and increasing the efficiency of report access for your buyers. 

@@ -30,17 +30,19 @@ const ContactUs = () => {
 
     emailjs
       .send(
-        'service_ftaumqi',
+        'service_fx2ay7f',
         'template_urc793n',
         formData,
         'DE2qNaIU2eFpMb7xK'
       )
       .then(
         (result) => {
+          setError('');
           setSuccess('Message sent successfully!');
         },
         (error) => {
           console.error('Failed to send message:', error);
+          setSuccess('');
           setError('Failed to send message. Please try again later.');
         }
       );
@@ -66,7 +68,7 @@ const ContactUs = () => {
             </div>
             <div>
               <h2>Email</h2>
-              <p>sales@checkforsure.com.au</p>
+              <p>info@checkforsure.com.au</p>
             </div>
           </div>
           <div className='contact_choice'>
@@ -75,10 +77,10 @@ const ContactUs = () => {
             </div>
             <div>
               <h2>Phone</h2>
-              <p>02 6542 6877</p>
+              <p>1800 987 123</p>
             </div>
           </div>
-          <div className='contact_choice'>
+          {/* <div className='contact_choice'>
             <div className='fill'>
               <img src={address} alt='address' />
             </div>
@@ -86,7 +88,7 @@ const ContactUs = () => {
               <h2>Address</h2>
               <p>118 Pitt Street, Sydney NSW 2000</p>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className='send_message'>
           <h1>Send Message</h1>
