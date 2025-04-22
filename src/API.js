@@ -1,5 +1,5 @@
-const Backend_url = 'http://localhost:8080';
-// const Backend_url = '/api';
+// const Backend_url = 'http://localhost:8080';
+const Backend_url = '/api';
 
 export default async function FetchFunc(path, method, body) {
   return await fetch(`${Backend_url}` + path, {
