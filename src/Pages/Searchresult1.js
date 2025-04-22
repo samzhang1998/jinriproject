@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useParams } from 'react';
 import './Searchresult1.css';
 import Header from '../Header';
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Findreport from './Findreport';
 import building from '../asset/图层 2 1.png';
 import ok from '../asset/Check_fill.png';
 import inner from '../asset/pexels-emrecan-2079246.png';
 import outer from '../asset/pexels-tobiasbjorkli-2119713.png';
 import Policy from '../Purchase/Policy';
+import FetchFunc from '../API';
 
 const Searchresult1 = () => {
     const navigate = useNavigate();
-    const location = useLocation();
-    const { query } = location.state || {};
-    const price = localStorage.getItem('price');
+    // const location = useLocation();
+    // const { query } = location.state || {};
+    // const price = localStorage.getItem('price');
     const [condition,setCondition] = useState(false);
+    const { propertyId } = useParams();
+    const [address, setAddress] = useState('');
+    const [price, setPrice] = useState('')
 
     const handleSearch = () => {
         localStorage.setItem('reportOK', true);
@@ -23,12 +27,34 @@ const Searchresult1 = () => {
 
     const handleConfirm = () => {
         setCondition(false);
-        navigate('/purchasereport', { state: { query, price } });
+        navigate('/purchasereport', { state: { address, price } });
     };
 
     const handleClose = () => {
         setCondition(false);
     };
+
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const response = await FetchFunc(
+                    `/search/${propertyId}`,
+                    'GET',
+                );
+                if (!response.ok) {
+                    console.log(response.text());
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                console.log('Response from server:', response);
+                const data = response.json();
+                setAddress(data.propertyAddress);
+                setPrice(data.reportPrice);
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+            }
+        };
+        fetchServices();
+    }, [propertyId]);
 
     return (
         <div className='search_result1'>
@@ -50,7 +76,7 @@ const Searchresult1 = () => {
                     <div className='title'>
                         <h2>Building & Pest Report</h2>
                     </div>
-                    <h3>{query}</h3>
+                    <h3>{address}</h3>
                     <div className='available'>
                         <img src={ok} alt='ok' />
                         <p>Report available now!</p>
