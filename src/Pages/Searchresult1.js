@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useParams } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Searchresult1.css';
 import Header from '../Header';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Findreport from './Findreport';
 import building from '../asset/图层 2 1.png';
 import ok from '../asset/Check_fill.png';
@@ -16,7 +16,7 @@ const Searchresult1 = () => {
     // const { query } = location.state || {};
     // const price = localStorage.getItem('price');
     const [condition,setCondition] = useState(false);
-    const { propertyId } = useParams();
+    const { id } = useParams();
     const [address, setAddress] = useState('');
     const [price, setPrice] = useState('')
 
@@ -38,15 +38,14 @@ const Searchresult1 = () => {
         const fetchServices = async () => {
             try {
                 const response = await FetchFunc(
-                    `/search/${propertyId}`,
+                    `/search/${id}`,
                     'GET',
                 );
                 if (!response.ok) {
                     console.log(response.text());
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                console.log('Response from server:', response);
-                const data = response.json();
+                const data = await response.json();
                 setAddress(data.propertyAddress);
                 setPrice(data.reportPrice);
             } catch (error) {
@@ -54,7 +53,7 @@ const Searchresult1 = () => {
             }
         };
         fetchServices();
-    }, [propertyId]);
+    }, [id]);
 
     return (
         <div className='search_result1'>

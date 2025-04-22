@@ -162,8 +162,8 @@ const SearchBox = () => {
                     // console.log('Response from server:', response);
                     const data = await response.json();
                     localStorage.setItem('price', data.reportPrice);
-                    // console.log(data);
-                    navigate(`/report`, { state: { query }});
+                    console.log(data);
+                    navigate(`/report/${data.propertyId}`, { state: { query }});
                 } else if (response.status === 404) {
                     navigate(`/bookinspector`, { state: { query }});
                 } else if (response.status === 401) {
