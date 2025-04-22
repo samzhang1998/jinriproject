@@ -540,10 +540,10 @@ const PurchasePage = () => {
     const id = localStorage.getItem('userId');
     const role = localStorage.getItem('role');
     const location = useLocation();
-    const { query } = location.state || {};
+    const { address } = location.state || {};
     const [selectedServices,setSelectedServices] = useState([]);
     const [formPurchase,setFormPurchase] = useState({
-        propertyAddress: query,
+        propertyAddress: address,
         coolingPeriod: false,
         auction: false,
         numberBedrooms: null,
