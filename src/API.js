@@ -1,4 +1,5 @@
-const Backend_url = 'http://localhost:8080';
+// const Backend_url = 'http://localhost:8080';
+const Backend_url = 'https://checkforsure.com.au/api';
 // const Backend_url = '/api';
 
 export default async function FetchFunc(path, method, body) {

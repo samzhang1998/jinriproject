@@ -21,7 +21,7 @@ const Home = () => {
             <h1>Instant Building Reports<br />Ready at Your First Open Home!</h1>
             <p>Independent, Professional Reports</p>
           </div>
-          <Search />          
+          <Search />
         </div>
         <div className='box2'>
           <Introduction />
