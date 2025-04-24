@@ -121,3 +121,38 @@
 .confirm_change button:hover {
     background-color: #004d40;
 }
+
+.order_search {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    gap: 5%;
+    margin: 10px 0;
+}
+
+.order_search input {
+    padding: 0.5rem 1rem;
+    position: relative;                     
+    height: 1.5rem;
+    margin-right: 0;
+    border: 1px solid #DDD;
+    border-radius: 0.625rem;
+    outline: none;
+}
+
+.order_search button {
+    grid-column: 3 / 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #008286;
+    height: 2.5rem;
+    color: white;
+    border: none;
+    border-radius: 0.625rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.order_search button:hover {
+    background-color: #004d40;
+}
