@@ -334,7 +334,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
             paymentMethod: 'card',
             ...formPurchase,
         };    
-        // console.log('Sending data:', dataToSend);    
+        console.log('Sending data:', dataToSend);    
         try {
             fetch(`${Backend_url}/create-payment-intent`, {
                 method: 'POST',
@@ -351,6 +351,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
             })
             .then(data => {
                 if (data.clientSecret) {
+                    console.log('Client Secret:', data.clientSecret);
                     setClientSecret(data.clientSecret); // Set client secret
                     // console.log('Client Secret:', data.clientSecret);
                 } else {
@@ -481,14 +482,14 @@ const StepThree = ({ clientSecret }) => {
 const PaymentSummary = ({ summary }) => {
     const location = useLocation();
     const role = localStorage.getItem('role');
-    const { query, price } = location.state || {};
+    const { address, query, price } = location.state || {};
     const totalAmount = parseFloat(price) + parseFloat(summary.hasGrannyFlat ? 99 : 0) + parseFloat(summary.servicePrice);
 
     return (
         <div className="order_summary">
             <h3>Order Summary</h3>
             <div className="address">
-                <p>{query}</p>
+                <p>{query || address}</p>
             </div>
             <hr style={{
                 background: '#DDD', 
@@ -541,10 +542,10 @@ const PurchasePage = () => {
     const id = localStorage.getItem('userId');
     const role = localStorage.getItem('role');
     const location = useLocation();
-    const { address } = location.state || {};
+    const { query, address } = location.state || {};
     const [selectedServices,setSelectedServices] = useState([]);
     const [formPurchase,setFormPurchase] = useState({
-        propertyAddress: address,
+        propertyAddress: address || query,
         coolingPeriod: false,
         auction: false,
         numberBedrooms: null,
