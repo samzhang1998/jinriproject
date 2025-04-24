@@ -334,7 +334,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
             paymentMethod: 'card',
             ...formPurchase,
         };    
-        // console.log('Sending data:', dataToSend);    
+        console.log('Sending data:', dataToSend);    
         try {
             fetch(`${Backend_url}/create-payment-intent`, {
                 method: 'POST',
@@ -351,6 +351,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
             })
             .then(data => {
                 if (data.clientSecret) {
+                    console.log('Client Secret:', data.clientSecret);
                     setClientSecret(data.clientSecret); // Set client secret
                     // console.log('Client Secret:', data.clientSecret);
                 } else {
