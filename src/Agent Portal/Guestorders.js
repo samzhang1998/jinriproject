@@ -38,12 +38,18 @@ const Guestorders = () => {
     const [refresh, setRefresh] = useState(false);
     const navigate = useNavigate();
     const [activeOrderId, setActiveOrderId] = useState(null);
+    const [id, setId] = useState('');
+    const [address, setAddress] = useState('');
+    const pageSize = 10
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalOrders, setTotalOrders] = useState(null);
+    const totalPages = Math.ceil(totalOrders / pageSize);
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
                 const response = await FetchFunc(
-                    `/admin/allGuestOrders`,
+                    `/admin/allGuestOrders?offset=${(currentPage-1)*pageSize+1}&limit=${currentPage*pageSize}`,
                     'GET',
                 );
                 if (response.status === 401) {
@@ -60,7 +66,8 @@ const Guestorders = () => {
                 // console.log('Response from server:', response);
                 const data = await response.json();
                 // console.log('data response:', data);
-                setOrder(data);
+                setTotalOrders(data.totalElements);
+                setOrder(data.content);
             } catch (error) {
                 console.error('Error fetching orders:', error);
             }
@@ -73,6 +80,14 @@ const Guestorders = () => {
         const [year, time] = yearAndTime.split(' ');
         return `${year}-${month}-${day}T${time}`;
     };
+
+    const handleAddressSearch = (e) => {
+        setAddress(e.target.value);
+    }
+
+    const handleIdSearch = (e) => {
+        setId(e.target.value);
+    }
 
     const handleOpenModal = (orderId) => {
         // console.log(orderId)
@@ -129,6 +144,21 @@ const Guestorders = () => {
                 <button onClick={handleRecordDownload} style={{width: '15rem'}}>Download Order Record</button>
             </div>
             <hr style={{background: '#DDD', width: '100%', border: 'none', height: '1px'}} />
+            <div className="order_search">
+                <input 
+                    type="text"
+                    value={id}
+                    placeholder="Search order id"
+                    onChange={handleIdSearch}
+                />
+                <input
+                    type="text"
+                    value={address}
+                    placeholder="Search address"
+                    onChange={handleAddressSearch}                    
+                />
+                <button>Search</button>
+            </div>
             <div className="order_list">
                 {order
                 .sort((a, b) => new Date(formatToISO(b.createTime)) - new Date(formatToISO(a.createTime)))
@@ -151,6 +181,34 @@ const Guestorders = () => {
                         )}
                     </div>
                 ))}
+            </div>
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'end', alignItems: 'center', gap: '5px'}}>
+                <button
+                    onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
+                    disabled={currentPage === 1}
+                >
+                    Last Page
+                </button>
+                {[...Array(totalPages)].map((_, idx) => {
+                    const page = idx + 1;
+                    return (
+                        <button
+                            key={page}
+                            onClick={() => setCurrentPage(page)}
+                            style={{
+                                fontWeight: page === currentPage ? 'bold' : 'normal',
+                            }}
+                        >
+                            {page}
+                        </button>
+                    );
+                })}
+                <button
+                    onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                >
+                    Next Page
+                </button>
             </div>
         </div>
     );

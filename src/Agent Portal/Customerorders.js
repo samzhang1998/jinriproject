@@ -236,12 +236,19 @@ const Customerorders = () => {
     const [refresh, setRefresh] = useState(false);
     const [activeOrderId, setActiveOrderId] = useState(null);
     const [priceModal, setPriceModal] = useState(false);
+    const [id, setId] = useState('');
+    const [address, setAddress] = useState('');
+    const pageSize = 10;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalOrders, setTotalOrders] = useState(null);
+    const totalPages = Math.ceil(totalOrders / pageSize);
+
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
                 const response = await FetchFunc(
-                    `/admin/allCustomerOrders`,
+                    `/admin/allCustomerOrders?status=${filter}&offset=${(currentPage-1)*pageSize+1}&limit=${currentPage*pageSize}`,
                     'GET',
                 );
                 if (response.status === 401) {
@@ -258,7 +265,8 @@ const Customerorders = () => {
                 // console.log('Response from server:', response);
                 const data = await response.json();
                 // console.log('data response:', data);
-                setOrder(data);
+                setTotalOrders(data.totalElements);
+                setOrder(data.content);
             } catch (error) {
                 console.error('Error fetching orders:', error);
             }
@@ -266,10 +274,29 @@ const Customerorders = () => {
         fetchOrders();
     }, [navigate, refresh]);
 
-    const filteredOrders = order.filter(order => {
-        if (filter === 'all') return true;
-        return order.currentStatus.toLowerCase() === filter;
-    });
+    // const filteredOrders = order.filter(order => {
+    //     if (filter === 'all') return true;
+    //     return order.currentStatus.toLowerCase() === filter;
+    // });
+
+    const handleAddressSearch = (e) => {
+        setAddress(e.target.value);
+    }
+
+    const handleIdSearch = (e) => {
+        setId(e.target.value);
+    }
+
+    const handleOrderSearch = async () => {
+        try {
+            const response = await FetchFunc(
+                `/customer-order/search?orderId=${id}&address=${address}`,
+                'GET',
+            );
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
     const handleOpenModal = (orderId) => {
         // console.log(orderId)
@@ -348,6 +375,21 @@ const Customerorders = () => {
                 )}
             </div>
             <hr style={{background: '#DDD', width: '100%', border: 'none', height: '1px'}} />
+            <div className="order_search">
+                <input 
+                    type="text"
+                    value={id}
+                    placeholder="Search order id"
+                    onChange={handleIdSearch}
+                />
+                <input
+                    type="text"
+                    value={address}
+                    placeholder="Search address"
+                    onChange={handleAddressSearch}                    
+                />
+                <button onClick={handleOrderSearch}>Search</button>
+            </div>
             <div className="order_status">
                 <span 
                     onClick={() => setFilter('all')}
@@ -364,7 +406,7 @@ const Customerorders = () => {
             </div>
             <div className="order_list">
                 {Array.isArray(order) && 
-                    filteredOrders
+                    order
                     .sort((a, b) => new Date(formatToISO(b.createTime)) - new Date(formatToISO(a.createTime)))
                     .map((order) => (
                     <div key={order.orderId} className="order_item">                        
@@ -386,6 +428,34 @@ const Customerorders = () => {
                         )}
                     </div>
                 ))}
+            </div>
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'end', alignItems: 'center', gap: '5px'}}>
+                <button
+                    onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
+                    disabled={currentPage === 1}
+                >
+                    Last Page
+                </button>
+                {[...Array(totalPages)].map((_, idx) => {
+                    const page = idx + 1;
+                    return (
+                        <button
+                            key={page}
+                            onClick={() => setCurrentPage(page)}
+                            style={{
+                                fontWeight: page === currentPage ? 'bold' : 'normal',
+                            }}
+                        >
+                            {page}
+                        </button>
+                    );
+                })}
+                <button
+                    onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                >
+                    Next Page
+                </button>
             </div>
         </div>
     );
