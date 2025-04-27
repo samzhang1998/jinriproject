@@ -455,7 +455,7 @@ const Changeproperty = () => {
         const fetchData = async () => {
             try {
                 const response = await FetchFunc(
-                    `/admin/allProperties?status=${filter}&offset=${(currentPage-1)*pageSize+1}&limit=${currentPage*pageSize}`,
+                    `/admin/allProperties?status=${filter}&offset=${currentPage-1}&limit=${pageSize}`,
                     'Get',
                 );
                 if (response.status === 401) {
@@ -471,14 +471,14 @@ const Changeproperty = () => {
                 }
                 // console.log('Response from server:', response);
                 const data = await response.json();
-                // console.log('data response:', data);
+                console.log('data response:', data);
                 setProperty(data);
             } catch (error) {
                 console.error('Error fetching orders:', error);
             }
         };
         fetchData();
-    }, [refresh, navigate]);
+    }, [refresh, navigate, filter, currentPage, pageSize]);
 
     const filteredProperty = property.filter((item) => {
         if (filter === 'all') return true;
@@ -489,6 +489,31 @@ const Changeproperty = () => {
 
     const handleAddressSearch = (e) => {
         setAddress(e.target.value)
+    }
+
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await FetchFunc(
+                `/admin/search/properties?address=${address}`,
+                'GET',
+            );
+            if (response.status === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
+                navigate('/adminlogin');
+            } else if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log('data response:', data);
+        } catch (error) {
+            console.error('Error:', error);
+        }
     }
 
     const openPropertyModal = (propertyId) => {
@@ -537,12 +562,12 @@ const Changeproperty = () => {
                     onChange={handleAddressSearch}
                     style={{gridColumn: '1/3'}}                    
                 />
-                <button>Search</button>
+                <button onClick={handleSearch}>Search</button>
             </div>
             <div className="order_status">
                 <span 
-                    onClick={() => setFilter('all')}
-                    className={filter === 'all' ? 'active' : ''}
+                    onClick={() => setFilter('')}
+                    className={filter === '' ? 'active' : ''}
                 >All</span>
                 <span 
                     onClick={() => setFilter('deleted')}

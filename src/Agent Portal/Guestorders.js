@@ -40,16 +40,17 @@ const Guestorders = () => {
     const [activeOrderId, setActiveOrderId] = useState(null);
     const [id, setId] = useState('');
     const [address, setAddress] = useState('');
-    const pageSize = 10
+    const pageSize = 10;
     const [currentPage, setCurrentPage] = useState(1);
     const [totalOrders, setTotalOrders] = useState(null);
     const totalPages = Math.ceil(totalOrders / pageSize);
+    const [searchedOrder, setSearchedOrder] = useState([]);
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
                 const response = await FetchFunc(
-                    `/admin/allGuestOrders?offset=${(currentPage-1)*pageSize+1}&limit=${currentPage*pageSize}`,
+                    `/admin/allGuestOrders?offset=${currentPage-1}&limit=${pageSize}`,
                     'GET',
                 );
                 if (response.status === 401) {
@@ -65,7 +66,7 @@ const Guestorders = () => {
                 }
                 // console.log('Response from server:', response);
                 const data = await response.json();
-                // console.log('data response:', data);
+                console.log('data response:', data);
                 setTotalOrders(data.totalElements);
                 setOrder(data.content);
             } catch (error) {
@@ -73,7 +74,7 @@ const Guestorders = () => {
             }
         };
         fetchOrders();
-    }, [refresh,navigate]);
+    }, [refresh, navigate, currentPage, pageSize]);
 
     const formatToISO = (dateString) => {
         const [day, month, yearAndTime] = dateString.split('-');
@@ -87,6 +88,32 @@ const Guestorders = () => {
 
     const handleIdSearch = (e) => {
         setId(e.target.value);
+    }
+
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await FetchFunc(
+                `/admin/search/guestOrders?orderId=${id}&address=${address}`,
+                'GET',
+            );
+            if (response.status === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
+                navigate('/adminlogin');
+            } else if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log('data response:', data);
+            setSearchedOrder(data);
+        } catch (error) {
+            console.error('Error:', error);
+        }
     }
 
     const handleOpenModal = (orderId) => {
@@ -157,7 +184,34 @@ const Guestorders = () => {
                     placeholder="Search address"
                     onChange={handleAddressSearch}                    
                 />
-                <button>Search</button>
+                <button onClick={handleSearch}>Search</button>
+            </div>
+            <div className="order_list">
+                {Array.isArray(searchedOrder) && 
+                    searchedOrder
+                    .sort((a, b) => new Date(formatToISO(b.createTime)) - new Date(formatToISO(a.createTime)))
+                    .map((order) => (
+                    <div key={order.id} className="order_item">                        
+                        <div className="order_detail">
+                            <p>{order.createTime}</p>
+                            <h1>Order #{order.id}</h1>
+                            <h2>{order.propertyAddress}</h2>
+                        </div>
+                        <div onClick={() => handleOpenModal(order.id)} className="edit_order">
+                            Show Details
+                        </div>
+                        {activeOrderId === order.id && (
+                            <EditGuestOrderModal 
+                                id={order.id}
+                                closeModal={handleCloseModal}
+                                order={order}
+                                refresh={refresh}
+                                setRefresh={setRefresh}
+                            />
+                        )}
+                    </div>
+                ))}
+                <hr style={{background: '#DDD', width: '100%', border: 'none', height: '1px'}} />
             </div>
             <div className="order_list">
                 {order
@@ -169,10 +223,10 @@ const Guestorders = () => {
                             <h1>Order #{order.id}</h1>
                             <h2>{order.propertyAddress}</h2>
                         </div>
-                        <div onClick={() => handleOpenModal(order.orderId)} className="edit_order">
+                        <div onClick={() => handleOpenModal(order.id)} className="edit_order">
                             Show details
                         </div>
-                        {activeOrderId === order.orderId && (
+                        {activeOrderId === order.id && (
                             <EditGuestOrderModal 
                                 id={order.id}
                                 closeModal={handleCloseModal}
