@@ -33,31 +33,17 @@ const Policy = ({ showModal, onClose, onConfirm }) => {
                     <img src={close} alt="close" onClick={handleClose} />
                 </div>
                 <div className='modal_body' ref={contentRef} onScroll={handleScroll}>
-                    <p>I have read and agree to Check for sure's Terms & Conditions
-                        (which includes our Collection Notice and Cancellation charges 
-                        policy). A 'Late Cancellation' could lead to cancellation charges that
-                        can exceed your initial payment, up to a maximum of 50% of the retail
-                        cost of a report.</p>
-                    <p>I have read and agree to Check for sure's Terms & Conditions
-                        (which includes our Collection Notice and Cancellation charges 
-                        policy). A 'Late Cancellation' could lead to cancellation charges that
-                        can exceed your initial payment, up to a maximum of 50% of the retail
-                        cost of a report.</p>
-                    <p>I have read and agree to Check for sure's Terms & Conditions
-                        (which includes our Collection Notice and Cancellation charges 
-                        policy). A 'Late Cancellation' could lead to cancellation charges that
-                        can exceed your initial payment, up to a maximum of 50% of the retail
-                        cost of a report.</p>
-                    <p>I have read and agree to Check for sure's Terms & Conditions
-                        (which includes our Collection Notice and Cancellation charges 
-                        policy). A 'Late Cancellation' could lead to cancellation charges that
-                        can exceed your initial payment, up to a maximum of 50% of the retail
-                        cost of a report.</p>
-                    <p>I have read and agree to Check for sure's Terms & Conditions
-                        (which includes our Collection Notice and Cancellation charges 
-                        policy). A 'Late Cancellation' could lead to cancellation charges that
-                        can exceed your initial payment, up to a maximum of 50% of the retail
-                        cost of a report.</p>
+                    <p>CheckForSure is a platform that facilitates access to independent building inspection 
+                        services by connecting users with qualified building inspectors. CheckForSure itself 
+                        does not carry out building inspections and does not verify, endorse, or guarantee the 
+                        accuracy or completeness of any inspection report provided through the platform.</p>
+                    <p>All inspections are conducted independently by third-party inspectors, who bear full 
+                        responsibility for the quality, content, and conclusions of their reports.</p>
+                    <p>CheckForSure accepts no liability whatsoever for any loss, damage, or claims arising 
+                        from the use of or reliance on any inspection report obtained through the platform.</p>
+                    <p>By using CheckForSure, you acknowledge and agree that any issues, disputes, or claims 
+                        relating to an inspection or report must be directed to the individual inspector who 
+                        provided the service.</p>
                 </div>
                 <button
                     className='understand'

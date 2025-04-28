@@ -4,7 +4,8 @@ import "./Changeproperty.css";
 import close from "../asset/Close_round.png";
 import { useNavigate } from "react-router-dom";
 
-const Backend_url = 'http://3.106.224.222';
+// const Backend_url = 'http://3.106.224.222';
+const Backend_url = 'https://checkforsure.com.au/api';
 // const Backend_url = '/api';
 
 const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData,filter }) => {
@@ -451,6 +452,7 @@ const Changeproperty = () => {
     const [totalProperties, setTotalProperties] = useState(null);
     const totalPages = Math.ceil(totalProperties / pageSize);
     const [searchedProperty, setSearchedProperty] = useState('');
+    const [url, setUrl] = useState('');
     
     useEffect(() => {
         const fetchData = async () => {
@@ -549,9 +551,9 @@ const Changeproperty = () => {
             } else if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            const url = await response.text();
+            const data = await response.text();
+            setUrl(data);
             console.log('data response:', url);
-            window.open(url, '_blank');
         } catch (error) {
             console.error('Error:', error);
         }
@@ -738,6 +740,18 @@ const Changeproperty = () => {
                     Next Page
                 </button>
             </div>
+            {url && <div className="change_modal">
+                <div className="pdf_preview">
+                    <div className="pdf_action">
+                        <img src={close} alt="close" onClick={() => setUrl('')} style={{cursor: 'pointer'}}/>
+                    </div>
+                    <iframe
+                        src={url}
+                        style={{width: '100%', height: '100vh', border: 'none',}}
+                    >
+                    </iframe>
+                </div>
+            </div>}
         </div>
     );
 };
