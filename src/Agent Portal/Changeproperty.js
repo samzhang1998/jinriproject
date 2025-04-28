@@ -4,8 +4,8 @@ import "./Changeproperty.css";
 import close from "../asset/Close_round.png";
 import { useNavigate } from "react-router-dom";
 
-// const Backend_url = 'http://localhost:8080';
-const Backend_url = '/api';
+const Backend_url = 'http://3.106.224.222';
+// const Backend_url = '/api';
 
 const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData,filter }) => {
     const navigate = useNavigate();
@@ -183,7 +183,7 @@ const AddPropertyModal = ({ closeModal, refresh, setRefresh }) => {
         streetNumber: '',
         suburb: '',
         state: '',
-        roomNumber: '',
+        roomNumber: null,
         postcode: '',
     });
     // const Change = `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`;
@@ -285,7 +285,7 @@ const AddPropertyModal = ({ closeModal, refresh, setRefresh }) => {
                         onChange={handleInputChange}
                         required
                     />
-                    <p>Property Room Number:</p>
+                    {/* <p>Property Room Number:</p>
                     <input
                         type="text"
                         name="roomNumber"
@@ -293,7 +293,7 @@ const AddPropertyModal = ({ closeModal, refresh, setRefresh }) => {
                         value={property.roomNumber}
                         onChange={handleInputChange}
                         required
-                    />
+                    /> */}
                     <p>Property Postcode:</p>
                     <input
                         type="text"
@@ -446,18 +446,32 @@ const Changeproperty = () => {
     const [refresh, setRefresh] = useState(false);
     const [address, setAddress] = useState('');
     const navigate = useNavigate();
-    const pageSize = 10
+    const pageSize = 10;
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalOrders, setTotalOrders] = useState(null);
-    const totalPages = Math.ceil(totalOrders / pageSize);
+    const [totalProperties, setTotalProperties] = useState(null);
+    const totalPages = Math.ceil(totalProperties / pageSize);
+    const [searchedProperty, setSearchedProperty] = useState('');
     
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await FetchFunc(
-                    `/admin/allProperties?status=${filter}&offset=${currentPage-1}&limit=${pageSize}`,
-                    'Get',
-                );
+                let response;
+                if (filter === 'deleted') {
+                    response = await FetchFunc(
+                        `/admin/properties?isDeleted=true&offset=${currentPage-1}&limit=${pageSize}`,
+                        'Get',
+                    );
+                } else if (filter === 'notDeleted') {
+                    response = await FetchFunc(
+                        `/admin/properties?isDeleted=false&offset=${currentPage-1}&limit=${pageSize}`,
+                        'Get',
+                    );
+                } else {
+                    response = await FetchFunc(
+                        `/admin/properties?offset=${currentPage-1}&limit=${pageSize}`,
+                        'Get',
+                    );
+                }                
                 if (response.status === 401) {
                     localStorage.setItem('isLoggedIn', false);
                     localStorage.removeItem('username');
@@ -472,7 +486,8 @@ const Changeproperty = () => {
                 // console.log('Response from server:', response);
                 const data = await response.json();
                 console.log('data response:', data);
-                setProperty(data);
+                setProperty(data.content);
+                setTotalProperties(data.totalElements);
             } catch (error) {
                 console.error('Error fetching orders:', error);
             }
@@ -480,12 +495,12 @@ const Changeproperty = () => {
         fetchData();
     }, [refresh, navigate, filter, currentPage, pageSize]);
 
-    const filteredProperty = property.filter((item) => {
-        if (filter === 'all') return true;
-        if (filter === 'deleted') return item.isDeleted;
-        if (filter === 'notDeleted') return !item.isDeleted;
-        return true;
-    });
+    // const filteredProperty = property.filter((item) => {
+    //     if (filter === 'all') return true;
+    //     if (filter === 'deleted') return item.isDeleted;
+    //     if (filter === 'notDeleted') return !item.isDeleted;
+    //     return true;
+    // });
 
     const handleAddressSearch = (e) => {
         setAddress(e.target.value)
@@ -511,6 +526,32 @@ const Changeproperty = () => {
             }
             const data = await response.json();
             console.log('data response:', data);
+            setSearchedProperty(data);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    const handlePreview = async (name, type) => {
+        try {
+            const response = await FetchFunc(
+                `/oss/preview?fileName=${name}&reportType=${type}`,
+                'GET',
+            );
+            if (response.status === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
+                navigate('/adminlogin');
+            } else if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const url = await response.text();
+            console.log('data response:', url);
+            window.open(url, '_blank')
         } catch (error) {
             console.error('Error:', error);
         }
@@ -564,21 +605,7 @@ const Changeproperty = () => {
                 />
                 <button onClick={handleSearch}>Search</button>
             </div>
-            <div className="order_status">
-                <span 
-                    onClick={() => setFilter('')}
-                    className={filter === '' ? 'active' : ''}
-                >All</span>
-                <span 
-                    onClick={() => setFilter('deleted')}
-                    className={filter === 'deleted' ? 'active' : ''}
-                >Deleted</span>
-                <span 
-                    onClick={() => setFilter('notDeleted')}
-                    className={filter === 'notDeleted' ? 'active' : ''}
-                >Active</span>               
-            </div>
-            {Array.isArray(property) && filteredProperty.map((property) => (
+            {Array.isArray(searchedProperty) && searchedProperty.map((property) => (
                 <div key={property.propertyId} className="admin_property">
                     <div className="property_price">
                         <h2>{property.propertyAddress}</h2>
@@ -608,7 +635,67 @@ const Changeproperty = () => {
                         )}
                     </div>
                     <div className="upload_report">
-                        <p>Report: {property.reportName}</p>
+                        {property.reportName && <p onClick={() => handlePreview(property.reportName, property.type)}>Report: {property.reportName}</p>}
+                        <span onClick={() => openUploadModal(property.propertyId)}>Upload Report</span>
+                    </div>
+                    {uploadModalPropertyId === property.propertyId && (
+                        <UploadModal
+                            type={property.type}
+                            id={property.propertyId}
+                            name={property.reportName}
+                            closeModal={closeUploadModal}
+                            refresh={refresh}
+                            setRefresh={setRefresh}
+                        />
+                    )}
+                </div>
+            ))}
+            <hr style={{background: '#DDD', width: '100%', border: 'none', height: '1px'}} />
+            <div className="order_status">
+                <span 
+                    onClick={() => setFilter('')}
+                    className={filter === '' ? 'active' : ''}
+                >All</span>
+                <span 
+                    onClick={() => setFilter('deleted')}
+                    className={filter === 'deleted' ? 'active' : ''}
+                >Deleted</span>
+                <span 
+                    onClick={() => setFilter('notDeleted')}
+                    className={filter === 'notDeleted' ? 'active' : ''}
+                >Active</span>               
+            </div>
+            {Array.isArray(property) && property.map((property) => (
+                <div key={property.propertyId} className="admin_property">
+                    <div className="property_price">
+                        <h2>{property.propertyAddress}</h2>
+                        <span onClick={() => openPriceModal(property.propertyId)}>Set Price</span>
+                        {pricePropertyId === property.propertyId && (
+                            <PriceModal 
+                                id={property.propertyId}
+                                closeModal={closePriceModal}
+                                prevPrice={property.reportPrice}
+                                refresh={refresh}
+                                setRefresh={setRefresh}                           
+                            />
+                        )}
+                    </div>
+                    <div className="admin_property_detail">
+                        <p>Property type: {property.type}</p>
+                        <span onClick={() => openPropertyModal(property.propertyId)}>Edit Property</span>
+                        {activePropertyId === property.propertyId && (
+                            <ChangePropertyModal
+                                id={property.propertyId}
+                                closeModal={closePropertyModal}
+                                refresh={refresh}
+                                setRefresh={setRefresh}
+                                existingData={property}
+                                filter={filter}
+                            />
+                        )}
+                    </div>
+                    <div className="upload_report">
+                        {property.reportName && <p onClick={() => handlePreview(property.reportName, property.type)}>Report: {property.reportName}</p>}
                         <span onClick={() => openUploadModal(property.propertyId)}>Upload Report</span>
                     </div>
                     {uploadModalPropertyId === property.propertyId && (
