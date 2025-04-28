@@ -551,7 +551,7 @@ const Changeproperty = () => {
             }
             const url = await response.text();
             console.log('data response:', url);
-            window.open(url, '_blank')
+            window.open(url, '_blank');
         } catch (error) {
             console.error('Error:', error);
         }
