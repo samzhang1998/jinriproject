@@ -66,7 +66,7 @@ const Guestorders = () => {
                 }
                 // console.log('Response from server:', response);
                 const data = await response.json();
-                console.log('data response:', data);
+                // console.log('data response:', data);
                 setTotalOrders(data.totalElements);
                 setOrder(data.content);
             } catch (error) {
@@ -109,7 +109,7 @@ const Guestorders = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            console.log('data response:', data);
+            // console.log('data response:', data);
             setSearchedOrder(data);
         } catch (error) {
             console.error('Error:', error);

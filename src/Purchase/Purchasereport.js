@@ -10,8 +10,8 @@ import back from '../asset/Expand_left.png';
 import Payment from './Payment';
 
 
-// const Backend_url = 'http://localhost:8080';
-const Backend_url = '/api';
+const Backend_url = 'http://localhost:8080';
+// const Backend_url = '/api';
 
 const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) => {
     const isReportOk = localStorage.getItem('reportOK') === 'true';
@@ -334,7 +334,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
             paymentMethod: 'card',
             ...formPurchase,
         };    
-        console.log('Sending data:', dataToSend);    
+        // console.log('Sending data:', dataToSend);    
         try {
             fetch(`${Backend_url}/create-payment-intent`, {
                 method: 'POST',
@@ -351,7 +351,7 @@ const StepTwo = ({ showStepThree, updatePaymentSummary, formPurchase, setFormPur
             })
             .then(data => {
                 if (data.clientSecret) {
-                    console.log('Client Secret:', data.clientSecret);
+                    // console.log('Client Secret:', data.clientSecret);
                     setClientSecret(data.clientSecret); // Set client secret
                     // console.log('Client Secret:', data.clientSecret);
                 } else {
