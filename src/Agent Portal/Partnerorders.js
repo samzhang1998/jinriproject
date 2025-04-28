@@ -139,14 +139,23 @@ const Partnerorders = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalOrders, setTotalOrders] = useState(null);
     const totalPages = Math.ceil(totalOrders / pageSize);
+    const [searchedOrder, setSearchedOrder] = useState([]);
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await FetchFunc(
-                    `/admin/allPartnerOrders?status=${filter}&offset=${(currentPage-1)*pageSize+1}&limit=${currentPage*pageSize}`,
-                    'GET',
-                );
+                let response;
+                if (filter) {
+                    response = await FetchFunc(
+                        `/admin/allPartnerOrders?status=${filter}&offset=${currentPage-1}&limit=${pageSize}`,
+                        'GET',
+                    );
+                } else {
+                    response = await FetchFunc(
+                        `/admin/allPartnerOrders?offset=${currentPage-1}&limit=${pageSize}`,
+                        'GET',
+                    );
+                }
                 if (response.status === 401) {
                     localStorage.setItem('isLoggedIn', false);
                     localStorage.removeItem('username');
@@ -160,7 +169,7 @@ const Partnerorders = () => {
                 }
                 // console.log('Response from server:', response);
                 const data = await response.json();
-                // console.log('data response:', data);
+                console.log('data response:', data);
                 setTotalOrders(data.totalElements);
                 setOrder(data.content);
             } catch (error) {
@@ -168,12 +177,12 @@ const Partnerorders = () => {
             }
         };
         fetchOrders();
-    }, [refresh,navigate]);
+    }, [refresh, navigate, filter, currentPage, pageSize]);
 
-    const filteredOrders = order.filter(order => {
-        if (filter === 'all') return true;
-        return order.currentStatus.toLowerCase() === filter;
-    });
+    // const filteredOrders = order.filter(order => {
+    //     if (filter === 'all') return true;
+    //     return order.currentStatus.toLowerCase() === filter;
+    // });
 
     const handleAddressSearch = (e) => {
         setAddress(e.target.value);
@@ -181,6 +190,32 @@ const Partnerorders = () => {
 
     const handleIdSearch = (e) => {
         setId(e.target.value);
+    }
+
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await FetchFunc(
+                `/partner-order/search?orderId=${id}&address=${address}`,
+                'GET',
+            );
+            if (response.status === 401) {
+                localStorage.setItem('isLoggedIn', false);
+                localStorage.removeItem('username');
+                localStorage.removeItem('role');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('email');
+                localStorage.removeItem('mobile');
+                navigate('/adminlogin');
+            } else if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log('data response:', data);
+            setSearchedOrder(data);
+        } catch (error) {
+            console.error('Error:', error);
+        }
     }
 
     const formatToISO = (dateString) => {
@@ -257,12 +292,38 @@ const Partnerorders = () => {
                     placeholder="Search address"
                     onChange={handleAddressSearch}                    
                 />
-                <button>Search</button>
+                <button onClick={handleSearch}>Search</button>
+            </div>
+            <div className="order_list">
+                {Array.isArray(searchedOrder) && 
+                    searchedOrder
+                    .sort((a, b) => new Date(formatToISO(b.createTime)) - new Date(formatToISO(a.createTime)))
+                    .map((order) => (
+                    <div key={order.orderId} className="order_item">                        
+                        <div className="order_detail">
+                            <p>{order.createTime}</p>
+                            <h1>Order #{order.orderId}</h1>
+                            <h2>{order.info}</h2>
+                        </div>
+                        <div onClick={() => handleOpenModal(order.orderId)} className="edit_order">
+                            Edit order
+                        </div>
+                        {activeOrderId === order.orderId && (
+                            <EditPartnerOrderModal 
+                                id={order.orderId}
+                                closeModal={handleCloseModal}
+                                refresh={refresh}
+                                setRefresh={setRefresh}
+                            />
+                        )}
+                    </div>
+                ))}
+                <hr style={{background: '#DDD', width: '100%', border: 'none', height: '1px'}} />
             </div>
             <div className="order_status">
                 <span 
-                    onClick={() => setFilter('all')}
-                    className={filter === 'all' ? 'active' : ''}
+                    onClick={() => setFilter('')}
+                    className={filter === '' ? 'active' : ''}
                 >All</span>
                 <span 
                     onClick={() => setFilter('processing')}
@@ -274,7 +335,7 @@ const Partnerorders = () => {
                 >Completed</span>
             </div>
             <div className="order_list">
-                {filteredOrders
+                {order
                 .sort((a, b) => new Date(formatToISO(b.createTime)) - new Date(formatToISO(a.createTime)))
                 .map((order) => (
                     <div key={order.id} className="order_item">                        
