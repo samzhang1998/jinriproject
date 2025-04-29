@@ -86,8 +86,6 @@ const Searchresult2 = () => {
                     the safety and structural integrity of your property. Backed by over a decade 
                     of industry expertise, we are committed to helping you make informed and 
                     confident choices for your current property or future investment.</p>
-                    <h5>Inspectors</h5>
-                    <span>Max</span>
                     <div className="purchase_button2">
                         {isLoggedIn && <button onClick={handleSearch}>Book Inspector</button>}
                         {!isLoggedIn && <button onClick={() => navigate('/login')}>Book Inspector</button>}

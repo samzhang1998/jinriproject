@@ -16,7 +16,7 @@ const Searchresult1 = () => {
     // const { query } = location.state || {};
     // const price = localStorage.getItem('price');
     const [condition,setCondition] = useState(false);
-    const { id } = useParams();
+    const { id, partner } = useParams();
     const [address, setAddress] = useState('');
     const [price, setPrice] = useState('')
 
@@ -46,6 +46,7 @@ const Searchresult1 = () => {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
+                localStorage.setItem("partnerId", partner);
                 setAddress(data.propertyAddress);
                 setPrice(data.reportPrice);
             } catch (error) {
@@ -86,8 +87,6 @@ const Searchresult1 = () => {
                     ensure the safety and structural integrity of your property. Backed by over 
                     a decade of industry expertise, we are committed to helping you make informed 
                     and confident choices for your current property or future investment.</p>
-                    <h5>Inspectors</h5>
-                    <span>Max</span>
                     <div className="purchase_button">
                         <button onClick={handleSearch}>
                             Purchase Report

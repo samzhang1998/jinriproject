@@ -7,6 +7,7 @@ import { stripePromise } from './Payment';
 
 function Completion() {
   const [ messageBody, setMessageBody ] = useState('');
+  const [form, setForm] = useState({});
   const navigate = useNavigate();
   const [status, setStatus] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -16,16 +17,24 @@ function Completion() {
 
   const submitForm = async () => {
     const formPurchase = sessionStorage.getItem("formPurchase");
+    setForm(formPurchase);   
     if (!formPurchase) {
       console.error("No formPurchase data found in sessionStorage.");
       return; // Exit the function if the data is missing
+    }
+    const partnerId = localStorage.getItem("partnerId");
+    if (partnerId) {
+      setForm(f => ({
+        ...f,
+        partnerId
+      }));
     }
     if (isloggedIn) {
       try {
         const response = await FetchFunc(
           '/customer-order/create',
           'POST',
-          formPurchase
+          form
         );
 
         if (!response.ok) {
@@ -33,6 +42,7 @@ function Completion() {
         } else {
           // console.log('Response from server:', await response.json()); // Process response
           sessionStorage.removeItem("formPurchase");
+          localStorage.removeItem("partnerId");
         }
       } catch (error) {
         console.error('Error submitting form:', error);

@@ -22,7 +22,7 @@ const Header = () => {
                     &#9776;
                 </div>
                 <ul className={`menu ${isOpen ? 'show' : ''}`}>
-                    <li><Link to="/individual">For Individual</Link></li>
+                    <li><Link to="/individual">For Buyer</Link></li>
                     <hr className='menu_hr'/>
                     <li><Link to="/partner">For Partner</Link></li>
                     <hr className='menu_hr'/>
