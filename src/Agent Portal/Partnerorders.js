@@ -343,6 +343,7 @@ const Partnerorders = () => {
                             <p>{order.createTime}</p>
                             <h1>Order #{order.orderId}</h1>
                             <h2>{order.info}</h2>
+                            <p>{order.url}</p>
                         </div>
                         <div onClick={() => handleOpenModal(order.orderId)} className="edit_order">
                             Edit order
