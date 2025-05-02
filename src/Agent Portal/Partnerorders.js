@@ -104,7 +104,7 @@ const EditPartnerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
                         >
                             <option value="">Order Status</option>
                             <option value="Processing">Processing</option>
-                            <option value="Complete">Complete</option>
+                            <option value="Completed">Complete</option>
                         </select>
                     </label>
                     <label>
@@ -129,7 +129,7 @@ const EditPartnerOrderModal = ({ id, closeModal, refresh, setRefresh }) => {
 
 const Partnerorders = () => {
     const [order, setOrder] = useState([]);
-    const [filter, setFilter] = useState('complete');
+    const [filter, setFilter] = useState('completed');
     const [refresh, setRefresh] = useState(false);
     const navigate = useNavigate();
     const [activeOrderId, setActiveOrderId] = useState(null);
@@ -330,19 +330,20 @@ const Partnerorders = () => {
                     className={filter === 'processing' ? 'active' : ''}
                 >Processing</span>
                 <span 
-                    onClick={() => setFilter('complete')}
-                    className={filter === 'complete' ? 'active' : ''}
+                    onClick={() => setFilter('completed')}
+                    className={filter === 'completed' ? 'active' : ''}
                 >Completed</span>
             </div>
             <div className="order_list">
                 {order
                 .sort((a, b) => new Date(formatToISO(b.createTime)) - new Date(formatToISO(a.createTime)))
                 .map((order) => (
-                    <div key={order.id} className="order_item">                        
+                    <div key={order.orderId} className="order_item">                        
                         <div className="order_detail">
                             <p>{order.createTime}</p>
                             <h1>Order #{order.orderId}</h1>
                             <h2>{order.info}</h2>
+                            <p>{order.url}</p>
                         </div>
                         <div onClick={() => handleOpenModal(order.orderId)} className="edit_order">
                             Edit order

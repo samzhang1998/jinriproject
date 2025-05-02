@@ -22,18 +22,18 @@ const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) =
 
     const validateCustomerField = (name, value, relatedValue) => {
         let error = '';
-        const requiredFields = ['firstName', 'lastName', 'homeAddress', 'agentFirstName', 'agentLastName', 'mobile', 'agentMobile', 'agentEmail'];
+        const requiredFields = ['firstName', 'lastName', 'homeAddress', 'mobile'];
         if (requiredFields.includes(name) && !value) {
             error = 'This field is required';
             return error;
         }
 
-        if (name === 'email' || name === 'agentEmail') {
+        if (name === 'email') {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(value)) {
                 error = 'Invalid email format';
             }
-        } else if (name === 'mobile' || name === 'agentMobile') {
+        } else if (name === 'mobile') {
             const mobileRegex = /^(\+61|0)4\d{8}$/;
             if (!mobileRegex.test(value)) {
                 error = 'Invalid mobile number';

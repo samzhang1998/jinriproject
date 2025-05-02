@@ -16,7 +16,7 @@ const ForIndividual = () => {
           <Header />
         </div>      
         <div className='individual_text1'>
-          <h1>For Individual</h1>
+          <h1>For Buyer</h1>
           <p>Buying a property is one of the biggest investments you'll ever make. Our 
             comprehensive Building & Pest Report provides you with a detailed overview of 
             the property's condition, including any structural issues or pest infestations. 
