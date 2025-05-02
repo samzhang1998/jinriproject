@@ -355,3 +355,19 @@
     line-height: 150%;
     outline: none;
 }
+
+.pdf_preview {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: #FFF;
+}
+
+.pdf_action {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+}

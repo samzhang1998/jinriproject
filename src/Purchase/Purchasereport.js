@@ -10,8 +10,8 @@ import back from '../asset/Expand_left.png';
 import Payment from './Payment';
 
 
-const Backend_url = 'http://localhost:8080';
-// const Backend_url = '/api';
+// const Backend_url = 'http://localhost:8080';
+const Backend_url = '/api';
 
 const StepOne = ({ showStepTwo, updatePaymentSummary,formPurchase, onUpdate }) => {
     const isReportOk = localStorage.getItem('reportOK') === 'true';
