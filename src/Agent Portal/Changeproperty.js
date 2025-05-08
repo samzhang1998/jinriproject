@@ -5,9 +5,9 @@ import close from "../asset/Close_round.png";
 import { useNavigate } from "react-router-dom";
 
 // // const Backend_url = 'http://3.106.224.222';
-const Backend_url = 'http://localhost:8080';
+// const Backend_url = 'http://localhost:8080';
 // const Backend_url = 'https://checkforsure.com.au/api';
-// const Backend_url = '/api';
+const Backend_url = '/api';
 
 const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData,filter }) => {
     const navigate = useNavigate();
