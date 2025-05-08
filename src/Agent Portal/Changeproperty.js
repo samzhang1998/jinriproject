@@ -4,9 +4,9 @@ import "./Changeproperty.css";
 import close from "../asset/Close_round.png";
 import { useNavigate } from "react-router-dom";
 
-// const Backend_url = 'http://3.106.224.222:8080';
+const Backend_url = 'http://3.106.224.222:8080';
 // const Backend_url = 'https://checkforsure.com.au/api';
-const Backend_url = '/api';
+// const Backend_url = '/api';
 
 const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData,filter }) => {
     const navigate = useNavigate();
@@ -334,7 +334,7 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
                 body: formData,
                 credentials:'include',
             });
-            if (response === 401) {
+            if (response.status === 401) {
                 localStorage.setItem('isLoggedIn', false);
                 localStorage.removeItem('username');
                 localStorage.removeItem('role');
@@ -342,16 +342,16 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
                 localStorage.removeItem('email');
                 localStorage.removeItem('mobile');
                 navigate('/login');
-            } else if (response === 200) {
-                // console.log('Response from server:', response);                
+            } else if (response.status === 413) {
+                setUploadStatus('File is too large!');
+            } else if (response.status === 200) {
+                console.log('Response from server:', response);                
                 setRefresh(!refresh);
                 setUploadStatus('File uploaded successfully!');
-            } else if (response === 413) {
-                setUploadStatus('File is too large!');
             } else {
-                // console.log(response.text());
+                console.log(response);
                 setUploadStatus(`Upload failed. Status: ${response.status}`);
-            }            
+            }                        
         } catch (error) {
             console.error('Error submitting form:', error);
             setUploadStatus(`Upload failed. Error: ${error.message}`);
