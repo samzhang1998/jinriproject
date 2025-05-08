@@ -4,9 +4,9 @@ import "./Changeproperty.css";
 import close from "../asset/Close_round.png";
 import { useNavigate } from "react-router-dom";
 
-// const Backend_url = 'http://3.106.224.222';
-const Backend_url = 'https://checkforsure.com.au/api';
-// const Backend_url = '/api';
+// const Backend_url = 'http://3.106.224.222:8080';
+// const Backend_url = 'https://checkforsure.com.au/api';
+const Backend_url = '/api';
 
 const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData,filter }) => {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
         streetNumber: existingData.streetNumber || '',
         suburb: existingData.suburb || '',
         state: existingData.state || '',
-        roomNumber: existingData.roomNumber || '',
+        roomNumber: existingData.roomNumber || null,
         postcode: existingData.postcode || '',
         propertyId: id
     });
@@ -33,7 +33,6 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
           ...prevData,
           [name]: value,
         //   address: getAddress(),
-          address: `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`.trim(),
         }));
     };
 
@@ -41,9 +40,10 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
         e.preventDefault();
         const dataToSend = {
             ...property,
+            address: `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`.trim(),
         };
         try {
-            // console.log('data sent:', dataToSend);
+            console.log('data sent:', dataToSend);
             const response = await FetchFunc(
                 '/admin/editProperty',
                 'POST',
@@ -152,14 +152,14 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
                         value={property.type}
                         onChange={handleInputChange}
                     />
-                    <p>Property Room Number:</p>
+                    {/* <p>Property Room Number:</p>
                     <input
                         type="text"
                         name="roomNumber"
                         placeholder={existingData.roomNumber}
                         value={property.roomNumber}
                         onChange={handleInputChange}
-                    />
+                    /> */}
                     <p>Property Postcode:</p>
                     <input
                         type="text"
