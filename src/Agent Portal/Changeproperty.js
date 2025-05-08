@@ -4,6 +4,8 @@ import "./Changeproperty.css";
 import close from "../asset/Close_round.png";
 import { useNavigate } from "react-router-dom";
 
+// const Backend_url = 'http://3.106.224.222:8080';
+// const Backend_url = 'https://checkforsure.com.au/api';
 // // const Backend_url = 'http://3.106.224.222';
 // const Backend_url = 'http://localhost:8080';
 // const Backend_url = 'https://checkforsure.com.au/api';
@@ -18,7 +20,7 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
         streetNumber: existingData.streetNumber || '',
         suburb: existingData.suburb || '',
         state: existingData.state || '',
-        roomNumber: existingData.roomNumber || '',
+        roomNumber: existingData.roomNumber || null,
         postcode: existingData.postcode || '',
         propertyId: id
     });
@@ -34,7 +36,6 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
           ...prevData,
           [name]: value,
         //   address: getAddress(),
-          address: `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`.trim(),
         }));
     };
 
@@ -42,9 +43,10 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
         e.preventDefault();
         const dataToSend = {
             ...property,
+            address: `${property.streetNumber} ${property.streetName}, ${property.suburb} ${property.state} ${property.postcode}`.trim(),
         };
         try {
-            // console.log('data sent:', dataToSend);
+            console.log('data sent:', dataToSend);
             const response = await FetchFunc(
                 '/admin/editProperty',
                 'POST',
@@ -153,14 +155,14 @@ const ChangePropertyModal = ({ closeModal, id, refresh, setRefresh, existingData
                         value={property.type}
                         onChange={handleInputChange}
                     />
-                    <p>Property Room Number:</p>
+                    {/* <p>Property Room Number:</p>
                     <input
                         type="text"
                         name="roomNumber"
                         placeholder={existingData.roomNumber}
                         value={property.roomNumber}
                         onChange={handleInputChange}
-                    />
+                    /> */}
                     <p>Property Postcode:</p>
                     <input
                         type="text"
@@ -318,6 +320,7 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
     const [uploadStatus, setUploadStatus] = useState('');
     const handleFileChange = (e) => {
         setSelectedFile(e.target.files[0]);
+        setUploadStatus('');
     };
 
     const handleUpload = async () => {
@@ -342,13 +345,16 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
                 localStorage.removeItem('email');
                 localStorage.removeItem('mobile');
                 navigate('/login');
-            } else if (!response.ok) {
+            } else if (response === 200) {
+                // console.log('Response from server:', response);                
+                setRefresh(!refresh);
+                setUploadStatus('File uploaded successfully!');
+            } else if (response === 413) {
+                setUploadStatus('File is too large!');
+            } else {
                 // console.log(response.text());
                 setUploadStatus(`Upload failed. Status: ${response.status}`);
-            }
-            // console.log('Response from server:', response);
-            setRefresh(!refresh);
-            setUploadStatus('File uploaded successfully!');
+            }            
         } catch (error) {
             console.error('Error submitting form:', error);
             setUploadStatus(`Upload failed. Error: ${error.message}`);
@@ -742,7 +748,7 @@ const Changeproperty = () => {
                     Next Page
                 </button>
             </div>
-            {url && <div className="change_modal">
+            {/* {url && <div className="change_modal">
                 <div className="pdf_preview">
                     <div className="pdf_action">
                         <img src={close} alt="close" onClick={() => setUrl('')} style={{cursor: 'pointer'}}/>
@@ -753,7 +759,7 @@ const Changeproperty = () => {
                     >
                     </iframe>
                 </div>
-            </div>}
+            </div>} */}
         </div>
     );
 };
