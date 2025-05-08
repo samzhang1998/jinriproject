@@ -317,6 +317,7 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
     const [uploadStatus, setUploadStatus] = useState('');
     const handleFileChange = (e) => {
         setSelectedFile(e.target.files[0]);
+        setUploadStatus('');
     };
 
     const handleUpload = async () => {
@@ -743,7 +744,7 @@ const Changeproperty = () => {
                     Next Page
                 </button>
             </div>
-            {url && <div className="change_modal">
+            {/* {url && <div className="change_modal">
                 <div className="pdf_preview">
                     <div className="pdf_action">
                         <img src={close} alt="close" onClick={() => setUrl('')} style={{cursor: 'pointer'}}/>
@@ -754,7 +755,7 @@ const Changeproperty = () => {
                     >
                     </iframe>
                 </div>
-            </div>}
+            </div>} */}
         </div>
     );
 };
