@@ -341,13 +341,16 @@ const UploadModal = ({ closeModal, type, name, id, refresh, setRefresh }) => {
                 localStorage.removeItem('email');
                 localStorage.removeItem('mobile');
                 navigate('/login');
-            } else if (!response.ok) {
+            } else if (response === 200) {
+                // console.log('Response from server:', response);                
+                setRefresh(!refresh);
+                setUploadStatus('File uploaded successfully!');
+            } else if (response === 413) {
+                setUploadStatus('File is too large!');
+            } else {
                 // console.log(response.text());
                 setUploadStatus(`Upload failed. Status: ${response.status}`);
-            }
-            // console.log('Response from server:', response);
-            setRefresh(!refresh);
-            setUploadStatus('File uploaded successfully!');
+            }            
         } catch (error) {
             console.error('Error submitting form:', error);
             setUploadStatus(`Upload failed. Error: ${error.message}`);
