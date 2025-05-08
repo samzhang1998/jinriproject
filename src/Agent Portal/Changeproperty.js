@@ -4,7 +4,10 @@ import "./Changeproperty.css";
 import close from "../asset/Close_round.png";
 import { useNavigate } from "react-router-dom";
 
-const Backend_url = 'http://3.106.224.222:8080';
+// const Backend_url = 'http://3.106.224.222:8080';
+// const Backend_url = 'https://checkforsure.com.au/api';
+// // const Backend_url = 'http://3.106.224.222';
+// const Backend_url = 'http://localhost:8080';
 // const Backend_url = 'https://checkforsure.com.au/api';
 // const Backend_url = '/api';
 
@@ -487,11 +490,11 @@ const Changeproperty = () => {
                     localStorage.removeItem('mobile');
                     navigate('/adminlogin');
                 } else if (!response.ok) {
-                    console.log(`HTTP error! Status:`, response.text());
+                    console.error(`HTTP error! Status:`, response.text());
                 }
                 // console.log('Response from server:', response);
                 const data = await response.json();
-                console.log('data response:', data);
+                // console.log('data response:', data);
                 setProperty(data.content);
                 setTotalProperties(data.totalElements);
             } catch (error) {
@@ -531,7 +534,7 @@ const Changeproperty = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            console.log('data response:', data);
+            // console.log('data response:', data);
             setSearchedProperty(data);
         } catch (error) {
             console.error('Error:', error);
@@ -555,9 +558,10 @@ const Changeproperty = () => {
             } else if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            const data = await response.text();
-            setUrl(data);
+            const url = await response.text();
             console.log('data response:', url);
+            setUrl(url);
+            window.open(url, '_blank');
         } catch (error) {
             console.error('Error:', error);
         }
