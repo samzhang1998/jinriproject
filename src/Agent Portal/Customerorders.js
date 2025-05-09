@@ -275,7 +275,10 @@ const Customerorders = () => {
                 const data = await response.json();
                 // console.log('data response:', data);
                 setTotalOrders(data.totalElements);
-                setOrder(data.content);
+                const sorted = data.content.slice().sort((a, b) => {
+                    return new Date(b.createTime) - new Date(a.createTime);
+                });
+                setOrder(sorted);
             } catch (error) {
                 console.error('Error fetching orders:', error);
             }

@@ -207,7 +207,7 @@ const OrderOverview = () => {
                     <p>Can't find property?<Link to="/address"><span>Click here</span></Link></p>
                     <h1>Order Overview</h1>
                     <h2>Address: {formData.address}</h2>
-                    <h2>Inspector: {id}</h2>
+                    {/* <h2>Inspector: {id}</h2> */}
                     <h2>ETA: 2-4 Business Days</h2>
                     <button 
                         className="order_now"

@@ -52,7 +52,10 @@ const Orders = ({ type,id }) => {
                 // console.log('Response from server:', response);
                 const data = await response.json();
                 // console.log('data response:', data);
-                setOrders(data.content);
+                const sorted = data.content.slice().sort((a, b) => {
+                    return new Date(b.createTime) - new Date(a.createTime);
+                });
+                setOrders(sorted);
                 setTotalOrders(data.totalElements);
             } catch (error) {
                 console.error('Error fetching orders:', error);

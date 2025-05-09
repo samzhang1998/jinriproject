@@ -35,13 +35,13 @@ const Login = () => {
 
     const location = useLocation();
 
-    const handleBack = () => {
-        if (location.state?.from === '/signup') {
-            navigate('/');
-        } else {
-            navigate(-1);
-        }
-    };
+    // const handleBack = () => {
+    //     if (location.state?.from === '/signup') {
+    //         navigate('/');
+    //     } else {
+    //         navigate(-1);
+    //     }
+    // };
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -64,7 +64,8 @@ const Login = () => {
                 localStorage.setItem('userId', responseData.userId);
                 localStorage.setItem('email', responseData.email);
                 localStorage.setItem('mobile', responseData.mobile);
-                handleBack();
+                // handleBack();
+                navigate('/');
                 const existingTimeOutId = localStorage.getItem('timeOutId');
                 if (existingTimeOutId) {
                     clearTimeout(parseInt(existingTimeOutId, 10));
