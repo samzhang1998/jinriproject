@@ -76,7 +76,8 @@ const Searchresult1 = () => {
                     <div className='title'>
                         <h2>Building & Pest Report</h2>
                     </div>
-                    <h3>{address}</h3>
+                    {address && <h3>{address}</h3>}
+                    {!address && <h3>Report of this address is not available now, please contact us</h3>}
                     <div className='available'>
                         <img src={ok} alt='ok' />
                         <p>Report available now!</p>
@@ -94,11 +95,16 @@ const Searchresult1 = () => {
                     </div>
                 </div>
             </div>
-            <div className="mobile_purchase_button">
+            {address && <div className="mobile_purchase_button">
                 <button onClick={handleSearch}>
                     Purchase Report
                 </button>
-            </div>
+            </div>}
+            {!address && <div className="mobile_purchase_button">
+                <button onClick={() => navigate('/contact')}>
+                    Contact Us
+                </button>
+            </div>}
             {condition === true && <Policy showModal={handleSearch} onConfirm={handleConfirm} onClose={handleClose}/>}
             <div className='check'>
                 <div className='check_text'>
