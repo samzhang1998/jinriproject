@@ -301,7 +301,7 @@ const MobileSearchBox = () => {
                     const data = await response.json();
                     localStorage.setItem('price', data.reportPrice);
                     // console.log(data);
-                    navigate(`/report`, { state: { query }});
+                    navigate(`/report/${data.propertyId}`, { state: { query }});
                 } else if (response.status === 404) {
                     navigate(`/bookinspector`, { state: { query }});
                 } else if (response.status === 401) {
